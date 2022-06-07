@@ -1,0 +1,11 @@
+_book/
+_bookdown_files/
+libs/
+**/*.bib
+**/*.html
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.DS_Store 
+img/.DS_Store

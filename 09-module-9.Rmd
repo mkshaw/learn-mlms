@@ -1,0 +1,258 @@
+# Multilevel Modelling with Repeated Measures Data {#module-9}
+
+## Learning Objectives
+
+JESS/MKS NOTE TO SELF REVIEW THE EQUATIONS IN THIS CHAPTER, THEY'RE A LITTLE MESSY
+
+In this chapter, we will review fitting MLMs for repeated measures data.
+
+The learning objectives for this chapter are:
+
+1. Review multilevel modelling concepts discussed so far;
+2. Recognize when data are repeated measures and in the correct format for multilevel modelling;
+3. Conduct multilevel modelling on repeated measures data;
+4. Interpret coefficients for repeated measures data.
+
+All materials for this chapter are available for download [here](www.learn-mlms.com/students).
+
+## Data Demonstration
+
+### Load Dependencies
+
+For this data demo, we will use the following packages:
+
+```{r message=FALSE, warning=FALSE}
+library(lme4) # for multilevel models
+library(lmerTest) # for p-values
+library(performance) # for ICC
+```
+
+### Review of Multilevel Modelling Procedure
+
+Multilevel modelling in repeated measures data is a new application of the techniques we've covered so far, so let's briefly review the steps in our modelling framework so far:
+
+1. Establish solid theory and measurement, decide whether you need MLMs for your question
+2. Run random-intercept-only (i.e., null) model to calculate ICC and quantify extent of clustering in data
+3. Build model incrementally adding fixed and random effects per your theory, considering centering and estimation (REML or FIML) choices
+4. Conduct deviance test to compare model fits
+5. If you run into estimation issues, change your optimizer or remove problematic effects
+6. Report results: coefficients, significance, plausible values ranges, any changes made to address estimation issues
+
+### Multilevel Models for Repeated Measures
+
+Thus far, we've been using a cross-sectional example of students clustered within schools. Our level-1 variables have been about traits that students vary on (e.g., age, gender, SES) while our level-2 variables have been about traits that schools vary on (e.g., whether they are public or private schools). 
+
+With repeated measures data, measures are clustered within person rather than having people clustered within some organizational structure. The level-1 variables are about traits that the measures vary on (e.g., experimental manipulations) while level-2 variables are about traits that people vary on (e.g., age, gender, SES). For example, imagine we show participants pictures of lines and ask them to estimate the line length. We measure how long it takes them to rate each line. A level-1 variable would be the line length; each participant sees several lines of different lengths. A level-2 variable would be something demographic like a participant's age or gender; each person has the same value on the variable for the entire experiment.
+
+In this chapter, we'll look at repeated measures data without time in the model. In Chapter 10, we'll look at repeated measures data with time in the model, i.e., longitudinal models. 
+
+#### Data Structures: Long vs Wide
+
+Imagine you were measuring weight and caloric intake. If you have historically worked with repeated measures data in an ANOVA framework, you are probably used to working with data in a "wide" format, i.e., one row per participant with different variables for different measurement instances. 
+
+|id|weight1|weight2|calories1|calories2|
+|:-:|:-----:|:-----:|:-------:|:-------:|
+|1|200|190|3500|3300|
+|2|150|160|3200|3100|
+
+In MLMs, you need to use data in a "long" format where one row is one measurement occasion:
+
+|id|weight|calories|measurement_occasion|
+|:-:|:-----:|:-----:|:-------:|:-------:|
+|1|200|3500|1|
+|1|190|3300|2|
+|2|150|3200|1|
+|2|160|3100|2|
+
+This requires transposing your data, which you can read more about [here](https://tidyr.tidyverse.org/reference/pivot_longer.html). 
+
+An aside: you might also be used to thinking listwise deletion deletes an entire participant, because listwise deletion deletes rows with any missing data and in wide data one row *is* one participant. In long data, listwise deletion means deleting one measurement instance, not necessarily an entire participant. For example, if a participant answers a questionnaire a first time, then at one follow-up, but not at the second follow-up, listwise deletion will only remove their third row full of NAs; you'll keep their data from the first two questionnaires.
+
+### Our Data: Reaction Time
+
+The data used in this module are used as an example in Hoffman and Rovine (2007). The article and supporting materials can be found here: http://www.lesahoffman.com/Research/MLM.html
+
+```{r, eval=FALSE}
+data <- read.csv('hoffman2007.csv')
+```
+
+```{r, echo = FALSE}
+# this actually loads my data, but will be hidden
+data <- read.csv('data/hoffman2007.csv', fileEncoding = "UTF-8-BOM")
+```
+
+Let's look at our data:
+
+```{r}
+head(data)
+```
+For this data demo the outcome of interest is the log of reaction time for participants to detect a change during a picture viewing task (`rt_sec`). The pictures varied on two dimensions: how meaningful driving was to the picture (`meaning`) and how salient the change was in the picture (`salient`). For this analysis we will focus on the variables centered from the midpoint of the rating (3): `c_mean` and `c_sal`. One of the primary research questions was how age related to reaction time, given those differences in pictures. Participants were sampled in age categories: younger (`oldage` = 0, 40 and under) and older (`oldage` = 1, above 40). Repeated trials are nested within persons.
+
+### Random-Intercept-Only/Null Model
+
+Let's estimate our null model with FIML as our estimator and calculate the ICC:
+
+```{r}
+null_model <- lmer(lg_rt ~ 1 + (1|id), data = data, REML = FALSE) # note that REML = FALSE
+performance::icc(null_model)
+```
+
+With repeated measures data, the ICC is interpreted as the proportion of variance between people: How much of the variance stems from people being different from one another versus fluctuating within themselves? A large ICC means that most of the variability is between people, not from people varying in their answers to a set of questions (or in this case, reaction time). The ICC is 0.252, indicating that 25.2% of the variance in log reaction time is attributed to a person. 
+
+(Some bonus fun: when responses to questions are nested within person, Cronbach's alpha is equivalent to the ICC: a high alpha indicates high "reliability" of the scale because most of the scale variance is between people, individuals have relatively consistent patterns of answering on the scale.)
+
+### Adding Level-1 Fixed Effects
+
+Let's add our level-1 predictors for picture meaning `c_mean` and picture salience `c_sal` to our model. This is represented with the following formulae:
+
+| Level  | Equation |
+|:-------|:---------|
+|Level 1 | $lg\_rt_{ij} = \beta_{0j} + \beta_{1j}c\_mean_{ij} + \beta_{2j}c\_sal_{ij} + R_{ij}$|
+|Level 2 | $\beta_{0j} = \gamma_{00} + U_{0j}$|
+|        | $\beta_{1j} = \gamma_{10}$|
+|        | $\beta_{2j} = \gamma_{20}$|
+|Combined| $lg\_rt_{ij} = \gamma_{00} + \gamma_{10}c\_mean_{ij} + \gamma_{20}c\_sal_{ij} + U_{0j} + R_{ij}$|
+
+With this model, we're estimating 5 parameters:
+
+1. $\gamma_{00}$: the fixed effect for the intercept, controlling for `c_mean` and `c_sal`;
+2. $\gamma_{10}$: the fixed effect for the slope of `c_mean`, controlling for `c_sal`. This represents how meaning affects a person's reaction time — do people respond more quickly or slowly to photos with changes that are related to driving a car (perhaps because they're often driving and are attuned to changes in the environment when operating a car)?
+3. $\gamma_{20}$: the fixed effect for the slope of `c_sal`, controlling for `c_mean`. This represents how salience affects a person's reaction time — do people respond more quickly or slowly to photos with more obvious changes?
+4. $\tau_0^2$: a random effect for the intercept capturing the variance of people around the intercept, controlling for `c_mean` and `c_sal`;
+3. $\sigma^2$: a random effect capturing the variance of people around their own mean log reaction time, controlling for `c_mean` and `c_sal`.
+
+Let's run the model with FIML as our estimator:
+
+```{r}
+l1_model <- lmer(lg_rt ~ 1 + c_mean + c_sal + (1|id), data = data, REML = FALSE)
+summary(l1_model)
+```
+
+The intercept of 1.61 is the mean log reaction time across all people at average values of meaning and salience. A one-unit increase in meaning is associated with a decrease in log reaction time of 0.05 (i.e., a faster reaction time), at the average level of salience. A one-unit increase in salience is associated with a decrease in log reaction time of 0.13 at the average level of meaning. All coefficients are significant. The term describing how people vary around the grand mean intercept is 0.18. The term describing how people vary around their own intercept is 0.48.
+
+Does this model have significantly less deviance (i.e., better fit) than the null model alone? Let's use a deviance test to check. Note that we can compare the null and level-1 models because we used FIML as our estimator and they are nested (i.e., all variables in the level-1 model are in the null model).
+
+```{r}
+anova(null_model, l1_model)
+```
+
+The level-1 model does have significantly less deviance (16516 compared to 17076 for the null model), so is a better model. Hooray!
+
+### Adding Random Slopes
+
+Let's try adding random slopes for our level-1 variables of meaning and salience. This allows slopes to vary across people. Maybe some people have stronger relationships between salience and reaction time — such that when the change is more salient they really notice it, and when it's less salient they notice it less — while other people have eagle eyes and notice the changes no matter their salience.
+
+| Level  | Equation |
+|:-------|:---------|
+|Level 1 | $lg\_rt_{ij} = \beta_{0j} + \beta_{1j}c\_mean_{ij} + \beta_{2j}c\_sal_{ij} + R_{ij}$|
+|Level 2 | $\beta_{0j} = \gamma_{00} + U_{0j}$|
+|        | $\beta_{1j} = \gamma_{10} + U_{1j}$|
+|        | $\beta_{2j} = \gamma_{20} + U_{2j}$|
+|Combined| $lg\_rt_{ij} = \gamma_{00} + \gamma_{10}c\_mean_{ij} + \gamma_{20}c\_sal_{ij} + U_{0j} + U_{1j}c\_mean_{ij} + U_{2j}c\_sal_{ij} + R_{ij}$|
+
+Let's not estimate random effect covariances, so with this model, we're estimating 7 parameters:
+
+1. $\gamma_{00}$: the fixed effect for the intercept, controlling for `c_mean` and `c_sal`;
+2. $\gamma_{10}$: the fixed effect for the slope of `c_mean`, controlling for `c_sal`;
+3. $\gamma_{20}$: the fixed effect for the slope of `c_sal`, controlling for `c_mean`;
+4. $\tau_0^2$: a random effect for the intercept capturing the variance of people around the intercept, controlling for `c_mean` and `c_sal`;
+5. $\tau_1^2$: a random effect capturing how people's slopes for `c_mean` vary around the grand mean slope, controlling for `c_sal`;
+6. $\tau_2^2$: a random effect capturing how people's slopes for `c_sal` vary around the grand mean slope, controlling for `c_mean`;
+7. $\sigma^2$: a random effect capturing the variance of people around their own mean log reaction time, controlling for `c_mean` and `c_sal`.
+
+Let's run our model with random slope effects (but no covariances) in R:
+
+```{r}
+l1_random <- lmer(lg_rt ~ 1 + c_mean + c_sal + (1|id) + (0 + c_mean|id) + (0 + c_sal|id), data = data, REML = FALSE)
+summary(l1_random)
+```
+
+We get an estimation error! Recall that singularity occurs when a variance term is close to zero or a correlation between variance terms is near 1 (high multicollinearity). Looking at our output, the variance terms for meaning and salience both look quite small. Let's try to address our estimation issue by removing the smaller of the two, the random effect for `c_mean`.
+
+```{r}
+l1_random_without_cmean <- lmer(lg_rt ~ 1 + c_mean + c_sal + (1|id) + (0 + c_sal|id), data = data, REML = FALSE)
+summary(l1_random_without_cmean)
+```
+
+That took care of our singularity issue. However, the random effect for salience still looks very small. Let's conduct a deviance test to see if including the random effect reduces deviance at all (that is, whether it is worth it to estimate).
+
+```{r}
+anova(l1_random, l1_random_without_cmean)
+```
+
+There is no significant difference between these models, so there doesn't seem to be much benefit to including the random effect for salience.
+
+### Adding Level-2 Fixed Effects
+
+The level-2 variables in our dataset are demographic variables about participants, which in this dataset is their sex, age in years, whether they 40 or older (`oldage` = 1) or younger than 40 (`oldage` = 0), or their age centered at 65 years old for those who are older than 40 (`yrs65`). Let's add `oldage` and `sex` as level-2 predictors of the intercept.
+
+| Level  | Equation |
+|:-------|:---------|
+|Level 1 | $lg\_rt_{ij} = \beta_{0j} + \beta_{1j}c\_mean_{ij} + \beta_{2j}c\_sal_{ij} + R_{ij}$|
+|Level 2 | $\beta_{0j} = \gamma_{00} + \gamma_{01}oldage_j + \gamma_{02}sex_j +  U_{0j}$|
+|        | $\beta_{1j} = \gamma_{10}$|
+|        | $\beta_{2j} = \gamma_{20}$|
+|Combined| $lg\_rt_{ij} = \gamma_{00} + \gamma_{01}oldage_j + \gamma_{02}sex_j + \gamma_{10}c\_mean_{ij} + \gamma_{20}c\_sal_{ij} + U_{0j} + R_{ij}$|
+
+We're estimating 7 effects:
+
+1. $\gamma_{00}$: the fixed effect for the intercept, controlling for `c_mean` and `c_sal`;
+2. $\gamma_{10}$: the fixed effect for the slope of `c_mean`, controlling for `c_sal`;
+3. $\gamma_{20}$: the fixed effect for the slope of `c_sal`, controlling for `c_mean`;
+4. $\gamma_{01}$: the fixed effect for the slope of `oldage`, controlling for `sex`, `c_mean`, and `c_sal`;
+5. $\gamma_{02}$: the fixed effect for the slope of `sex`, controlling for `oldage`, `c_mean` and `c_sal`;
+6. $\tau_0^2$: a random effect capturing how people's mean log reaction times vary around the grand mean log reaction time, controlling for `c_mean`, `c_sal`, `oldage`, and `sex`;
+7. $\sigma^2$: a random effect capturing the variance of people around their own mean log reaction time, controlling for `c_mean`, `c_sal`, `oldage`, and `sex`.
+
+
+```{r}
+l2_model <- lmer(lg_rt ~ 1 + c_mean + c_sal + oldage + sex + (1|id), data = data, REML = FALSE)
+summary(l2_model)
+```
+
+The intercept of 1.28 is the mean log reaction time across all people at average values of meaning and salience for men (`sex` = 0) who are younger than 40 (`oldage` = 40). A one-unit increase in meaning is associated with a decrease in log reaction time of 0.05 (i.e., a faster reaction time), controlling for other variables. A one-unit increase in salience is associated with a decrease in log reaction time of 0.13 controlling for other variables. People older than 40 have 0.80 units longer of a log reaction time on average, controlling for other variables. Women have 0.04 unit-slower log reaction times on average, controlling for other variables. All coefficients are significant except for `sex`. The term describing how people vary around the grand mean intercept is 0.02. The term describing how people vary around their own intercept is 0.48.
+
+Let's run a model without the non-significant `sex` predictor and conduct a deviance test to see if the model fit is negatively impacted.
+
+```{r}
+# model
+l2_model_no_sex <- lmer(lg_rt ~ 1 + c_mean + c_sal + oldage + (1|id), data = data, REML = FALSE)
+
+# deviance test
+anova(l2_model, l2_model_no_sex)
+```
+
+There is no significant difference in deviance, so we don't lose on the model fit front if we don't estimate `sex`.
+
+### Adding Cross-Level Interactions
+
+For our final model, let's remove the level-2 term for `sex` and look at a cross-level interaction between `oldage` and the slope of `c_mean` to consider the question: does age alter the effect of meaning on reaction times?
+
+| Level  | Equation |
+|:-------|:---------|
+|Level 1 | $lg\_rt_{ij} = \beta_{0j} + \beta_{1j}c\_mean_{ij} + \beta_{2j}c\_sal_{ij} + R_{ij}$|
+|Level 2 | $\beta_{0j} = \gamma_{00} + \gamma_{01}oldage_j +  U_{0j}$|
+|        | $\beta_{1j} = \gamma_{10} + \gamma_{11}oldage_j$|
+|        | $\beta_{2j} = \gamma_{20}$|
+|Combined| $lg\_rt_{ij} = \gamma_{00} + \gamma_{01}oldage_j + \gamma_{10}c\_mean_{ij} + \gamma_{20}c\_sal_{ij} + \gamma_{11}c\_mean_{ij}*oldage_j + U_{0j} + R_{ij}$|
+
+We're estimating 7 effects:
+
+1. $\gamma_{00}$: the fixed effect for the intercept, controlling for `c_mean`, `c_sal`, and `oldage`;
+2. $\gamma_{10}$: the fixed effect for the slope of `c_mean`, controlling for `c_sal` and `oldage`;
+3. $\gamma_{20}$: the fixed effect for the slope of `c_sal`, controlling for `c_mean` and `oldage`;
+4. $\gamma_{01}$: the fixed effect for the slope of `oldage`, controlling for `c_mean` and `c_sal`;
+5. $\gamma_{11}$: the fixed effect for the cross-level interaction of `oldage` with `c_mean`, controlling for `c_sal`;
+6. $\tau_0^2$: a random effect capturing how people's mean log reaction times vary around the grand mean log reaction time, controlling for `c_mean`, `c_sal`, and `oldage`;
+7. $\sigma^2$: a random effect capturing the variance of people around their own mean log reaction time, controlling for `c_mean`, `c_sal`, and `oldage``.
+
+```{r}
+crosslevel_model <- lmer(lg_rt ~ 1 + c_mean + c_sal + oldage + oldage:c_mean + (1|id), data = data, REML = FALSE)
+summary(crosslevel_model)
+```
+
+The interaction between `oldage` and `c_mean` is 0.04, suggesting that people older than 40 have 0.04 added to their (log) reaction times for more meaningful photos. That is, older people have slower reaction times even when photos are more related to driving. The other coefficient interpretations are similar to those we discussed in earlier models.
+
+## Conclusion
+
+In this chapter, we reviewed our MLM pipeline and applied it to repeated measures without time in the model. In Chapter 10, we will look at longitudinal models, i.e., repeated measures with time in the model.

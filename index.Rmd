@@ -1,0 +1,46 @@
+--- 
+title: Introduction to Multilevel Modelling
+author: Mairead Shaw and Jessica Kay Flake
+# date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output:
+  bookdown::gitbook
+documentclass: book
+biblio-style: apalike
+link-citations: yes
+description: "This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and criticially analyze their use in the literature."
+url: 'https\://www.learn-mlms.com'
+github-repo: 'mkshaw/multilevel-modelling/'
+---
+# Introduction {#introduction}
+
+## Overview
+
+These materials focus on conceptual foundations of multilevel models (MLMs), specifiying them, and interpreting the results. Topics include multilevel data and approaches to dependence, specifying and interpreting fixed and random effects, model estimation, centering, repeated measures and longitudinal models, assumptions testing, and effect sizes in MLMs.
+
+## Goals
+
+These materials are intended for students and instructors.
+
+By the end of this course, students will be able to:
+
+1. Estimate variance components and interpret the intraclass correlation coefficient
+2. Decide if and when a multilevel model is needed
+3. Specify and build multilevel models with covariates at level 1 and 2 with both cross-sectional and repeated measures designs
+4. Interpret regression coefficients and variance components from multilevel models
+5. Assess the assumptions of multilevel models
+6. Calculate effect sizes for multilevel models
+
+For instructors, all of the chapters, datasets, demonstration steps, and code are available for reuse under a [CC BY 4.0 license](https://creativecommons.org/licenses/by/4.0/).
+
+## Prerequisites
+
+Readers should be comfortable with multiple linear regression, including building regression models, interpreting regression output, and testing for and interpreting regression coefficients including interactions. The first module reviews multiple regression and can be used to gauge your preparedness for continuing. For those wishing to brush up their regression skills before working through these materials, we recommend UCLA's Statistical Methods and Data Analytics resources and online seminars: https://stats.oarc.ucla.edu/other/mult-pkg/seminars/
+
+The worked examples will be conducted using `lme4` in R. The [`lme4` documentation](https://cran.r-project.org/web/packages/lme4/vignettes/lmer.pdf) provides details of the workings of `lme4`, for interested readers.
+
+## Materials
+
+If you are a student interested in following along with the data analysis demonstrations, you can download the data files [here](https://www.learn-mlms.com/students).
+
+If you are an instructor interested in using these files to create your own teaching materials, you can find data, blank worksheets, and R scripts [here](https://www.learn-mlms.com/instructors).

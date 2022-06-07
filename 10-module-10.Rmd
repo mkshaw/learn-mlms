@@ -1,0 +1,285 @@
+# Multilevel Modelling with Longitudinal Data {#module-10}
+
+## Learning Objectives
+
+In Chapter 9, we discussed how to interpret multilevel models with repeated measures data without time in the model. In this chapter, we will review fitting MLMs for longitudinal data, i.e., repeated measures with time in the model.
+
+The learning objectives for this chapter are:
+
+1. Recognize when data are longitudinal and in the correct format for multilevel modelling;
+2. Conduct multilevel modelling on longitudinal data;
+4. Interpret coefficients for longitudinal data;
+4. Review evidence to decide whether to retain effects.
+
+All materials for this chapter are available for download [here](www.learn-mlms.com/students).
+
+## Data Demonstration
+
+### Load Dependencies
+
+For this data demo, we will use the following packages:
+
+```{r message=FALSE, warning=FALSE}
+library(dplyr) # for data manipulation
+library(ggplot2) # for graphing
+library(lme4) # for multilevel models
+library(lmerTest) # for p-values
+library(performance) # for ICC
+```
+
+### Multilevel Models for Longitudinal Data 
+
+When we use cross-sectional data, level-1 variables vary between individuals (e.g., age, gender, SES) while level-2 variables vary between clusters (e.g., whether schools are public or private, number of students in a classroom, school funding).
+
+With repeated measures data *without* time in the model, level-1 variables vary between measurement occasions (e.g., experimental manipulations, stimulus volume or brightness) while level-2 variables vary between people (e.g., age, gender, SES).
+
+In this chapter, we're looking at longitudinal models, i.e., repeated measures *with* time in the model. With longitudinal data, level-1 variables vary over time (e.g., weight at time 1, time 2, time 3; Testosterone levels at 10 minutes into game, 20 minutes into game, 30 minutes into game). Level-1 variables are also called "time-varying covariates" because they vary with time. Level-2 variables are the same across time (also called "time invariant covariates"), for example age, gender, SES (assuming these things don't change over the study period, if you wait long enough these will or may change).
+
+#### Data Structures: Long vs Wide
+
+As with repeated measures, you need your data in long format to conduct an MLM. Imagine you were measuring weight and caloric intake. If you have historically worked with repeated measures data in an ANOVA framework, you are probably used to working with data in a "wide" format, i.e., one row per participant with different variables for different measurement instances. 
+
+|id|weight1|weight2|calories1|calories2|
+|:-:|:-----:|:-----:|:-------:|:-------:|
+|1|200|190|3500|3300|
+|2|150|160|3200|3100|
+
+In MLMs, you need to use data in a "long" format where one row is one measurement occasion:
+
+|id|weight|calories|measurement_occasion|
+|:-:|:-----:|:-----:|:-------:|:-------:|
+|1|200|3500|1|
+|1|190|3300|2|
+|2|150|3200|1|
+|2|160|3100|2|
+
+### Visualizing Testosterone Levels Over Time
+
+The data used in this chapter are a simplified version of the data from Casto, K.V., & Edwards, D.A. (2016). Before, during, and after: How phases of competition differentially affect testosterone, cortisol, and estradiol levels in women athletes. Adaptive Human Behavior and Physiology, 2, 11-25. https://doi.org/10.1007/s40750-015-0028-2.
+
+Dr. Kathleen Casto gave us permission to use these data for teaching purposes (thanks Kathleen!); any other use requires additional permission. You can see more of her work [here](https://scholar.google.com/citations?user=xqhtNEIAAAAJ&hl=en).
+
+```{r, eval=FALSE}
+data <- read.csv('casto2016.csv')
+```
+
+```{r, echo = FALSE}
+# this actually loads my data, but will be hidden
+data <- read.csv('data/casto2016.csv', fileEncoding = "UTF-8-BOM")
+```
+
+```{r}
+head(data)
+```
+
+These data include hormone levels of female athletes in a competition setting (soccer game), if they played in the game or not (`Played`), what position they played (`position`), how long they played (`minplayed`), their testosterone levels (`Testosterone`), and if they were taking birth control (`HormonCont`). We will focus on testosterone, if they played, and if they were taking birth control for this example.
+
+Let's start by visualizing testosterone levels over time for the entire sample:
+
+```{r}
+data %>% 
+  group_by(time0) %>%
+  mutate(tmean = mean(Testosterone)) %>% # mean testosterone per timepoint
+  ggplot(mapping = aes(x = time0, y = tmean)) +
+  geom_line() +
+  labs(title = "Testosterone Over Time for Entire Sample")
+```
+
+The relationship between time and testosterone doesn't look exactly linear. Let's check if there are different relationships between people who played and people who didn't.
+
+```{r}
+data %>% 
+  group_by(time0, Played) %>% # group by timepoint and played
+  mutate(tmean = mean(Testosterone)) %>% 
+  ggplot(mapping = aes(x = time0, y = tmean, colour = factor(Played))) +
+  geom_line() +
+  labs(title = "Testosterone Over Time, Played vs. Did Not Play")
+```
+
+Those who played have a pretty linear increase in testosterone over time, while those who did not play go up from time 0 to 1 and then back down between 1 and 2, so it looks like playing or not might be an important level-2 predictor for our model intercepts and slopes.
+
+Finally, let's check whether birth control seems like an important predictor of intercepts and slopes:
+
+```{r}
+data %>% 
+  group_by(time0, HormonCont) %>% # group by timepoint and birth control
+  mutate(tmean = mean(Testosterone)) %>% 
+  ggplot(mapping = aes(x = time0, y = tmean, colour = factor(HormonCont))) +
+  geom_line() +
+  labs(title = "Testosterone Over Time, Birth Control or Not")
+```
+
+Looks like another variable we might want to consider in our model! Let's begin with our null model and incrementally build from there.
+
+### Random-Intercept-Only/Null Model
+
+Let's estimate our null model with FIML as our estimator and calculate the ICC. Why FIML? We're going to be adding fixed effects (played, birth control) and comparing model fits.
+
+| Level  | Equation |
+|:-------|:---------|
+|Level 1 | $testosterone_{ij} = \beta_{0j} + R_{ij}$|
+|Level 2 | $\beta_{0j} = \gamma_{00} + U_{0j}$|
+|Combined| $testosterone_{ij} = \gamma_{00} + U_{0j} + R_{ij}$|
+
+Here, we're estimating three parameters:
+
+1. $\gamma_{00}$: the fixed effect for the intercept, mean testosterone levels across all people;
+4. $\tau_0^2$: a random effect for the intercept capturing the variance of people's average testosterone levels around the intercept;
+3. $\sigma^2$: a random effect capturing the variance of people around their own average testosterone level.
+
+```{r}
+null_model <- lmer(Testosterone ~ 1 + (1|Code), data = data, REML = FALSE)
+summary(null_model)
+performance::icc(null_model)
+```
+
+With longitudinal data, as with repeated measures without time, the ICC is interpreted as the proportion of variance between people: How much of the variance stems from people being different from one another versus fluctuating within themselves? A large ICC means that most of the variability is between people, not from people varying in their testosterone levels. The ICC is 0.576, indicating that 57.6% of the variance in testosterone is attributed to a person. 
+
+### Adding Level-1 Fixed and Random Effects
+
+Let's add our level-1 predictor, `time0`, to our model. Note that `time0` is coded such that 0 is the first measurement occasion at the beginning of the game, 1 is mid-game, and 2 is at the end of the game.
+
+| Level  | Equation |
+|:-------|:---------|
+|Level 1 | $testosterone_{ij} = \beta_{0j} + \beta_{1j}time0_{ij} + R_{ij}$|
+|Level 2 | $\beta_{0j} = \gamma_{00} + U_{0j}$|
+|        | $\beta_{1j} = \gamma_{10} + U_{1j}$|
+|Combined| $testosterone_{ij} = \gamma_{00} + \gamma_{10}time0_{ij} + U_{0j} + U_{1j}time0_{ij} + R_{ij}$|
+
+With this model, we're estimating 6 parameters:
+
+1. $\gamma_{00}$: the fixed effect for the intercept, mean testosterone levels at time 0 across all people;
+2. $\gamma_{10}$: the fixed effect for time0, effect of time on testosterone levels;
+3. $\tau_0^2$: a random effect for the intercept capturing the variance of people's average testosterone levels around the intercept;
+4. $\tau_1^2$: a random effect for the slope of time0 capturing the variance of people's slopes around the grand mean slope;
+3. $\sigma^2$: a random effect capturing the variance of people around their own average testosterone level.
+6. $\tau_{01}$: the covariance between the random intercept and random slope. Do people who have higher values of testosterone at time0 have particularly lower or higher slopes?
+
+Let's run the model with FIML as our estimator:
+
+```{r}
+l1_model <- lmer(Testosterone ~ 1 + time0 + (time0|Code), data = data, REML = FALSE)
+summary(l1_model)
+
+as.matrix(Matrix::bdiag(VarCorr(l1_model)))
+```
+
+Looking at our fixed effects, the intercept of 50.67 is the average testosterone level across people at time 0. The slope of 9.09 indicates the average increase in testosterone levels over one unit of time. 
+
+The variance term describing how people vary around the intercept is 154.67. The variance term describing how people's slopes vary is 24.12. The covariance between the random intercept and random slope is 53.07 (correlation of 0.87), indicating that those with higher initial levels of testosterone also have higher slopes (more intense increase in testosterone over time). 
+
+### Evidence for Retaining Effects
+
+The fixed effect for time seems both statistically and practically significant. Variances are difficult to interpret in isolation, so we can consider a few sources of evidence when examining whether to keep the random effect for slope: deviance testing, 95% confidence interval, 95% plausible values range, and visualizing variance.
+
+We can use the built-in `anova()` function to conduct our deviance test for the model with and without the slope covariance:
+
+```{r}
+l1_model_no_U1j <-  lmer(Testosterone ~ 1 + time0 + (1|Code), data = data, REML = FALSE)
+
+anova(l1_model, l1_model_no_U1j)
+```
+
+There is significantly less deviance in the model with the slope variance term.
+
+Let's look at 95% confidence intervals for all effects:
+
+```{r, warning=FALSE}
+confint(l1_model, oldNames = F)
+```
+
+We've suppressed the warnings in this output for brevity, but if you run this code yourself you'll see a lot of warnings! That's likely because of the covariance term, given that the correlation `cor_time0.(Intercept)|Code` runs up against the upper bound of 1.00 within the confidence interval. Let's remove that term.
+
+```{r}
+l1_model_cov0 <- lmer(Testosterone ~ 1 + time0 + (1|Code) + (0 + time0|Code), data = data, REML = FALSE)
+anova(l1_model, l1_model_cov0)
+```
+
+Our model fit is not significantly different after removing the covariance term, so let's proceed without it and look at our confidence intervals again:
+
+```{r}
+confint(l1_model_cov0, oldNames = F)
+```
+
+The confidence interval for our slope variance, `sd_time0|Code`, does not contain 0, so it is significant.
+
+Finally, one way to visualize variability is with a graph: what are the different slope values across people? This is the same as our Empirical Bayes plotting exercise in Chapter 4.
+
+```{r}
+# Extract Empirical Bayes estimates and graph them
+as_tibble(coef(l1_model)$Code) %>% 
+  ggplot(mapping = aes(x = time0)) +
+  geom_histogram(bins = 5)
+```
+
+To summarize our evidence: the model with the random slope effect fits better, the random effect confidence interval does not contain zero (i.e., it is significant), and we can see that slopes for time vary, many people's slopes around 5 or 10 but some as high as ~20. All signs point to keeping the random effect.
+
+### Adding Level-2 Fixed Effects
+
+Let's start adding the level-2 effects we graphed at the beginning: playing and birth control. First, let's add whether someone played or not.
+
+| Level  | Equation |
+|:-------|:---------|
+|Level 1 | $testosterone_{ij} = \beta_{0j} + \beta_{1j}time0_{ij} + R_{ij}$|
+|Level 2 | $\beta_{0j} = \gamma_{00} + \gamma_{01}played_j + U_{0j}$|
+|        | $\beta_{1j} = \gamma_{10} + \gamma_{11}played_j + U_{1j}$|
+|Combined| $testosterone_{ij} = \gamma_{00} + \gamma_{01}*played_j + \gamma_{10}time0_{ij} + \gamma_{11}time0_{ij}*played_j + U_{0j} + U_{1j}time0_{ij} + R_{ij}$|
+
+With this model, we're estimating 7 parameters:
+
+1. $\gamma_{00}$: the fixed effect for the intercept, mean testosterone levels at time 0 across those who did not play (`played` = 0);
+2. $\gamma_{10}$: the fixed effect for time0, effect of time on testosterone levels controlling for playing;
+3. $\gamma_{01}$: the fixed effect for playing, effect of playing on testosterone at time0;
+4. $\gamma_{11}$: interaction term between playing and time, the effect of playing on the effect of time on testosterone levels;
+5. $\tau_0^2$: a random effect for the intercept capturing the variance of people's average testosterone levels around the intercept controlling for time and playing;
+6. $\tau_1^2$: a random effect for the slope of time0 capturing the variance of people's slopes around the grand mean slope controlling for playing;
+7. $\sigma^2$: a random effect capturing the variance of people around their own average testosterone level, controlling for time and playing;
+
+We are not estimating a covariance term.
+
+```{r}
+l2_played <- lmer(Testosterone ~ 1 + time0 + Played + Played:time0 + (1|Code) + (0 + time0|Code), data = data, REML = FALSE)
+summary(l2_played)
+```
+
+Looking at our fixed effects, the intercept of 44.53 is the average testosterone level at time 0 across people who didn't play. The slope of time, 3.93, indicates the average increase in testosterone levels over one unit of time controlling for playing. The slope of having played, 9.00, indicates that those who played had on average 9 more units of Testosterone than those who didn't at time 0. The interaction between time and having played indicates that those who played had a 7.39-higher slope on average than those who didn't.
+
+The variance term describing how people vary around the intercept is 182.24. The variance term describing how people's time slopes vary is 27.22. 
+
+Let's do a quick deviance test to see if including playing decreases deviance (i.e., improves model fit):
+
+```{r}
+anova(l1_model_cov0, l2_played)
+```
+
+The model with played does fit significantly better.
+
+Finally, let's add a fixed effect for birth control.
+
+| Level  | Equation |
+|:-------|:---------|
+|Level 1 | $testosterone_{ij} = \beta_{0j} + \beta_{1j}time0_{ij} + R_{ij}$|
+|Level 2 | $\beta_{0j} = \gamma_{00} + \gamma_{01}played_j + \gamma_{02}birth\_control_j + U_{0j}$|
+|        | $\beta_{1j} = \gamma_{10} + \gamma_{11}played_j + \gamma_{12}birth\_control_j + U_{1j}$|
+|Combined| $testosterone_{ij} = \gamma_{00} + \gamma_{01}*played_j + \gamma_{02}*birth\_control_j + \gamma_{10}time0_{ij} + \gamma_{11}time0_{ij}*played_j + \gamma_{12}time0_{ij}*birth\_control_j + U_{0j} + U_{1j}time0_{ij} + R_{ij}$|
+
+Here, we're estimating 9 effects, the 7 previously described plus:
+
+8. $\gamma_{02}$: the fixed effect for birth control, effect of taking birth control on baseline testosterone levels controlling for playing;
+9. $\gamma_{12}$: interaction term between playing and birth control.
+
+```{r}
+l2_played_birthcontrol <- lmer(Testosterone ~ 1 + time0 + Played + time0:Played + HormonCont + time0:HormonCont + (1|Code) + (0 + time0|Code), data = data, REML = FALSE)
+summary(l2_played_birthcontrol)
+Matrix::bdiag(VarCorr(l2_played_birthcontrol))
+```
+
+```{r}
+anova(l2_played, l2_played_birthcontrol)
+```
+
+Taking birth control is associated with a drop in Testosterone by 9.71 units, controlling for all other variables, and the interaction between time and birth control was -0.39, indicating that the slope for time is `4.09 - 0.39 = 3.70` for people taking birth control. Neither effect was statistically significant.
+
+## Conclusion
+
+In this chapter, we estimated and interpreted models for longitudinal data and reviewed some of the evidence available to us in making model construction decisions: deviance testing, 95% confidence intervals, and visualizing Empirical Bayes estimates. In Chapter 11, we will review another source of evidence for model-building and interpretation: effect sizes and R-squared in multilevel models.

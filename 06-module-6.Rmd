@@ -1,0 +1,194 @@
+# Random Effects and Cross-level Interactions {#module-6}
+
+## Learning Objectives
+
+In this chapter, we will introduce cross-level interactions and random effects.
+
+The learning objectives for this chapter are:
+
+1. Code and interpret models with random slope effects and cross-level interactions.
+2. Interpret meaning of different elements of a Tau matrix.
+3. Visualize a random effect covariance using Empirical Bayes estimates.
+
+All materials for this chapter are available for download [here](www.learn-mlms.com/students).
+
+## Data Demonstration
+
+The data for this chapter were taken from chapter 3 of Heck, R. H., Thomas, S. L., & Tabata, L. N. (2011). *Multilevel and Longitudinal Modeling with IBM SPSS*: Taylor & Francis. Students are clustered within schools in the data.
+
+### Load Data and Dependencies
+
+For this data demo, we will use the following packages:
+
+```{r message=FALSE, warning=FALSE}
+library(dplyr) # for data manipulation
+library(ggplot2) # for visualizations
+library(lme4) # for multilevel models
+library(lmerTest) # for p-values
+```
+
+And the same dataset of students' math achievement:
+
+```{r, eval=FALSE}
+data <- read.csv('heck2011.csv')
+```
+
+```{r, echo = FALSE}
+# this actually loads my data, but will be hidden
+data <- read.csv('data/heck2011.csv', fileEncoding = "UTF-8-BOM")
+```
+
+### MLM with Random Slope Effect 
+
+As a reminder, in Chapter 4 we made the following scatterplot visualizing the relationship between math achievement and socioeconomic status across different schools:
+
+```{r}
+data %>% 
+  filter(schcode <= 10) %>% 
+  ggplot(mapping = aes(x = ses, y = math, colour = factor(schcode))) +
+  geom_point() +
+  geom_smooth(mapping = aes(group = schcode), method = "lm", se = FALSE, fullrange = TRUE) +
+  labs(colour = "schcode")
+```
+
+As we can see, the intercept and slope values are quite different across schools. For example, school 3 has an intercept around 38 and a small positive slope, whereas school 8 has an intercept around 55 and a larger positive slope. In Chapter 5, we modelled the relationship between math achievement and SES as follows:
+
+| Level  | Equation |
+|:-------|:---------|
+|Level 1 | $math_{ij} = \beta_{0j} + \beta_{1j}ses_{ij} + R_{ij}$|
+|Level 2 | $\beta_{0j} = \gamma_{00} + U_{0j}$|
+|        | $\beta_{1j} = \gamma_{10}$|
+|Combined| $math_{ij} = \gamma_{00} +  \gamma_{1j}ses_{ij} + U_{0j} + R_{ij}$|
+
+We did not assume all schools had the same mean math achievement: we modelled the variation in intercepts by adding a random intercept term (`U_{0j}`) to our model, which estimated the variances in intercepts across schools. However, we assumed that all schools had the same slope by only estimating the average effect of SES, and not a variance around that slope. That doesn't seem accurate; look at our scatterplot and the variability in slopes! We can model this variance in slopes between schools by adding a random slope term to our model. The following equations describe this model:
+
+| Level  | Equation |
+|:-------|:---------|
+|Level 1 | $math_{ij} = \beta_{0j} + \beta_{1j}ses_{ij} + R_{ij}$|
+|Level 2 | $\beta_{0j} = \gamma_{00} + U_{0j}$|
+|        | $\beta_{1j} = \gamma_{10} + U_{1j}$|
+|Combined| $math_{ij} = \gamma_{00} +  \gamma_{1j}ses_{ij} + U_{0j} + U_{1j}ses_{ij} + R_{ij}$|
+
+With this model, we'll now be estimating 6 parameters — 2 fixed effects, 3 random effects, and a random effect covariance:
+
+1. $\gamma_{00}$: the fixed effect for the intercept, controlling for `ses`;
+2. $\gamma_{10}$: the fixed effect for the slope of `ses`;
+3. $\sigma^2$: a random effect capturing the variance of students around their school's mean math achievement, controlling for `ses`;
+4. $\tau_0^2$: a random effect for the intercept capturing the variance of schools around the intercept, controlling for `ses`;
+5. $\tau_1^2$: a random effect for the slope capturing variance of school slopes around the grand mean slope, controlling for `ses`;
+6. $\tau_{01}$: a random effect covariance capturing how the intercept variance and slope variance relate to each other.
+
+The random effect covariance $\tau_{01}$ quantifies the relationship between $\tau_0^2$ and $\tau_1^2$. It is interpreted like any other covariance, as the unstandardized relationship, but `lme4` also outputs the standardized form, the correlation. If the covariance is positive, then a higher intercept value is associated with a higher slope. If negative, a higher intercept value is associated with a lower slope. If near-zero, there is minimal/no relationship between the intercept and slope values. 
+
+In our example, that would indicate schools with higher mean levels of math achievement at the intercept of `ses = 0` would also have a larger slope of `ses`. If the covariance is negative, then a higher intercept value is associated with a lower slope. In our example, schools with higher intercepts of math achievement at `ses = 0` would have lower slopes for `ses`. We'll look at the actual random effect covariance in a moment.
+
+To estimate a random slope effect in `lme4`, you place the predictor for which you want a random slope before the `|` in the code as follows:
+
+```{r}
+ses_l1_random <- lmer(math ~ ses + (1 + ses|schcode), data = data, REML = TRUE)
+summary(ses_l1_random)
+```
+
+Note that the 1 indicates a random intercept term, and is a default setting so you can also estimate both a random intercept and slope with just `(ses|schcode)`. If you want to exclude the random intercept from the model you need to write `(0 + ses|schcode)` to override the default.
+
+Let's look at our fixed effects. Per the intercept, the average math achievement at mean SES (`ses` = 0) is 57.70. A one-standard-deviation increase in `ses` across all private schools is associated with a 3.96-point increase in math achievement.
+
+From our random effects, the variance term describing how schools vary around the intercept (at mean ses) is 3.20 ($\tau_0^2$), the variance term describing how school SES slopes vary around the grand mean slope is 0.78 ($\tau_1^2$), and the variance term describing how students vary around their school's mean math achievement is 62.59 ($\sigma^2$). We can find our random effect covariance by examining our Tau matrix. The Tau matrix is called a Tau matrix because it contains the estimates for our random effects, or Taus: $\tau_0^2$, $\tau_1^2$, etc. We have always been estimating a Tau matrix, but when we only had a random intercept it was just a 1-by-1 matrix of the random intercept term $\tau_0^2$.
+
+```{r}
+Matrix::bdiag(VarCorr(ses_l1_random))
+```
+
+The code looks a little busy, but there are two steps. First, we extract our random effects variance-covariance matrix (Tau matrix) with `VarCorr(ses_l1_random)`. Then, we use the `bdiag()` function from the Matrix package to construct a matrix that's easy for us to read at a glance.
+
+In the first row and first column, we have our intercept variance term $\tau_0^2$, 3.20. In the second row and second column, we have our slope variance term, $\tau_1^2$, 0.78. In the second row and first column OR in the first row and second column, we have our random effect covariance, -1.58. This negative covariance indicates that for higher intercepts, the slope value is lower: the relationship between SES and math achievement decreases as mean math achievement increases. The matrix we've shown here only includes the level-2 random effects organized in matrix form, which you may see in other software programs and which can be easier to read. Information about the relationship between random effects is also output by `lme4` under the "Random effects:" section. The `lme4` output includes all random effects in variance and standard deviation units, as well as the *correlation* (not covariance) between the intercept and slope variances.
+
+We can convert the covariance between $\tau_0^2$ and $\tau_1^2$ to the correlation using the standard deviations of each:
+
+$$corr = \frac{cov(X, Y)}{sd_x*sd_y}$$
+
+We have our covariance from our Tau matrix: -1.58. We can see the standard deviations in the `lme4` output: the standard deviation of the intercept variance is 1.79, the standard deviation of the slope variance 0.88. We can then compute the correlation:
+
+```{r}
+-1.58/(1.79*0.88)
+```
+
+So there is a correlation of -1 between the intercept variance and slope variance, which matches the printed output of -1.00 under the "Corr" column in the "Random effects" section of the `lme4` output.
+
+Let's visualize the relationship using Empirical Bayes estimates (see Chapter 4 for more on EB estimates) of the intercepts and slopes for each school; we expect to see a negative relationship between them.
+
+```{r}
+empirical_bayes_data <- ranef(ses_l1_random) # extract random effects for each school
+
+empirical_bayes_intercepts <- empirical_bayes_data$schcode["(Intercept)"]
+
+empirical_bayes_slopes <- empirical_bayes_data$schcode["ses"] # extracts the SES/slope EB estimates from the list
+
+bind_cols(empirical_bayes_intercepts, empirical_bayes_slopes) %>%  # combine EB slopes and intercepts into a useable dataframe for graphing
+  ggplot(mapping = aes(x = ses, y = `(Intercept)`)) +
+  geom_point()
+```
+
+Looks like we expect! That's a covariance of -1.58 visualized.
+
+Finally, note that we get a convergence issue with this model: `boundary (singular) fit: see help('isSingular')`. For now, we're going to ignore that. In Chapter 7 we will focus on estimation issues and troubleshooting.
+
+### MLM with Crosslevel Effect
+
+In Chapter 5, we added the level-2 variable of school type (`public = 0` for public schools, `public = 1` for private schools) as a predictor of the intercept to answer the question: how does school type affect math achievement scores when `ses = 0`? Do public schools have higher or lower intercepts than private schools? The following equations described that model:
+
+| Level  | Equation |
+|:-------|:---------|
+|Level 1 | $math_{ij} = \beta_{0j} + \beta_{1j}ses_{ij} + R_{ij}$|
+|Level 2 | $\beta_{0j} = \gamma_{00} + \gamma_{10}public_j + U_{0j}$|
+|        | $\beta_{1j} = \gamma_{10}$|
+|Combined| $math_{ij} = \gamma_{00} + \gamma_{01}public_{j} + \gamma_{10}ses_{ij} + U_{0j} + R_{ij}$|
+
+What if we want to know how school type affects the slope of `ses`, though? In other words, is there a difference in the effect of SES on math achievement in a private or public school? We can answer this question by adding school type as a predictor of SES slopes and create a cross-level interaction. This is an interaction because it allows us to estimate a different slope based on school type, whereas our previous model assumed the relationship between SES and math achievement was the same for both school types. The logic is the same as in regular regression.
+
+We can describe this model with the following equations. Note that we are also including our slope random effect ($\tau_1^2$ / $U_{1j}$), which allows the slopes to vary across schools. This is logically consistent with the idea that slopes might vary due to school type, but not required. We could run this model without random slopes.
+
+| Level  | Equation |
+|:-------|:---------|
+|Level 1 | $math_{ij} = \beta_{0j} + \beta_{1j}ses_{ij} + R_{ij}$|
+|Level 2 | $\beta_{0j} = \gamma_{00} + \gamma_{10}public_j + U_{0j}$|
+|        | $\beta_{1j} = \gamma_{10} + \gamma_{11}public_j + U_{1j}$|
+|Combined| $math_{ij} = \gamma_{00} + \gamma_{01}public_{j} + \gamma_{10}ses_{ij} + \gamma_{11}ses_{ij}*public_j + U_{0j} + U_{1j}public_{j} + R_{ij}$|
+
+With this model, we will be estimating 8 parameters — 4 fixed effects, 3 random effects, and a random effect covariance:
+
+1. $\gamma_{00}$: the fixed effect for the intercept, controlling for `ses` and `public`;
+2. $\gamma_{01}$: the fixed effect for the slope of `public`, controlling for `ses`;
+3. $\gamma_{10}$: the fixed effect for the slope of `ses`, controlling for `public`;
+4. $\gamma_{11}$: the fixed effect for the effect of `public` on the slope of `ses`;
+5. $\sigma^2$: a random effect capturing the variance of students around their school's mean math achievement, controlling for `ses` and `public`;
+6. $\tau_0^2$: a random effect for the intercept capturing the variance of schools around the intercept, controlling for `ses` and `public`;
+7. $\tau_1^2$: a random effect for the slope capturing variance of school slopes around the grand mean slope, controlling for `ses` and `public`;
+8. $\tau_{01}$: a random effect covariance capturing how the intercept variance and slope variance relate to each other.
+
+A cross-level interaction is interpreted like an interaction in regular regression: the effect of school type on the effect of SES on math achievement. Like in regular regression interactions, it can also be interpreted as the effect of SES on school type on math achievement. And as in regular regression, either interpretation is accurate, but one of the other might be more intuitive for a specific research question.
+
+Let's run our model:
+
+```{r}
+crosslevel_model <- lmer(math ~ 1 + ses + public + ses:public + (1 + ses|schcode), data = data, REML = TRUE)
+summary(crosslevel_model)
+```
+
+Note that we can include interactions in two ways. Here, we are using verbose code, listing the individual effects (`ses` and `public`) and indicating their interaction with `ses:public`. You can also capture all of this information with an asterisk: `ses*public` is equivalent to `ses + public + ses:public`.
+
+We have a convergence warning again: `boundary (singular) fit: see help('isSingular')`, and again we're going to ignore it for now (see Chapter 7 for a deeper dive into these issues).
+
+Let's look at our fixed effects. Per the intercept, the average math achievement across all private schools (`public` = 0) at mean SES (`ses` = 0) is 57.72. A one-standard-deviation increase in `ses` across all private schools is associated with a 4.42-point increase in math achievement. Public schools (`public` = 1) at mean `ses` have a -0.02-point decrease on average in math achievement relative to private schools. The effect of `ses` on math achievement is lower in public schools by -0.63 points on average, which quantifies the interaction. We can calculate the expected slope for SES in public schools by using these coefficients: `4.42 - 0.63 = 3.79`, so a one-unit increase in SES in public schools is associated with a 3.79-unit increase in math achievement, less of an affect than at private schools.
+
+From our random effects, the variance term describing how schools vary around the intercept (at mean SES at public schools) is 3.21, the variance of school slopes around the grand mean is 0.80, and the variance term describing how students vary around their school means is 62.56. We can see our random effect covariance of -1.6 with our Tau matrix, indicating that schools with higher values of mean math achievement at the intercept of `ses = 0` have lower slopes of `ses`.
+
+```{r}
+Matrix::bdiag(VarCorr(crosslevel_model))
+```
+
+Like in other chapters, you can also calculate variance reduced at level-1 and level-2 to examine the impact of adding our cross-level effect, which we leave as an exercise to the reader.
+
+## Conclusion
+
+In this chapter, we added random slope effects at level-1 and a cross-level interaction to our model, examined the Tau matrix, and interpreted random effect covariances. In doing so, we ran into some convergence issues (that `?isSingular` warning). In Chapter 7, we'll delve into model estimation options, problems, and troubleshooting.

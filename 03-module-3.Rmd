@@ -1,0 +1,81 @@
+# Approaches to Multilevel Data {#module-3}
+
+## Learning Objectives
+
+In this chapter, we will illustrate a clustered dataset and review non-multilevel-modelling options for handling that clustering. 
+
+The learning objectives for this chapter are:
+
+1. Understand the implications of treating clustered data as unclustered;
+2. Use cluster-robust standard errors to account for clustering;
+3. Compare results between regular and cluster-robust regression.
+
+All materials for this chapter are available for download [here](www.learn-mlms.com/students).
+
+## Data Demonstration
+
+The data for this chapter were taken from chapter 3 of Heck, R. H., Thomas, S. L., & Tabata, L. N. (2011). *Multilevel and Longitudinal Modeling with IBM SPSS*: Taylor & Francis. Students are clustered within schools in the dataset.
+
+### Load Data and Dependencies
+
+First, let's load in the data and packages we'll be using for this data demo. We will use the following packages:
+
+```{r message=FALSE}
+library(dplyr) # for data processing
+library(lmtest) # for cluster-robust standard errors
+library(sandwich) # for cluster-robust standard errors
+```
+
+We'll store the data in an object called `data`. If you want to read the data in with the relative filepath (i.e., just referencing "heck2011.csv"), make sure the file is in the same folder as your R script. If the file is in a different folder, tell your computer exactly where to find it with an absolute file path.
+
+```{r, eval=FALSE}
+data <- read.csv('heck2011.csv')
+```
+
+```{r, echo = FALSE}
+# this actually loads my code, but will be hidden
+data <- read.csv('data/heck2011.csv', fileEncoding = "UTF-8-BOM")
+```
+
+### Dealing with Dependence
+
+Our dataset is clustered, students within schools, but in Chapter 2 we treated it as if it were not clustered, i.e., as if each student was randomly selected from a population of students, regardless of school. When we treat clustered data as unclustered, we bias the significance testing for our models such that we are more likely to make a Type I error. A *t* value is based on dividing a regression coefficient by the standard error: $t = \frac{b}{SE}$. The standard error is a quotient of the standard deviation and the square root of the degrees of freedom, the sample size *n*: $SE = \frac{\sigma}{\sqrt n}$. When we assume that data are unclustered, we act like we have a larger sample size than we do (e.g., 100 independent observations rather than 10 classes of 10 students), which reduces the standard error and inflates the t-value, making it more likely that our coefficients will be significant.
+
+We have multiple options for dealing with dependence. Multilevel models are one option, accounting for the clustered data structure by quantifying how the clusters vary across the entire sample. For example, looking at student math achievement, we can move beyond having a single intercept to having a mean intercept across all schools *and* a term representing how schools' mean math achievements vary around the mean intercept. Multilevel models are a powerful tool! But in providing more information to the researcher (e.g., how schools vary around the grand mean intercept), they also require more input from the researcher: do we expect our intercepts to vary? Do we expect our slopes to vary? If so, which slopes?
+
+Sometimes, we don't need an MLM (and the assumptions that come along with it) because we don't want to ask questions at multiple levels, like "how does student SES and teacher years of experience affect student math achievement?" We just want to know "how does student SES affect student math achievement?" In this case, we might think of the clustering in our data as a nuisance, something to be handled so that our standard errors aren't biased, but not theoretically investigated. In such a case where we want to run a single-level regression that controls bias in the standard errors, we can use cluster-robust standard errors.
+
+### Cluster-Robust Standard Errors
+
+Cluster-robust standard errors account for clustering but retain the interpretation of regular regression models. That is, the coefficients do not delineate within and between effects, but provide average effects pooled across the whole dataset and unbiased standard errors that take into account the clustering. For more information on clustered standard errors, see this helpful overview: https://mldscenter.maryland.gov/egov/Publications/ResearchSeries/Clustered%20Data,%20Are%20Multilevel%20Models%20Really%20Necessary.pdf. Let's look at cluster-robust standard errors in action!
+
+In chapter 2, we conducted a linear regression predicting math achievement from socioeconomic status and sex. Let's run that same model.
+
+```{r}
+model <- lm(math ~ ses + female, data = data)
+summary(model)
+```
+
+Now, let's run the same model with cluster-robust standard errors and compare the coefficients and their significance between the regular and cluster-robust models.
+
+```{r}
+model_crse <- coeftest(model, vcov = vcovCL, cluster = ~ schcode)
+model_crse
+```
+
+As expected, the coefficients are the same between the two models, but the significance levels differ. In this case, the differences are trivial, and all coefficients retain their significance. But in your case, correcting for clustering might make the difference between significant and non-significant results. 
+
+## Conclusion
+
+In this chapter, we discussed why we need to account for clustering in our analyses. We then demonstrated an MLM alternative, cluster-robust standard errors, that can be used to account for clustering if you're asking questions at one level and want to run a single-level regression, but adjust the standard errors.
+
+In chapter 4, we will look at our first multilevel models for handling clustered data structures and asking multilevel questions.
+
+## Further Reading
+
+McCoach, D. B. (2010). Dealing With Dependence (Part II): A Gentle Introduction to Hierarchical Linear Modeling. Gifted Child Quarterly, 54(3), 252–256. https://doi.org/10.1177/0016986210373475
+
+McCoach, D. B., & Adelson, J. L. (2010). Dealing with dependence (Part 1): Understanding the effects of clustered data. Gifted Child Quarterly, 54(2), 152–155. https://doi.org/10.1177/0016986210363076
+
+McNeish, D., Stapleton, L. M., & Silverman, R. D. (2017). On the unnecessary ubiquity of hierarchical linear modeling. Psychological Methods, 22(1), 114–140. https://doi.org/10.1037/met0000078
+
