@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 12 Assumptions | Introduction to Multilevel Modelling</title>
+  <meta name="description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and criticially analyze their use in the literature." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 12 Assumptions | Introduction to Multilevel Modelling" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://www.learn-mlms.com" />
+  
+  <meta property="og:description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and criticially analyze their use in the literature." />
+  <meta name="github-repo" content="mkshaw/multilevel-modelling/" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 12 Assumptions | Introduction to Multilevel Modelling" />
+  
+  <meta name="twitter:description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and criticially analyze their use in the literature." />
+  
+
+<meta name="author" content="Mairead Shaw and Jessica Kay Flake" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="11-module-11.html"/>
+
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to Multilevel Modelling</li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#goals"><i class="fa fa-check"></i><b>1.2</b> Goals</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#prerequisites"><i class="fa fa-check"></i><b>1.3</b> Prerequisites</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#materials"><i class="fa fa-check"></i><b>1.4</b> Materials</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html"><i class="fa fa-check"></i><b>2</b> Multiple Regression Review</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#learning-objectives"><i class="fa fa-check"></i><b>2.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="2.2" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#data-demonstration"><i class="fa fa-check"></i><b>2.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#creating-r-projects"><i class="fa fa-check"></i><b>2.2.1</b> Creating R Projects</a></li>
+<li class="chapter" data-level="2.2.2" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#loading-data-and-dependencies"><i class="fa fa-check"></i><b>2.2.2</b> Loading Data and Dependencies</a></li>
+<li class="chapter" data-level="2.2.3" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#simple-linear-regression"><i class="fa fa-check"></i><b>2.2.3</b> Simple Linear Regression</a></li>
+<li class="chapter" data-level="2.2.4" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#multiple-regression-1"><i class="fa fa-check"></i><b>2.2.4</b> Multiple Regression</a></li>
+<li class="chapter" data-level="2.2.5" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#interaction-terms"><i class="fa fa-check"></i><b>2.2.5</b> Interaction Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#conclusion"><i class="fa fa-check"></i><b>2.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="03-module-3.html"><a href="03-module-3.html"><i class="fa fa-check"></i><b>3</b> Approaches to Multilevel Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="03-module-3.html"><a href="03-module-3.html#learning-objectives-1"><i class="fa fa-check"></i><b>3.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="3.2" data-path="03-module-3.html"><a href="03-module-3.html#data-demonstration-1"><i class="fa fa-check"></i><b>3.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="03-module-3.html"><a href="03-module-3.html#load-data-and-dependencies"><i class="fa fa-check"></i><b>3.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="3.2.2" data-path="03-module-3.html"><a href="03-module-3.html#dealing-with-dependence"><i class="fa fa-check"></i><b>3.2.2</b> Dealing with Dependence</a></li>
+<li class="chapter" data-level="3.2.3" data-path="03-module-3.html"><a href="03-module-3.html#cluster-robust-standard-errors"><i class="fa fa-check"></i><b>3.2.3</b> Cluster-Robust Standard Errors</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="03-module-3.html"><a href="03-module-3.html#conclusion-1"><i class="fa fa-check"></i><b>3.3</b> Conclusion</a></li>
+<li class="chapter" data-level="3.4" data-path="03-module-3.html"><a href="03-module-3.html#further-reading"><i class="fa fa-check"></i><b>3.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="04-module-4.html"><a href="04-module-4.html"><i class="fa fa-check"></i><b>4</b> Our First Multilevel Models</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="04-module-4.html"><a href="04-module-4.html#learning-objectives-2"><i class="fa fa-check"></i><b>4.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="4.2" data-path="04-module-4.html"><a href="04-module-4.html#data-demonstration-2"><i class="fa fa-check"></i><b>4.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="04-module-4.html"><a href="04-module-4.html#load-data-and-dependencies-1"><i class="fa fa-check"></i><b>4.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="4.2.2" data-path="04-module-4.html"><a href="04-module-4.html#why-multilevel-models"><i class="fa fa-check"></i><b>4.2.2</b> Why Multilevel Models?</a></li>
+<li class="chapter" data-level="4.2.3" data-path="04-module-4.html"><a href="04-module-4.html#fixed-vs-random-effects"><i class="fa fa-check"></i><b>4.2.3</b> Fixed vs Random Effects</a></li>
+<li class="chapter" data-level="4.2.4" data-path="04-module-4.html"><a href="04-module-4.html#the-null-model"><i class="fa fa-check"></i><b>4.2.4</b> The Null Model</a></li>
+<li class="chapter" data-level="4.2.5" data-path="04-module-4.html"><a href="04-module-4.html#understanding-variance"><i class="fa fa-check"></i><b>4.2.5</b> Understanding Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="04-module-4.html"><a href="04-module-4.html#conclusion-2"><i class="fa fa-check"></i><b>4.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="05-module-5.html"><a href="05-module-5.html"><i class="fa fa-check"></i><b>5</b> Adding Fixed Predictors to MLMs</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="05-module-5.html"><a href="05-module-5.html#learning-objectives-3"><i class="fa fa-check"></i><b>5.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="5.2" data-path="05-module-5.html"><a href="05-module-5.html#data-demonstration-3"><i class="fa fa-check"></i><b>5.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="05-module-5.html"><a href="05-module-5.html#load-data-and-dependencies-2"><i class="fa fa-check"></i><b>5.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="5.2.2" data-path="05-module-5.html"><a href="05-module-5.html#mlm-with-level-1-predictor"><i class="fa fa-check"></i><b>5.2.2</b> MLM with Level-1 Predictor</a></li>
+<li class="chapter" data-level="5.2.3" data-path="05-module-5.html"><a href="05-module-5.html#compare-regular-and-multilevel-regression"><i class="fa fa-check"></i><b>5.2.3</b> Compare Regular and Multilevel Regression</a></li>
+<li class="chapter" data-level="5.2.4" data-path="05-module-5.html"><a href="05-module-5.html#mlm-with-level-2-predictor"><i class="fa fa-check"></i><b>5.2.4</b> MLM with Level-2 Predictor</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="05-module-5.html"><a href="05-module-5.html#conclusion-3"><i class="fa fa-check"></i><b>5.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="06-module-6.html"><a href="06-module-6.html"><i class="fa fa-check"></i><b>6</b> Random Effects and Cross-level Interactions</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="06-module-6.html"><a href="06-module-6.html#learning-objectives-4"><i class="fa fa-check"></i><b>6.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="6.2" data-path="06-module-6.html"><a href="06-module-6.html#data-demonstration-4"><i class="fa fa-check"></i><b>6.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="06-module-6.html"><a href="06-module-6.html#load-data-and-dependencies-3"><i class="fa fa-check"></i><b>6.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="6.2.2" data-path="06-module-6.html"><a href="06-module-6.html#mlm-with-random-slope-effect"><i class="fa fa-check"></i><b>6.2.2</b> MLM with Random Slope Effect</a></li>
+<li class="chapter" data-level="6.2.3" data-path="06-module-6.html"><a href="06-module-6.html#mlm-with-crosslevel-effect"><i class="fa fa-check"></i><b>6.2.3</b> MLM with Crosslevel Effect</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="06-module-6.html"><a href="06-module-6.html#conclusion-4"><i class="fa fa-check"></i><b>6.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="07-module-7.html"><a href="07-module-7.html"><i class="fa fa-check"></i><b>7</b> Model Estimation Options, Problems, and Troubleshooting</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="07-module-7.html"><a href="07-module-7.html#learning-objectives-5"><i class="fa fa-check"></i><b>7.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="7.2" data-path="07-module-7.html"><a href="07-module-7.html#data-demonstration-5"><i class="fa fa-check"></i><b>7.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="07-module-7.html"><a href="07-module-7.html#load-data-and-dependencies-4"><i class="fa fa-check"></i><b>7.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="7.2.2" data-path="07-module-7.html"><a href="07-module-7.html#introduction-to-estimation-problems"><i class="fa fa-check"></i><b>7.2.2</b> Introduction to Estimation Problems</a></li>
+<li class="chapter" data-level="7.2.3" data-path="07-module-7.html"><a href="07-module-7.html#estimation-and-optimizers"><i class="fa fa-check"></i><b>7.2.3</b> Estimation and Optimizers</a></li>
+<li class="chapter" data-level="7.2.4" data-path="07-module-7.html"><a href="07-module-7.html#non-convergence"><i class="fa fa-check"></i><b>7.2.4</b> Non-Convergence</a></li>
+<li class="chapter" data-level="7.2.5" data-path="07-module-7.html"><a href="07-module-7.html#singularity"><i class="fa fa-check"></i><b>7.2.5</b> Singularity</a></li>
+<li class="chapter" data-level="7.2.6" data-path="07-module-7.html"><a href="07-module-7.html#deviance-testing-for-model-comparison"><i class="fa fa-check"></i><b>7.2.6</b> Deviance Testing for Model Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="07-module-7.html"><a href="07-module-7.html#conclusion-5"><i class="fa fa-check"></i><b>7.3</b> Conclusion</a></li>
+<li class="chapter" data-level="7.4" data-path="07-module-7.html"><a href="07-module-7.html#further-reading-1"><i class="fa fa-check"></i><b>7.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="08-module-8.html"><a href="08-module-8.html"><i class="fa fa-check"></i><b>8</b> Centering Options and Interpretations</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="08-module-8.html"><a href="08-module-8.html#learning-objectives-6"><i class="fa fa-check"></i><b>8.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="8.2" data-path="08-module-8.html"><a href="08-module-8.html#data-demonstration-6"><i class="fa fa-check"></i><b>8.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="08-module-8.html"><a href="08-module-8.html#load-data-and-dependencies-5"><i class="fa fa-check"></i><b>8.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="8.2.2" data-path="08-module-8.html"><a href="08-module-8.html#why-center-variables"><i class="fa fa-check"></i><b>8.2.2</b> Why Center Variables?</a></li>
+<li class="chapter" data-level="8.2.3" data-path="08-module-8.html"><a href="08-module-8.html#within-between-and-contextual-effects"><i class="fa fa-check"></i><b>8.2.3</b> Within, Between, and Contextual Effects</a></li>
+<li class="chapter" data-level="8.2.4" data-path="08-module-8.html"><a href="08-module-8.html#options-for-centering-in-mlms"><i class="fa fa-check"></i><b>8.2.4</b> Options for Centering in MLMs</a></li>
+<li class="chapter" data-level="8.2.5" data-path="08-module-8.html"><a href="08-module-8.html#what-kind-of-centering-should-you-use"><i class="fa fa-check"></i><b>8.2.5</b> What Kind of Centering Should You Use?</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="08-module-8.html"><a href="08-module-8.html#conclusion-6"><i class="fa fa-check"></i><b>8.3</b> Conclusion</a></li>
+<li class="chapter" data-level="8.4" data-path="08-module-8.html"><a href="08-module-8.html#further-reading-2"><i class="fa fa-check"></i><b>8.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="09-module-9.html"><a href="09-module-9.html"><i class="fa fa-check"></i><b>9</b> Multilevel Modelling with Repeated Measures Data</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="09-module-9.html"><a href="09-module-9.html#learning-objectives-7"><i class="fa fa-check"></i><b>9.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="9.2" data-path="09-module-9.html"><a href="09-module-9.html#data-demonstration-7"><i class="fa fa-check"></i><b>9.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="09-module-9.html"><a href="09-module-9.html#load-dependencies"><i class="fa fa-check"></i><b>9.2.1</b> Load Dependencies</a></li>
+<li class="chapter" data-level="9.2.2" data-path="09-module-9.html"><a href="09-module-9.html#review-of-multilevel-modelling-procedure"><i class="fa fa-check"></i><b>9.2.2</b> Review of Multilevel Modelling Procedure</a></li>
+<li class="chapter" data-level="9.2.3" data-path="09-module-9.html"><a href="09-module-9.html#multilevel-models-for-repeated-measures"><i class="fa fa-check"></i><b>9.2.3</b> Multilevel Models for Repeated Measures</a></li>
+<li class="chapter" data-level="9.2.4" data-path="09-module-9.html"><a href="09-module-9.html#our-data-reaction-time"><i class="fa fa-check"></i><b>9.2.4</b> Our Data: Reaction Time</a></li>
+<li class="chapter" data-level="9.2.5" data-path="09-module-9.html"><a href="09-module-9.html#random-intercept-onlynull-model"><i class="fa fa-check"></i><b>9.2.5</b> Random-Intercept-Only/Null Model</a></li>
+<li class="chapter" data-level="9.2.6" data-path="09-module-9.html"><a href="09-module-9.html#adding-level-1-fixed-effects"><i class="fa fa-check"></i><b>9.2.6</b> Adding Level-1 Fixed Effects</a></li>
+<li class="chapter" data-level="9.2.7" data-path="09-module-9.html"><a href="09-module-9.html#adding-random-slopes"><i class="fa fa-check"></i><b>9.2.7</b> Adding Random Slopes</a></li>
+<li class="chapter" data-level="9.2.8" data-path="09-module-9.html"><a href="09-module-9.html#adding-level-2-fixed-effects"><i class="fa fa-check"></i><b>9.2.8</b> Adding Level-2 Fixed Effects</a></li>
+<li class="chapter" data-level="9.2.9" data-path="09-module-9.html"><a href="09-module-9.html#adding-cross-level-interactions"><i class="fa fa-check"></i><b>9.2.9</b> Adding Cross-Level Interactions</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="09-module-9.html"><a href="09-module-9.html#conclusion-7"><i class="fa fa-check"></i><b>9.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="10-module-10.html"><a href="10-module-10.html"><i class="fa fa-check"></i><b>10</b> Multilevel Modelling with Longitudinal Data</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="10-module-10.html"><a href="10-module-10.html#learning-objectives-8"><i class="fa fa-check"></i><b>10.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="10.2" data-path="10-module-10.html"><a href="10-module-10.html#data-demonstration-8"><i class="fa fa-check"></i><b>10.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="10-module-10.html"><a href="10-module-10.html#load-dependencies-1"><i class="fa fa-check"></i><b>10.2.1</b> Load Dependencies</a></li>
+<li class="chapter" data-level="10.2.2" data-path="10-module-10.html"><a href="10-module-10.html#multilevel-models-for-longitudinal-data"><i class="fa fa-check"></i><b>10.2.2</b> Multilevel Models for Longitudinal Data</a></li>
+<li class="chapter" data-level="10.2.3" data-path="10-module-10.html"><a href="10-module-10.html#visualizing-testosterone-levels-over-time"><i class="fa fa-check"></i><b>10.2.3</b> Visualizing Testosterone Levels Over Time</a></li>
+<li class="chapter" data-level="10.2.4" data-path="10-module-10.html"><a href="10-module-10.html#random-intercept-onlynull-model-1"><i class="fa fa-check"></i><b>10.2.4</b> Random-Intercept-Only/Null Model</a></li>
+<li class="chapter" data-level="10.2.5" data-path="10-module-10.html"><a href="10-module-10.html#adding-level-1-fixed-and-random-effects"><i class="fa fa-check"></i><b>10.2.5</b> Adding Level-1 Fixed and Random Effects</a></li>
+<li class="chapter" data-level="10.2.6" data-path="10-module-10.html"><a href="10-module-10.html#evidence-for-retaining-effects"><i class="fa fa-check"></i><b>10.2.6</b> Evidence for Retaining Effects</a></li>
+<li class="chapter" data-level="10.2.7" data-path="10-module-10.html"><a href="10-module-10.html#adding-level-2-fixed-effects-1"><i class="fa fa-check"></i><b>10.2.7</b> Adding Level-2 Fixed Effects</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="10-module-10.html"><a href="10-module-10.html#conclusion-8"><i class="fa fa-check"></i><b>10.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="11-module-11.html"><a href="11-module-11.html"><i class="fa fa-check"></i><b>11</b> Effect Sizes in Multilevel Models</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="11-module-11.html"><a href="11-module-11.html#learning-objectives-9"><i class="fa fa-check"></i><b>11.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="11.2" data-path="11-module-11.html"><a href="11-module-11.html#data-demonstration-9"><i class="fa fa-check"></i><b>11.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="11-module-11.html"><a href="11-module-11.html#load-data-and-dependencies-6"><i class="fa fa-check"></i><b>11.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="11.2.2" data-path="11-module-11.html"><a href="11-module-11.html#defining-effect-sizes"><i class="fa fa-check"></i><b>11.2.2</b> Defining Effect Sizes</a></li>
+<li class="chapter" data-level="11.2.3" data-path="11-module-11.html"><a href="11-module-11.html#r-squared-in-multilevel-models"><i class="fa fa-check"></i><b>11.2.3</b> R-squared in Multilevel Models</a></li>
+<li class="chapter" data-level="11.2.4" data-path="11-module-11.html"><a href="11-module-11.html#single-model-automatic-entry"><i class="fa fa-check"></i><b>11.2.4</b> Single Model, Automatic Entry</a></li>
+<li class="chapter" data-level="11.2.5" data-path="11-module-11.html"><a href="11-module-11.html#single-model-manual-entry"><i class="fa fa-check"></i><b>11.2.5</b> Single Model, Manual Entry</a></li>
+<li class="chapter" data-level="11.2.6" data-path="11-module-11.html"><a href="11-module-11.html#model-comparison"><i class="fa fa-check"></i><b>11.2.6</b> Model Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="11-module-11.html"><a href="11-module-11.html#conclusion-9"><i class="fa fa-check"></i><b>11.3</b> Conclusion</a></li>
+<li class="chapter" data-level="11.4" data-path="11-module-11.html"><a href="11-module-11.html#additional-reading"><i class="fa fa-check"></i><b>11.4</b> Additional Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="12-module-12.html"><a href="12-module-12.html"><i class="fa fa-check"></i><b>12</b> Assumptions</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="12-module-12.html"><a href="12-module-12.html#learning-objectives-10"><i class="fa fa-check"></i><b>12.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="12.2" data-path="12-module-12.html"><a href="12-module-12.html#data-demonstration-10"><i class="fa fa-check"></i><b>12.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="12-module-12.html"><a href="12-module-12.html#load-data-and-dependencies-7"><i class="fa fa-check"></i><b>12.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="12.2.2" data-path="12-module-12.html"><a href="12-module-12.html#assumptions-of-mlms"><i class="fa fa-check"></i><b>12.2.2</b> Assumptions of MLMs</a></li>
+<li class="chapter" data-level="12.2.3" data-path="12-module-12.html"><a href="12-module-12.html#assumption-1-model-specification"><i class="fa fa-check"></i><b>12.2.3</b> Assumption 1: Model Specification</a></li>
+<li class="chapter" data-level="12.2.4" data-path="12-module-12.html"><a href="12-module-12.html#assumption-2-functional-form-is-correct"><i class="fa fa-check"></i><b>12.2.4</b> Assumption 2: Functional Form is Correct</a></li>
+<li class="chapter" data-level="12.2.5" data-path="12-module-12.html"><a href="12-module-12.html#an-aside-extracting-residuals"><i class="fa fa-check"></i><b>12.2.5</b> An Aside: Extracting Residuals</a></li>
+<li class="chapter" data-level="12.2.6" data-path="12-module-12.html"><a href="12-module-12.html#assumption-3-level-1-residuals-are-independent-and-normally-distributed"><i class="fa fa-check"></i><b>12.2.6</b> Assumption 3: Level-1 Residuals are Independent and Normally Distributed</a></li>
+<li class="chapter" data-level="12.2.7" data-path="12-module-12.html"><a href="12-module-12.html#assumption-4-level-2-residuals-are-independent-and-multivariate-normal"><i class="fa fa-check"></i><b>12.2.7</b> Assumption 4: Level-2 Residuals are Independent and Multivariate Normal</a></li>
+<li class="chapter" data-level="12.2.8" data-path="12-module-12.html"><a href="12-module-12.html#assumption-5-residuals-at-level-1-and-level-2-are-independent"><i class="fa fa-check"></i><b>12.2.8</b> Assumption 5: Residuals at Level-1 and Level-2 are Independent</a></li>
+<li class="chapter" data-level="12.2.9" data-path="12-module-12.html"><a href="12-module-12.html#assumption-6-level-1-residuals-independent-of-level-2-predictors-level-2-residuals-independent-of-level-1-predictors"><i class="fa fa-check"></i><b>12.2.9</b> Assumption 6: Level-1 Residuals Independent of Level-2 Predictors, Level-2 Residuals Independent of Level-1 Predictors</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="12-module-12.html"><a href="12-module-12.html#conclusion-10"><i class="fa fa-check"></i><b>12.3</b> Conclusion</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://twitter.com/maireadkshaw">Mairead Shaw</a></li>
+<li><a href="https://twitter.com/jkayflake">Jessica Kay Flake</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Multilevel Modelling</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="module-12" class="section level1" number="12">
+<h1><span class="header-section-number">Chapter 12</span> Assumptions</h1>
+<div id="learning-objectives-10" class="section level2" number="12.1">
+<h2><span class="header-section-number">12.1</span> Learning Objectives</h2>
+<p>In this chapter we will review assumptions of MLMs and some ways to check them in R.</p>
+<p>The learning objectives for this chapter are:</p>
+<ol style="list-style-type: decimal">
+<li>Understand the assumptions underpinning MLMs;</li>
+<li>Develop and interpret R code and output for testing assumptions.</li>
+</ol>
+<p>All materials for this chapter are available for download <a href="www.learn-mlms.com/students">here</a>.</p>
+</div>
+<div id="data-demonstration-10" class="section level2" number="12.2">
+<h2><span class="header-section-number">12.2</span> Data Demonstration</h2>
+<div id="load-data-and-dependencies-7" class="section level3" number="12.2.1">
+<h3><span class="header-section-number">12.2.1</span> Load Data and Dependencies</h3>
+<p>For this data demo, we will use the following packages:</p>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="12-module-12.html#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4) <span class="co"># for multilevel models</span></span>
+<span id="cb209-2"><a href="12-module-12.html#cb209-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest) <span class="co"># for p-values</span></span>
+<span id="cb209-3"><a href="12-module-12.html#cb209-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># for data manipulation</span></span>
+<span id="cb209-4"><a href="12-module-12.html#cb209-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># for graphing</span></span></code></pre></div>
+<p>The data for chapter are a subsample from the 1982 High School Beyond data collected by the National Center for Educational Statistics, used as example data throughout Raudenbush, S. W., &amp; Bryk, A. S. (2002). Hierarchical Linear Models: Applications and Data Analysis Methods: SAGE Publications. These data are related to student math achievement.</p>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="12-module-12.html#cb210-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;rb2002.csv&#39;</span>)</span></code></pre></div>
+</div>
+<div id="assumptions-of-mlms" class="section level3" number="12.2.2">
+<h3><span class="header-section-number">12.2.2</span> Assumptions of MLMs</h3>
+<p>In brief, the assumptions underlying MLMs are as follows:</p>
+<ol style="list-style-type: decimal">
+<li>The model is correctly specified (i.e., all the predictors associated with the outcome and relevant random effects are included);</li>
+<li>The functional form is correct (e.g., the relationship between the predictors and outcome is linear if using a linear model);</li>
+<li>Level-1 residuals are independent and normally distributed;</li>
+<li>Level-2 residuals are independent and multivariate normally distributed;</li>
+<li>Residuals at level-1 and level-2 are unrelated;</li>
+<li>Predictors at one level are not related to errors at another level.</li>
+</ol>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="12-module-12.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Model is correctly specified</span></span>
+<span id="cb211-2"><a href="12-module-12.html#cb211-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. The functional form is correct -- Q1-3</span></span>
+<span id="cb211-3"><a href="12-module-12.html#cb211-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. At L2, residuals are independent and normally distributed with a mean of 0 and some variance -- Q5</span></span>
+<span id="cb211-4"><a href="12-module-12.html#cb211-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. L1 predictors are independent of L1 residuals for all predictors -- Q6</span></span>
+<span id="cb211-5"><a href="12-module-12.html#cb211-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. L2 residuals are multivariate normal and are independent from one another and across L2 units --</span></span>
+<span id="cb211-6"><a href="12-module-12.html#cb211-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. L2 predictors are unrelated to L2 residuals -- Q12-13</span></span>
+<span id="cb211-7"><a href="12-module-12.html#cb211-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 7. Residuals at L1 and L2 are unrelated -- Q14</span></span>
+<span id="cb211-8"><a href="12-module-12.html#cb211-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 8. Predictors at one level are not related to errors at another level -- Q15</span></span></code></pre></div>
+<p>In the data demonstration that follows, we will be showing some techniques for checking these assumptions. However, we note that there are many other ways to conduct similar checks; assumption checks are data exploration at the end of the day. If you know and prefer other methods of exploring the same facets of your data, go for it!</p>
+</div>
+<div id="assumption-1-model-specification" class="section level3" number="12.2.3">
+<h3><span class="header-section-number">12.2.3</span> Assumption 1: Model Specification</h3>
+<p>Specifying your model means determining which predictors should be included and what parameters to estimate. A correctly-specified model is one that includes everything associated with your outcome and nothing not-associated. This is impossible to <em>know</em> for certain and most researchers are constrained by the resources they have to get data and ultimately by the data they have. A general approach for considering this is trying to include all possible relevant IVs when predicting a DV. When building your MLM, build a maximal model with all possibe random effects, and trim down as you see effects are zero. Comparing models with and without effects and reviewing the literature for important variables to consider are decent strategies here. Get experts to read your results and their ideas on if anything is missing!</p>
+</div>
+<div id="assumption-2-functional-form-is-correct" class="section level3" number="12.2.4">
+<h3><span class="header-section-number">12.2.4</span> Assumption 2: Functional Form is Correct</h3>
+<p>The functional form of your model refers to the function connecting your predictors and outcome. In linear models like MLMs, that form is (you guessed it!) linear. However, you can use MLMs for non-linear data by specifying other functions, which are not covered in the current set of modules. In our example data, let’s look at the relationship between an outcome of math achievement (<code>mathach</code>) and a predictor of socioeconomic status (<code>ses</code>). We can get a sense of whether that relationship is linear with a scatterplot:</p>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="12-module-12.html#cb212-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb212-2"><a href="12-module-12.html#cb212-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> ses, <span class="at">y =</span> mathach)) <span class="sc">+</span></span>
+<span id="cb212-3"><a href="12-module-12.html#cb212-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
+<p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-120-1.png" width="672" /></p>
+<p>The scatterplot is hard to read because we have over 11,000 observations in our data. One option to improve readability is reducing the opacity of each point to get a clearer picture of how many points there are:</p>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="12-module-12.html#cb214-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb214-2"><a href="12-module-12.html#cb214-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> ses, <span class="at">y =</span> mathach)) <span class="sc">+</span></span>
+<span id="cb214-3"><a href="12-module-12.html#cb214-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
+<p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-121-1.png" width="672" /></p>
+<p>It looks loosely linear. Before we continue, for teaching purposes we’ll take a subset of 30 schools to make plotting easier for the rest of this data demo. For your data, you should consider all observations; this is just to make examples clearer.</p>
+<p>I’D ADD EMPHASIS TO THE PART ABOUT THEIR DATA, ABOVE</p>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="12-module-12.html#cb216-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb216-2"><a href="12-module-12.html#cb216-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(SCHOOL <span class="sc">%in%</span> <span class="fu">head</span>(<span class="fu">unique</span>(SCHOOL), <span class="at">n =</span> <span class="dv">30</span>))</span></code></pre></div>
+<p>Let’s take a look at the relationship between SES and math achievement for each of the 30 schools in our subsetted data.</p>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="12-module-12.html#cb217-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb217-2"><a href="12-module-12.html#cb217-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb217-3"><a href="12-module-12.html#cb217-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> ses, <span class="at">y =</span> mathach)) <span class="sc">+</span></span>
+<span id="cb217-4"><a href="12-module-12.html#cb217-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> SCHOOL)</span></code></pre></div>
+<p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-123-1.png" width="672" /></p>
+<p>Looks like we have vaguely linear relationships; nothing looks quadratic. This is a subjective determination, be open to other, non-linear functions if a straight line doesn’t appear to do the job. Finally, let’s graph all points on one plane again but with regression lines overlaid for each school.</p>
+<p>CURRENT HTML HAS NO REGRESSION LINES ON THE SCHOOLS</p>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="12-module-12.html#cb218-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb218-2"><a href="12-module-12.html#cb218-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(SCHOOL) <span class="sc">%&gt;%</span> </span>
+<span id="cb218-3"><a href="12-module-12.html#cb218-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> ses, <span class="at">y =</span> mathach, <span class="at">colour =</span> <span class="fu">factor</span>(SCHOOL))) <span class="sc">+</span></span>
+<span id="cb218-4"><a href="12-module-12.html#cb218-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb218-5"><a href="12-module-12.html#cb218-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>, <span class="at">fullrange =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-124-1.png" width="672" /></p>
+<p>This isn’t an explicit test of functional form, but it looks like there is variance in intercepts and slopes across schools that merits multilevel modelling (or cluster-robust standard errors, if you don’t have any multilevel research questions).</p>
+</div>
+<div id="an-aside-extracting-residuals" class="section level3" number="12.2.5">
+<h3><span class="header-section-number">12.2.5</span> An Aside: Extracting Residuals</h3>
+<p>In linear regression, we have the assumption of homoscedasticity. That is, the variance of residuals is roughly the same at any value of of your predictor(s). In multilevel models, we have two classes of residuals: level-1 residuals and level-2 residuals. The remaining assumptions all deal with these residuals: that they are normally distributed, that they don’t relate to each other, that they don’t relate to predictors at the same level or at the other level. We’re going to look at a model with math achievement predicted by SES centered within cluster (school) and mean SES predicting the intercept and slope of SES centered within cluster. We’ll estimate a random effect for the slope of SES centered within cluster. We’re not estimating the random effect covariance.</p>
+<table>
+<colgroup>
+<col width="44%" />
+<col width="55%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Level</th>
+<th align="left">Equation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Level 1</td>
+<td align="left"><span class="math inline">\(mathach_{ij} = \beta_{0j} + \beta_{1j}cwc\_ses + R_{ij}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Level 2</td>
+<td align="left"><span class="math inline">\(\beta_{0j} = \gamma_{00} + \gamma_{10}ses\_mean + U_{0j}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"><span class="math inline">\(\beta_{1j} = \gamma_{10} + \gamma_{11}ses\_mean + U_{1j}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Combined</td>
+<td align="left"><span class="math inline">\(math_{ij} = \gamma_{00} + \gamma_{01}ses\_mean + \gamma_{10}cwc\_ses + \gamma_{11}cwc\_ses*ses\_mean + U_{0j} + U_{1j}cwc\_ses + R_{ij}\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="12-module-12.html#cb220-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(mathach <span class="sc">~</span>  CWCses<span class="sc">*</span>ses_mean <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>SCHOOL) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> CWCses<span class="sc">|</span>SCHOOL), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb220-2"><a href="12-module-12.html#cb220-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
+## Formula: mathach ~ CWCses * ses_mean + (1 | SCHOOL) + (0 + CWCses | SCHOOL)
+##    Data: data
+## 
+## REML criterion at convergence: 8555.5
+## 
+## Scaled residuals: 
+##      Min       1Q   Median       3Q      Max 
+## -2.87105 -0.70607 -0.03647  0.76336  2.77351 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  SCHOOL   (Intercept)  1.990   1.411   
+##  SCHOOL.1 CWCses       1.379   1.174   
+##  Residual             35.315   5.943   
+## Number of obs: 1329, groups:  SCHOOL, 30
+## 
+## Fixed effects:
+##                 Estimate Std. Error      df t value             Pr(&gt;|t|)    
+## (Intercept)      12.8243     0.3078 28.9279  41.661 &lt; 0.0000000000000002 ***
+## CWCses            1.9581     0.3412 27.3088   5.739      0.0000040499457 ***
+## ses_mean          6.5269     0.6499 28.8676  10.044      0.0000000000628 ***
+## CWCses:ses_mean   1.5239     0.7253 27.7253   2.101               0.0448 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Correlation of Fixed Effects:
+##             (Intr) CWCses ses_mn
+## CWCses       0.000              
+## ses_mean    -0.026  0.000       
+## CWCss:ss_mn  0.000  0.030  0.000</code></pre>
+<p>Let’s extract the level-1 residuals and add them to our data to work with moving forward:</p>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="12-module-12.html#cb222-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>l1resid <span class="ot">&lt;-</span> <span class="fu">residuals</span>(model)</span>
+<span id="cb222-2"><a href="12-module-12.html#cb222-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data<span class="sc">$</span>l1resid)</span></code></pre></div>
+<pre><code>## [1] -1.9478535 10.1937749 10.7268788 -0.5893637  7.6105198 -6.0281684</code></pre>
+<p>We’ll extract the level-2 residuals shortly.</p>
+</div>
+<div id="assumption-3-level-1-residuals-are-independent-and-normally-distributed" class="section level3" number="12.2.6">
+<h3><span class="header-section-number">12.2.6</span> Assumption 3: Level-1 Residuals are Independent and Normally Distributed</h3>
+<div id="independent" class="section level4" number="12.2.6.1">
+<h4><span class="header-section-number">12.2.6.1</span> Independent</h4>
+<p>Our level-1 residuals should be independent of our level-1 predictors. For our example, if our level-1 residuals (<span class="math inline">\(\sigma^2\)</span>) correlate to SES centered within cluster, we have heteroscedasticity, which we don’t want. We can check this visually by creating a scatterplot of the predictor and the residuals:</p>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="12-module-12.html#cb224-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb224-2"><a href="12-module-12.html#cb224-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> CWCses, <span class="at">y =</span> l1resid)) <span class="sc">+</span></span>
+<span id="cb224-3"><a href="12-module-12.html#cb224-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb224-4"><a href="12-module-12.html#cb224-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;CWCses&quot;</span>, <span class="at">y =</span> <span class="st">&quot;residuals&quot;</span>)</span></code></pre></div>
+<p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-127-1.png" width="672" /></p>
+<p>Those don’t look correlated; they look like a blob. We can check this statistically by calculating the correlation.</p>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="12-module-12.html#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(data<span class="sc">$</span>l1resid, data<span class="sc">$</span>CWCses)</span></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  data$l1resid and data$CWCses
+## t = -0.0000000000000030409, df = 1327, p-value = 1
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.05377213  0.05377213
+## sample estimates:
+##                        cor 
+## -0.00000000000000008347562</code></pre>
+<p>That correlation is essentially zero, meaning that our level-1 residuals and level-1 predictor are indeed uncorrelated!</p>
+</div>
+<div id="normally-distributed" class="section level4" number="12.2.6.2">
+<h4><span class="header-section-number">12.2.6.2</span> Normally Distributed</h4>
+<p>We can check whether our level-1 residuals are normally distributed with a histogram:</p>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="12-module-12.html#cb227-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb227-2"><a href="12-module-12.html#cb227-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> l1resid)) <span class="sc">+</span></span>
+<span id="cb227-3"><a href="12-module-12.html#cb227-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-129-1.png" width="672" /></p>
+<p>Those look normal-ish – there’s maybe something odd going on in that the distribution is bimodal, but that can be influenced by the number of bins. For example, with fewer bins:</p>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="12-module-12.html#cb229-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb229-2"><a href="12-module-12.html#cb229-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> l1resid)) <span class="sc">+</span></span>
+<span id="cb229-3"><a href="12-module-12.html#cb229-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">15</span>)</span></code></pre></div>
+<p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-130-1.png" width="672" /></p>
+<p>Let’s clear this up with a QQ plot:</p>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="12-module-12.html#cb230-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb230-2"><a href="12-module-12.html#cb230-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">sample =</span> l1resid)) <span class="sc">+</span></span>
+<span id="cb230-3"><a href="12-module-12.html#cb230-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_qq</span>()</span></code></pre></div>
+<p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-131-1.png" width="672" /></p>
+<p>Those look fine.
+SAY WHY THEY LOOK FINE AND HOW TO TELL IF THEY ARE FINE</p>
+</div>
+</div>
+<div id="assumption-4-level-2-residuals-are-independent-and-multivariate-normal" class="section level3" number="12.2.7">
+<h3><span class="header-section-number">12.2.7</span> Assumption 4: Level-2 Residuals are Independent and Multivariate Normal</h3>
+<p>To check our level-2 residual assumptions, we need to extract the level-2 residuals and add them to our data. This requires a little more work than extracting the level-1 residuals. We could easily add level-1 residuals to our dataset because every row is a person and had a residual. Level-2 residuals are at the school level, so the vector of residuals cannot be appended as easily. Let’s create a level-2 dataset to work with instead.</p>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="12-module-12.html#cb231-1" aria-hidden="true" tabindex="-1"></a>l2_data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb231-2"><a href="12-module-12.html#cb231-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(SCHOOL) <span class="sc">%&gt;%</span>  <span class="co"># group data by clustering variable, school</span></span>
+<span id="cb231-3"><a href="12-module-12.html#cb231-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb231-4"><a href="12-module-12.html#cb231-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">mathach_mean =</span> <span class="fu">mean</span>(mathach) <span class="co"># create mean math achievement per school</span></span>
+<span id="cb231-5"><a href="12-module-12.html#cb231-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb231-6"><a href="12-module-12.html#cb231-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(SCHOOL, ses_mean, mathach_mean) <span class="sc">%&gt;%</span> </span>
+<span id="cb231-7"><a href="12-module-12.html#cb231-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>() <span class="co"># select unique rows (rather than having school, ses_mean, and mathach_mean repeating over and over again)</span></span></code></pre></div>
+<p>Then let’s add the level-2 residuals to this dataset. We get two columns of residuals with the <code>ranef(model)$SCHOOL</code> command; the first column is intercept residuals <span class="math inline">\(U_{0j}\)</span>s, the second column the slope residuals <span class="math inline">\(U_{1j}\)</span>s. Matrices are indexed as [row, column], so we use the <code>[, 1]</code> code to get all rows from column 1 and <code>[, 2]</code> to get all rows from column 2.</p>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="12-module-12.html#cb232-1" aria-hidden="true" tabindex="-1"></a>l2_data<span class="sc">$</span>intercept_resid <span class="ot">=</span> <span class="fu">ranef</span>(model)<span class="sc">$</span>SCHOOL[, <span class="dv">1</span>]</span>
+<span id="cb232-2"><a href="12-module-12.html#cb232-2" aria-hidden="true" tabindex="-1"></a>l2_data<span class="sc">$</span>slope_resid <span class="ot">=</span> <span class="fu">ranef</span>(model)<span class="sc">$</span>SCHOOL[, <span class="dv">2</span>]</span></code></pre></div>
+<div id="independent-1" class="section level4" number="12.2.7.1">
+<h4><span class="header-section-number">12.2.7.1</span> Independent</h4>
+<p>Like with level-1 residuals, we want our level-2 residuals to be independent from level-2 predictors. We also want both our level-2 residuals — intercept and slope residuals — to be independent of each other (which was not an issue at level-1, given that we only had one category of residual, <span class="math inline">\(\sigma^2\)</span>). We can check whether our level-2 residuals are independent from the level-2 predictors and from one another as we did before: with a scatterplot and/or by calculating the correlation among them.</p>
+<p>First, let’s look at the relationship between the intercept residuals and the level-2 variable of mean SES.</p>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="12-module-12.html#cb233-1" aria-hidden="true" tabindex="-1"></a>l2_data <span class="sc">%&gt;%</span> </span>
+<span id="cb233-2"><a href="12-module-12.html#cb233-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> intercept_resid, <span class="at">y =</span> ses_mean)) <span class="sc">+</span></span>
+<span id="cb233-3"><a href="12-module-12.html#cb233-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-134-1.png" width="672" />
+And the correlation:</p>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="12-module-12.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(l2_data<span class="sc">$</span>ses_mean, l2_data<span class="sc">$</span>intercept_resid)</span></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  l2_data$ses_mean and l2_data$intercept_resid
+## t = -0.000000000000077435, df = 28, p-value = 1
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.3602692  0.3602692
+## sample estimates:
+##                     cor 
+## -0.00000000000001463377</code></pre>
+<p>Those look uncorrelated to me!</p>
+<p>Next, let’s check that the slope residuals are independent from the predictor of mean SES:</p>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="12-module-12.html#cb236-1" aria-hidden="true" tabindex="-1"></a>l2_data <span class="sc">%&gt;%</span> </span>
+<span id="cb236-2"><a href="12-module-12.html#cb236-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> slope_resid, <span class="at">y =</span>ses_mean)) <span class="sc">+</span></span>
+<span id="cb236-3"><a href="12-module-12.html#cb236-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-136-1.png" width="672" /></p>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="12-module-12.html#cb237-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(l2_data<span class="sc">$</span>ses_mean, l2_data<span class="sc">$</span>slope_resid)</span></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  l2_data$ses_mean and l2_data$slope_resid
+## t = 0.0000000000000036749, df = 28, p-value = 1
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.3602692  0.3602692
+## sample estimates:
+##                      cor 
+## 0.0000000000000006944986</code></pre>
+<p>Those also look uncorrelated!</p>
+<p>Finally, let’s check whether the level-2 residuals are independent of each other:</p>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="12-module-12.html#cb239-1" aria-hidden="true" tabindex="-1"></a>l2_data <span class="sc">%&gt;%</span> </span>
+<span id="cb239-2"><a href="12-module-12.html#cb239-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> slope_resid, <span class="at">y =</span> intercept_resid)) <span class="sc">+</span></span>
+<span id="cb239-3"><a href="12-module-12.html#cb239-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-137-1.png" width="672" /></p>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="12-module-12.html#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(l2_data<span class="sc">$</span>intercept_resid, l2_data<span class="sc">$</span>slope_resid)</span></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  l2_data$intercept_resid and l2_data$slope_resid
+## t = -3.9046, df = 28, p-value = 0.0005424
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.7859072 -0.2970177
+## sample estimates:
+##        cor 
+## -0.5937517</code></pre>
+<p>JESS THIS SEEMS WEIRD, is it just that we should be modelling the covariance between intercepts and slopes?
+–YEAH I WOULD STATE THIS AS, OUR MODEL ASSUMES THEY ARE INDEP, BUT WE CAN RELAX THIS BY ADDING THE COVARIANCE. WHICH WE KNOW IS THERE BECAUSE THE CORR IS ONE, IT WOULD BE BETTER TO FIX THE CORR TO 1 THAN TO CONSTRAIN IT TO ZERO, DO YOU KNOW IF YOU CAN DO THIS IN LME4?</p>
+</div>
+<div id="multivariate-normal" class="section level4" number="12.2.7.2">
+<h4><span class="header-section-number">12.2.7.2</span> Multivariate Normal</h4>
+<p>As we did with our level-1 residuals, we can check the normality of our level-2 residuals with histograms and QQ plots. First, intercept residuals:</p>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="12-module-12.html#cb242-1" aria-hidden="true" tabindex="-1"></a>l2_data <span class="sc">%&gt;%</span> </span>
+<span id="cb242-2"><a href="12-module-12.html#cb242-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> intercept_resid)) <span class="sc">+</span></span>
+<span id="cb242-3"><a href="12-module-12.html#cb242-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> .<span class="dv">75</span>)</span></code></pre></div>
+<p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-138-1.png" width="672" /></p>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="12-module-12.html#cb243-1" aria-hidden="true" tabindex="-1"></a>l2_data <span class="sc">%&gt;%</span> </span>
+<span id="cb243-2"><a href="12-module-12.html#cb243-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">sample =</span> intercept_resid)) <span class="sc">+</span></span>
+<span id="cb243-3"><a href="12-module-12.html#cb243-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_qq</span>()</span></code></pre></div>
+<p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-138-2.png" width="672" /></p>
+<p>Those look roughly normal, but a bit wonky. WE NEED TO ADD SOMETHING HERE ABOUT WHAT THE RAMIFICATIONS ARE OF NON NORMAL RESIDUALS.</p>
+<p>Next, our slope residuals:</p>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="12-module-12.html#cb244-1" aria-hidden="true" tabindex="-1"></a>l2_data <span class="sc">%&gt;%</span> </span>
+<span id="cb244-2"><a href="12-module-12.html#cb244-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> slope_resid)) <span class="sc">+</span></span>
+<span id="cb244-3"><a href="12-module-12.html#cb244-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> .<span class="dv">50</span>)</span></code></pre></div>
+<p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-139-1.png" width="672" /></p>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="12-module-12.html#cb245-1" aria-hidden="true" tabindex="-1"></a>l2_data <span class="sc">%&gt;%</span> </span>
+<span id="cb245-2"><a href="12-module-12.html#cb245-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">sample =</span> slope_resid)) <span class="sc">+</span></span>
+<span id="cb245-3"><a href="12-module-12.html#cb245-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_qq</span>()</span></code></pre></div>
+<p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-139-2.png" width="672" /></p>
+<p>JESS CAN YOU WRITE ABOUT MULTIVARIATE NORMALITY HERE pls –EVENTUALLY BUT NOT KNOW BECAUSE I’M NEARLY 4 HOURS INTO THIS AND AM OUT OF TIME, EEEP.</p>
+</div>
+</div>
+<div id="assumption-5-residuals-at-level-1-and-level-2-are-independent" class="section level3" number="12.2.8">
+<h3><span class="header-section-number">12.2.8</span> Assumption 5: Residuals at Level-1 and Level-2 are Independent</h3>
+<p>Our residuals at level-1 and level-2 should not be related to each other. We can check that with scatterplots and calculating correlations. To do so, we first need to add our level-2 residuals to our level-1 dataset. As mentioned, each school only has one level-2 intercept residual and one level-2 slope residual, but as many level-1 residuals as there are students in that school To add our level-2 residuals to the dataset, then, we need to replicate them X times, where X is the number of students in a school. For example, if a school has 10 students, we need to repeat the level-2 residuals 10 times. (This is how level-2 predictors are encoded, too: for a school with 10 students, the mean values of SES for that school repeats 10 times in the dataset.)</p>
+<p>To do that, let’s use the replication function <code>rep</code> with the <code>times</code> argument to repeat each value X times. We can find the number of students per school as follows:</p>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="12-module-12.html#cb246-1" aria-hidden="true" tabindex="-1"></a>n_per_school <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb246-2"><a href="12-module-12.html#cb246-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(SCHOOL) <span class="sc">%&gt;%</span> <span class="co"># group by school</span></span>
+<span id="cb246-3"><a href="12-module-12.html#cb246-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(SCHOOL) <span class="sc">%&gt;%</span> <span class="co"># we just want to count schools</span></span>
+<span id="cb246-4"><a href="12-module-12.html#cb246-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb246-5"><a href="12-module-12.html#cb246-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb246-6"><a href="12-module-12.html#cb246-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(n) <span class="sc">%&gt;%</span> </span>
+<span id="cb246-7"><a href="12-module-12.html#cb246-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unlist</span>()</span></code></pre></div>
+<p>Then let’s create vectors of level-1 and level-2 residuals that repeat X times:</p>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="12-module-12.html#cb247-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>intercept_resid <span class="ot">&lt;-</span> <span class="fu">rep</span>(l2_data<span class="sc">$</span>intercept_resid, <span class="at">times =</span> n_per_school)</span>
+<span id="cb247-2"><a href="12-module-12.html#cb247-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>slope_resid <span class="ot">&lt;-</span> <span class="fu">rep</span>(l2_data<span class="sc">$</span>slope_resid, <span class="at">times =</span> n_per_school)</span></code></pre></div>
+<p>Now that we have a dataset with all of our residuals, let’s assess whether the level-1 and level-2 residuals are correlated with our trusty scatterplots and correlations. First, level-2 intercept residuals and level-1 residuals.</p>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="12-module-12.html#cb248-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb248-2"><a href="12-module-12.html#cb248-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> l1resid, <span class="at">y =</span> intercept_resid)) <span class="sc">+</span></span>
+<span id="cb248-3"><a href="12-module-12.html#cb248-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-142-1.png" width="672" /></p>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="12-module-12.html#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(data<span class="sc">$</span>l1resid, data<span class="sc">$</span>intercept_resid)</span></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  data$l1resid and data$intercept_resid
+## t = 2.7251, df = 1327, p-value = 0.006512
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.02091225 0.12785972
+## sample estimates:
+##        cor 
+## 0.07460049</code></pre>
+<p>This looks odd at first, but the striation is because for any one level-2 residual there are multiple level-1 residuals. This looks decent; for each level-2 residual, there seems to be a decent spread of level-1 residuals. We would be concerned if level-1 residuals were clustering so that, say, for lower level-2 residuals there were also lower level-1 residuals or vice versa. Our correlation is also quite small, emphasizing that things seem fine.</p>
+<p>Next, level-1 residuals with level-2 slope residuals:</p>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="12-module-12.html#cb251-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb251-2"><a href="12-module-12.html#cb251-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> l1resid, <span class="at">y =</span> slope_resid)) <span class="sc">+</span></span>
+<span id="cb251-3"><a href="12-module-12.html#cb251-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-143-1.png" width="672" /></p>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="12-module-12.html#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(data<span class="sc">$</span>l1resid, data<span class="sc">$</span>slope_resid)</span></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  data$l1resid and data$slope_resid
+## t = -1.666, df = 1327, p-value = 0.09595
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.099214249  0.008106189
+## sample estimates:
+##         cor 
+## -0.04568585</code></pre>
+<p>This similarly looks fine.</p>
+</div>
+<div id="assumption-6-level-1-residuals-independent-of-level-2-predictors-level-2-residuals-independent-of-level-1-predictors" class="section level3" number="12.2.9">
+<h3><span class="header-section-number">12.2.9</span> Assumption 6: Level-1 Residuals Independent of Level-2 Predictors, Level-2 Residuals Independent of Level-1 Predictors</h3>
+<p>We’ve tested that our residuals are independent of predictors at their same level — level-1 residuals with <code>ses_cwc</code> and level-2 residuals with <code>ses_mean</code>. We also want residuals to be independent of predictors at the other level — level-1 residuals independent of <code>ses_mean</code> and level-2 residuals independent of <code>ses_cwc</code>. How do we test this? Scatterplots and correlations, of course. Let’s check level-1 residuals first:</p>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="12-module-12.html#cb254-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb254-2"><a href="12-module-12.html#cb254-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> l1resid, <span class="at">y =</span> ses_mean)) <span class="sc">+</span></span>
+<span id="cb254-3"><a href="12-module-12.html#cb254-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-144-1.png" width="672" /></p>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="12-module-12.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(data<span class="sc">$</span>l1resid, data<span class="sc">$</span>ses_mean)</span></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  data$l1resid and data$ses_mean
+## t = -0.000000000000042298, df = 1327, p-value = 1
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.05377213  0.05377213
+## sample estimates:
+##                      cor 
+## -0.000000000000001161143</code></pre>
+<p>The scatterplot looks like there might be a pattern where lower values on ses_mean are associated with higher residuals, but the correlation belies this.</p>
+<p>Next level-2 intercept residuals:</p>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="12-module-12.html#cb257-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb257-2"><a href="12-module-12.html#cb257-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> intercept_resid, <span class="at">y =</span> CWCses)) <span class="sc">+</span></span>
+<span id="cb257-3"><a href="12-module-12.html#cb257-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-145-1.png" width="672" /></p>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="12-module-12.html#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(data<span class="sc">$</span>intercept_resid, data<span class="sc">$</span>CWCses)</span></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  data$intercept_resid and data$CWCses
+## t = -0.0000000000000027815, df = 1327, p-value = 1
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.05377213  0.05377213
+## sample estimates:
+##                        cor 
+## -0.00000000000000007635609</code></pre>
+<p>Looks good!</p>
+<p>And finally level-2 slope residuals:</p>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="12-module-12.html#cb260-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb260-2"><a href="12-module-12.html#cb260-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> slope_resid, <span class="at">y =</span> CWCses)) <span class="sc">+</span></span>
+<span id="cb260-3"><a href="12-module-12.html#cb260-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-146-1.png" width="672" /></p>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="12-module-12.html#cb261-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(data<span class="sc">$</span>slope_resid, data<span class="sc">$</span>CWCses)</span></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  data$slope_resid and data$CWCses
+## t = -0.0000000000000019141, df = 1327, p-value = 1
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.05377213  0.05377213
+## sample estimates:
+##                        cor 
+## -0.00000000000000005254428</code></pre>
+<p>Looks great!</p>
+</div>
+</div>
+<div id="conclusion-10" class="section level2" number="12.3">
+<h2><span class="header-section-number">12.3</span> Conclusion</h2>
+<p>We could have a longer conclusion here, or a new chapter? SOMETHING ABOUT THIS BEING SUBJECTIVE?</p>
+<p>I THINK WHAT NEEDS TO HAPPEN HERE IS THAT YOU REVIEW THE CHAPTER IN THE TEXTBOOK FROM CLASS AND WE SEE IF WE CAN BEEF THIS UP. THIS IS ALWAYS THE ONE IVE BEEN THE MOST THIN ON, AND I’D LIKE TO TAKE THIS AS AN OPPORTUNIY TO MAKE SURE IT IS A BIT MORE THOROUGH. JUST READING A TEXTBOOK CHAPTER ON THIS AND ADDING SOME MORE DISCUSSION AND/OR EXAMPLES WOULD DO THE TRICK. I PROBABLY PULLED THIS FROM THE BOOK, BUT I DON’T QUITE REMEMBER. CAN YOU TAKE A LOOK AND ENSURE NOTHING MAJOR IS MISSING?</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="11-module-11.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["open_mlm_materials.pdf", "open_mlm_materials.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"depth": 2,
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

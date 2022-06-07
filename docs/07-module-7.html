@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 7 Model Estimation Options, Problems, and Troubleshooting | Introduction to Multilevel Modelling</title>
+  <meta name="description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and criticially analyze their use in the literature." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 7 Model Estimation Options, Problems, and Troubleshooting | Introduction to Multilevel Modelling" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://www.learn-mlms.com" />
+  
+  <meta property="og:description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and criticially analyze their use in the literature." />
+  <meta name="github-repo" content="mkshaw/multilevel-modelling/" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 7 Model Estimation Options, Problems, and Troubleshooting | Introduction to Multilevel Modelling" />
+  
+  <meta name="twitter:description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and criticially analyze their use in the literature." />
+  
+
+<meta name="author" content="Mairead Shaw and Jessica Kay Flake" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="06-module-6.html"/>
+<link rel="next" href="08-module-8.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to Multilevel Modelling</li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#goals"><i class="fa fa-check"></i><b>1.2</b> Goals</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#prerequisites"><i class="fa fa-check"></i><b>1.3</b> Prerequisites</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#materials"><i class="fa fa-check"></i><b>1.4</b> Materials</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html"><i class="fa fa-check"></i><b>2</b> Multiple Regression Review</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#learning-objectives"><i class="fa fa-check"></i><b>2.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="2.2" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#data-demonstration"><i class="fa fa-check"></i><b>2.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#creating-r-projects"><i class="fa fa-check"></i><b>2.2.1</b> Creating R Projects</a></li>
+<li class="chapter" data-level="2.2.2" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#loading-data-and-dependencies"><i class="fa fa-check"></i><b>2.2.2</b> Loading Data and Dependencies</a></li>
+<li class="chapter" data-level="2.2.3" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#simple-linear-regression"><i class="fa fa-check"></i><b>2.2.3</b> Simple Linear Regression</a></li>
+<li class="chapter" data-level="2.2.4" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#multiple-regression-1"><i class="fa fa-check"></i><b>2.2.4</b> Multiple Regression</a></li>
+<li class="chapter" data-level="2.2.5" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#interaction-terms"><i class="fa fa-check"></i><b>2.2.5</b> Interaction Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#conclusion"><i class="fa fa-check"></i><b>2.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="03-module-3.html"><a href="03-module-3.html"><i class="fa fa-check"></i><b>3</b> Approaches to Multilevel Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="03-module-3.html"><a href="03-module-3.html#learning-objectives-1"><i class="fa fa-check"></i><b>3.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="3.2" data-path="03-module-3.html"><a href="03-module-3.html#data-demonstration-1"><i class="fa fa-check"></i><b>3.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="03-module-3.html"><a href="03-module-3.html#load-data-and-dependencies"><i class="fa fa-check"></i><b>3.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="3.2.2" data-path="03-module-3.html"><a href="03-module-3.html#dealing-with-dependence"><i class="fa fa-check"></i><b>3.2.2</b> Dealing with Dependence</a></li>
+<li class="chapter" data-level="3.2.3" data-path="03-module-3.html"><a href="03-module-3.html#cluster-robust-standard-errors"><i class="fa fa-check"></i><b>3.2.3</b> Cluster-Robust Standard Errors</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="03-module-3.html"><a href="03-module-3.html#conclusion-1"><i class="fa fa-check"></i><b>3.3</b> Conclusion</a></li>
+<li class="chapter" data-level="3.4" data-path="03-module-3.html"><a href="03-module-3.html#further-reading"><i class="fa fa-check"></i><b>3.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="04-module-4.html"><a href="04-module-4.html"><i class="fa fa-check"></i><b>4</b> Our First Multilevel Models</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="04-module-4.html"><a href="04-module-4.html#learning-objectives-2"><i class="fa fa-check"></i><b>4.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="4.2" data-path="04-module-4.html"><a href="04-module-4.html#data-demonstration-2"><i class="fa fa-check"></i><b>4.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="04-module-4.html"><a href="04-module-4.html#load-data-and-dependencies-1"><i class="fa fa-check"></i><b>4.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="4.2.2" data-path="04-module-4.html"><a href="04-module-4.html#why-multilevel-models"><i class="fa fa-check"></i><b>4.2.2</b> Why Multilevel Models?</a></li>
+<li class="chapter" data-level="4.2.3" data-path="04-module-4.html"><a href="04-module-4.html#fixed-vs-random-effects"><i class="fa fa-check"></i><b>4.2.3</b> Fixed vs Random Effects</a></li>
+<li class="chapter" data-level="4.2.4" data-path="04-module-4.html"><a href="04-module-4.html#the-null-model"><i class="fa fa-check"></i><b>4.2.4</b> The Null Model</a></li>
+<li class="chapter" data-level="4.2.5" data-path="04-module-4.html"><a href="04-module-4.html#understanding-variance"><i class="fa fa-check"></i><b>4.2.5</b> Understanding Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="04-module-4.html"><a href="04-module-4.html#conclusion-2"><i class="fa fa-check"></i><b>4.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="05-module-5.html"><a href="05-module-5.html"><i class="fa fa-check"></i><b>5</b> Adding Fixed Predictors to MLMs</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="05-module-5.html"><a href="05-module-5.html#learning-objectives-3"><i class="fa fa-check"></i><b>5.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="5.2" data-path="05-module-5.html"><a href="05-module-5.html#data-demonstration-3"><i class="fa fa-check"></i><b>5.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="05-module-5.html"><a href="05-module-5.html#load-data-and-dependencies-2"><i class="fa fa-check"></i><b>5.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="5.2.2" data-path="05-module-5.html"><a href="05-module-5.html#mlm-with-level-1-predictor"><i class="fa fa-check"></i><b>5.2.2</b> MLM with Level-1 Predictor</a></li>
+<li class="chapter" data-level="5.2.3" data-path="05-module-5.html"><a href="05-module-5.html#compare-regular-and-multilevel-regression"><i class="fa fa-check"></i><b>5.2.3</b> Compare Regular and Multilevel Regression</a></li>
+<li class="chapter" data-level="5.2.4" data-path="05-module-5.html"><a href="05-module-5.html#mlm-with-level-2-predictor"><i class="fa fa-check"></i><b>5.2.4</b> MLM with Level-2 Predictor</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="05-module-5.html"><a href="05-module-5.html#conclusion-3"><i class="fa fa-check"></i><b>5.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="06-module-6.html"><a href="06-module-6.html"><i class="fa fa-check"></i><b>6</b> Random Effects and Cross-level Interactions</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="06-module-6.html"><a href="06-module-6.html#learning-objectives-4"><i class="fa fa-check"></i><b>6.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="6.2" data-path="06-module-6.html"><a href="06-module-6.html#data-demonstration-4"><i class="fa fa-check"></i><b>6.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="06-module-6.html"><a href="06-module-6.html#load-data-and-dependencies-3"><i class="fa fa-check"></i><b>6.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="6.2.2" data-path="06-module-6.html"><a href="06-module-6.html#mlm-with-random-slope-effect"><i class="fa fa-check"></i><b>6.2.2</b> MLM with Random Slope Effect</a></li>
+<li class="chapter" data-level="6.2.3" data-path="06-module-6.html"><a href="06-module-6.html#mlm-with-crosslevel-effect"><i class="fa fa-check"></i><b>6.2.3</b> MLM with Crosslevel Effect</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="06-module-6.html"><a href="06-module-6.html#conclusion-4"><i class="fa fa-check"></i><b>6.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="07-module-7.html"><a href="07-module-7.html"><i class="fa fa-check"></i><b>7</b> Model Estimation Options, Problems, and Troubleshooting</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="07-module-7.html"><a href="07-module-7.html#learning-objectives-5"><i class="fa fa-check"></i><b>7.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="7.2" data-path="07-module-7.html"><a href="07-module-7.html#data-demonstration-5"><i class="fa fa-check"></i><b>7.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="07-module-7.html"><a href="07-module-7.html#load-data-and-dependencies-4"><i class="fa fa-check"></i><b>7.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="7.2.2" data-path="07-module-7.html"><a href="07-module-7.html#introduction-to-estimation-problems"><i class="fa fa-check"></i><b>7.2.2</b> Introduction to Estimation Problems</a></li>
+<li class="chapter" data-level="7.2.3" data-path="07-module-7.html"><a href="07-module-7.html#estimation-and-optimizers"><i class="fa fa-check"></i><b>7.2.3</b> Estimation and Optimizers</a></li>
+<li class="chapter" data-level="7.2.4" data-path="07-module-7.html"><a href="07-module-7.html#non-convergence"><i class="fa fa-check"></i><b>7.2.4</b> Non-Convergence</a></li>
+<li class="chapter" data-level="7.2.5" data-path="07-module-7.html"><a href="07-module-7.html#singularity"><i class="fa fa-check"></i><b>7.2.5</b> Singularity</a></li>
+<li class="chapter" data-level="7.2.6" data-path="07-module-7.html"><a href="07-module-7.html#deviance-testing-for-model-comparison"><i class="fa fa-check"></i><b>7.2.6</b> Deviance Testing for Model Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="07-module-7.html"><a href="07-module-7.html#conclusion-5"><i class="fa fa-check"></i><b>7.3</b> Conclusion</a></li>
+<li class="chapter" data-level="7.4" data-path="07-module-7.html"><a href="07-module-7.html#further-reading-1"><i class="fa fa-check"></i><b>7.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="08-module-8.html"><a href="08-module-8.html"><i class="fa fa-check"></i><b>8</b> Centering Options and Interpretations</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="08-module-8.html"><a href="08-module-8.html#learning-objectives-6"><i class="fa fa-check"></i><b>8.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="8.2" data-path="08-module-8.html"><a href="08-module-8.html#data-demonstration-6"><i class="fa fa-check"></i><b>8.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="08-module-8.html"><a href="08-module-8.html#load-data-and-dependencies-5"><i class="fa fa-check"></i><b>8.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="8.2.2" data-path="08-module-8.html"><a href="08-module-8.html#why-center-variables"><i class="fa fa-check"></i><b>8.2.2</b> Why Center Variables?</a></li>
+<li class="chapter" data-level="8.2.3" data-path="08-module-8.html"><a href="08-module-8.html#within-between-and-contextual-effects"><i class="fa fa-check"></i><b>8.2.3</b> Within, Between, and Contextual Effects</a></li>
+<li class="chapter" data-level="8.2.4" data-path="08-module-8.html"><a href="08-module-8.html#options-for-centering-in-mlms"><i class="fa fa-check"></i><b>8.2.4</b> Options for Centering in MLMs</a></li>
+<li class="chapter" data-level="8.2.5" data-path="08-module-8.html"><a href="08-module-8.html#what-kind-of-centering-should-you-use"><i class="fa fa-check"></i><b>8.2.5</b> What Kind of Centering Should You Use?</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="08-module-8.html"><a href="08-module-8.html#conclusion-6"><i class="fa fa-check"></i><b>8.3</b> Conclusion</a></li>
+<li class="chapter" data-level="8.4" data-path="08-module-8.html"><a href="08-module-8.html#further-reading-2"><i class="fa fa-check"></i><b>8.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="09-module-9.html"><a href="09-module-9.html"><i class="fa fa-check"></i><b>9</b> Multilevel Modelling with Repeated Measures Data</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="09-module-9.html"><a href="09-module-9.html#learning-objectives-7"><i class="fa fa-check"></i><b>9.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="9.2" data-path="09-module-9.html"><a href="09-module-9.html#data-demonstration-7"><i class="fa fa-check"></i><b>9.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="09-module-9.html"><a href="09-module-9.html#load-dependencies"><i class="fa fa-check"></i><b>9.2.1</b> Load Dependencies</a></li>
+<li class="chapter" data-level="9.2.2" data-path="09-module-9.html"><a href="09-module-9.html#review-of-multilevel-modelling-procedure"><i class="fa fa-check"></i><b>9.2.2</b> Review of Multilevel Modelling Procedure</a></li>
+<li class="chapter" data-level="9.2.3" data-path="09-module-9.html"><a href="09-module-9.html#multilevel-models-for-repeated-measures"><i class="fa fa-check"></i><b>9.2.3</b> Multilevel Models for Repeated Measures</a></li>
+<li class="chapter" data-level="9.2.4" data-path="09-module-9.html"><a href="09-module-9.html#our-data-reaction-time"><i class="fa fa-check"></i><b>9.2.4</b> Our Data: Reaction Time</a></li>
+<li class="chapter" data-level="9.2.5" data-path="09-module-9.html"><a href="09-module-9.html#random-intercept-onlynull-model"><i class="fa fa-check"></i><b>9.2.5</b> Random-Intercept-Only/Null Model</a></li>
+<li class="chapter" data-level="9.2.6" data-path="09-module-9.html"><a href="09-module-9.html#adding-level-1-fixed-effects"><i class="fa fa-check"></i><b>9.2.6</b> Adding Level-1 Fixed Effects</a></li>
+<li class="chapter" data-level="9.2.7" data-path="09-module-9.html"><a href="09-module-9.html#adding-random-slopes"><i class="fa fa-check"></i><b>9.2.7</b> Adding Random Slopes</a></li>
+<li class="chapter" data-level="9.2.8" data-path="09-module-9.html"><a href="09-module-9.html#adding-level-2-fixed-effects"><i class="fa fa-check"></i><b>9.2.8</b> Adding Level-2 Fixed Effects</a></li>
+<li class="chapter" data-level="9.2.9" data-path="09-module-9.html"><a href="09-module-9.html#adding-cross-level-interactions"><i class="fa fa-check"></i><b>9.2.9</b> Adding Cross-Level Interactions</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="09-module-9.html"><a href="09-module-9.html#conclusion-7"><i class="fa fa-check"></i><b>9.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="10-module-10.html"><a href="10-module-10.html"><i class="fa fa-check"></i><b>10</b> Multilevel Modelling with Longitudinal Data</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="10-module-10.html"><a href="10-module-10.html#learning-objectives-8"><i class="fa fa-check"></i><b>10.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="10.2" data-path="10-module-10.html"><a href="10-module-10.html#data-demonstration-8"><i class="fa fa-check"></i><b>10.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="10-module-10.html"><a href="10-module-10.html#load-dependencies-1"><i class="fa fa-check"></i><b>10.2.1</b> Load Dependencies</a></li>
+<li class="chapter" data-level="10.2.2" data-path="10-module-10.html"><a href="10-module-10.html#multilevel-models-for-longitudinal-data"><i class="fa fa-check"></i><b>10.2.2</b> Multilevel Models for Longitudinal Data</a></li>
+<li class="chapter" data-level="10.2.3" data-path="10-module-10.html"><a href="10-module-10.html#visualizing-testosterone-levels-over-time"><i class="fa fa-check"></i><b>10.2.3</b> Visualizing Testosterone Levels Over Time</a></li>
+<li class="chapter" data-level="10.2.4" data-path="10-module-10.html"><a href="10-module-10.html#random-intercept-onlynull-model-1"><i class="fa fa-check"></i><b>10.2.4</b> Random-Intercept-Only/Null Model</a></li>
+<li class="chapter" data-level="10.2.5" data-path="10-module-10.html"><a href="10-module-10.html#adding-level-1-fixed-and-random-effects"><i class="fa fa-check"></i><b>10.2.5</b> Adding Level-1 Fixed and Random Effects</a></li>
+<li class="chapter" data-level="10.2.6" data-path="10-module-10.html"><a href="10-module-10.html#evidence-for-retaining-effects"><i class="fa fa-check"></i><b>10.2.6</b> Evidence for Retaining Effects</a></li>
+<li class="chapter" data-level="10.2.7" data-path="10-module-10.html"><a href="10-module-10.html#adding-level-2-fixed-effects-1"><i class="fa fa-check"></i><b>10.2.7</b> Adding Level-2 Fixed Effects</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="10-module-10.html"><a href="10-module-10.html#conclusion-8"><i class="fa fa-check"></i><b>10.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="11-module-11.html"><a href="11-module-11.html"><i class="fa fa-check"></i><b>11</b> Effect Sizes in Multilevel Models</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="11-module-11.html"><a href="11-module-11.html#learning-objectives-9"><i class="fa fa-check"></i><b>11.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="11.2" data-path="11-module-11.html"><a href="11-module-11.html#data-demonstration-9"><i class="fa fa-check"></i><b>11.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="11-module-11.html"><a href="11-module-11.html#load-data-and-dependencies-6"><i class="fa fa-check"></i><b>11.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="11.2.2" data-path="11-module-11.html"><a href="11-module-11.html#defining-effect-sizes"><i class="fa fa-check"></i><b>11.2.2</b> Defining Effect Sizes</a></li>
+<li class="chapter" data-level="11.2.3" data-path="11-module-11.html"><a href="11-module-11.html#r-squared-in-multilevel-models"><i class="fa fa-check"></i><b>11.2.3</b> R-squared in Multilevel Models</a></li>
+<li class="chapter" data-level="11.2.4" data-path="11-module-11.html"><a href="11-module-11.html#single-model-automatic-entry"><i class="fa fa-check"></i><b>11.2.4</b> Single Model, Automatic Entry</a></li>
+<li class="chapter" data-level="11.2.5" data-path="11-module-11.html"><a href="11-module-11.html#single-model-manual-entry"><i class="fa fa-check"></i><b>11.2.5</b> Single Model, Manual Entry</a></li>
+<li class="chapter" data-level="11.2.6" data-path="11-module-11.html"><a href="11-module-11.html#model-comparison"><i class="fa fa-check"></i><b>11.2.6</b> Model Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="11-module-11.html"><a href="11-module-11.html#conclusion-9"><i class="fa fa-check"></i><b>11.3</b> Conclusion</a></li>
+<li class="chapter" data-level="11.4" data-path="11-module-11.html"><a href="11-module-11.html#additional-reading"><i class="fa fa-check"></i><b>11.4</b> Additional Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="12-module-12.html"><a href="12-module-12.html"><i class="fa fa-check"></i><b>12</b> Assumptions</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="12-module-12.html"><a href="12-module-12.html#learning-objectives-10"><i class="fa fa-check"></i><b>12.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="12.2" data-path="12-module-12.html"><a href="12-module-12.html#data-demonstration-10"><i class="fa fa-check"></i><b>12.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="12-module-12.html"><a href="12-module-12.html#load-data-and-dependencies-7"><i class="fa fa-check"></i><b>12.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="12.2.2" data-path="12-module-12.html"><a href="12-module-12.html#assumptions-of-mlms"><i class="fa fa-check"></i><b>12.2.2</b> Assumptions of MLMs</a></li>
+<li class="chapter" data-level="12.2.3" data-path="12-module-12.html"><a href="12-module-12.html#assumption-1-model-specification"><i class="fa fa-check"></i><b>12.2.3</b> Assumption 1: Model Specification</a></li>
+<li class="chapter" data-level="12.2.4" data-path="12-module-12.html"><a href="12-module-12.html#assumption-2-functional-form-is-correct"><i class="fa fa-check"></i><b>12.2.4</b> Assumption 2: Functional Form is Correct</a></li>
+<li class="chapter" data-level="12.2.5" data-path="12-module-12.html"><a href="12-module-12.html#an-aside-extracting-residuals"><i class="fa fa-check"></i><b>12.2.5</b> An Aside: Extracting Residuals</a></li>
+<li class="chapter" data-level="12.2.6" data-path="12-module-12.html"><a href="12-module-12.html#assumption-3-level-1-residuals-are-independent-and-normally-distributed"><i class="fa fa-check"></i><b>12.2.6</b> Assumption 3: Level-1 Residuals are Independent and Normally Distributed</a></li>
+<li class="chapter" data-level="12.2.7" data-path="12-module-12.html"><a href="12-module-12.html#assumption-4-level-2-residuals-are-independent-and-multivariate-normal"><i class="fa fa-check"></i><b>12.2.7</b> Assumption 4: Level-2 Residuals are Independent and Multivariate Normal</a></li>
+<li class="chapter" data-level="12.2.8" data-path="12-module-12.html"><a href="12-module-12.html#assumption-5-residuals-at-level-1-and-level-2-are-independent"><i class="fa fa-check"></i><b>12.2.8</b> Assumption 5: Residuals at Level-1 and Level-2 are Independent</a></li>
+<li class="chapter" data-level="12.2.9" data-path="12-module-12.html"><a href="12-module-12.html#assumption-6-level-1-residuals-independent-of-level-2-predictors-level-2-residuals-independent-of-level-1-predictors"><i class="fa fa-check"></i><b>12.2.9</b> Assumption 6: Level-1 Residuals Independent of Level-2 Predictors, Level-2 Residuals Independent of Level-1 Predictors</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="12-module-12.html"><a href="12-module-12.html#conclusion-10"><i class="fa fa-check"></i><b>12.3</b> Conclusion</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://twitter.com/maireadkshaw">Mairead Shaw</a></li>
+<li><a href="https://twitter.com/jkayflake">Jessica Kay Flake</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Multilevel Modelling</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="module-7" class="section level1" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Model Estimation Options, Problems, and Troubleshooting</h1>
+<div id="learning-objectives-5" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> Learning Objectives</h2>
+<p>In this chapter, we will review common estimation options, problems that can arise, and how to troubleshoot those problems.</p>
+<p>The learning objectives for this chapter are:</p>
+<ol style="list-style-type: decimal">
+<li>Differentiate between restricted maximum likelihood and full information maximum likelihood estimation options;</li>
+<li>Describe common causes of estimation errors;</li>
+<li>Understand the components of optimizer functions;</li>
+<li>Recognize estimation errors in R output and examine output to identify error sources;</li>
+<li>Build and compare models to address errors.</li>
+</ol>
+<p>All materials for this chapter are available for download <a href="www.learn-mlms.com/students">here</a>.</p>
+</div>
+<div id="data-demonstration-5" class="section level2" number="7.2">
+<h2><span class="header-section-number">7.2</span> Data Demonstration</h2>
+<p>The data for this chapter were taken from chapter 3 of Heck, R. H., Thomas, S. L., &amp; Tabata, L. N. (2011). <em>Multilevel and Longitudinal Modeling with IBM SPSS</em>: Taylor &amp; Francis. Students are clustered within schools in the data.</p>
+<div id="load-data-and-dependencies-4" class="section level3" number="7.2.1">
+<h3><span class="header-section-number">7.2.1</span> Load Data and Dependencies</h3>
+<p>For this data demo, we will use the following packages:</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="07-module-7.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># for data manipulation</span></span>
+<span id="cb89-2"><a href="07-module-7.html#cb89-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># for graphing</span></span>
+<span id="cb89-3"><a href="07-module-7.html#cb89-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4) <span class="co"># for multilevel models</span></span>
+<span id="cb89-4"><a href="07-module-7.html#cb89-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest) <span class="co"># for p-values</span></span></code></pre></div>
+<p>And the same dataset of students’ math achievement:</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="07-module-7.html#cb90-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;heck2011.csv&#39;</span>)</span></code></pre></div>
+</div>
+<div id="introduction-to-estimation-problems" class="section level3" number="7.2.2">
+<h3><span class="header-section-number">7.2.2</span> Introduction to Estimation Problems</h3>
+<p>In Chapter 6, we modelled the relationship between SES and math achievement with a random intercept and random slope as follows:</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="07-module-7.html#cb91-1" aria-hidden="true" tabindex="-1"></a>ses_l1_random <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> ses<span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
+<p>As indicated by the warning message from R, our model is singular (which we’ll define in a moment). In this chapter, we will examine estimation issues like this and how to troubleshoot them. This is one of the less interactive chapters in these materials, but if you want a reason to stick around, there is a fun puzzle analogy. We’ll begin with some notes on model estimation and then move onto possible issues and how to address them.</p>
+</div>
+<div id="estimation-and-optimizers" class="section level3" number="7.2.3">
+<h3><span class="header-section-number">7.2.3</span> Estimation and Optimizers</h3>
+<p>In linear regression, Ordinary Least Squares estimation is used to find a combination of parameters (intercepts and slopes) that minimize the residual sum of squares. If we imagine a simple linear regression with math achievement as an outcome and SES as a predictor, we have our regression line (line of best fit) and our actual data points around that line.</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="07-module-7.html#cb93-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb93-2"><a href="07-module-7.html#cb93-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(schcode <span class="sc">&lt;=</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span> <span class="co"># subset data to make it easier to see</span></span>
+<span id="cb93-3"><a href="07-module-7.html#cb93-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> ses, <span class="at">y =</span> math)) <span class="sc">+</span></span>
+<span id="cb93-4"><a href="07-module-7.html#cb93-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb93-5"><a href="07-module-7.html#cb93-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">fullrange =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<p>For a given value of SES on the x-axis, the distance between our prediction (regression line) and our actual observation (data point) is our residual, and if we sum all of the residuals (after squaring them so the negative residuals below the line and positive residuals above it don’t cancel out), we get our residual sum of squares. OLS regression will select the regression line with the smallest residuals, which is the line that is as close as possible to the data points. You can see this process and play around with it on this interactive website: <a href="https://seeing-theory.brown.edu/regression-analysis/index.html#section1" class="uri">https://seeing-theory.brown.edu/regression-analysis/index.html#section1</a></p>
+<p>In multilevel modelling, we use maximum likelihood (ML) estimation instead of OLS estimation. In ML estimation, we have our data points and we want to find the combination of parameters (intercepts and slopes) that maximize the likelihood that we observed that data. This is an iterative process, where we select parameters that maximize the probability of getting our data (i.e., that maximize the likelihood). We select set after set of parameters, and eventually stop when the parameter sets aren’t getting better. You can play around with likelihood here: <a href="https://seeing-theory.brown.edu/bayesian-inference/index.html#section2" class="uri">https://seeing-theory.brown.edu/bayesian-inference/index.html#section2</a> This video from Stat Quest walks through the concept:</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/XepXtl9YKwc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<p>We have two options for ML estimation in multilevel modelling: restricted maximum likelihood (REML) and full information maximum likelihood (FIML or ML). The key difference between them is how the estimation methods handle the variance components. When using REML, there is a penalty applied to the degrees of freedom when estimating the variance components <span class="math inline">\(\sigma^2\)</span>, <span class="math inline">\(\tau_1^2\)</span>, etc. When using FIML, there is no such penalty and as a result the variance components are usually underestimated. A linear regression analogy might help clarify this point: the formula for population variance is <span class="math inline">\(S = \frac{\Sigma(x_i - \overline{x})^2}{n}\)</span>. The formula for sample variance is <span class="math inline">\(s = \frac{\Sigma(x_i - \overline{x})^2}{n - 1}\)</span>. The sample variance imposes a penalty of n - 1 and is a REML estimator, while the population variance formula is the corresponding FIML estimator. Because we want accurate information about our variance components, we will usually use REML. We will only use FIML when we want to compare two models with different fixed effects. We’ll discuss model comparison later in this chapter.</p>
+</div>
+<div id="non-convergence" class="section level3" number="7.2.4">
+<h3><span class="header-section-number">7.2.4</span> Non-Convergence</h3>
+<p>In the embedded Stat Quest video above, the narrator describes the iterative process in ML estimation of finding the maximum likelihood estimate of a parameter, trying multiple different options before settling on one as the value that maximizes the likelihood of observing their data about mice weights. When you’re working with many predictors at once — for example, an intercept and a slope for SES and a slope for school type and variance terms for all of those fixed effects — it is harder to try all possible combinations. So, optimization algorithms (AKA optimizers) are used to try to find the ML estimates by examining a subset of possible combinations. However, these optimizers cannot always find the combination of parameters that maximizes the likelihood of observing your data; they can’t find a solution to the problem of “what paramaters maximize the likelihood of observing this data?”. When the optimizers cannot find a solution, the result is called non-convergence: the model did not <em>converge</em> on a solution.</p>
+<p>You should not use the parameter estimates from a non-converged solution. A non-convergence warning is the computing equivalent of being unable to put a puzzle together, jamming the pieces in where you can, and saying “I don’t know, this is my best guess about where these pieces go.” Sure, the puzzle might sort of look like the image on the box, but it doesn’t really match, a bunch of the pieces have been contorted and bent to fit.</p>
+<p>(That was the puzzle analogy, was it worth sticking around?)</p>
+<p>There are two main strategies to solve a non-convergence problem: change your optimizer or change your model. You can manipulate a few characteristics of your optimizer to try to get convergence:</p>
+<ol style="list-style-type: decimal">
+<li>Number of iterations. If you increase the number of iterations, the algorithm will search for longer. This is the equivalent of getting our puzzle-doer to sit at the table for longer trying to assemble the puzzle, trying out different and more pieces.</li>
+<li>Algorithm: the algorithm determines how the optimizer chooses its next attempted solution. What strategy is our puzzle-doer using to fit pieces into the puzzle?</li>
+<li>Tolerance: this can get a bit technical, so we suggest <a href="https://doi.apa.org/doiLanding?doi=10.1037%2Fmet0000159">Brauer and Curtin, 2018</a> for more.</li>
+</ol>
+<p>You can alter these elements of your optimizer to see if giving it more time, a different strategy, or more leeway to say “yes, this converged” will lead to convergence. Alternatively, you can trim your model, removing variables you think are less likely to matter. We will discuss some approaches to doing this below.</p>
+</div>
+<div id="singularity" class="section level3" number="7.2.5">
+<h3><span class="header-section-number">7.2.5</span> Singularity</h3>
+<p>Singularity occurs when an element of your variance-covariance matrix is estimated as essentially zero as a result of extreme multicollinearity or because the parameter is actually essentially zero.</p>
+<p>You can find singularity by examining your variance-covariance estimates and the correlations between them. It will often show up as co/variances near zero or correlations between variances at -1 or 1. Let’s return to our example from Chapter 6, predicting math achievement from SES with a random slope:</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="07-module-7.html#cb95-1" aria-hidden="true" tabindex="-1"></a>ses_l1_random <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> ses<span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
+<p>As we can see, our output contains a helpful warning message notifying us that the model is singular. We can investigate this issue in three ways. First, we can look at our Tau matrix:</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="07-module-7.html#cb97-1" aria-hidden="true" tabindex="-1"></a>Matrix<span class="sc">::</span><span class="fu">bdiag</span>(<span class="fu">VarCorr</span>(ses_l1_random))</span></code></pre></div>
+<pre><code>## 2 x 2 sparse Matrix of class &quot;dgCMatrix&quot;
+##             (Intercept)        ses
+## (Intercept)    3.204184 -1.5802590
+## ses           -1.580259  0.7793617</code></pre>
+<p>Things look okay here, no elements appear to be close to or zero. Our second method of investigation is looking at our overall output:</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="07-module-7.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ses_l1_random)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
+## Formula: math ~ 1 + ses + (1 + ses | schcode)
+##    Data: data
+## 
+## REML criterion at convergence: 48190.1
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -3.8578 -0.5553  0.1290  0.6437  5.7098 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev. Corr 
+##  schcode  (Intercept)  3.2042  1.7900        
+##           ses          0.7794  0.8828   -1.00
+##  Residual             62.5855  7.9111        
+## Number of obs: 6871, groups:  schcode, 419
+## 
+## Fixed effects:
+##              Estimate Std. Error        df t value            Pr(&gt;|t|)    
+## (Intercept)   57.6959     0.1315  378.6378  438.78 &lt;0.0000000000000002 ***
+## ses            3.9602     0.1408 1450.7730   28.12 &lt;0.0000000000000002 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Correlation of Fixed Effects:
+##     (Intr)
+## ses -0.284
+## optimizer (nloptwrap) convergence code: 0 (OK)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
+<p>Here, in our random effects section, we can see that the correlation between our random effects is -1.00, a sign of perfect multicollinearity. We can dig into the confidence intervals of our estimates up close to confirm this:</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="07-module-7.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(ses_l1_random, <span class="at">oldNames =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## Computing profile confidence intervals ...</code></pre>
+<pre><code>## Warning in FUN(X[[i]], ...): non-monotonic profile for cor_ses.(Intercept)|schcode</code></pre>
+<pre><code>## Warning in confint.thpr(pp, level = level, zeta = zeta): bad spline fit for cor_ses.
+## (Intercept)|schcode: falling back to linear interpolation</code></pre>
+<pre><code>##                                  2.5 %    97.5 %
+## sd_(Intercept)|schcode       1.4944476  2.077295
+## cor_ses.(Intercept)|schcode -1.0000000  1.000000
+## sd_ses|schcode               0.5400973  1.262130
+## sigma                        7.7760573  8.049130
+## (Intercept)                 57.4362972 57.956350
+## ses                          3.6716229  4.252084</code></pre>
+<p>Note that <code>oldNames = FALSE</code> just makes the output easier to read. This will take a moment to run, but when it does we can see that the 95% confidence interval for the correlation between our random effects spans -1 to 1 (i.e. the entire possible range). Our singularity issue started when we added the random slope effect, which added both a random slope variance <span class="math inline">\(\tau_1^2\)</span> and the random intercept-slope covariance <span class="math inline">\(\tau_{01}\)</span>. Let’s see if we can fix the issue by removing that problematic covariance.</p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="07-module-7.html#cb106-1" aria-hidden="true" tabindex="-1"></a>ses_l1_random_cov0 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> ses<span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb106-2"><a href="07-module-7.html#cb106-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ses_l1_random_cov0)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
+## Formula: math ~ 1 + ses + (1 | schcode) + (0 + ses | schcode)
+##    Data: data
+## 
+## REML criterion at convergence: 48213.4
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -3.7791 -0.5526  0.1327  0.6466  5.7089 
+## 
+## Random effects:
+##  Groups    Name        Variance Std.Dev.
+##  schcode   (Intercept)  3.3222  1.8227  
+##  schcode.1 ses          0.7205  0.8488  
+##  Residual              62.5213  7.9070  
+## Number of obs: 6871, groups:  schcode, 419
+## 
+## Fixed effects:
+##             Estimate Std. Error       df t value            Pr(&gt;|t|)    
+## (Intercept)  57.5888     0.1328 374.9738  433.55 &lt;0.0000000000000002 ***
+## ses           3.8803     0.1435 377.2408   27.04 &lt;0.0000000000000002 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Correlation of Fixed Effects:
+##     (Intr)
+## ses -0.023</code></pre>
+<p>Here, we specify our random intercept <code>(1|schcode)</code> and random slope with no covariance <code>(0 + ses|schcode)</code> separately, and that fixed the singularity issue! If we print our Tau matrix we can see that the covariance is fixed to 0.</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="07-module-7.html#cb108-1" aria-hidden="true" tabindex="-1"></a>Matrix<span class="sc">::</span><span class="fu">bdiag</span>(<span class="fu">VarCorr</span>(ses_l1_random_cov0))</span></code></pre></div>
+<pre><code>## 2 x 2 sparse Matrix of class &quot;dgCMatrix&quot;
+##                        
+## [1,] 3.322166 .        
+## [2,] .        0.7204535</code></pre>
+<p>In general, it is best practice to build a maximal multilevel model, one that includes all possible fixed and random effects that are not zero (Barr et al., 2013). This maximal model will produce parameter estimates with the least amount of bias and provide the best shot at your model fitting the data. However, the maximal model that tries to estimate extreme random effects (those near zero or with high multicollinearity) will have trouble converging and produce estimation errors. When this happens, often an inspection of the random effects will reveal which parameters need to be removed from the model. It can be helpful, ahead of running your MLMs, to consider the key variables of interest, their random effects, and plan, if the maximal model has errors, which parameters should be removed and in what order. Overall, building MLMs is about balancing complexity with utility. Sometimes we do not have enough information in our data to estimate the complex model we planned, so having a plan for how to decrease complexity ahead of time can prevent getting lost in the <a href="http://www.stat.columbia.edu/~gelman/research/unpublished/p_hacking.pdf">garden of forking paths</a>.</p>
+</div>
+<div id="deviance-testing-for-model-comparison" class="section level3" number="7.2.6">
+<h3><span class="header-section-number">7.2.6</span> Deviance Testing for Model Comparison</h3>
+<p>We removed the random effect covariance and our model is no longer singular (i.e., suffering from multicollinearity). That seems better! Now that we have a model without an error, let’s look at comparing the model with the random slope for SES (but no covariance, as we just removed that) and the model without the random slope for SES. If we want to formally test if a model fit is better or at least not worse, we can conduct a deviance test. You can find the “deviance” for your model under the “REML criterion at convergence” in your summary output. In short, deviance is bad and we don’t want more of it, so when we compare the model with and without the random slope for SES, we don’t want the model with the random slope to have more deviance. We want the same or less deviance.</p>
+<p>Note that deviance is based on the likelihood function for your model. Unlike probability, likelihood is not bound at 0 and 1. It can be any number. As a result, looking at likelihood or deviance in isolation is not informative, because it has no bounds. It is only useful for comparison between models, where less deviance indicates a better model (compared to the reference model).</p>
+<p>Here, we’re comparing models with the same fixed effects but different random effects so we can still use REML estimator that more accurately estimates random effects. We have our two model terms, <code>ses_l1_random</code> and <code>ses_l1_random_cov0</code>, and we can compare the deviance of each using the built-in ANOVA function. Specifying <code>refit = FALSE</code> stops the function from refitting the models with FIML. If we were comparing models with different fixed effects, we would use FIML to estimate our models.</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="07-module-7.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="co"># models</span></span>
+<span id="cb110-2"><a href="07-module-7.html#cb110-2" aria-hidden="true" tabindex="-1"></a>ses_l1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb110-3"><a href="07-module-7.html#cb110-3" aria-hidden="true" tabindex="-1"></a>ses_l1_random_cov0 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> ses<span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb110-4"><a href="07-module-7.html#cb110-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-5"><a href="07-module-7.html#cb110-5" aria-hidden="true" tabindex="-1"></a><span class="co"># deviance test to compare model fit</span></span>
+<span id="cb110-6"><a href="07-module-7.html#cb110-6" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ses_l1, ses_l1_random_cov0, <span class="at">refit =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## Data: data
+## Models:
+## ses_l1: math ~ 1 + ses + (1 | schcode)
+## ses_l1_random_cov0: math ~ 1 + ses + (1 | schcode) + (0 + ses | schcode)
+##                    npar   AIC   BIC logLik deviance  Chisq Df Pr(&gt;Chisq)
+## ses_l1                4 48223 48251 -24108    48215                     
+## ses_l1_random_cov0    5 48223 48258 -24107    48213 2.0825  1      0.149</code></pre>
+<p>Let’s read our output. We have seven columns:</p>
+<ul>
+<li>npar is the number of parameters estimated in the models. The only difference between the models is one has a random slope for SES and the other doesn’t, and you can see that one model estimates 4 parameters and the other 5 parameters.</li>
+<li>AIC: Akaike’s Information Criterion, one measure of goodness of fit</li>
+<li>BIC: Bayesian Information Criterion, another measure of goodness of fit</li>
+<li>logLik: log likelihood</li>
+<li>deviance: -2*logLik</li>
+<li>Chisq: the difference betwen our models’ deviances</li>
+<li>df: the degrees of freedom for the test, calculated as the difference in number of parameters between the models</li>
+<li>Pr(&gt;Chisq): the probability that we would find our chi-square value or greater if the null hypothesis that the models were the same was true</li>
+</ul>
+<p>There is no significant difference between our models’ deviance statistics: the model without the random slope has a deviance of 48215 and the model with the covariance has a deviance of 48213. The difference between these numbers is not significant, <em>p</em> = 0.149. Thus, there is no significant different in model fits and adding a random slope does not compromise model fit so we can add it if we think it’s informative.</p>
+<p>We’ll discuss model specification, fit, and comparison more in Chapter 11 when discussing effect sizes. In closing, when assessing model fit or troubleshooting estimation problems, it is preferable to pre-register what troubleshooting you expect to try or models you expect to estimate. At minimum, you should keep a record of changes you make and report all of them.</p>
+</div>
+</div>
+<div id="conclusion-5" class="section level2" number="7.3">
+<h2><span class="header-section-number">7.3</span> Conclusion</h2>
+<p>In this chapter, we considered convergence options, how to diagnose and troubleshoot issues, and comparing model fits using deviance testing. In Chapter 8, we’ll consider different centering options in MLMs.</p>
+</div>
+<div id="further-reading-1" class="section level2" number="7.4">
+<h2><span class="header-section-number">7.4</span> Further Reading</h2>
+<p>Barr, D. J., Levy, R., Scheepers, C., &amp; Tily, H. J. (2013). Random effects structure for confirmatory hypothesis testing: Keep it maximal. Journal of memory and language, 68(3), 10.1016/j.jml.2012.11.001. <a href="https://doi.org/10.1016/j.jml.2012.11.001" class="uri">https://doi.org/10.1016/j.jml.2012.11.001</a></p>
+<p>Brauer, M., &amp; Curtin, J. J. (2018). Linear mixed-effects models and the analysis of nonindependent data: A unified framework to analyze categorical and continuous independent variables that vary within-subjects and/or within-items. Psychological Methods, 23(3), 389–411.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="06-module-6.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="08-module-8.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["open_mlm_materials.pdf", "open_mlm_materials.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"depth": 2,
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 10 Multilevel Modelling with Longitudinal Data | Introduction to Multilevel Modelling</title>
+  <meta name="description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and criticially analyze their use in the literature." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 10 Multilevel Modelling with Longitudinal Data | Introduction to Multilevel Modelling" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://www.learn-mlms.com" />
+  
+  <meta property="og:description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and criticially analyze their use in the literature." />
+  <meta name="github-repo" content="mkshaw/multilevel-modelling/" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 10 Multilevel Modelling with Longitudinal Data | Introduction to Multilevel Modelling" />
+  
+  <meta name="twitter:description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and criticially analyze their use in the literature." />
+  
+
+<meta name="author" content="Mairead Shaw and Jessica Kay Flake" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="09-module-9.html"/>
+<link rel="next" href="11-module-11.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to Multilevel Modelling</li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#goals"><i class="fa fa-check"></i><b>1.2</b> Goals</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#prerequisites"><i class="fa fa-check"></i><b>1.3</b> Prerequisites</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#materials"><i class="fa fa-check"></i><b>1.4</b> Materials</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html"><i class="fa fa-check"></i><b>2</b> Multiple Regression Review</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#learning-objectives"><i class="fa fa-check"></i><b>2.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="2.2" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#data-demonstration"><i class="fa fa-check"></i><b>2.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#creating-r-projects"><i class="fa fa-check"></i><b>2.2.1</b> Creating R Projects</a></li>
+<li class="chapter" data-level="2.2.2" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#loading-data-and-dependencies"><i class="fa fa-check"></i><b>2.2.2</b> Loading Data and Dependencies</a></li>
+<li class="chapter" data-level="2.2.3" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#simple-linear-regression"><i class="fa fa-check"></i><b>2.2.3</b> Simple Linear Regression</a></li>
+<li class="chapter" data-level="2.2.4" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#multiple-regression-1"><i class="fa fa-check"></i><b>2.2.4</b> Multiple Regression</a></li>
+<li class="chapter" data-level="2.2.5" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#interaction-terms"><i class="fa fa-check"></i><b>2.2.5</b> Interaction Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#conclusion"><i class="fa fa-check"></i><b>2.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="03-module-3.html"><a href="03-module-3.html"><i class="fa fa-check"></i><b>3</b> Approaches to Multilevel Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="03-module-3.html"><a href="03-module-3.html#learning-objectives-1"><i class="fa fa-check"></i><b>3.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="3.2" data-path="03-module-3.html"><a href="03-module-3.html#data-demonstration-1"><i class="fa fa-check"></i><b>3.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="03-module-3.html"><a href="03-module-3.html#load-data-and-dependencies"><i class="fa fa-check"></i><b>3.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="3.2.2" data-path="03-module-3.html"><a href="03-module-3.html#dealing-with-dependence"><i class="fa fa-check"></i><b>3.2.2</b> Dealing with Dependence</a></li>
+<li class="chapter" data-level="3.2.3" data-path="03-module-3.html"><a href="03-module-3.html#cluster-robust-standard-errors"><i class="fa fa-check"></i><b>3.2.3</b> Cluster-Robust Standard Errors</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="03-module-3.html"><a href="03-module-3.html#conclusion-1"><i class="fa fa-check"></i><b>3.3</b> Conclusion</a></li>
+<li class="chapter" data-level="3.4" data-path="03-module-3.html"><a href="03-module-3.html#further-reading"><i class="fa fa-check"></i><b>3.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="04-module-4.html"><a href="04-module-4.html"><i class="fa fa-check"></i><b>4</b> Our First Multilevel Models</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="04-module-4.html"><a href="04-module-4.html#learning-objectives-2"><i class="fa fa-check"></i><b>4.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="4.2" data-path="04-module-4.html"><a href="04-module-4.html#data-demonstration-2"><i class="fa fa-check"></i><b>4.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="04-module-4.html"><a href="04-module-4.html#load-data-and-dependencies-1"><i class="fa fa-check"></i><b>4.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="4.2.2" data-path="04-module-4.html"><a href="04-module-4.html#why-multilevel-models"><i class="fa fa-check"></i><b>4.2.2</b> Why Multilevel Models?</a></li>
+<li class="chapter" data-level="4.2.3" data-path="04-module-4.html"><a href="04-module-4.html#fixed-vs-random-effects"><i class="fa fa-check"></i><b>4.2.3</b> Fixed vs Random Effects</a></li>
+<li class="chapter" data-level="4.2.4" data-path="04-module-4.html"><a href="04-module-4.html#the-null-model"><i class="fa fa-check"></i><b>4.2.4</b> The Null Model</a></li>
+<li class="chapter" data-level="4.2.5" data-path="04-module-4.html"><a href="04-module-4.html#understanding-variance"><i class="fa fa-check"></i><b>4.2.5</b> Understanding Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="04-module-4.html"><a href="04-module-4.html#conclusion-2"><i class="fa fa-check"></i><b>4.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="05-module-5.html"><a href="05-module-5.html"><i class="fa fa-check"></i><b>5</b> Adding Fixed Predictors to MLMs</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="05-module-5.html"><a href="05-module-5.html#learning-objectives-3"><i class="fa fa-check"></i><b>5.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="5.2" data-path="05-module-5.html"><a href="05-module-5.html#data-demonstration-3"><i class="fa fa-check"></i><b>5.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="05-module-5.html"><a href="05-module-5.html#load-data-and-dependencies-2"><i class="fa fa-check"></i><b>5.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="5.2.2" data-path="05-module-5.html"><a href="05-module-5.html#mlm-with-level-1-predictor"><i class="fa fa-check"></i><b>5.2.2</b> MLM with Level-1 Predictor</a></li>
+<li class="chapter" data-level="5.2.3" data-path="05-module-5.html"><a href="05-module-5.html#compare-regular-and-multilevel-regression"><i class="fa fa-check"></i><b>5.2.3</b> Compare Regular and Multilevel Regression</a></li>
+<li class="chapter" data-level="5.2.4" data-path="05-module-5.html"><a href="05-module-5.html#mlm-with-level-2-predictor"><i class="fa fa-check"></i><b>5.2.4</b> MLM with Level-2 Predictor</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="05-module-5.html"><a href="05-module-5.html#conclusion-3"><i class="fa fa-check"></i><b>5.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="06-module-6.html"><a href="06-module-6.html"><i class="fa fa-check"></i><b>6</b> Random Effects and Cross-level Interactions</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="06-module-6.html"><a href="06-module-6.html#learning-objectives-4"><i class="fa fa-check"></i><b>6.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="6.2" data-path="06-module-6.html"><a href="06-module-6.html#data-demonstration-4"><i class="fa fa-check"></i><b>6.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="06-module-6.html"><a href="06-module-6.html#load-data-and-dependencies-3"><i class="fa fa-check"></i><b>6.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="6.2.2" data-path="06-module-6.html"><a href="06-module-6.html#mlm-with-random-slope-effect"><i class="fa fa-check"></i><b>6.2.2</b> MLM with Random Slope Effect</a></li>
+<li class="chapter" data-level="6.2.3" data-path="06-module-6.html"><a href="06-module-6.html#mlm-with-crosslevel-effect"><i class="fa fa-check"></i><b>6.2.3</b> MLM with Crosslevel Effect</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="06-module-6.html"><a href="06-module-6.html#conclusion-4"><i class="fa fa-check"></i><b>6.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="07-module-7.html"><a href="07-module-7.html"><i class="fa fa-check"></i><b>7</b> Model Estimation Options, Problems, and Troubleshooting</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="07-module-7.html"><a href="07-module-7.html#learning-objectives-5"><i class="fa fa-check"></i><b>7.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="7.2" data-path="07-module-7.html"><a href="07-module-7.html#data-demonstration-5"><i class="fa fa-check"></i><b>7.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="07-module-7.html"><a href="07-module-7.html#load-data-and-dependencies-4"><i class="fa fa-check"></i><b>7.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="7.2.2" data-path="07-module-7.html"><a href="07-module-7.html#introduction-to-estimation-problems"><i class="fa fa-check"></i><b>7.2.2</b> Introduction to Estimation Problems</a></li>
+<li class="chapter" data-level="7.2.3" data-path="07-module-7.html"><a href="07-module-7.html#estimation-and-optimizers"><i class="fa fa-check"></i><b>7.2.3</b> Estimation and Optimizers</a></li>
+<li class="chapter" data-level="7.2.4" data-path="07-module-7.html"><a href="07-module-7.html#non-convergence"><i class="fa fa-check"></i><b>7.2.4</b> Non-Convergence</a></li>
+<li class="chapter" data-level="7.2.5" data-path="07-module-7.html"><a href="07-module-7.html#singularity"><i class="fa fa-check"></i><b>7.2.5</b> Singularity</a></li>
+<li class="chapter" data-level="7.2.6" data-path="07-module-7.html"><a href="07-module-7.html#deviance-testing-for-model-comparison"><i class="fa fa-check"></i><b>7.2.6</b> Deviance Testing for Model Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="07-module-7.html"><a href="07-module-7.html#conclusion-5"><i class="fa fa-check"></i><b>7.3</b> Conclusion</a></li>
+<li class="chapter" data-level="7.4" data-path="07-module-7.html"><a href="07-module-7.html#further-reading-1"><i class="fa fa-check"></i><b>7.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="08-module-8.html"><a href="08-module-8.html"><i class="fa fa-check"></i><b>8</b> Centering Options and Interpretations</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="08-module-8.html"><a href="08-module-8.html#learning-objectives-6"><i class="fa fa-check"></i><b>8.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="8.2" data-path="08-module-8.html"><a href="08-module-8.html#data-demonstration-6"><i class="fa fa-check"></i><b>8.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="08-module-8.html"><a href="08-module-8.html#load-data-and-dependencies-5"><i class="fa fa-check"></i><b>8.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="8.2.2" data-path="08-module-8.html"><a href="08-module-8.html#why-center-variables"><i class="fa fa-check"></i><b>8.2.2</b> Why Center Variables?</a></li>
+<li class="chapter" data-level="8.2.3" data-path="08-module-8.html"><a href="08-module-8.html#within-between-and-contextual-effects"><i class="fa fa-check"></i><b>8.2.3</b> Within, Between, and Contextual Effects</a></li>
+<li class="chapter" data-level="8.2.4" data-path="08-module-8.html"><a href="08-module-8.html#options-for-centering-in-mlms"><i class="fa fa-check"></i><b>8.2.4</b> Options for Centering in MLMs</a></li>
+<li class="chapter" data-level="8.2.5" data-path="08-module-8.html"><a href="08-module-8.html#what-kind-of-centering-should-you-use"><i class="fa fa-check"></i><b>8.2.5</b> What Kind of Centering Should You Use?</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="08-module-8.html"><a href="08-module-8.html#conclusion-6"><i class="fa fa-check"></i><b>8.3</b> Conclusion</a></li>
+<li class="chapter" data-level="8.4" data-path="08-module-8.html"><a href="08-module-8.html#further-reading-2"><i class="fa fa-check"></i><b>8.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="09-module-9.html"><a href="09-module-9.html"><i class="fa fa-check"></i><b>9</b> Multilevel Modelling with Repeated Measures Data</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="09-module-9.html"><a href="09-module-9.html#learning-objectives-7"><i class="fa fa-check"></i><b>9.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="9.2" data-path="09-module-9.html"><a href="09-module-9.html#data-demonstration-7"><i class="fa fa-check"></i><b>9.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="09-module-9.html"><a href="09-module-9.html#load-dependencies"><i class="fa fa-check"></i><b>9.2.1</b> Load Dependencies</a></li>
+<li class="chapter" data-level="9.2.2" data-path="09-module-9.html"><a href="09-module-9.html#review-of-multilevel-modelling-procedure"><i class="fa fa-check"></i><b>9.2.2</b> Review of Multilevel Modelling Procedure</a></li>
+<li class="chapter" data-level="9.2.3" data-path="09-module-9.html"><a href="09-module-9.html#multilevel-models-for-repeated-measures"><i class="fa fa-check"></i><b>9.2.3</b> Multilevel Models for Repeated Measures</a></li>
+<li class="chapter" data-level="9.2.4" data-path="09-module-9.html"><a href="09-module-9.html#our-data-reaction-time"><i class="fa fa-check"></i><b>9.2.4</b> Our Data: Reaction Time</a></li>
+<li class="chapter" data-level="9.2.5" data-path="09-module-9.html"><a href="09-module-9.html#random-intercept-onlynull-model"><i class="fa fa-check"></i><b>9.2.5</b> Random-Intercept-Only/Null Model</a></li>
+<li class="chapter" data-level="9.2.6" data-path="09-module-9.html"><a href="09-module-9.html#adding-level-1-fixed-effects"><i class="fa fa-check"></i><b>9.2.6</b> Adding Level-1 Fixed Effects</a></li>
+<li class="chapter" data-level="9.2.7" data-path="09-module-9.html"><a href="09-module-9.html#adding-random-slopes"><i class="fa fa-check"></i><b>9.2.7</b> Adding Random Slopes</a></li>
+<li class="chapter" data-level="9.2.8" data-path="09-module-9.html"><a href="09-module-9.html#adding-level-2-fixed-effects"><i class="fa fa-check"></i><b>9.2.8</b> Adding Level-2 Fixed Effects</a></li>
+<li class="chapter" data-level="9.2.9" data-path="09-module-9.html"><a href="09-module-9.html#adding-cross-level-interactions"><i class="fa fa-check"></i><b>9.2.9</b> Adding Cross-Level Interactions</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="09-module-9.html"><a href="09-module-9.html#conclusion-7"><i class="fa fa-check"></i><b>9.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="10-module-10.html"><a href="10-module-10.html"><i class="fa fa-check"></i><b>10</b> Multilevel Modelling with Longitudinal Data</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="10-module-10.html"><a href="10-module-10.html#learning-objectives-8"><i class="fa fa-check"></i><b>10.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="10.2" data-path="10-module-10.html"><a href="10-module-10.html#data-demonstration-8"><i class="fa fa-check"></i><b>10.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="10-module-10.html"><a href="10-module-10.html#load-dependencies-1"><i class="fa fa-check"></i><b>10.2.1</b> Load Dependencies</a></li>
+<li class="chapter" data-level="10.2.2" data-path="10-module-10.html"><a href="10-module-10.html#multilevel-models-for-longitudinal-data"><i class="fa fa-check"></i><b>10.2.2</b> Multilevel Models for Longitudinal Data</a></li>
+<li class="chapter" data-level="10.2.3" data-path="10-module-10.html"><a href="10-module-10.html#visualizing-testosterone-levels-over-time"><i class="fa fa-check"></i><b>10.2.3</b> Visualizing Testosterone Levels Over Time</a></li>
+<li class="chapter" data-level="10.2.4" data-path="10-module-10.html"><a href="10-module-10.html#random-intercept-onlynull-model-1"><i class="fa fa-check"></i><b>10.2.4</b> Random-Intercept-Only/Null Model</a></li>
+<li class="chapter" data-level="10.2.5" data-path="10-module-10.html"><a href="10-module-10.html#adding-level-1-fixed-and-random-effects"><i class="fa fa-check"></i><b>10.2.5</b> Adding Level-1 Fixed and Random Effects</a></li>
+<li class="chapter" data-level="10.2.6" data-path="10-module-10.html"><a href="10-module-10.html#evidence-for-retaining-effects"><i class="fa fa-check"></i><b>10.2.6</b> Evidence for Retaining Effects</a></li>
+<li class="chapter" data-level="10.2.7" data-path="10-module-10.html"><a href="10-module-10.html#adding-level-2-fixed-effects-1"><i class="fa fa-check"></i><b>10.2.7</b> Adding Level-2 Fixed Effects</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="10-module-10.html"><a href="10-module-10.html#conclusion-8"><i class="fa fa-check"></i><b>10.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="11-module-11.html"><a href="11-module-11.html"><i class="fa fa-check"></i><b>11</b> Effect Sizes in Multilevel Models</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="11-module-11.html"><a href="11-module-11.html#learning-objectives-9"><i class="fa fa-check"></i><b>11.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="11.2" data-path="11-module-11.html"><a href="11-module-11.html#data-demonstration-9"><i class="fa fa-check"></i><b>11.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="11-module-11.html"><a href="11-module-11.html#load-data-and-dependencies-6"><i class="fa fa-check"></i><b>11.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="11.2.2" data-path="11-module-11.html"><a href="11-module-11.html#defining-effect-sizes"><i class="fa fa-check"></i><b>11.2.2</b> Defining Effect Sizes</a></li>
+<li class="chapter" data-level="11.2.3" data-path="11-module-11.html"><a href="11-module-11.html#r-squared-in-multilevel-models"><i class="fa fa-check"></i><b>11.2.3</b> R-squared in Multilevel Models</a></li>
+<li class="chapter" data-level="11.2.4" data-path="11-module-11.html"><a href="11-module-11.html#single-model-automatic-entry"><i class="fa fa-check"></i><b>11.2.4</b> Single Model, Automatic Entry</a></li>
+<li class="chapter" data-level="11.2.5" data-path="11-module-11.html"><a href="11-module-11.html#single-model-manual-entry"><i class="fa fa-check"></i><b>11.2.5</b> Single Model, Manual Entry</a></li>
+<li class="chapter" data-level="11.2.6" data-path="11-module-11.html"><a href="11-module-11.html#model-comparison"><i class="fa fa-check"></i><b>11.2.6</b> Model Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="11-module-11.html"><a href="11-module-11.html#conclusion-9"><i class="fa fa-check"></i><b>11.3</b> Conclusion</a></li>
+<li class="chapter" data-level="11.4" data-path="11-module-11.html"><a href="11-module-11.html#additional-reading"><i class="fa fa-check"></i><b>11.4</b> Additional Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="12-module-12.html"><a href="12-module-12.html"><i class="fa fa-check"></i><b>12</b> Assumptions</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="12-module-12.html"><a href="12-module-12.html#learning-objectives-10"><i class="fa fa-check"></i><b>12.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="12.2" data-path="12-module-12.html"><a href="12-module-12.html#data-demonstration-10"><i class="fa fa-check"></i><b>12.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="12-module-12.html"><a href="12-module-12.html#load-data-and-dependencies-7"><i class="fa fa-check"></i><b>12.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="12.2.2" data-path="12-module-12.html"><a href="12-module-12.html#assumptions-of-mlms"><i class="fa fa-check"></i><b>12.2.2</b> Assumptions of MLMs</a></li>
+<li class="chapter" data-level="12.2.3" data-path="12-module-12.html"><a href="12-module-12.html#assumption-1-model-specification"><i class="fa fa-check"></i><b>12.2.3</b> Assumption 1: Model Specification</a></li>
+<li class="chapter" data-level="12.2.4" data-path="12-module-12.html"><a href="12-module-12.html#assumption-2-functional-form-is-correct"><i class="fa fa-check"></i><b>12.2.4</b> Assumption 2: Functional Form is Correct</a></li>
+<li class="chapter" data-level="12.2.5" data-path="12-module-12.html"><a href="12-module-12.html#an-aside-extracting-residuals"><i class="fa fa-check"></i><b>12.2.5</b> An Aside: Extracting Residuals</a></li>
+<li class="chapter" data-level="12.2.6" data-path="12-module-12.html"><a href="12-module-12.html#assumption-3-level-1-residuals-are-independent-and-normally-distributed"><i class="fa fa-check"></i><b>12.2.6</b> Assumption 3: Level-1 Residuals are Independent and Normally Distributed</a></li>
+<li class="chapter" data-level="12.2.7" data-path="12-module-12.html"><a href="12-module-12.html#assumption-4-level-2-residuals-are-independent-and-multivariate-normal"><i class="fa fa-check"></i><b>12.2.7</b> Assumption 4: Level-2 Residuals are Independent and Multivariate Normal</a></li>
+<li class="chapter" data-level="12.2.8" data-path="12-module-12.html"><a href="12-module-12.html#assumption-5-residuals-at-level-1-and-level-2-are-independent"><i class="fa fa-check"></i><b>12.2.8</b> Assumption 5: Residuals at Level-1 and Level-2 are Independent</a></li>
+<li class="chapter" data-level="12.2.9" data-path="12-module-12.html"><a href="12-module-12.html#assumption-6-level-1-residuals-independent-of-level-2-predictors-level-2-residuals-independent-of-level-1-predictors"><i class="fa fa-check"></i><b>12.2.9</b> Assumption 6: Level-1 Residuals Independent of Level-2 Predictors, Level-2 Residuals Independent of Level-1 Predictors</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="12-module-12.html"><a href="12-module-12.html#conclusion-10"><i class="fa fa-check"></i><b>12.3</b> Conclusion</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://twitter.com/maireadkshaw">Mairead Shaw</a></li>
+<li><a href="https://twitter.com/jkayflake">Jessica Kay Flake</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Multilevel Modelling</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="module-10" class="section level1" number="10">
+<h1><span class="header-section-number">Chapter 10</span> Multilevel Modelling with Longitudinal Data</h1>
+<div id="learning-objectives-8" class="section level2" number="10.1">
+<h2><span class="header-section-number">10.1</span> Learning Objectives</h2>
+<p>In Chapter 9, we discussed how to interpret multilevel models with repeated measures data without time in the model. In this chapter, we will review fitting MLMs for longitudinal data, i.e., repeated measures with time in the model.</p>
+<p>The learning objectives for this chapter are:</p>
+<ol style="list-style-type: decimal">
+<li>Recognize when data are longitudinal and in the correct format for multilevel modelling;</li>
+<li>Conduct multilevel modelling on longitudinal data;</li>
+<li>Interpret coefficients for longitudinal data;</li>
+<li>Review evidence to decide whether to retain effects.</li>
+</ol>
+<p>All materials for this chapter are available for download <a href="www.learn-mlms.com/students">here</a>.</p>
+</div>
+<div id="data-demonstration-8" class="section level2" number="10.2">
+<h2><span class="header-section-number">10.2</span> Data Demonstration</h2>
+<div id="load-dependencies-1" class="section level3" number="10.2.1">
+<h3><span class="header-section-number">10.2.1</span> Load Dependencies</h3>
+<p>For this data demo, we will use the following packages:</p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="10-module-10.html#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># for data manipulation</span></span>
+<span id="cb154-2"><a href="10-module-10.html#cb154-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># for graphing</span></span>
+<span id="cb154-3"><a href="10-module-10.html#cb154-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4) <span class="co"># for multilevel models</span></span>
+<span id="cb154-4"><a href="10-module-10.html#cb154-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest) <span class="co"># for p-values</span></span>
+<span id="cb154-5"><a href="10-module-10.html#cb154-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(performance) <span class="co"># for ICC</span></span></code></pre></div>
+</div>
+<div id="multilevel-models-for-longitudinal-data" class="section level3" number="10.2.2">
+<h3><span class="header-section-number">10.2.2</span> Multilevel Models for Longitudinal Data</h3>
+<p>When we use cross-sectional data, level-1 variables vary between individuals (e.g., age, gender, SES) while level-2 variables vary between clusters (e.g., whether schools are public or private, number of students in a classroom, school funding).</p>
+<p>With repeated measures data <em>without</em> time in the model, level-1 variables vary between measurement occasions (e.g., experimental manipulations, stimulus volume or brightness) while level-2 variables vary between people (e.g., age, gender, SES).</p>
+<p>In this chapter, we’re looking at longitudinal models, i.e., repeated measures <em>with</em> time in the model. With longitudinal data, level-1 variables vary over time (e.g., weight at time 1, time 2, time 3; Testosterone levels at 10 minutes into game, 20 minutes into game, 30 minutes into game). Level-1 variables are also called “time-varying covariates” because they vary with time. Level-2 variables are the same across time (also called “time invariant covariates”), for example age, gender, SES (assuming these things don’t change over the study period, if you wait long enough these will or may change).</p>
+<div id="data-structures-long-vs-wide-1" class="section level4" number="10.2.2.1">
+<h4><span class="header-section-number">10.2.2.1</span> Data Structures: Long vs Wide</h4>
+<p>As with repeated measures, you need your data in long format to conduct an MLM. Imagine you were measuring weight and caloric intake. If you have historically worked with repeated measures data in an ANOVA framework, you are probably used to working with data in a “wide” format, i.e., one row per participant with different variables for different measurement instances.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">id</th>
+<th align="center">weight1</th>
+<th align="center">weight2</th>
+<th align="center">calories1</th>
+<th align="center">calories2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">200</td>
+<td align="center">190</td>
+<td align="center">3500</td>
+<td align="center">3300</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">150</td>
+<td align="center">160</td>
+<td align="center">3200</td>
+<td align="center">3100</td>
+</tr>
+</tbody>
+</table>
+<p>In MLMs, you need to use data in a “long” format where one row is one measurement occasion:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">id</th>
+<th align="center">weight</th>
+<th align="center">calories</th>
+<th align="center">measurement_occasion</th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">200</td>
+<td align="center">3500</td>
+<td align="center">1</td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">190</td>
+<td align="center">3300</td>
+<td align="center">2</td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td align="center">2</td>
+<td align="center">150</td>
+<td align="center">3200</td>
+<td align="center">1</td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">160</td>
+<td align="center">3100</td>
+<td align="center">2</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="visualizing-testosterone-levels-over-time" class="section level3" number="10.2.3">
+<h3><span class="header-section-number">10.2.3</span> Visualizing Testosterone Levels Over Time</h3>
+<p>The data used in this chapter are a simplified version of the data from Casto, K.V., &amp; Edwards, D.A. (2016). Before, during, and after: How phases of competition differentially affect testosterone, cortisol, and estradiol levels in women athletes. Adaptive Human Behavior and Physiology, 2, 11-25. <a href="https://doi.org/10.1007/s40750-015-0028-2" class="uri">https://doi.org/10.1007/s40750-015-0028-2</a>.</p>
+<p>Dr. Kathleen Casto gave us permission to use these data for teaching purposes (thanks Kathleen!); any other use requires additional permission. You can see more of her work <a href="https://scholar.google.com/citations?user=xqhtNEIAAAAJ&amp;hl=en">here</a>.</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="10-module-10.html#cb155-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;casto2016.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="10-module-10.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
+<pre><code>##   Code position HormonCont Played minplayed game time Cortisol Testosterone Estradiol
+## 1 1224        1          0      1        90    1    2    0.456       84.541     3.706
+## 2 1224        1          0      1        90    1    3    0.575      118.942     5.631
+## 3 1224        1          0      1        90    1    4    0.303      104.803     3.372
+## 4 1348        2          0      1        90    1    2    0.649       39.547     2.620
+## 5 1348        2          0      1        90    1    3    0.323       44.291     3.010
+## 6 1348        2          0      1        90    1    4    0.879       62.774     3.650
+##   time0
+## 1     0
+## 2     1
+## 3     2
+## 4     0
+## 5     1
+## 6     2</code></pre>
+<p>These data include hormone levels of female athletes in a competition setting (soccer game), if they played in the game or not (<code>Played</code>), what position they played (<code>position</code>), how long they played (<code>minplayed</code>), their testosterone levels (<code>Testosterone</code>), and if they were taking birth control (<code>HormonCont</code>). We will focus on testosterone, if they played, and if they were taking birth control for this example.</p>
+<p>Let’s start by visualizing testosterone levels over time for the entire sample:</p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="10-module-10.html#cb158-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb158-2"><a href="10-module-10.html#cb158-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(time0) <span class="sc">%&gt;%</span></span>
+<span id="cb158-3"><a href="10-module-10.html#cb158-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tmean =</span> <span class="fu">mean</span>(Testosterone)) <span class="sc">%&gt;%</span> <span class="co"># mean testosterone per timepoint</span></span>
+<span id="cb158-4"><a href="10-module-10.html#cb158-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> time0, <span class="at">y =</span> tmean)) <span class="sc">+</span></span>
+<span id="cb158-5"><a href="10-module-10.html#cb158-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb158-6"><a href="10-module-10.html#cb158-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Testosterone Over Time for Entire Sample&quot;</span>)</span></code></pre></div>
+<p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-92-1.png" width="672" /></p>
+<p>The relationship between time and testosterone doesn’t look exactly linear. Let’s check if there are different relationships between people who played and people who didn’t.</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="10-module-10.html#cb159-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb159-2"><a href="10-module-10.html#cb159-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(time0, Played) <span class="sc">%&gt;%</span> <span class="co"># group by timepoint and played</span></span>
+<span id="cb159-3"><a href="10-module-10.html#cb159-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tmean =</span> <span class="fu">mean</span>(Testosterone)) <span class="sc">%&gt;%</span> </span>
+<span id="cb159-4"><a href="10-module-10.html#cb159-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> time0, <span class="at">y =</span> tmean, <span class="at">colour =</span> <span class="fu">factor</span>(Played))) <span class="sc">+</span></span>
+<span id="cb159-5"><a href="10-module-10.html#cb159-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb159-6"><a href="10-module-10.html#cb159-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Testosterone Over Time, Played vs. Did Not Play&quot;</span>)</span></code></pre></div>
+<p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-93-1.png" width="672" /></p>
+<p>Those who played have a pretty linear increase in testosterone over time, while those who did not play go up from time 0 to 1 and then back down between 1 and 2, so it looks like playing or not might be an important level-2 predictor for our model intercepts and slopes.</p>
+<p>Finally, let’s check whether birth control seems like an important predictor of intercepts and slopes:</p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="10-module-10.html#cb160-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb160-2"><a href="10-module-10.html#cb160-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(time0, HormonCont) <span class="sc">%&gt;%</span> <span class="co"># group by timepoint and birth control</span></span>
+<span id="cb160-3"><a href="10-module-10.html#cb160-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tmean =</span> <span class="fu">mean</span>(Testosterone)) <span class="sc">%&gt;%</span> </span>
+<span id="cb160-4"><a href="10-module-10.html#cb160-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> time0, <span class="at">y =</span> tmean, <span class="at">colour =</span> <span class="fu">factor</span>(HormonCont))) <span class="sc">+</span></span>
+<span id="cb160-5"><a href="10-module-10.html#cb160-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb160-6"><a href="10-module-10.html#cb160-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Testosterone Over Time, Birth Control or Not&quot;</span>)</span></code></pre></div>
+<p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-94-1.png" width="672" /></p>
+<p>Looks like another variable we might want to consider in our model! Let’s begin with our null model and incrementally build from there.</p>
+</div>
+<div id="random-intercept-onlynull-model-1" class="section level3" number="10.2.4">
+<h3><span class="header-section-number">10.2.4</span> Random-Intercept-Only/Null Model</h3>
+<p>Let’s estimate our null model with FIML as our estimator and calculate the ICC. Why FIML? We’re going to be adding fixed effects (played, birth control) and comparing model fits.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Level</th>
+<th align="left">Equation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Level 1</td>
+<td align="left"><span class="math inline">\(testosterone_{ij} = \beta_{0j} + R_{ij}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Level 2</td>
+<td align="left"><span class="math inline">\(\beta_{0j} = \gamma_{00} + U_{0j}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left">Combined</td>
+<td align="left"><span class="math inline">\(testosterone_{ij} = \gamma_{00} + U_{0j} + R_{ij}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Here, we’re estimating three parameters:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\gamma_{00}\)</span>: the fixed effect for the intercept, mean testosterone levels across all people;</li>
+<li><span class="math inline">\(\tau_0^2\)</span>: a random effect for the intercept capturing the variance of people’s average testosterone levels around the intercept;</li>
+<li><span class="math inline">\(\sigma^2\)</span>: a random effect capturing the variance of people around their own average testosterone level.</li>
+</ol>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="10-module-10.html#cb161-1" aria-hidden="true" tabindex="-1"></a>null_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Testosterone <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Code), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb161-2"><a href="10-module-10.html#cb161-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(null_model)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
+## Formula: Testosterone ~ 1 + (1 | Code)
+##    Data: data
+## 
+##      AIC      BIC   logLik deviance df.resid 
+##    634.5    641.4   -314.3    628.5       70 
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -1.6055 -0.5563 -0.2220  0.4901  2.8619 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  Code     (Intercept) 252.9    15.90   
+##  Residual             186.1    13.64   
+## Number of obs: 73, groups:  Code, 25
+## 
+## Fixed effects:
+##             Estimate Std. Error     df t value            Pr(&gt;|t|)    
+## (Intercept)   59.643      3.569 24.876   16.71 0.00000000000000494 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="10-module-10.html#cb163-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(null_model)</span></code></pre></div>
+<pre><code>## # Intraclass Correlation Coefficient
+## 
+##      Adjusted ICC: 0.576
+##   Conditional ICC: 0.576</code></pre>
+<p>With longitudinal data, as with repeated measures without time, the ICC is interpreted as the proportion of variance between people: How much of the variance stems from people being different from one another versus fluctuating within themselves? A large ICC means that most of the variability is between people, not from people varying in their testosterone levels. The ICC is 0.576, indicating that 57.6% of the variance in testosterone is attributed to a person.</p>
+</div>
+<div id="adding-level-1-fixed-and-random-effects" class="section level3" number="10.2.5">
+<h3><span class="header-section-number">10.2.5</span> Adding Level-1 Fixed and Random Effects</h3>
+<p>Let’s add our level-1 predictor, <code>time0</code>, to our model. Note that <code>time0</code> is coded such that 0 is the first measurement occasion at the beginning of the game, 1 is mid-game, and 2 is at the end of the game.</p>
+<table>
+<colgroup>
+<col width="44%" />
+<col width="55%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Level</th>
+<th align="left">Equation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Level 1</td>
+<td align="left"><span class="math inline">\(testosterone_{ij} = \beta_{0j} + \beta_{1j}time0_{ij} + R_{ij}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Level 2</td>
+<td align="left"><span class="math inline">\(\beta_{0j} = \gamma_{00} + U_{0j}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"><span class="math inline">\(\beta_{1j} = \gamma_{10} + U_{1j}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Combined</td>
+<td align="left"><span class="math inline">\(testosterone_{ij} = \gamma_{00} + \gamma_{10}time0_{ij} + U_{0j} + U_{1j}time0_{ij} + R_{ij}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>With this model, we’re estimating 6 parameters:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\gamma_{00}\)</span>: the fixed effect for the intercept, mean testosterone levels at time 0 across all people;</li>
+<li><span class="math inline">\(\gamma_{10}\)</span>: the fixed effect for time0, effect of time on testosterone levels;</li>
+<li><span class="math inline">\(\tau_0^2\)</span>: a random effect for the intercept capturing the variance of people’s average testosterone levels around the intercept;</li>
+<li><span class="math inline">\(\tau_1^2\)</span>: a random effect for the slope of time0 capturing the variance of people’s slopes around the grand mean slope;</li>
+<li><span class="math inline">\(\sigma^2\)</span>: a random effect capturing the variance of people around their own average testosterone level.</li>
+<li><span class="math inline">\(\tau_{01}\)</span>: the covariance between the random intercept and random slope. Do people who have higher values of testosterone at time0 have particularly lower or higher slopes?</li>
+</ol>
+<p>Let’s run the model with FIML as our estimator:</p>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="10-module-10.html#cb165-1" aria-hidden="true" tabindex="-1"></a>l1_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Testosterone <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time0 <span class="sc">+</span> (time0<span class="sc">|</span>Code), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb165-2"><a href="10-module-10.html#cb165-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(l1_model)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
+## Formula: Testosterone ~ 1 + time0 + (time0 | Code)
+##    Data: data
+## 
+##      AIC      BIC   logLik deviance df.resid 
+##    601.1    614.8   -294.5    589.1       67 
+## 
+## Scaled residuals: 
+##      Min       1Q   Median       3Q      Max 
+## -1.65381 -0.55990 -0.07896  0.50762  2.39316 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev. Corr
+##  Code     (Intercept) 154.67   12.437       
+##           time0        24.12    4.911   0.87
+##  Residual              78.58    8.865       
+## Number of obs: 73, groups:  Code, 25
+## 
+## Fixed effects:
+##             Estimate Std. Error     df t value            Pr(&gt;|t|)    
+## (Intercept)   50.665      2.971 25.027  17.054 0.00000000000000273 ***
+## time0          9.092      1.625 24.030   5.595 0.00000925670408174 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Correlation of Fixed Effects:
+##       (Intr)
+## time0 0.114</code></pre>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="10-module-10.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.matrix</span>(Matrix<span class="sc">::</span><span class="fu">bdiag</span>(<span class="fu">VarCorr</span>(l1_model)))</span></code></pre></div>
+<pre><code>##             (Intercept)    time0
+## (Intercept)   154.67317 53.07523
+## time0          53.07523 24.11744</code></pre>
+<p>Looking at our fixed effects, the intercept of 50.67 is the average testosterone level across people at time 0. The slope of 9.09 indicates the average increase in testosterone levels over one unit of time.</p>
+<p>The variance term describing how people vary around the intercept is 154.67. The variance term describing how people’s slopes vary is 24.12. The covariance between the random intercept and random slope is 53.07 (correlation of 0.87), indicating that those with higher initial levels of testosterone also have higher slopes (more intense increase in testosterone over time).</p>
+</div>
+<div id="evidence-for-retaining-effects" class="section level3" number="10.2.6">
+<h3><span class="header-section-number">10.2.6</span> Evidence for Retaining Effects</h3>
+<p>The fixed effect for time seems both statistically and practically significant. Variances are difficult to interpret in isolation, so we can consider a few sources of evidence when examining whether to keep the random effect for slope: deviance testing, 95% confidence interval, 95% plausible values range, and visualizing variance.</p>
+<p>We can use the built-in <code>anova()</code> function to conduct our deviance test for the model with and without the slope covariance:</p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="10-module-10.html#cb169-1" aria-hidden="true" tabindex="-1"></a>l1_model_no_U1j <span class="ot">&lt;-</span>  <span class="fu">lmer</span>(Testosterone <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time0 <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Code), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb169-2"><a href="10-module-10.html#cb169-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb169-3"><a href="10-module-10.html#cb169-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(l1_model, l1_model_no_U1j)</span></code></pre></div>
+<pre><code>## Data: data
+## Models:
+## l1_model_no_U1j: Testosterone ~ 1 + time0 + (1 | Code)
+## l1_model: Testosterone ~ 1 + time0 + (time0 | Code)
+##                 npar    AIC    BIC  logLik deviance Chisq Df Pr(&gt;Chisq)   
+## l1_model_no_U1j    4 607.23 616.39 -299.61   599.23                       
+## l1_model           6 601.09 614.83 -294.54   589.09 10.14  2   0.006281 **
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>There is significantly less deviance in the model with the slope variance term.</p>
+<p>Let’s look at 95% confidence intervals for all effects:</p>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="10-module-10.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(l1_model, <span class="at">oldNames =</span> F)</span></code></pre></div>
+<pre><code>## Computing profile confidence intervals ...</code></pre>
+<pre><code>##                                  2.5 %    97.5 %
+## sd_(Intercept)|Code         8.08885766 18.508662
+## cor_time0.(Intercept)|Code -0.02405199  1.000000
+## sd_time0|Code               1.82944849  9.035275
+## sigma                       6.84599241 11.178406
+## (Intercept)                44.60763264 56.714968
+## time0                       5.76797005 12.405566</code></pre>
+<p>We’ve suppressed the warnings in this output for brevity, but if you run this code yourself you’ll see a lot of warnings! That’s likely because of the covariance term, given that the correlation <code>cor_time0.(Intercept)|Code</code> runs up against the upper bound of 1.00 within the confidence interval. Let’s remove that term.</p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="10-module-10.html#cb174-1" aria-hidden="true" tabindex="-1"></a>l1_model_cov0 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Testosterone <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time0 <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Code) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> time0<span class="sc">|</span>Code), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb174-2"><a href="10-module-10.html#cb174-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(l1_model, l1_model_cov0)</span></code></pre></div>
+<pre><code>## Data: data
+## Models:
+## l1_model_cov0: Testosterone ~ 1 + time0 + (1 | Code) + (0 + time0 | Code)
+## l1_model: Testosterone ~ 1 + time0 + (time0 | Code)
+##               npar    AIC    BIC  logLik deviance  Chisq Df Pr(&gt;Chisq)  
+## l1_model_cov0    5 602.67 614.12 -296.33   592.67                       
+## l1_model         6 601.09 614.83 -294.54   589.09 3.5849  1    0.05831 .
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Our model fit is not significantly different after removing the covariance term, so let’s proceed without it and look at our confidence intervals again:</p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="10-module-10.html#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(l1_model_cov0, <span class="at">oldNames =</span> F)</span></code></pre></div>
+<pre><code>## Computing profile confidence intervals ...</code></pre>
+<pre><code>##                         2.5 %   97.5 %
+## sd_(Intercept)|Code 10.123069 20.33901
+## sd_time0|Code        2.941503 10.19590
+## sigma                6.549504 10.66364
+## (Intercept)         44.090984 57.21964
+## time0                5.589114 12.80020</code></pre>
+<p>The confidence interval for our slope variance, <code>sd_time0|Code</code>, does not contain 0, so it is significant.</p>
+<p>Finally, one way to visualize variability is with a graph: what are the different slope values across people? This is the same as our Empirical Bayes plotting exercise in Chapter 4.</p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="10-module-10.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract Empirical Bayes estimates and graph them</span></span>
+<span id="cb179-2"><a href="10-module-10.html#cb179-2" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(<span class="fu">coef</span>(l1_model)<span class="sc">$</span>Code) <span class="sc">%&gt;%</span> </span>
+<span id="cb179-3"><a href="10-module-10.html#cb179-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> time0)) <span class="sc">+</span></span>
+<span id="cb179-4"><a href="10-module-10.html#cb179-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">5</span>)</span></code></pre></div>
+<p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-101-1.png" width="672" /></p>
+<p>To summarize our evidence: the model with the random slope effect fits better, the random effect confidence interval does not contain zero (i.e., it is significant), and we can see that slopes for time vary, many people’s slopes around 5 or 10 but some as high as ~20. All signs point to keeping the random effect.</p>
+</div>
+<div id="adding-level-2-fixed-effects-1" class="section level3" number="10.2.7">
+<h3><span class="header-section-number">10.2.7</span> Adding Level-2 Fixed Effects</h3>
+<p>Let’s start adding the level-2 effects we graphed at the beginning: playing and birth control. First, let’s add whether someone played or not.</p>
+<table>
+<colgroup>
+<col width="44%" />
+<col width="55%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Level</th>
+<th align="left">Equation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Level 1</td>
+<td align="left"><span class="math inline">\(testosterone_{ij} = \beta_{0j} + \beta_{1j}time0_{ij} + R_{ij}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Level 2</td>
+<td align="left"><span class="math inline">\(\beta_{0j} = \gamma_{00} + \gamma_{01}played_j + U_{0j}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"><span class="math inline">\(\beta_{1j} = \gamma_{10} + \gamma_{11}played_j + U_{1j}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Combined</td>
+<td align="left"><span class="math inline">\(testosterone_{ij} = \gamma_{00} + \gamma_{01}*played_j + \gamma_{10}time0_{ij} + \gamma_{11}time0_{ij}*played_j + U_{0j} + U_{1j}time0_{ij} + R_{ij}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>With this model, we’re estimating 7 parameters:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\gamma_{00}\)</span>: the fixed effect for the intercept, mean testosterone levels at time 0 across those who did not play (<code>played</code> = 0);</li>
+<li><span class="math inline">\(\gamma_{10}\)</span>: the fixed effect for time0, effect of time on testosterone levels controlling for playing;</li>
+<li><span class="math inline">\(\gamma_{01}\)</span>: the fixed effect for playing, effect of playing on testosterone at time0;</li>
+<li><span class="math inline">\(\gamma_{11}\)</span>: interaction term between playing and time, the effect of playing on the effect of time on testosterone levels;</li>
+<li><span class="math inline">\(\tau_0^2\)</span>: a random effect for the intercept capturing the variance of people’s average testosterone levels around the intercept controlling for time and playing;</li>
+<li><span class="math inline">\(\tau_1^2\)</span>: a random effect for the slope of time0 capturing the variance of people’s slopes around the grand mean slope controlling for playing;</li>
+<li><span class="math inline">\(\sigma^2\)</span>: a random effect capturing the variance of people around their own average testosterone level, controlling for time and playing;</li>
+</ol>
+<p>We are not estimating a covariance term.</p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="10-module-10.html#cb180-1" aria-hidden="true" tabindex="-1"></a>l2_played <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Testosterone <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time0 <span class="sc">+</span> Played <span class="sc">+</span> Played<span class="sc">:</span>time0 <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Code) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> time0<span class="sc">|</span>Code), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb180-2"><a href="10-module-10.html#cb180-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(l2_played)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
+## Formula: Testosterone ~ 1 + time0 + Played + Played:time0 + (1 | Code) +  
+##     (0 + time0 | Code)
+##    Data: data
+## 
+##      AIC      BIC   logLik deviance df.resid 
+##    599.1    615.1   -292.5    585.1       66 
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -1.5068 -0.5964 -0.1015  0.3243  2.4437 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  Code     (Intercept) 182.24   13.500  
+##  Code.1   time0        27.22    5.217  
+##  Residual              67.89    8.239  
+## Number of obs: 73, groups:  Code, 25
+## 
+## Fixed effects:
+##              Estimate Std. Error     df t value     Pr(&gt;|t|)    
+## (Intercept)    44.526      5.479 26.886   8.126 0.0000000103 ***
+## time0           3.929      2.942 25.406   1.335       0.1936    
+## Played          9.004      6.638 26.811   1.356       0.1863    
+## time0:Played    7.389      3.500 25.476   2.111       0.0448 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Correlation of Fixed Effects:
+##             (Intr) time0  Played
+## time0       -0.265              
+## Played      -0.825  0.218       
+## time0:Playd  0.222 -0.840 -0.270</code></pre>
+<p>Looking at our fixed effects, the intercept of 44.53 is the average testosterone level at time 0 across people who didn’t play. The slope of time, 3.93, indicates the average increase in testosterone levels over one unit of time controlling for playing. The slope of having played, 9.00, indicates that those who played had on average 9 more units of Testosterone than those who didn’t at time 0. The interaction between time and having played indicates that those who played had a 7.39-higher slope on average than those who didn’t.</p>
+<p>The variance term describing how people vary around the intercept is 182.24. The variance term describing how people’s time slopes vary is 27.22.</p>
+<p>Let’s do a quick deviance test to see if including playing decreases deviance (i.e., improves model fit):</p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="10-module-10.html#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(l1_model_cov0, l2_played)</span></code></pre></div>
+<pre><code>## Data: data
+## Models:
+## l1_model_cov0: Testosterone ~ 1 + time0 + (1 | Code) + (0 + time0 | Code)
+## l2_played: Testosterone ~ 1 + time0 + Played + Played:time0 + (1 | Code) + (0 + time0 | Code)
+##               npar    AIC    BIC  logLik deviance Chisq Df Pr(&gt;Chisq)  
+## l1_model_cov0    5 602.67 614.12 -296.33   592.67                      
+## l2_played        7 599.09 615.12 -292.54   585.09 7.583  2    0.02256 *
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>The model with played does fit significantly better.</p>
+<p>Finally, let’s add a fixed effect for birth control.</p>
+<table>
+<colgroup>
+<col width="44%" />
+<col width="55%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Level</th>
+<th align="left">Equation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Level 1</td>
+<td align="left"><span class="math inline">\(testosterone_{ij} = \beta_{0j} + \beta_{1j}time0_{ij} + R_{ij}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Level 2</td>
+<td align="left"><span class="math inline">\(\beta_{0j} = \gamma_{00} + \gamma_{01}played_j + \gamma_{02}birth\_control_j + U_{0j}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"><span class="math inline">\(\beta_{1j} = \gamma_{10} + \gamma_{11}played_j + \gamma_{12}birth\_control_j + U_{1j}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Combined</td>
+<td align="left"><span class="math inline">\(testosterone_{ij} = \gamma_{00} + \gamma_{01}*played_j + \gamma_{02}*birth\_control_j + \gamma_{10}time0_{ij} + \gamma_{11}time0_{ij}*played_j + \gamma_{12}time0_{ij}*birth\_control_j + U_{0j} + U_{1j}time0_{ij} + R_{ij}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Here, we’re estimating 9 effects, the 7 previously described plus:</p>
+<ol start="8" style="list-style-type: decimal">
+<li><span class="math inline">\(\gamma_{02}\)</span>: the fixed effect for birth control, effect of taking birth control on baseline testosterone levels controlling for playing;</li>
+<li><span class="math inline">\(\gamma_{12}\)</span>: interaction term between playing and birth control.</li>
+</ol>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="10-module-10.html#cb184-1" aria-hidden="true" tabindex="-1"></a>l2_played_birthcontrol <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Testosterone <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time0 <span class="sc">+</span> Played <span class="sc">+</span> time0<span class="sc">:</span>Played <span class="sc">+</span> HormonCont <span class="sc">+</span> time0<span class="sc">:</span>HormonCont <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Code) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> time0<span class="sc">|</span>Code), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb184-2"><a href="10-module-10.html#cb184-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(l2_played_birthcontrol)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
+## Formula: Testosterone ~ 1 + time0 + Played + time0:Played + HormonCont +  
+##     time0:HormonCont + (1 | Code) + (0 + time0 | Code)
+##    Data: data
+## 
+##      AIC      BIC   logLik deviance df.resid 
+##    600.4    621.0   -291.2    582.4       64 
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -1.5413 -0.5573 -0.1349  0.3886  2.4161 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  Code     (Intercept) 159.27   12.620  
+##  Code.1   time0        27.99    5.291  
+##  Residual              67.37    8.208  
+## Number of obs: 73, groups:  Code, 25
+## 
+## Fixed effects:
+##                  Estimate Std. Error      df t value     Pr(&gt;|t|)    
+## (Intercept)       50.5745     6.4512 26.8271   7.840 0.0000000207 ***
+## time0              4.0889     3.5168 25.6439   1.163       0.2557    
+## Played             9.2374     6.3078 26.9286   1.464       0.1547    
+## HormonCont        -9.7086     6.1205 26.8019  -1.586       0.1244    
+## time0:Played       7.4842     3.5225 25.5433   2.125       0.0435 *  
+## time0:HormonCont  -0.3946     3.3160 25.6701  -0.119       0.9062    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Correlation of Fixed Effects:
+##             (Intr) time0  Played HrmnCn tm0:Pl
+## time0       -0.287                            
+## Played      -0.652  0.187                     
+## HormonCont  -0.591  0.169 -0.024              
+## time0:Playd  0.183 -0.668 -0.280  0.007       
+## tm0:HrmnCnt  0.171 -0.543  0.007 -0.289 -0.067</code></pre>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="10-module-10.html#cb186-1" aria-hidden="true" tabindex="-1"></a>Matrix<span class="sc">::</span><span class="fu">bdiag</span>(<span class="fu">VarCorr</span>(l2_played_birthcontrol))</span></code></pre></div>
+<pre><code>## 2 x 2 sparse Matrix of class &quot;dgCMatrix&quot;
+##                       
+## [1,] 159.2723  .      
+## [2,]   .      27.99435</code></pre>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="10-module-10.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(l2_played, l2_played_birthcontrol)</span></code></pre></div>
+<pre><code>## Data: data
+## Models:
+## l2_played: Testosterone ~ 1 + time0 + Played + Played:time0 + (1 | Code) + (0 + time0 | Code)
+## l2_played_birthcontrol: Testosterone ~ 1 + time0 + Played + time0:Played + HormonCont + time0:HormonCont + (1 | Code) + (0 + time0 | Code)
+##                        npar    AIC    BIC  logLik deviance  Chisq Df Pr(&gt;Chisq)
+## l2_played                 7 599.09 615.12 -292.54   585.09                     
+## l2_played_birthcontrol    9 600.36 620.97 -291.18   582.36 2.7264  2     0.2558</code></pre>
+<p>Taking birth control is associated with a drop in Testosterone by 9.71 units, controlling for all other variables, and the interaction between time and birth control was -0.39, indicating that the slope for time is <code>4.09 - 0.39 = 3.70</code> for people taking birth control. Neither effect was statistically significant.</p>
+</div>
+</div>
+<div id="conclusion-8" class="section level2" number="10.3">
+<h2><span class="header-section-number">10.3</span> Conclusion</h2>
+<p>In this chapter, we estimated and interpreted models for longitudinal data and reviewed some of the evidence available to us in making model construction decisions: deviance testing, 95% confidence intervals, and visualizing Empirical Bayes estimates. In Chapter 11, we will review another source of evidence for model-building and interpretation: effect sizes and R-squared in multilevel models.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="09-module-9.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="11-module-11.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["open_mlm_materials.pdf", "open_mlm_materials.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"depth": 2,
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

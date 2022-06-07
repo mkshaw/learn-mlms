@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 8 Centering Options and Interpretations | Introduction to Multilevel Modelling</title>
+  <meta name="description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and criticially analyze their use in the literature." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 8 Centering Options and Interpretations | Introduction to Multilevel Modelling" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://www.learn-mlms.com" />
+  
+  <meta property="og:description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and criticially analyze their use in the literature." />
+  <meta name="github-repo" content="mkshaw/multilevel-modelling/" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 8 Centering Options and Interpretations | Introduction to Multilevel Modelling" />
+  
+  <meta name="twitter:description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and criticially analyze their use in the literature." />
+  
+
+<meta name="author" content="Mairead Shaw and Jessica Kay Flake" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="07-module-7.html"/>
+<link rel="next" href="09-module-9.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to Multilevel Modelling</li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#goals"><i class="fa fa-check"></i><b>1.2</b> Goals</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#prerequisites"><i class="fa fa-check"></i><b>1.3</b> Prerequisites</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#materials"><i class="fa fa-check"></i><b>1.4</b> Materials</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html"><i class="fa fa-check"></i><b>2</b> Multiple Regression Review</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#learning-objectives"><i class="fa fa-check"></i><b>2.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="2.2" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#data-demonstration"><i class="fa fa-check"></i><b>2.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#creating-r-projects"><i class="fa fa-check"></i><b>2.2.1</b> Creating R Projects</a></li>
+<li class="chapter" data-level="2.2.2" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#loading-data-and-dependencies"><i class="fa fa-check"></i><b>2.2.2</b> Loading Data and Dependencies</a></li>
+<li class="chapter" data-level="2.2.3" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#simple-linear-regression"><i class="fa fa-check"></i><b>2.2.3</b> Simple Linear Regression</a></li>
+<li class="chapter" data-level="2.2.4" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#multiple-regression-1"><i class="fa fa-check"></i><b>2.2.4</b> Multiple Regression</a></li>
+<li class="chapter" data-level="2.2.5" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#interaction-terms"><i class="fa fa-check"></i><b>2.2.5</b> Interaction Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#conclusion"><i class="fa fa-check"></i><b>2.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="03-module-3.html"><a href="03-module-3.html"><i class="fa fa-check"></i><b>3</b> Approaches to Multilevel Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="03-module-3.html"><a href="03-module-3.html#learning-objectives-1"><i class="fa fa-check"></i><b>3.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="3.2" data-path="03-module-3.html"><a href="03-module-3.html#data-demonstration-1"><i class="fa fa-check"></i><b>3.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="03-module-3.html"><a href="03-module-3.html#load-data-and-dependencies"><i class="fa fa-check"></i><b>3.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="3.2.2" data-path="03-module-3.html"><a href="03-module-3.html#dealing-with-dependence"><i class="fa fa-check"></i><b>3.2.2</b> Dealing with Dependence</a></li>
+<li class="chapter" data-level="3.2.3" data-path="03-module-3.html"><a href="03-module-3.html#cluster-robust-standard-errors"><i class="fa fa-check"></i><b>3.2.3</b> Cluster-Robust Standard Errors</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="03-module-3.html"><a href="03-module-3.html#conclusion-1"><i class="fa fa-check"></i><b>3.3</b> Conclusion</a></li>
+<li class="chapter" data-level="3.4" data-path="03-module-3.html"><a href="03-module-3.html#further-reading"><i class="fa fa-check"></i><b>3.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="04-module-4.html"><a href="04-module-4.html"><i class="fa fa-check"></i><b>4</b> Our First Multilevel Models</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="04-module-4.html"><a href="04-module-4.html#learning-objectives-2"><i class="fa fa-check"></i><b>4.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="4.2" data-path="04-module-4.html"><a href="04-module-4.html#data-demonstration-2"><i class="fa fa-check"></i><b>4.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="04-module-4.html"><a href="04-module-4.html#load-data-and-dependencies-1"><i class="fa fa-check"></i><b>4.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="4.2.2" data-path="04-module-4.html"><a href="04-module-4.html#why-multilevel-models"><i class="fa fa-check"></i><b>4.2.2</b> Why Multilevel Models?</a></li>
+<li class="chapter" data-level="4.2.3" data-path="04-module-4.html"><a href="04-module-4.html#fixed-vs-random-effects"><i class="fa fa-check"></i><b>4.2.3</b> Fixed vs Random Effects</a></li>
+<li class="chapter" data-level="4.2.4" data-path="04-module-4.html"><a href="04-module-4.html#the-null-model"><i class="fa fa-check"></i><b>4.2.4</b> The Null Model</a></li>
+<li class="chapter" data-level="4.2.5" data-path="04-module-4.html"><a href="04-module-4.html#understanding-variance"><i class="fa fa-check"></i><b>4.2.5</b> Understanding Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="04-module-4.html"><a href="04-module-4.html#conclusion-2"><i class="fa fa-check"></i><b>4.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="05-module-5.html"><a href="05-module-5.html"><i class="fa fa-check"></i><b>5</b> Adding Fixed Predictors to MLMs</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="05-module-5.html"><a href="05-module-5.html#learning-objectives-3"><i class="fa fa-check"></i><b>5.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="5.2" data-path="05-module-5.html"><a href="05-module-5.html#data-demonstration-3"><i class="fa fa-check"></i><b>5.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="05-module-5.html"><a href="05-module-5.html#load-data-and-dependencies-2"><i class="fa fa-check"></i><b>5.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="5.2.2" data-path="05-module-5.html"><a href="05-module-5.html#mlm-with-level-1-predictor"><i class="fa fa-check"></i><b>5.2.2</b> MLM with Level-1 Predictor</a></li>
+<li class="chapter" data-level="5.2.3" data-path="05-module-5.html"><a href="05-module-5.html#compare-regular-and-multilevel-regression"><i class="fa fa-check"></i><b>5.2.3</b> Compare Regular and Multilevel Regression</a></li>
+<li class="chapter" data-level="5.2.4" data-path="05-module-5.html"><a href="05-module-5.html#mlm-with-level-2-predictor"><i class="fa fa-check"></i><b>5.2.4</b> MLM with Level-2 Predictor</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="05-module-5.html"><a href="05-module-5.html#conclusion-3"><i class="fa fa-check"></i><b>5.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="06-module-6.html"><a href="06-module-6.html"><i class="fa fa-check"></i><b>6</b> Random Effects and Cross-level Interactions</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="06-module-6.html"><a href="06-module-6.html#learning-objectives-4"><i class="fa fa-check"></i><b>6.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="6.2" data-path="06-module-6.html"><a href="06-module-6.html#data-demonstration-4"><i class="fa fa-check"></i><b>6.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="06-module-6.html"><a href="06-module-6.html#load-data-and-dependencies-3"><i class="fa fa-check"></i><b>6.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="6.2.2" data-path="06-module-6.html"><a href="06-module-6.html#mlm-with-random-slope-effect"><i class="fa fa-check"></i><b>6.2.2</b> MLM with Random Slope Effect</a></li>
+<li class="chapter" data-level="6.2.3" data-path="06-module-6.html"><a href="06-module-6.html#mlm-with-crosslevel-effect"><i class="fa fa-check"></i><b>6.2.3</b> MLM with Crosslevel Effect</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="06-module-6.html"><a href="06-module-6.html#conclusion-4"><i class="fa fa-check"></i><b>6.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="07-module-7.html"><a href="07-module-7.html"><i class="fa fa-check"></i><b>7</b> Model Estimation Options, Problems, and Troubleshooting</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="07-module-7.html"><a href="07-module-7.html#learning-objectives-5"><i class="fa fa-check"></i><b>7.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="7.2" data-path="07-module-7.html"><a href="07-module-7.html#data-demonstration-5"><i class="fa fa-check"></i><b>7.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="07-module-7.html"><a href="07-module-7.html#load-data-and-dependencies-4"><i class="fa fa-check"></i><b>7.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="7.2.2" data-path="07-module-7.html"><a href="07-module-7.html#introduction-to-estimation-problems"><i class="fa fa-check"></i><b>7.2.2</b> Introduction to Estimation Problems</a></li>
+<li class="chapter" data-level="7.2.3" data-path="07-module-7.html"><a href="07-module-7.html#estimation-and-optimizers"><i class="fa fa-check"></i><b>7.2.3</b> Estimation and Optimizers</a></li>
+<li class="chapter" data-level="7.2.4" data-path="07-module-7.html"><a href="07-module-7.html#non-convergence"><i class="fa fa-check"></i><b>7.2.4</b> Non-Convergence</a></li>
+<li class="chapter" data-level="7.2.5" data-path="07-module-7.html"><a href="07-module-7.html#singularity"><i class="fa fa-check"></i><b>7.2.5</b> Singularity</a></li>
+<li class="chapter" data-level="7.2.6" data-path="07-module-7.html"><a href="07-module-7.html#deviance-testing-for-model-comparison"><i class="fa fa-check"></i><b>7.2.6</b> Deviance Testing for Model Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="07-module-7.html"><a href="07-module-7.html#conclusion-5"><i class="fa fa-check"></i><b>7.3</b> Conclusion</a></li>
+<li class="chapter" data-level="7.4" data-path="07-module-7.html"><a href="07-module-7.html#further-reading-1"><i class="fa fa-check"></i><b>7.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="08-module-8.html"><a href="08-module-8.html"><i class="fa fa-check"></i><b>8</b> Centering Options and Interpretations</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="08-module-8.html"><a href="08-module-8.html#learning-objectives-6"><i class="fa fa-check"></i><b>8.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="8.2" data-path="08-module-8.html"><a href="08-module-8.html#data-demonstration-6"><i class="fa fa-check"></i><b>8.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="08-module-8.html"><a href="08-module-8.html#load-data-and-dependencies-5"><i class="fa fa-check"></i><b>8.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="8.2.2" data-path="08-module-8.html"><a href="08-module-8.html#why-center-variables"><i class="fa fa-check"></i><b>8.2.2</b> Why Center Variables?</a></li>
+<li class="chapter" data-level="8.2.3" data-path="08-module-8.html"><a href="08-module-8.html#within-between-and-contextual-effects"><i class="fa fa-check"></i><b>8.2.3</b> Within, Between, and Contextual Effects</a></li>
+<li class="chapter" data-level="8.2.4" data-path="08-module-8.html"><a href="08-module-8.html#options-for-centering-in-mlms"><i class="fa fa-check"></i><b>8.2.4</b> Options for Centering in MLMs</a></li>
+<li class="chapter" data-level="8.2.5" data-path="08-module-8.html"><a href="08-module-8.html#what-kind-of-centering-should-you-use"><i class="fa fa-check"></i><b>8.2.5</b> What Kind of Centering Should You Use?</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="08-module-8.html"><a href="08-module-8.html#conclusion-6"><i class="fa fa-check"></i><b>8.3</b> Conclusion</a></li>
+<li class="chapter" data-level="8.4" data-path="08-module-8.html"><a href="08-module-8.html#further-reading-2"><i class="fa fa-check"></i><b>8.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="09-module-9.html"><a href="09-module-9.html"><i class="fa fa-check"></i><b>9</b> Multilevel Modelling with Repeated Measures Data</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="09-module-9.html"><a href="09-module-9.html#learning-objectives-7"><i class="fa fa-check"></i><b>9.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="9.2" data-path="09-module-9.html"><a href="09-module-9.html#data-demonstration-7"><i class="fa fa-check"></i><b>9.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="09-module-9.html"><a href="09-module-9.html#load-dependencies"><i class="fa fa-check"></i><b>9.2.1</b> Load Dependencies</a></li>
+<li class="chapter" data-level="9.2.2" data-path="09-module-9.html"><a href="09-module-9.html#review-of-multilevel-modelling-procedure"><i class="fa fa-check"></i><b>9.2.2</b> Review of Multilevel Modelling Procedure</a></li>
+<li class="chapter" data-level="9.2.3" data-path="09-module-9.html"><a href="09-module-9.html#multilevel-models-for-repeated-measures"><i class="fa fa-check"></i><b>9.2.3</b> Multilevel Models for Repeated Measures</a></li>
+<li class="chapter" data-level="9.2.4" data-path="09-module-9.html"><a href="09-module-9.html#our-data-reaction-time"><i class="fa fa-check"></i><b>9.2.4</b> Our Data: Reaction Time</a></li>
+<li class="chapter" data-level="9.2.5" data-path="09-module-9.html"><a href="09-module-9.html#random-intercept-onlynull-model"><i class="fa fa-check"></i><b>9.2.5</b> Random-Intercept-Only/Null Model</a></li>
+<li class="chapter" data-level="9.2.6" data-path="09-module-9.html"><a href="09-module-9.html#adding-level-1-fixed-effects"><i class="fa fa-check"></i><b>9.2.6</b> Adding Level-1 Fixed Effects</a></li>
+<li class="chapter" data-level="9.2.7" data-path="09-module-9.html"><a href="09-module-9.html#adding-random-slopes"><i class="fa fa-check"></i><b>9.2.7</b> Adding Random Slopes</a></li>
+<li class="chapter" data-level="9.2.8" data-path="09-module-9.html"><a href="09-module-9.html#adding-level-2-fixed-effects"><i class="fa fa-check"></i><b>9.2.8</b> Adding Level-2 Fixed Effects</a></li>
+<li class="chapter" data-level="9.2.9" data-path="09-module-9.html"><a href="09-module-9.html#adding-cross-level-interactions"><i class="fa fa-check"></i><b>9.2.9</b> Adding Cross-Level Interactions</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="09-module-9.html"><a href="09-module-9.html#conclusion-7"><i class="fa fa-check"></i><b>9.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="10-module-10.html"><a href="10-module-10.html"><i class="fa fa-check"></i><b>10</b> Multilevel Modelling with Longitudinal Data</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="10-module-10.html"><a href="10-module-10.html#learning-objectives-8"><i class="fa fa-check"></i><b>10.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="10.2" data-path="10-module-10.html"><a href="10-module-10.html#data-demonstration-8"><i class="fa fa-check"></i><b>10.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="10-module-10.html"><a href="10-module-10.html#load-dependencies-1"><i class="fa fa-check"></i><b>10.2.1</b> Load Dependencies</a></li>
+<li class="chapter" data-level="10.2.2" data-path="10-module-10.html"><a href="10-module-10.html#multilevel-models-for-longitudinal-data"><i class="fa fa-check"></i><b>10.2.2</b> Multilevel Models for Longitudinal Data</a></li>
+<li class="chapter" data-level="10.2.3" data-path="10-module-10.html"><a href="10-module-10.html#visualizing-testosterone-levels-over-time"><i class="fa fa-check"></i><b>10.2.3</b> Visualizing Testosterone Levels Over Time</a></li>
+<li class="chapter" data-level="10.2.4" data-path="10-module-10.html"><a href="10-module-10.html#random-intercept-onlynull-model-1"><i class="fa fa-check"></i><b>10.2.4</b> Random-Intercept-Only/Null Model</a></li>
+<li class="chapter" data-level="10.2.5" data-path="10-module-10.html"><a href="10-module-10.html#adding-level-1-fixed-and-random-effects"><i class="fa fa-check"></i><b>10.2.5</b> Adding Level-1 Fixed and Random Effects</a></li>
+<li class="chapter" data-level="10.2.6" data-path="10-module-10.html"><a href="10-module-10.html#evidence-for-retaining-effects"><i class="fa fa-check"></i><b>10.2.6</b> Evidence for Retaining Effects</a></li>
+<li class="chapter" data-level="10.2.7" data-path="10-module-10.html"><a href="10-module-10.html#adding-level-2-fixed-effects-1"><i class="fa fa-check"></i><b>10.2.7</b> Adding Level-2 Fixed Effects</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="10-module-10.html"><a href="10-module-10.html#conclusion-8"><i class="fa fa-check"></i><b>10.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="11-module-11.html"><a href="11-module-11.html"><i class="fa fa-check"></i><b>11</b> Effect Sizes in Multilevel Models</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="11-module-11.html"><a href="11-module-11.html#learning-objectives-9"><i class="fa fa-check"></i><b>11.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="11.2" data-path="11-module-11.html"><a href="11-module-11.html#data-demonstration-9"><i class="fa fa-check"></i><b>11.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="11-module-11.html"><a href="11-module-11.html#load-data-and-dependencies-6"><i class="fa fa-check"></i><b>11.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="11.2.2" data-path="11-module-11.html"><a href="11-module-11.html#defining-effect-sizes"><i class="fa fa-check"></i><b>11.2.2</b> Defining Effect Sizes</a></li>
+<li class="chapter" data-level="11.2.3" data-path="11-module-11.html"><a href="11-module-11.html#r-squared-in-multilevel-models"><i class="fa fa-check"></i><b>11.2.3</b> R-squared in Multilevel Models</a></li>
+<li class="chapter" data-level="11.2.4" data-path="11-module-11.html"><a href="11-module-11.html#single-model-automatic-entry"><i class="fa fa-check"></i><b>11.2.4</b> Single Model, Automatic Entry</a></li>
+<li class="chapter" data-level="11.2.5" data-path="11-module-11.html"><a href="11-module-11.html#single-model-manual-entry"><i class="fa fa-check"></i><b>11.2.5</b> Single Model, Manual Entry</a></li>
+<li class="chapter" data-level="11.2.6" data-path="11-module-11.html"><a href="11-module-11.html#model-comparison"><i class="fa fa-check"></i><b>11.2.6</b> Model Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="11-module-11.html"><a href="11-module-11.html#conclusion-9"><i class="fa fa-check"></i><b>11.3</b> Conclusion</a></li>
+<li class="chapter" data-level="11.4" data-path="11-module-11.html"><a href="11-module-11.html#additional-reading"><i class="fa fa-check"></i><b>11.4</b> Additional Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="12-module-12.html"><a href="12-module-12.html"><i class="fa fa-check"></i><b>12</b> Assumptions</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="12-module-12.html"><a href="12-module-12.html#learning-objectives-10"><i class="fa fa-check"></i><b>12.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="12.2" data-path="12-module-12.html"><a href="12-module-12.html#data-demonstration-10"><i class="fa fa-check"></i><b>12.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="12-module-12.html"><a href="12-module-12.html#load-data-and-dependencies-7"><i class="fa fa-check"></i><b>12.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="12.2.2" data-path="12-module-12.html"><a href="12-module-12.html#assumptions-of-mlms"><i class="fa fa-check"></i><b>12.2.2</b> Assumptions of MLMs</a></li>
+<li class="chapter" data-level="12.2.3" data-path="12-module-12.html"><a href="12-module-12.html#assumption-1-model-specification"><i class="fa fa-check"></i><b>12.2.3</b> Assumption 1: Model Specification</a></li>
+<li class="chapter" data-level="12.2.4" data-path="12-module-12.html"><a href="12-module-12.html#assumption-2-functional-form-is-correct"><i class="fa fa-check"></i><b>12.2.4</b> Assumption 2: Functional Form is Correct</a></li>
+<li class="chapter" data-level="12.2.5" data-path="12-module-12.html"><a href="12-module-12.html#an-aside-extracting-residuals"><i class="fa fa-check"></i><b>12.2.5</b> An Aside: Extracting Residuals</a></li>
+<li class="chapter" data-level="12.2.6" data-path="12-module-12.html"><a href="12-module-12.html#assumption-3-level-1-residuals-are-independent-and-normally-distributed"><i class="fa fa-check"></i><b>12.2.6</b> Assumption 3: Level-1 Residuals are Independent and Normally Distributed</a></li>
+<li class="chapter" data-level="12.2.7" data-path="12-module-12.html"><a href="12-module-12.html#assumption-4-level-2-residuals-are-independent-and-multivariate-normal"><i class="fa fa-check"></i><b>12.2.7</b> Assumption 4: Level-2 Residuals are Independent and Multivariate Normal</a></li>
+<li class="chapter" data-level="12.2.8" data-path="12-module-12.html"><a href="12-module-12.html#assumption-5-residuals-at-level-1-and-level-2-are-independent"><i class="fa fa-check"></i><b>12.2.8</b> Assumption 5: Residuals at Level-1 and Level-2 are Independent</a></li>
+<li class="chapter" data-level="12.2.9" data-path="12-module-12.html"><a href="12-module-12.html#assumption-6-level-1-residuals-independent-of-level-2-predictors-level-2-residuals-independent-of-level-1-predictors"><i class="fa fa-check"></i><b>12.2.9</b> Assumption 6: Level-1 Residuals Independent of Level-2 Predictors, Level-2 Residuals Independent of Level-1 Predictors</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="12-module-12.html"><a href="12-module-12.html#conclusion-10"><i class="fa fa-check"></i><b>12.3</b> Conclusion</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://twitter.com/maireadkshaw">Mairead Shaw</a></li>
+<li><a href="https://twitter.com/jkayflake">Jessica Kay Flake</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Multilevel Modelling</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="module-8" class="section level1" number="8">
+<h1><span class="header-section-number">Chapter 8</span> Centering Options and Interpretations</h1>
+<div id="learning-objectives-6" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> Learning Objectives</h2>
+<p>In this chapter, we will review options for and interpretations of centering variables in multilevel models. The examples are adapted from Dr. Dan McNeish’s lecture (thanks Dan!), and you can see an overview of his other work <a href="https://sites.google.com/site/danielmmcneish/">here</a>.</p>
+<p>The learning objectives for this chapter are:</p>
+<ol style="list-style-type: decimal">
+<li>Review centering options and interpretation in linear regression.</li>
+<li>Differentiate between total, within, between, and contextual effects.</li>
+<li>Understand the difference between within-cluster and grand-mean centering and when to use each strategy.</li>
+<li>Estimate and interpret models using both within-cluster and grand-mean centering.</li>
+</ol>
+<p>All materials for this chapter are available for download <a href="www.learn-mlms.com/students">here</a>.</p>
+</div>
+<div id="data-demonstration-6" class="section level2" number="8.2">
+<h2><span class="header-section-number">8.2</span> Data Demonstration</h2>
+<p>The data for this chapter were taken from chapter 3 of Heck, R. H., Thomas, S. L., &amp; Tabata, L. N. (2011). <em>Multilevel and Longitudinal Modeling with IBM SPSS</em>: Taylor &amp; Francis. Students are clustered within schools in the data.</p>
+<div id="load-data-and-dependencies-5" class="section level3" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> Load Data and Dependencies</h3>
+<p>For this data demo, we will use the following packages:</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="08-module-8.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># for data manipulation</span></span>
+<span id="cb112-2"><a href="08-module-8.html#cb112-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr) <span class="co"># for assignment pipe %&lt;&gt;%</span></span>
+<span id="cb112-3"><a href="08-module-8.html#cb112-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4) <span class="co"># for multilevel models</span></span>
+<span id="cb112-4"><a href="08-module-8.html#cb112-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest) <span class="co"># for p-values</span></span></code></pre></div>
+<p>And the same dataset of students’ math achievement:</p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="08-module-8.html#cb113-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;heck2011.csv&#39;</span>)</span></code></pre></div>
+</div>
+<div id="why-center-variables" class="section level3" number="8.2.2">
+<h3><span class="header-section-number">8.2.2</span> Why Center Variables?</h3>
+<p>If you’ve worked with single-level regression before, you’re probably already familiar with centering variables. Centering in regression facilitates interpretation of the intercept, which is the average value of your outcome variable when all predictors are set to zero. If your predictors do not have meaningful zero points, then the intercept can be non-sensical. For example, imagine we were predicting the number of goals scored by players in an adult hockey league based on their age in a simple regression:</p>
+<p><span class="math inline">\(goals_{i} = \beta_{0} + \beta_{1}age_{i} + \epsilon_{i}\)</span></p>
+<p>If we had age in years without centering it, the intercept would represent the average number of goals scored by players 0 years old. There are no players in adult hockey leagues that are zero years old, so this intercept is not really useful to us. If we instead centered age, the intercept would represent the average number of goals scored by players at the average league age (maybe something like 38 years old). This is a more meaningful interpretation that lies within the range of our data.</p>
+<p>Centering in multilevel models is also used to make coefficients more meaningful, but also changes the interpretation of coefficients and can be used to decompose total effects into estimates of the within, between, and contextual effects of a variable. Let’s dig more into those different effects.</p>
+</div>
+<div id="within-between-and-contextual-effects" class="section level3" number="8.2.3">
+<h3><span class="header-section-number">8.2.3</span> Within, Between, and Contextual Effects</h3>
+<p>To define within, between, and contextual effects, let’s think about Marsh’s Big Fish-Little Pond effect. This effect describes the situation in which high achieving students in a school that is low achieving on average, will feel better about their abilities than high achieving students in a school with higher average achievement. You may have experienced this feeling when you went from being one of the best undergraduates at your institution (i.e., you were the big fish in the little pond) to feeling less confident in your abilities when you went to graduate school (i.e., when you became a small or medium sized fish in a big pond). In the example data we have students in different schools and have measured their levels of academic achievement (their grades, for example) and academic self-concept (do they feel like they’re succeeding in school?).</p>
+<p>The within effect describes the relationship between students’ grades and their feelings of succeeding in school within a given school: how does a student’s grades affect their feelings of success? We might expect that higher grades are associated with stronger feelings of “yes, I am succeeding.”</p>
+<p>The between effect describes the relationship between a school’s average grades and the average of students’ feelings of success: how does a school’s average grade affect students’ average feelings of success? We might expect that in higher-performing schools, the students actually feel less successful on average.</p>
+<p>The contextual effect describes the difference in feelings of success for students with <em>the same</em> grades in schools with <em>different</em> average grades. What would happen if we plopped the same student into a different context (i.e., cluster)? We might expect that Student A with a grade of 80% in a school with an average grade of 60% feels great about their success, but what if we take that student with a grade of 80% and put them into a school with an average grade of 99%? They probably don’t feel as successful. This is the Big Fish-Little Pond effect, and it is a contextual effect: what effect does context have on the outcome variable?</p>
+<p>We can see this illustrated in the following graph adapted from Dan McNeish’s slides:</p>
+<p><img src="img/effect_types.png" /><!-- --></p>
+<p>Note how the effects relate to one another: <span class="math inline">\(between\ effect = within\ effect + contextual\ effect\)</span>. One way of thinking of this is that the between effect shows the overall, average relationship, but using MLMs, we can decompose it into a within and contextual effect. To estimate these effects, We use different centering options!</p>
+</div>
+<div id="options-for-centering-in-mlms" class="section level3" number="8.2.4">
+<h3><span class="header-section-number">8.2.4</span> Options for Centering in MLMs</h3>
+<p>Let’s return to our example of SES predicting math achievement to understand if there is a contextual effect of students’ achievement from being in higher or lower on average SES schools. So far, we’ve been using the following model:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Level</th>
+<th align="left">Equation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Level 1</td>
+<td align="left"><span class="math inline">\(math_{ij} = \beta_{0j} + \beta_{1j}ses_{ij} + R_{ij}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Level 2</td>
+<td align="left"><span class="math inline">\(\beta_{0j} = \gamma_{00} + U_{0j}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"><span class="math inline">\(\beta_{1j} = \gamma_{10}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Combined</td>
+<td align="left"><span class="math inline">\(math_{ij} = \gamma_{00} + \gamma_{10}ses_{ij} + U_{0j} + R_{ij}\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="08-module-8.html#cb114-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb114-2"><a href="08-module-8.html#cb114-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
+## Formula: math ~ 1 + ses + (1 | schcode)
+##    Data: data
+## 
+## REML criterion at convergence: 48215.4
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -3.7733 -0.5540  0.1303  0.6469  5.6908 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  schcode  (Intercept)  3.469   1.863   
+##  Residual             62.807   7.925   
+## Number of obs: 6871, groups:  schcode, 419
+## 
+## Fixed effects:
+##              Estimate Std. Error        df t value            Pr(&gt;|t|)    
+## (Intercept)   57.5960     0.1329  375.6989  433.36 &lt;0.0000000000000002 ***
+## ses            3.8739     0.1366 3914.6382   28.35 &lt;0.0000000000000002 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Correlation of Fixed Effects:
+##     (Intr)
+## ses -0.025</code></pre>
+<p>We’ve been using the variable <code>ses</code> which is Z-scored so 0 is equal to the mean across all students. This is a type of centering that also standardizes the units in our model. From this model, we’ve seen in previous chapters that SES has a 3.87-unit effect on achievement, meaning that math achievement is expected to increase by 3.87 units as SES increases by 1 standard deviation. This estimate cannot tell us about the effect within a school, or the contextual effect, it is an uninterpretable blend of both. We will walk through how to tease these different effects out using centering.</p>
+<p>If we want to get our within, between, and contextual effects, we have two options (Enders and Tofighi, 2007):</p>
+<ol style="list-style-type: decimal">
+<li>Centering within cluster (CWC)</li>
+<li>Centering around grand mean (CGM).</li>
+</ol>
+<div id="centering-within-cluster-cwc" class="section level4" number="8.2.4.1">
+<h4><span class="header-section-number">8.2.4.1</span> Centering Within Cluster (CWC)</h4>
+<p>Centering a variable within a cluster means each cluster will have a mean of zero. So, each school will have a mean of zero, and students’ scores on <code>ses_cwc</code> will reflect their variance around their school mean, not the grand mean of the whole dataset.</p>
+<p>To center SES within cluster, we first group our dataset by school and calculate the mean SES for each cluster:</p>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="08-module-8.html#cb116-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&lt;&gt;%</span> <span class="co"># this symbol is an assignment operator and pipe, equivalent to data &lt;- data %&gt;% </span></span>
+<span id="cb116-2"><a href="08-module-8.html#cb116-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(schcode) <span class="sc">%&gt;%</span> </span>
+<span id="cb116-3"><a href="08-module-8.html#cb116-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ses_mean =</span> <span class="fu">mean</span>(ses))</span></code></pre></div>
+<p>Then, we subtract this cluster mean from every individual student’s SES value: <span class="math inline">\(ses_{cwc} = ses - ses_{mean}\)</span>. For the students at the mean, the resulting value will be 0. Students above the mean will have positive values, and students below the mean will have negative values.</p>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="08-module-8.html#cb117-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb117-2"><a href="08-module-8.html#cb117-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ses_cwc =</span> ses <span class="sc">-</span> ses_mean)</span></code></pre></div>
+<p>The values of <code>ses_cwc</code> are distributed around the mean for the cluster. The mean of the centered values for each school is now (essentially) zero:</p>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="08-module-8.html#cb118-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb118-2"><a href="08-module-8.html#cb118-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(schcode) <span class="sc">%&gt;%</span> </span>
+<span id="cb118-3"><a href="08-module-8.html#cb118-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb118-4"><a href="08-module-8.html#cb118-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(ses_cwc)</span>
+<span id="cb118-5"><a href="08-module-8.html#cb118-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## # A tibble: 419 x 2
+##    schcode `mean(ses_cwc)`
+##      &lt;int&gt;           &lt;dbl&gt;
+##  1       1        3.01e-17
+##  2       2       -1.28e-17
+##  3       3        4.32e-17
+##  4       4        5.55e-17
+##  5       5       -3.28e-18
+##  6       6       -3.47e-18
+##  7       7        8.67e-19
+##  8       8        1.07e-17
+##  9       9        1.14e-17
+## 10      10       -5.56e-18
+## # … with 409 more rows</code></pre>
+<p>If we estimate a model with just <code>ses_cwc</code>, it would look like this:</p>
+<table>
+<colgroup>
+<col width="44%" />
+<col width="55%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Level</th>
+<th align="left">Equation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Level 1</td>
+<td align="left"><span class="math inline">\(math_{ij} = \beta_{0j} + \beta_{1j}ses\_cwc_{ij} + R_{ij}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Level 2</td>
+<td align="left"><span class="math inline">\(\beta_{0j} = \gamma_{00} + U_{0j}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"><span class="math inline">\(\beta_{1j} = \gamma_{10}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Combined</td>
+<td align="left"><span class="math inline">\(math_{ij} = \gamma_{00} + \gamma_{10}ses\_cwc_{ij} + U_{0j} + R_{ij}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Here, <span class="math inline">\(\gamma_{10}\)</span> represents how students vary around their school mean, which is our within effect. It only captures the effect of SES on achievement within schools, if we run this model we get an intercept of 57.67 and an effect for <code>ses_cwc</code> of 3.19 indicating that on average, within a school an increase in SES to one standard deviation above the mean is associated with an increase in math achievement of 3.19.</p>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="08-module-8.html#cb120-1" aria-hidden="true" tabindex="-1"></a>model_cwc <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses_cwc <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb120-2"><a href="08-module-8.html#cb120-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_cwc)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
+## Formula: math ~ 1 + ses_cwc + (1 | schcode)
+##    Data: data
+## 
+## REML criterion at convergence: 48482.5
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -3.6436 -0.5628  0.1413  0.6375  5.6268 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  schcode  (Intercept) 10.89    3.300   
+##  Residual             62.59    7.912   
+## Number of obs: 6871, groups:  schcode, 419
+## 
+## Fixed effects:
+##              Estimate Std. Error        df t value            Pr(&gt;|t|)    
+## (Intercept)   57.6732     0.1883  416.1017  306.33 &lt;0.0000000000000002 ***
+## ses_cwc        3.1903     0.1578 6451.7013   20.22 &lt;0.0000000000000002 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Correlation of Fixed Effects:
+##         (Intr)
+## ses_cwc 0.000</code></pre>
+<p>This model is incomplete. If we want our between effect (i.e., how the school averages differ from each other), we can add the aggregate back in at level 2, which is the value we calculated for each school’s mean, <code>ses_mean</code>:</p>
+<table>
+<colgroup>
+<col width="44%" />
+<col width="55%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Level</th>
+<th align="left">Equation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Level 1</td>
+<td align="left"><span class="math inline">\(math_{ij} = \beta_{0j} + \beta_{1j}ses\_cwc_{ij} + R_{ij}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Level 2</td>
+<td align="left"><span class="math inline">\(\beta_{0j} = \gamma_{00} + \gamma_{01}ses\_mean_j + U_{0j}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"><span class="math inline">\(\beta_{1j} = \gamma_{10}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Combined</td>
+<td align="left"><span class="math inline">\(math_{ij} = \gamma_{00} + \gamma_{01}ses\_mean_j + \gamma_{10}ses\_cwc_{ij} + U_{0j} + R_{ij}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>With this model, we are estimating 5 parameters:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\gamma_{00}\)</span>: the fixed effect for the intercept, controlling for <code>ses_cwc</code> and <code>ses_mean</code> (i.e., a student with school-average SES at the average school);</li>
+<li><span class="math inline">\(\gamma_{01}\)</span>: the fixed effect for <code>ses_mean</code> controlling for <code>ses_cwc</code>. This is our between effect, indicating the effect of a school’s average SES on a student’s math achievement;</li>
+<li><span class="math inline">\(\gamma_{10}\)</span>: the fixed effect for the slope of <code>ses_cwc</code> controlling for <code>ses_mean</code>. This is our within effect, indicating the effect of a student’s SES compared to the school average (at the average school, <code>ses_mean</code> = 0);</li>
+<li><span class="math inline">\(\tau_0^2\)</span>: a random effect for the intercept capturing the variance of schools around the intercept, controlling for <code>ses_cwc</code> and <code>ses_mean</code>;</li>
+<li><span class="math inline">\(\sigma^2\)</span>: a random effect capturing the variance of students around their school mean math achievement, controlling for <code>ses_cwc</code> and <code>ses_mean</code>.</li>
+</ol>
+<p>Let’s estimate it:</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="08-module-8.html#cb122-1" aria-hidden="true" tabindex="-1"></a>model_cwc_l2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses_cwc <span class="sc">+</span> ses_mean <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb122-2"><a href="08-module-8.html#cb122-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_cwc_l2)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
+## Formula: math ~ 1 + ses_cwc + ses_mean + (1 | schcode)
+##    Data: data
+## 
+## REML criterion at convergence: 48137.9
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -3.7545 -0.5575  0.1312  0.6619  5.7512 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  schcode  (Intercept)  2.511   1.585   
+##  Residual             62.628   7.914   
+## Number of obs: 6871, groups:  schcode, 419
+## 
+## Fixed effects:
+##              Estimate Std. Error        df t value            Pr(&gt;|t|)    
+## (Intercept)   57.5467     0.1239  401.3223  464.54 &lt;0.0000000000000002 ***
+## ses_cwc        3.1903     0.1578 6448.7759   20.22 &lt;0.0000000000000002 ***
+## ses_mean       5.8920     0.2529  385.3371   23.30 &lt;0.0000000000000002 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Correlation of Fixed Effects:
+##          (Intr) ss_cwc
+## ses_cwc   0.000       
+## ses_mean -0.052  0.000</code></pre>
+<p>The average student math achievement at the average school is 57.55. A one-unit increase in SES within a school is associated with a 3.19-unit increase in math achievement. A one-unit increase in the school’s average SES is associated with a 5.89-unit increase in math achievement.</p>
+<p>Recall our earlier formula detailing the relationship between the within, between, and contextual effects: <span class="math inline">\(between\ effect = within\ effect + contextual\ effect\)</span>. Armed with our between effect (<span class="math inline">\(\gamma_{01}\)</span>) and within effect (<span class="math inline">\(\gamma_{10}\)</span>), we can reorganize this equation and calculate our contextual effect: <span class="math inline">\(contextual = between - within = \gamma_{01} - \gamma_{10} = 5.89 - 3.19 = 2.70\)</span>, so with two hypothetical students with the same level of SES, the one in the school with higher average SES has 2.70-unit higher math achievement. This represents the contextual effect of a school’s SES on math achievement.</p>
+</div>
+<div id="centering-grand-mean-cgm" class="section level4" number="8.2.4.2">
+<h4><span class="header-section-number">8.2.4.2</span> Centering Grand Mean (CGM)</h4>
+<p>When we center a variable at the grand mean, we have information about how individuals vary around the mean of all individuals. So students’ scores on <code>ses_cgm</code> will reflect their variance around the mean of all students.</p>
+<p>To center SES at the grand mean, we first calculate the grand mean:</p>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="08-module-8.html#cb124-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb124-2"><a href="08-module-8.html#cb124-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> <span class="co"># remove the grouping by school that we added in the CWC section</span></span>
+<span id="cb124-3"><a href="08-module-8.html#cb124-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ses_grand_mean =</span> <span class="fu">mean</span>(ses))</span></code></pre></div>
+<p>Then, we subtract this grand mean from every individual student’s SES value: <span class="math inline">\(ses_{cgm} = ses - ses\_grand\_mean\)</span>. For the students at the grand mean, the resulting value will be 0. Students above the mean will have positive values, and students below the mean will have negative values.</p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="08-module-8.html#cb125-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb125-2"><a href="08-module-8.html#cb125-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ses_cgm =</span> ses <span class="sc">-</span> ses_grand_mean)</span></code></pre></div>
+<p>The values of <code>ses_cgm</code> are distributed around the grand mean. The mean of the students’ values of <code>ses_cgm</code> is now (essentially) zero.</p>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="08-module-8.html#cb126-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb126-2"><a href="08-module-8.html#cb126-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb126-3"><a href="08-module-8.html#cb126-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(ses_cgm)</span>
+<span id="cb126-4"><a href="08-module-8.html#cb126-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 1
+##   `mean(ses_cgm)`
+##             &lt;dbl&gt;
+## 1        3.15e-18</code></pre>
+<p>If we estimate a model with just <code>ses_cgm</code>, it would look like this:</p>
+<table>
+<colgroup>
+<col width="44%" />
+<col width="55%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Level</th>
+<th align="left">Equation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Level 1</td>
+<td align="left"><span class="math inline">\(math_{ij} = \beta_{0j} + \beta_{1j}ses\_cgm_{ij} + R_{ij}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Level 2</td>
+<td align="left"><span class="math inline">\(\beta_{0j} = \gamma_{00} + U_{0j}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"><span class="math inline">\(\beta_{1j} = \gamma_{10}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Combined</td>
+<td align="left"><span class="math inline">\(math_{ij} = \gamma_{00} + \gamma_{10}ses\_cgm_{ij} + U_{0j} + R_{ij}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Here, <span class="math inline">\(\gamma_{10}\)</span> represents how students vary around the grand mean. If we don’t factor out school means, then this value is an uninterpretable blend of within- and between-effects, sometimes referred to as the total effect. When we center at the grand mean, we <em>must</em> add the cluster mean back into into the model. (This is in contrast to centering within cluster, when we can just estimate the within effect, but to get the between effect we must add the cluster mean back into the model).</p>
+<table>
+<colgroup>
+<col width="44%" />
+<col width="55%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Level</th>
+<th align="left">Equation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Level 1</td>
+<td align="left"><span class="math inline">\(math_{ij} = \beta_{0j} + \beta_{1j}ses\_cgm_{ij} + R_{ij}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Level 2</td>
+<td align="left"><span class="math inline">\(\beta_{0j} = \gamma_{00} + \gamma_{01}ses\_mean_j + U_{0j}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"><span class="math inline">\(\beta_{1j} = \gamma_{10}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Combined</td>
+<td align="left"><span class="math inline">\(math_{ij} = \gamma_{00} + \gamma_{01}ses\_mean_j + \gamma_{10}ses\_cgm_{ij} + U_{0j} + R_{ij}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>With this model, we are estimating 5 parameters:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\gamma_{00}\)</span>: the fixed effect for the intercept, controlling for <code>ses_cgm</code> and <code>ses_mean</code> (i.e., a student with school-average SES at the average school);</li>
+<li><span class="math inline">\(\gamma_{01}\)</span>: the fixed effect for <code>ses_mean</code> controlling for <code>ses_cgm</code>. This is our contextual effect, indicating the effect of school average SES on student math achievement at the same level of student SES;</li>
+<li><span class="math inline">\(\gamma_{10}\)</span>: the fixed effect for the slope of <code>ses_cgm</code> controlling for <code>ses_mean</code>. This is our within effect, indicating the effect of a student’s SES compared to the school average (at the average school, <code>ses_mean</code> = 0);</li>
+<li><span class="math inline">\(\tau_0^2\)</span>: a random effect for the intercept capturing the variance of schools around the intercept, controlling for <code>ses_cgm</code> and <code>ses_mean</code>;</li>
+<li><span class="math inline">\(\sigma^2\)</span>: a random effect capturing the variance of students around their school mean math achievement, controlling for <code>ses_cgm</code> and <code>ses_mean</code>.</li>
+</ol>
+<p>Let’s estimate it in R:</p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="08-module-8.html#cb128-1" aria-hidden="true" tabindex="-1"></a>cgm_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses_cgm <span class="sc">+</span> ses_mean <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb128-2"><a href="08-module-8.html#cb128-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cgm_model)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
+## Formula: math ~ 1 + ses_cgm + ses_mean + (1 | schcode)
+##    Data: data
+## 
+## REML criterion at convergence: 48137.9
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -3.7545 -0.5575  0.1312  0.6619  5.7512 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  schcode  (Intercept)  2.511   1.585   
+##  Residual             62.628   7.914   
+## Number of obs: 6871, groups:  schcode, 419
+## 
+## Fixed effects:
+##              Estimate Std. Error        df t value            Pr(&gt;|t|)    
+## (Intercept)   57.6485     0.1240  402.6508 464.982 &lt;0.0000000000000002 ***
+## ses_cgm        3.1903     0.1578 6448.7759  20.217 &lt;0.0000000000000002 ***
+## ses_mean       2.7017     0.2981  738.7254   9.065 &lt;0.0000000000000002 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Correlation of Fixed Effects:
+##          (Intr) ss_cgm
+## ses_cgm   0.041       
+## ses_mean -0.066 -0.529</code></pre>
+<p>The average student math achievement at the average school is 57.65. For two hypothetical students with the same level of SES, the one in the school with higher average SES has 2.70-unit higher math achievement. Within a school, a one-unit increase in SES relative to the grand mean is associated with a 3.19-unit increase in math achievement.</p>
+<p>Recall our earlier formula detailing the relationship between the within, between, and contextual effects: <span class="math inline">\(between\ effect = within\ effect + contextual\ effect\)</span>. Armed with our contextual effect (<span class="math inline">\(\gamma_{01}\)</span>) and within effect (<span class="math inline">\(\gamma_{10}\)</span>), we can calculate our between effect: <span class="math inline">\(between = within + contextual = \gamma_{10} + \gamma_{01} = 3.19 + 2.70 = 5.89\)</span>, so an increase in a school’s average SES by one unit is associated with an increase of 5.89-unit math achievement.</p>
+</div>
+</div>
+<div id="what-kind-of-centering-should-you-use" class="section level3" number="8.2.5">
+<h3><span class="header-section-number">8.2.5</span> What Kind of Centering Should You Use?</h3>
+<p>Here is a reference table to keep track of what coefficients represent what effects in CWC or CGM models:</p>
+<table>
+<colgroup>
+<col width="23%" />
+<col width="28%" />
+<col width="23%" />
+<col width="24%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Centering Option</th>
+<th>Contextual Parameter</th>
+<th>Within Parameter</th>
+<th>Between Parameter</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Centering Grand Mean (CGM)</td>
+<td><span class="math inline">\(\gamma_{01}\)</span></td>
+<td><span class="math inline">\(\gamma_{10}\)</span></td>
+<td><span class="math inline">\(\gamma_{01} + \gamma_{10}\)</span></td>
+</tr>
+<tr class="even">
+<td>Centering Within Cluster (CWC)</td>
+<td><span class="math inline">\(\gamma_{01} - \gamma_{10}\)</span></td>
+<td><span class="math inline">\(\gamma_{10}\)</span></td>
+<td><span class="math inline">\(\gamma_{01}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Let’s look at our example results this way:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Centering Option</th>
+<th>Contextual Parameter</th>
+<th>Within Parameter</th>
+<th>Between Parameter</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Centering Grand Mean (CGM)</td>
+<td>2.70</td>
+<td>3.19</td>
+<td>5.89</td>
+</tr>
+<tr class="even">
+<td>Centering Within Cluster (CWC)</td>
+<td>2.70</td>
+<td>5.89</td>
+<td>3.19</td>
+</tr>
+</tbody>
+</table>
+<p>If you’re not interested in contextual results, you can use the following shorthand for deciding whether to center around the grand mean or within cluster: if you’re interested in level-1 predictors, CWC is best because it gives an unbiased estimate of the within cluster effect and produces better estimates of the slope variance, though as we saw you can get an unbiased estimate of the within cluster effect with CGM if you add the aggregate back in at level 2. If you’re interested in level-2 predictors, but you have covariates at level-1 you want to control for, CGM is best because it controls for level-1 predictors by producing adjusted means. If you are interested in interactions (at level-1 or cross-level), use CWC to get an unbiased estimate of the within cluster slope and slope variance. See Enders &amp; Tofighi (2007) for a detailed discussion.</p>
+</div>
+</div>
+<div id="conclusion-6" class="section level2" number="8.3">
+<h2><span class="header-section-number">8.3</span> Conclusion</h2>
+<p>In this chapter, we reviewed two options for centering variables in MLMs (centering within cluster and centering grand mean), when to use each option, and how to interpret coefficients under each option. In the first 8 chapters, we’ve covered a lot of the basics of MLMs. In Chapter 9, we’ll revisit a number of concepts we’ve already seen, but in the context of repeated-measure rather than the cross-sectional data we’ve been using to this point.</p>
+</div>
+<div id="further-reading-2" class="section level2" number="8.4">
+<h2><span class="header-section-number">8.4</span> Further Reading</h2>
+<p>Enders, C. K., &amp; Tofighi, D. (2007). Centering predictor variables in cross-sectional multilevel models: A new look at an old issue. Psychological Methods, 12(2), 121–138. <a href="https://doi.org/10.1037/1082-989X.12.2.121" class="uri">https://doi.org/10.1037/1082-989X.12.2.121</a></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="07-module-7.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="09-module-9.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["open_mlm_materials.pdf", "open_mlm_materials.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"depth": 2,
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

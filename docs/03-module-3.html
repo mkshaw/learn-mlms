@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Approaches to Multilevel Data | Introduction to Multilevel Modelling</title>
+  <meta name="description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and criticially analyze their use in the literature." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Approaches to Multilevel Data | Introduction to Multilevel Modelling" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://www.learn-mlms.com" />
+  
+  <meta property="og:description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and criticially analyze their use in the literature." />
+  <meta name="github-repo" content="mkshaw/multilevel-modelling/" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Approaches to Multilevel Data | Introduction to Multilevel Modelling" />
+  
+  <meta name="twitter:description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and criticially analyze their use in the literature." />
+  
+
+<meta name="author" content="Mairead Shaw and Jessica Kay Flake" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="02-multiple-regression.html"/>
+<link rel="next" href="04-module-4.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to Multilevel Modelling</li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#goals"><i class="fa fa-check"></i><b>1.2</b> Goals</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#prerequisites"><i class="fa fa-check"></i><b>1.3</b> Prerequisites</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#materials"><i class="fa fa-check"></i><b>1.4</b> Materials</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html"><i class="fa fa-check"></i><b>2</b> Multiple Regression Review</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#learning-objectives"><i class="fa fa-check"></i><b>2.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="2.2" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#data-demonstration"><i class="fa fa-check"></i><b>2.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#creating-r-projects"><i class="fa fa-check"></i><b>2.2.1</b> Creating R Projects</a></li>
+<li class="chapter" data-level="2.2.2" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#loading-data-and-dependencies"><i class="fa fa-check"></i><b>2.2.2</b> Loading Data and Dependencies</a></li>
+<li class="chapter" data-level="2.2.3" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#simple-linear-regression"><i class="fa fa-check"></i><b>2.2.3</b> Simple Linear Regression</a></li>
+<li class="chapter" data-level="2.2.4" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#multiple-regression-1"><i class="fa fa-check"></i><b>2.2.4</b> Multiple Regression</a></li>
+<li class="chapter" data-level="2.2.5" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#interaction-terms"><i class="fa fa-check"></i><b>2.2.5</b> Interaction Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#conclusion"><i class="fa fa-check"></i><b>2.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="03-module-3.html"><a href="03-module-3.html"><i class="fa fa-check"></i><b>3</b> Approaches to Multilevel Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="03-module-3.html"><a href="03-module-3.html#learning-objectives-1"><i class="fa fa-check"></i><b>3.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="3.2" data-path="03-module-3.html"><a href="03-module-3.html#data-demonstration-1"><i class="fa fa-check"></i><b>3.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="03-module-3.html"><a href="03-module-3.html#load-data-and-dependencies"><i class="fa fa-check"></i><b>3.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="3.2.2" data-path="03-module-3.html"><a href="03-module-3.html#dealing-with-dependence"><i class="fa fa-check"></i><b>3.2.2</b> Dealing with Dependence</a></li>
+<li class="chapter" data-level="3.2.3" data-path="03-module-3.html"><a href="03-module-3.html#cluster-robust-standard-errors"><i class="fa fa-check"></i><b>3.2.3</b> Cluster-Robust Standard Errors</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="03-module-3.html"><a href="03-module-3.html#conclusion-1"><i class="fa fa-check"></i><b>3.3</b> Conclusion</a></li>
+<li class="chapter" data-level="3.4" data-path="03-module-3.html"><a href="03-module-3.html#further-reading"><i class="fa fa-check"></i><b>3.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="04-module-4.html"><a href="04-module-4.html"><i class="fa fa-check"></i><b>4</b> Our First Multilevel Models</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="04-module-4.html"><a href="04-module-4.html#learning-objectives-2"><i class="fa fa-check"></i><b>4.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="4.2" data-path="04-module-4.html"><a href="04-module-4.html#data-demonstration-2"><i class="fa fa-check"></i><b>4.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="04-module-4.html"><a href="04-module-4.html#load-data-and-dependencies-1"><i class="fa fa-check"></i><b>4.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="4.2.2" data-path="04-module-4.html"><a href="04-module-4.html#why-multilevel-models"><i class="fa fa-check"></i><b>4.2.2</b> Why Multilevel Models?</a></li>
+<li class="chapter" data-level="4.2.3" data-path="04-module-4.html"><a href="04-module-4.html#fixed-vs-random-effects"><i class="fa fa-check"></i><b>4.2.3</b> Fixed vs Random Effects</a></li>
+<li class="chapter" data-level="4.2.4" data-path="04-module-4.html"><a href="04-module-4.html#the-null-model"><i class="fa fa-check"></i><b>4.2.4</b> The Null Model</a></li>
+<li class="chapter" data-level="4.2.5" data-path="04-module-4.html"><a href="04-module-4.html#understanding-variance"><i class="fa fa-check"></i><b>4.2.5</b> Understanding Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="04-module-4.html"><a href="04-module-4.html#conclusion-2"><i class="fa fa-check"></i><b>4.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="05-module-5.html"><a href="05-module-5.html"><i class="fa fa-check"></i><b>5</b> Adding Fixed Predictors to MLMs</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="05-module-5.html"><a href="05-module-5.html#learning-objectives-3"><i class="fa fa-check"></i><b>5.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="5.2" data-path="05-module-5.html"><a href="05-module-5.html#data-demonstration-3"><i class="fa fa-check"></i><b>5.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="05-module-5.html"><a href="05-module-5.html#load-data-and-dependencies-2"><i class="fa fa-check"></i><b>5.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="5.2.2" data-path="05-module-5.html"><a href="05-module-5.html#mlm-with-level-1-predictor"><i class="fa fa-check"></i><b>5.2.2</b> MLM with Level-1 Predictor</a></li>
+<li class="chapter" data-level="5.2.3" data-path="05-module-5.html"><a href="05-module-5.html#compare-regular-and-multilevel-regression"><i class="fa fa-check"></i><b>5.2.3</b> Compare Regular and Multilevel Regression</a></li>
+<li class="chapter" data-level="5.2.4" data-path="05-module-5.html"><a href="05-module-5.html#mlm-with-level-2-predictor"><i class="fa fa-check"></i><b>5.2.4</b> MLM with Level-2 Predictor</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="05-module-5.html"><a href="05-module-5.html#conclusion-3"><i class="fa fa-check"></i><b>5.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="06-module-6.html"><a href="06-module-6.html"><i class="fa fa-check"></i><b>6</b> Random Effects and Cross-level Interactions</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="06-module-6.html"><a href="06-module-6.html#learning-objectives-4"><i class="fa fa-check"></i><b>6.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="6.2" data-path="06-module-6.html"><a href="06-module-6.html#data-demonstration-4"><i class="fa fa-check"></i><b>6.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="06-module-6.html"><a href="06-module-6.html#load-data-and-dependencies-3"><i class="fa fa-check"></i><b>6.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="6.2.2" data-path="06-module-6.html"><a href="06-module-6.html#mlm-with-random-slope-effect"><i class="fa fa-check"></i><b>6.2.2</b> MLM with Random Slope Effect</a></li>
+<li class="chapter" data-level="6.2.3" data-path="06-module-6.html"><a href="06-module-6.html#mlm-with-crosslevel-effect"><i class="fa fa-check"></i><b>6.2.3</b> MLM with Crosslevel Effect</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="06-module-6.html"><a href="06-module-6.html#conclusion-4"><i class="fa fa-check"></i><b>6.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="07-module-7.html"><a href="07-module-7.html"><i class="fa fa-check"></i><b>7</b> Model Estimation Options, Problems, and Troubleshooting</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="07-module-7.html"><a href="07-module-7.html#learning-objectives-5"><i class="fa fa-check"></i><b>7.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="7.2" data-path="07-module-7.html"><a href="07-module-7.html#data-demonstration-5"><i class="fa fa-check"></i><b>7.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="07-module-7.html"><a href="07-module-7.html#load-data-and-dependencies-4"><i class="fa fa-check"></i><b>7.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="7.2.2" data-path="07-module-7.html"><a href="07-module-7.html#introduction-to-estimation-problems"><i class="fa fa-check"></i><b>7.2.2</b> Introduction to Estimation Problems</a></li>
+<li class="chapter" data-level="7.2.3" data-path="07-module-7.html"><a href="07-module-7.html#estimation-and-optimizers"><i class="fa fa-check"></i><b>7.2.3</b> Estimation and Optimizers</a></li>
+<li class="chapter" data-level="7.2.4" data-path="07-module-7.html"><a href="07-module-7.html#non-convergence"><i class="fa fa-check"></i><b>7.2.4</b> Non-Convergence</a></li>
+<li class="chapter" data-level="7.2.5" data-path="07-module-7.html"><a href="07-module-7.html#singularity"><i class="fa fa-check"></i><b>7.2.5</b> Singularity</a></li>
+<li class="chapter" data-level="7.2.6" data-path="07-module-7.html"><a href="07-module-7.html#deviance-testing-for-model-comparison"><i class="fa fa-check"></i><b>7.2.6</b> Deviance Testing for Model Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="07-module-7.html"><a href="07-module-7.html#conclusion-5"><i class="fa fa-check"></i><b>7.3</b> Conclusion</a></li>
+<li class="chapter" data-level="7.4" data-path="07-module-7.html"><a href="07-module-7.html#further-reading-1"><i class="fa fa-check"></i><b>7.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="08-module-8.html"><a href="08-module-8.html"><i class="fa fa-check"></i><b>8</b> Centering Options and Interpretations</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="08-module-8.html"><a href="08-module-8.html#learning-objectives-6"><i class="fa fa-check"></i><b>8.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="8.2" data-path="08-module-8.html"><a href="08-module-8.html#data-demonstration-6"><i class="fa fa-check"></i><b>8.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="08-module-8.html"><a href="08-module-8.html#load-data-and-dependencies-5"><i class="fa fa-check"></i><b>8.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="8.2.2" data-path="08-module-8.html"><a href="08-module-8.html#why-center-variables"><i class="fa fa-check"></i><b>8.2.2</b> Why Center Variables?</a></li>
+<li class="chapter" data-level="8.2.3" data-path="08-module-8.html"><a href="08-module-8.html#within-between-and-contextual-effects"><i class="fa fa-check"></i><b>8.2.3</b> Within, Between, and Contextual Effects</a></li>
+<li class="chapter" data-level="8.2.4" data-path="08-module-8.html"><a href="08-module-8.html#options-for-centering-in-mlms"><i class="fa fa-check"></i><b>8.2.4</b> Options for Centering in MLMs</a></li>
+<li class="chapter" data-level="8.2.5" data-path="08-module-8.html"><a href="08-module-8.html#what-kind-of-centering-should-you-use"><i class="fa fa-check"></i><b>8.2.5</b> What Kind of Centering Should You Use?</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="08-module-8.html"><a href="08-module-8.html#conclusion-6"><i class="fa fa-check"></i><b>8.3</b> Conclusion</a></li>
+<li class="chapter" data-level="8.4" data-path="08-module-8.html"><a href="08-module-8.html#further-reading-2"><i class="fa fa-check"></i><b>8.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="09-module-9.html"><a href="09-module-9.html"><i class="fa fa-check"></i><b>9</b> Multilevel Modelling with Repeated Measures Data</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="09-module-9.html"><a href="09-module-9.html#learning-objectives-7"><i class="fa fa-check"></i><b>9.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="9.2" data-path="09-module-9.html"><a href="09-module-9.html#data-demonstration-7"><i class="fa fa-check"></i><b>9.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="09-module-9.html"><a href="09-module-9.html#load-dependencies"><i class="fa fa-check"></i><b>9.2.1</b> Load Dependencies</a></li>
+<li class="chapter" data-level="9.2.2" data-path="09-module-9.html"><a href="09-module-9.html#review-of-multilevel-modelling-procedure"><i class="fa fa-check"></i><b>9.2.2</b> Review of Multilevel Modelling Procedure</a></li>
+<li class="chapter" data-level="9.2.3" data-path="09-module-9.html"><a href="09-module-9.html#multilevel-models-for-repeated-measures"><i class="fa fa-check"></i><b>9.2.3</b> Multilevel Models for Repeated Measures</a></li>
+<li class="chapter" data-level="9.2.4" data-path="09-module-9.html"><a href="09-module-9.html#our-data-reaction-time"><i class="fa fa-check"></i><b>9.2.4</b> Our Data: Reaction Time</a></li>
+<li class="chapter" data-level="9.2.5" data-path="09-module-9.html"><a href="09-module-9.html#random-intercept-onlynull-model"><i class="fa fa-check"></i><b>9.2.5</b> Random-Intercept-Only/Null Model</a></li>
+<li class="chapter" data-level="9.2.6" data-path="09-module-9.html"><a href="09-module-9.html#adding-level-1-fixed-effects"><i class="fa fa-check"></i><b>9.2.6</b> Adding Level-1 Fixed Effects</a></li>
+<li class="chapter" data-level="9.2.7" data-path="09-module-9.html"><a href="09-module-9.html#adding-random-slopes"><i class="fa fa-check"></i><b>9.2.7</b> Adding Random Slopes</a></li>
+<li class="chapter" data-level="9.2.8" data-path="09-module-9.html"><a href="09-module-9.html#adding-level-2-fixed-effects"><i class="fa fa-check"></i><b>9.2.8</b> Adding Level-2 Fixed Effects</a></li>
+<li class="chapter" data-level="9.2.9" data-path="09-module-9.html"><a href="09-module-9.html#adding-cross-level-interactions"><i class="fa fa-check"></i><b>9.2.9</b> Adding Cross-Level Interactions</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="09-module-9.html"><a href="09-module-9.html#conclusion-7"><i class="fa fa-check"></i><b>9.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="10-module-10.html"><a href="10-module-10.html"><i class="fa fa-check"></i><b>10</b> Multilevel Modelling with Longitudinal Data</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="10-module-10.html"><a href="10-module-10.html#learning-objectives-8"><i class="fa fa-check"></i><b>10.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="10.2" data-path="10-module-10.html"><a href="10-module-10.html#data-demonstration-8"><i class="fa fa-check"></i><b>10.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="10-module-10.html"><a href="10-module-10.html#load-dependencies-1"><i class="fa fa-check"></i><b>10.2.1</b> Load Dependencies</a></li>
+<li class="chapter" data-level="10.2.2" data-path="10-module-10.html"><a href="10-module-10.html#multilevel-models-for-longitudinal-data"><i class="fa fa-check"></i><b>10.2.2</b> Multilevel Models for Longitudinal Data</a></li>
+<li class="chapter" data-level="10.2.3" data-path="10-module-10.html"><a href="10-module-10.html#visualizing-testosterone-levels-over-time"><i class="fa fa-check"></i><b>10.2.3</b> Visualizing Testosterone Levels Over Time</a></li>
+<li class="chapter" data-level="10.2.4" data-path="10-module-10.html"><a href="10-module-10.html#random-intercept-onlynull-model-1"><i class="fa fa-check"></i><b>10.2.4</b> Random-Intercept-Only/Null Model</a></li>
+<li class="chapter" data-level="10.2.5" data-path="10-module-10.html"><a href="10-module-10.html#adding-level-1-fixed-and-random-effects"><i class="fa fa-check"></i><b>10.2.5</b> Adding Level-1 Fixed and Random Effects</a></li>
+<li class="chapter" data-level="10.2.6" data-path="10-module-10.html"><a href="10-module-10.html#evidence-for-retaining-effects"><i class="fa fa-check"></i><b>10.2.6</b> Evidence for Retaining Effects</a></li>
+<li class="chapter" data-level="10.2.7" data-path="10-module-10.html"><a href="10-module-10.html#adding-level-2-fixed-effects-1"><i class="fa fa-check"></i><b>10.2.7</b> Adding Level-2 Fixed Effects</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="10-module-10.html"><a href="10-module-10.html#conclusion-8"><i class="fa fa-check"></i><b>10.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="11-module-11.html"><a href="11-module-11.html"><i class="fa fa-check"></i><b>11</b> Effect Sizes in Multilevel Models</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="11-module-11.html"><a href="11-module-11.html#learning-objectives-9"><i class="fa fa-check"></i><b>11.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="11.2" data-path="11-module-11.html"><a href="11-module-11.html#data-demonstration-9"><i class="fa fa-check"></i><b>11.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="11-module-11.html"><a href="11-module-11.html#load-data-and-dependencies-6"><i class="fa fa-check"></i><b>11.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="11.2.2" data-path="11-module-11.html"><a href="11-module-11.html#defining-effect-sizes"><i class="fa fa-check"></i><b>11.2.2</b> Defining Effect Sizes</a></li>
+<li class="chapter" data-level="11.2.3" data-path="11-module-11.html"><a href="11-module-11.html#r-squared-in-multilevel-models"><i class="fa fa-check"></i><b>11.2.3</b> R-squared in Multilevel Models</a></li>
+<li class="chapter" data-level="11.2.4" data-path="11-module-11.html"><a href="11-module-11.html#single-model-automatic-entry"><i class="fa fa-check"></i><b>11.2.4</b> Single Model, Automatic Entry</a></li>
+<li class="chapter" data-level="11.2.5" data-path="11-module-11.html"><a href="11-module-11.html#single-model-manual-entry"><i class="fa fa-check"></i><b>11.2.5</b> Single Model, Manual Entry</a></li>
+<li class="chapter" data-level="11.2.6" data-path="11-module-11.html"><a href="11-module-11.html#model-comparison"><i class="fa fa-check"></i><b>11.2.6</b> Model Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="11-module-11.html"><a href="11-module-11.html#conclusion-9"><i class="fa fa-check"></i><b>11.3</b> Conclusion</a></li>
+<li class="chapter" data-level="11.4" data-path="11-module-11.html"><a href="11-module-11.html#additional-reading"><i class="fa fa-check"></i><b>11.4</b> Additional Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="12-module-12.html"><a href="12-module-12.html"><i class="fa fa-check"></i><b>12</b> Assumptions</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="12-module-12.html"><a href="12-module-12.html#learning-objectives-10"><i class="fa fa-check"></i><b>12.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="12.2" data-path="12-module-12.html"><a href="12-module-12.html#data-demonstration-10"><i class="fa fa-check"></i><b>12.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="12-module-12.html"><a href="12-module-12.html#load-data-and-dependencies-7"><i class="fa fa-check"></i><b>12.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="12.2.2" data-path="12-module-12.html"><a href="12-module-12.html#assumptions-of-mlms"><i class="fa fa-check"></i><b>12.2.2</b> Assumptions of MLMs</a></li>
+<li class="chapter" data-level="12.2.3" data-path="12-module-12.html"><a href="12-module-12.html#assumption-1-model-specification"><i class="fa fa-check"></i><b>12.2.3</b> Assumption 1: Model Specification</a></li>
+<li class="chapter" data-level="12.2.4" data-path="12-module-12.html"><a href="12-module-12.html#assumption-2-functional-form-is-correct"><i class="fa fa-check"></i><b>12.2.4</b> Assumption 2: Functional Form is Correct</a></li>
+<li class="chapter" data-level="12.2.5" data-path="12-module-12.html"><a href="12-module-12.html#an-aside-extracting-residuals"><i class="fa fa-check"></i><b>12.2.5</b> An Aside: Extracting Residuals</a></li>
+<li class="chapter" data-level="12.2.6" data-path="12-module-12.html"><a href="12-module-12.html#assumption-3-level-1-residuals-are-independent-and-normally-distributed"><i class="fa fa-check"></i><b>12.2.6</b> Assumption 3: Level-1 Residuals are Independent and Normally Distributed</a></li>
+<li class="chapter" data-level="12.2.7" data-path="12-module-12.html"><a href="12-module-12.html#assumption-4-level-2-residuals-are-independent-and-multivariate-normal"><i class="fa fa-check"></i><b>12.2.7</b> Assumption 4: Level-2 Residuals are Independent and Multivariate Normal</a></li>
+<li class="chapter" data-level="12.2.8" data-path="12-module-12.html"><a href="12-module-12.html#assumption-5-residuals-at-level-1-and-level-2-are-independent"><i class="fa fa-check"></i><b>12.2.8</b> Assumption 5: Residuals at Level-1 and Level-2 are Independent</a></li>
+<li class="chapter" data-level="12.2.9" data-path="12-module-12.html"><a href="12-module-12.html#assumption-6-level-1-residuals-independent-of-level-2-predictors-level-2-residuals-independent-of-level-1-predictors"><i class="fa fa-check"></i><b>12.2.9</b> Assumption 6: Level-1 Residuals Independent of Level-2 Predictors, Level-2 Residuals Independent of Level-1 Predictors</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="12-module-12.html"><a href="12-module-12.html#conclusion-10"><i class="fa fa-check"></i><b>12.3</b> Conclusion</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://twitter.com/maireadkshaw">Mairead Shaw</a></li>
+<li><a href="https://twitter.com/jkayflake">Jessica Kay Flake</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Multilevel Modelling</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="module-3" class="section level1" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Approaches to Multilevel Data</h1>
+<div id="learning-objectives-1" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Learning Objectives</h2>
+<p>In this chapter, we will illustrate a clustered dataset and review non-multilevel-modelling options for handling that clustering.</p>
+<p>The learning objectives for this chapter are:</p>
+<ol style="list-style-type: decimal">
+<li>Understand the implications of treating clustered data as unclustered;</li>
+<li>Use cluster-robust standard errors to account for clustering;</li>
+<li>Compare results between regular and cluster-robust regression.</li>
+</ol>
+<p>All materials for this chapter are available for download <a href="www.learn-mlms.com/students">here</a>.</p>
+</div>
+<div id="data-demonstration-1" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Data Demonstration</h2>
+<p>The data for this chapter were taken from chapter 3 of Heck, R. H., Thomas, S. L., &amp; Tabata, L. N. (2011). <em>Multilevel and Longitudinal Modeling with IBM SPSS</em>: Taylor &amp; Francis. Students are clustered within schools in the dataset.</p>
+<div id="load-data-and-dependencies" class="section level3" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Load Data and Dependencies</h3>
+<p>First, let’s load in the data and packages we’ll be using for this data demo. We will use the following packages:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="03-module-3.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># for data processing</span></span>
+<span id="cb19-2"><a href="03-module-3.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmtest) <span class="co"># for cluster-robust standard errors</span></span>
+<span id="cb19-3"><a href="03-module-3.html#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sandwich) <span class="co"># for cluster-robust standard errors</span></span></code></pre></div>
+<p>We’ll store the data in an object called <code>data</code>. If you want to read the data in with the relative filepath (i.e., just referencing “heck2011.csv”), make sure the file is in the same folder as your R script. If the file is in a different folder, tell your computer exactly where to find it with an absolute file path.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="03-module-3.html#cb20-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;heck2011.csv&#39;</span>)</span></code></pre></div>
+</div>
+<div id="dealing-with-dependence" class="section level3" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Dealing with Dependence</h3>
+<p>Our dataset is clustered, students within schools, but in Chapter 2 we treated it as if it were not clustered, i.e., as if each student was randomly selected from a population of students, regardless of school. When we treat clustered data as unclustered, we bias the significance testing for our models such that we are more likely to make a Type I error. A <em>t</em> value is based on dividing a regression coefficient by the standard error: <span class="math inline">\(t = \frac{b}{SE}\)</span>. The standard error is a quotient of the standard deviation and the square root of the degrees of freedom, the sample size <em>n</em>: <span class="math inline">\(SE = \frac{\sigma}{\sqrt n}\)</span>. When we assume that data are unclustered, we act like we have a larger sample size than we do (e.g., 100 independent observations rather than 10 classes of 10 students), which reduces the standard error and inflates the t-value, making it more likely that our coefficients will be significant.</p>
+<p>We have multiple options for dealing with dependence. Multilevel models are one option, accounting for the clustered data structure by quantifying how the clusters vary across the entire sample. For example, looking at student math achievement, we can move beyond having a single intercept to having a mean intercept across all schools <em>and</em> a term representing how schools’ mean math achievements vary around the mean intercept. Multilevel models are a powerful tool! But in providing more information to the researcher (e.g., how schools vary around the grand mean intercept), they also require more input from the researcher: do we expect our intercepts to vary? Do we expect our slopes to vary? If so, which slopes?</p>
+<p>Sometimes, we don’t need an MLM (and the assumptions that come along with it) because we don’t want to ask questions at multiple levels, like “how does student SES and teacher years of experience affect student math achievement?” We just want to know “how does student SES affect student math achievement?” In this case, we might think of the clustering in our data as a nuisance, something to be handled so that our standard errors aren’t biased, but not theoretically investigated. In such a case where we want to run a single-level regression that controls bias in the standard errors, we can use cluster-robust standard errors.</p>
+</div>
+<div id="cluster-robust-standard-errors" class="section level3" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Cluster-Robust Standard Errors</h3>
+<p>Cluster-robust standard errors account for clustering but retain the interpretation of regular regression models. That is, the coefficients do not delineate within and between effects, but provide average effects pooled across the whole dataset and unbiased standard errors that take into account the clustering. For more information on clustered standard errors, see this helpful overview: <a href="https://mldscenter.maryland.gov/egov/Publications/ResearchSeries/Clustered%20Data,%20Are%20Multilevel%20Models%20Really%20Necessary.pdf" class="uri">https://mldscenter.maryland.gov/egov/Publications/ResearchSeries/Clustered%20Data,%20Are%20Multilevel%20Models%20Really%20Necessary.pdf</a>. Let’s look at cluster-robust standard errors in action!</p>
+<p>In chapter 2, we conducted a linear regression predicting math achievement from socioeconomic status and sex. Let’s run that same model.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="03-module-3.html#cb21-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(math <span class="sc">~</span> ses <span class="sc">+</span> female, <span class="at">data =</span> data)</span>
+<span id="cb21-2"><a href="03-module-3.html#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = math ~ ses + female, data = data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -30.923  -4.606   1.176   5.317  48.054 
+## 
+## Coefficients:
+##             Estimate Std. Error t value             Pr(&gt;|t|)    
+## (Intercept)  58.1330     0.1390 418.093 &lt; 0.0000000000000002 ***
+## ses           4.2269     0.1255  33.679 &lt; 0.0000000000000002 ***
+## female       -1.0626     0.1960  -5.422         0.0000000609 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 8.115 on 6868 degrees of freedom
+## Multiple R-squared:  0.1467, Adjusted R-squared:  0.1464 
+## F-statistic: 590.3 on 2 and 6868 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+<p>Now, let’s run the same model with cluster-robust standard errors and compare the coefficients and their significance between the regular and cluster-robust models.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="03-module-3.html#cb23-1" aria-hidden="true" tabindex="-1"></a>model_crse <span class="ot">&lt;-</span> <span class="fu">coeftest</span>(model, <span class="at">vcov =</span> vcovCL, <span class="at">cluster =</span> <span class="sc">~</span> schcode)</span>
+<span id="cb23-2"><a href="03-module-3.html#cb23-2" aria-hidden="true" tabindex="-1"></a>model_crse</span></code></pre></div>
+<pre><code>## 
+## t test of coefficients:
+## 
+##             Estimate Std. Error  t value              Pr(&gt;|t|)    
+## (Intercept) 58.13305    0.16528 351.7188 &lt; 0.00000000000000022 ***
+## ses          4.22690    0.14951  28.2714 &lt; 0.00000000000000022 ***
+## female      -1.06257    0.21089  -5.0386           0.000000481 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>As expected, the coefficients are the same between the two models, but the significance levels differ. In this case, the differences are trivial, and all coefficients retain their significance. But in your case, correcting for clustering might make the difference between significant and non-significant results.</p>
+</div>
+</div>
+<div id="conclusion-1" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Conclusion</h2>
+<p>In this chapter, we discussed why we need to account for clustering in our analyses. We then demonstrated an MLM alternative, cluster-robust standard errors, that can be used to account for clustering if you’re asking questions at one level and want to run a single-level regression, but adjust the standard errors.</p>
+<p>In chapter 4, we will look at our first multilevel models for handling clustered data structures and asking multilevel questions.</p>
+</div>
+<div id="further-reading" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Further Reading</h2>
+<p>McCoach, D. B. (2010). Dealing With Dependence (Part II): A Gentle Introduction to Hierarchical Linear Modeling. Gifted Child Quarterly, 54(3), 252–256. <a href="https://doi.org/10.1177/0016986210373475" class="uri">https://doi.org/10.1177/0016986210373475</a></p>
+<p>McCoach, D. B., &amp; Adelson, J. L. (2010). Dealing with dependence (Part 1): Understanding the effects of clustered data. Gifted Child Quarterly, 54(2), 152–155. <a href="https://doi.org/10.1177/0016986210363076" class="uri">https://doi.org/10.1177/0016986210363076</a></p>
+<p>McNeish, D., Stapleton, L. M., &amp; Silverman, R. D. (2017). On the unnecessary ubiquity of hierarchical linear modeling. Psychological Methods, 22(1), 114–140. <a href="https://doi.org/10.1037/met0000078" class="uri">https://doi.org/10.1037/met0000078</a></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="02-multiple-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="04-module-4.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["open_mlm_materials.pdf", "open_mlm_materials.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"depth": 2,
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

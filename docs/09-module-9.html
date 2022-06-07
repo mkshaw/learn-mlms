@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 9 Multilevel Modelling with Repeated Measures Data | Introduction to Multilevel Modelling</title>
+  <meta name="description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and criticially analyze their use in the literature." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 9 Multilevel Modelling with Repeated Measures Data | Introduction to Multilevel Modelling" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://www.learn-mlms.com" />
+  
+  <meta property="og:description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and criticially analyze their use in the literature." />
+  <meta name="github-repo" content="mkshaw/multilevel-modelling/" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 9 Multilevel Modelling with Repeated Measures Data | Introduction to Multilevel Modelling" />
+  
+  <meta name="twitter:description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and criticially analyze their use in the literature." />
+  
+
+<meta name="author" content="Mairead Shaw and Jessica Kay Flake" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="08-module-8.html"/>
+<link rel="next" href="10-module-10.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to Multilevel Modelling</li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#goals"><i class="fa fa-check"></i><b>1.2</b> Goals</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#prerequisites"><i class="fa fa-check"></i><b>1.3</b> Prerequisites</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#materials"><i class="fa fa-check"></i><b>1.4</b> Materials</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html"><i class="fa fa-check"></i><b>2</b> Multiple Regression Review</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#learning-objectives"><i class="fa fa-check"></i><b>2.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="2.2" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#data-demonstration"><i class="fa fa-check"></i><b>2.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#creating-r-projects"><i class="fa fa-check"></i><b>2.2.1</b> Creating R Projects</a></li>
+<li class="chapter" data-level="2.2.2" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#loading-data-and-dependencies"><i class="fa fa-check"></i><b>2.2.2</b> Loading Data and Dependencies</a></li>
+<li class="chapter" data-level="2.2.3" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#simple-linear-regression"><i class="fa fa-check"></i><b>2.2.3</b> Simple Linear Regression</a></li>
+<li class="chapter" data-level="2.2.4" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#multiple-regression-1"><i class="fa fa-check"></i><b>2.2.4</b> Multiple Regression</a></li>
+<li class="chapter" data-level="2.2.5" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#interaction-terms"><i class="fa fa-check"></i><b>2.2.5</b> Interaction Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#conclusion"><i class="fa fa-check"></i><b>2.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="03-module-3.html"><a href="03-module-3.html"><i class="fa fa-check"></i><b>3</b> Approaches to Multilevel Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="03-module-3.html"><a href="03-module-3.html#learning-objectives-1"><i class="fa fa-check"></i><b>3.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="3.2" data-path="03-module-3.html"><a href="03-module-3.html#data-demonstration-1"><i class="fa fa-check"></i><b>3.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="03-module-3.html"><a href="03-module-3.html#load-data-and-dependencies"><i class="fa fa-check"></i><b>3.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="3.2.2" data-path="03-module-3.html"><a href="03-module-3.html#dealing-with-dependence"><i class="fa fa-check"></i><b>3.2.2</b> Dealing with Dependence</a></li>
+<li class="chapter" data-level="3.2.3" data-path="03-module-3.html"><a href="03-module-3.html#cluster-robust-standard-errors"><i class="fa fa-check"></i><b>3.2.3</b> Cluster-Robust Standard Errors</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="03-module-3.html"><a href="03-module-3.html#conclusion-1"><i class="fa fa-check"></i><b>3.3</b> Conclusion</a></li>
+<li class="chapter" data-level="3.4" data-path="03-module-3.html"><a href="03-module-3.html#further-reading"><i class="fa fa-check"></i><b>3.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="04-module-4.html"><a href="04-module-4.html"><i class="fa fa-check"></i><b>4</b> Our First Multilevel Models</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="04-module-4.html"><a href="04-module-4.html#learning-objectives-2"><i class="fa fa-check"></i><b>4.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="4.2" data-path="04-module-4.html"><a href="04-module-4.html#data-demonstration-2"><i class="fa fa-check"></i><b>4.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="04-module-4.html"><a href="04-module-4.html#load-data-and-dependencies-1"><i class="fa fa-check"></i><b>4.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="4.2.2" data-path="04-module-4.html"><a href="04-module-4.html#why-multilevel-models"><i class="fa fa-check"></i><b>4.2.2</b> Why Multilevel Models?</a></li>
+<li class="chapter" data-level="4.2.3" data-path="04-module-4.html"><a href="04-module-4.html#fixed-vs-random-effects"><i class="fa fa-check"></i><b>4.2.3</b> Fixed vs Random Effects</a></li>
+<li class="chapter" data-level="4.2.4" data-path="04-module-4.html"><a href="04-module-4.html#the-null-model"><i class="fa fa-check"></i><b>4.2.4</b> The Null Model</a></li>
+<li class="chapter" data-level="4.2.5" data-path="04-module-4.html"><a href="04-module-4.html#understanding-variance"><i class="fa fa-check"></i><b>4.2.5</b> Understanding Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="04-module-4.html"><a href="04-module-4.html#conclusion-2"><i class="fa fa-check"></i><b>4.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="05-module-5.html"><a href="05-module-5.html"><i class="fa fa-check"></i><b>5</b> Adding Fixed Predictors to MLMs</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="05-module-5.html"><a href="05-module-5.html#learning-objectives-3"><i class="fa fa-check"></i><b>5.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="5.2" data-path="05-module-5.html"><a href="05-module-5.html#data-demonstration-3"><i class="fa fa-check"></i><b>5.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="05-module-5.html"><a href="05-module-5.html#load-data-and-dependencies-2"><i class="fa fa-check"></i><b>5.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="5.2.2" data-path="05-module-5.html"><a href="05-module-5.html#mlm-with-level-1-predictor"><i class="fa fa-check"></i><b>5.2.2</b> MLM with Level-1 Predictor</a></li>
+<li class="chapter" data-level="5.2.3" data-path="05-module-5.html"><a href="05-module-5.html#compare-regular-and-multilevel-regression"><i class="fa fa-check"></i><b>5.2.3</b> Compare Regular and Multilevel Regression</a></li>
+<li class="chapter" data-level="5.2.4" data-path="05-module-5.html"><a href="05-module-5.html#mlm-with-level-2-predictor"><i class="fa fa-check"></i><b>5.2.4</b> MLM with Level-2 Predictor</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="05-module-5.html"><a href="05-module-5.html#conclusion-3"><i class="fa fa-check"></i><b>5.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="06-module-6.html"><a href="06-module-6.html"><i class="fa fa-check"></i><b>6</b> Random Effects and Cross-level Interactions</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="06-module-6.html"><a href="06-module-6.html#learning-objectives-4"><i class="fa fa-check"></i><b>6.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="6.2" data-path="06-module-6.html"><a href="06-module-6.html#data-demonstration-4"><i class="fa fa-check"></i><b>6.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="06-module-6.html"><a href="06-module-6.html#load-data-and-dependencies-3"><i class="fa fa-check"></i><b>6.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="6.2.2" data-path="06-module-6.html"><a href="06-module-6.html#mlm-with-random-slope-effect"><i class="fa fa-check"></i><b>6.2.2</b> MLM with Random Slope Effect</a></li>
+<li class="chapter" data-level="6.2.3" data-path="06-module-6.html"><a href="06-module-6.html#mlm-with-crosslevel-effect"><i class="fa fa-check"></i><b>6.2.3</b> MLM with Crosslevel Effect</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="06-module-6.html"><a href="06-module-6.html#conclusion-4"><i class="fa fa-check"></i><b>6.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="07-module-7.html"><a href="07-module-7.html"><i class="fa fa-check"></i><b>7</b> Model Estimation Options, Problems, and Troubleshooting</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="07-module-7.html"><a href="07-module-7.html#learning-objectives-5"><i class="fa fa-check"></i><b>7.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="7.2" data-path="07-module-7.html"><a href="07-module-7.html#data-demonstration-5"><i class="fa fa-check"></i><b>7.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="07-module-7.html"><a href="07-module-7.html#load-data-and-dependencies-4"><i class="fa fa-check"></i><b>7.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="7.2.2" data-path="07-module-7.html"><a href="07-module-7.html#introduction-to-estimation-problems"><i class="fa fa-check"></i><b>7.2.2</b> Introduction to Estimation Problems</a></li>
+<li class="chapter" data-level="7.2.3" data-path="07-module-7.html"><a href="07-module-7.html#estimation-and-optimizers"><i class="fa fa-check"></i><b>7.2.3</b> Estimation and Optimizers</a></li>
+<li class="chapter" data-level="7.2.4" data-path="07-module-7.html"><a href="07-module-7.html#non-convergence"><i class="fa fa-check"></i><b>7.2.4</b> Non-Convergence</a></li>
+<li class="chapter" data-level="7.2.5" data-path="07-module-7.html"><a href="07-module-7.html#singularity"><i class="fa fa-check"></i><b>7.2.5</b> Singularity</a></li>
+<li class="chapter" data-level="7.2.6" data-path="07-module-7.html"><a href="07-module-7.html#deviance-testing-for-model-comparison"><i class="fa fa-check"></i><b>7.2.6</b> Deviance Testing for Model Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="07-module-7.html"><a href="07-module-7.html#conclusion-5"><i class="fa fa-check"></i><b>7.3</b> Conclusion</a></li>
+<li class="chapter" data-level="7.4" data-path="07-module-7.html"><a href="07-module-7.html#further-reading-1"><i class="fa fa-check"></i><b>7.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="08-module-8.html"><a href="08-module-8.html"><i class="fa fa-check"></i><b>8</b> Centering Options and Interpretations</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="08-module-8.html"><a href="08-module-8.html#learning-objectives-6"><i class="fa fa-check"></i><b>8.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="8.2" data-path="08-module-8.html"><a href="08-module-8.html#data-demonstration-6"><i class="fa fa-check"></i><b>8.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="08-module-8.html"><a href="08-module-8.html#load-data-and-dependencies-5"><i class="fa fa-check"></i><b>8.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="8.2.2" data-path="08-module-8.html"><a href="08-module-8.html#why-center-variables"><i class="fa fa-check"></i><b>8.2.2</b> Why Center Variables?</a></li>
+<li class="chapter" data-level="8.2.3" data-path="08-module-8.html"><a href="08-module-8.html#within-between-and-contextual-effects"><i class="fa fa-check"></i><b>8.2.3</b> Within, Between, and Contextual Effects</a></li>
+<li class="chapter" data-level="8.2.4" data-path="08-module-8.html"><a href="08-module-8.html#options-for-centering-in-mlms"><i class="fa fa-check"></i><b>8.2.4</b> Options for Centering in MLMs</a></li>
+<li class="chapter" data-level="8.2.5" data-path="08-module-8.html"><a href="08-module-8.html#what-kind-of-centering-should-you-use"><i class="fa fa-check"></i><b>8.2.5</b> What Kind of Centering Should You Use?</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="08-module-8.html"><a href="08-module-8.html#conclusion-6"><i class="fa fa-check"></i><b>8.3</b> Conclusion</a></li>
+<li class="chapter" data-level="8.4" data-path="08-module-8.html"><a href="08-module-8.html#further-reading-2"><i class="fa fa-check"></i><b>8.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="09-module-9.html"><a href="09-module-9.html"><i class="fa fa-check"></i><b>9</b> Multilevel Modelling with Repeated Measures Data</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="09-module-9.html"><a href="09-module-9.html#learning-objectives-7"><i class="fa fa-check"></i><b>9.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="9.2" data-path="09-module-9.html"><a href="09-module-9.html#data-demonstration-7"><i class="fa fa-check"></i><b>9.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="09-module-9.html"><a href="09-module-9.html#load-dependencies"><i class="fa fa-check"></i><b>9.2.1</b> Load Dependencies</a></li>
+<li class="chapter" data-level="9.2.2" data-path="09-module-9.html"><a href="09-module-9.html#review-of-multilevel-modelling-procedure"><i class="fa fa-check"></i><b>9.2.2</b> Review of Multilevel Modelling Procedure</a></li>
+<li class="chapter" data-level="9.2.3" data-path="09-module-9.html"><a href="09-module-9.html#multilevel-models-for-repeated-measures"><i class="fa fa-check"></i><b>9.2.3</b> Multilevel Models for Repeated Measures</a></li>
+<li class="chapter" data-level="9.2.4" data-path="09-module-9.html"><a href="09-module-9.html#our-data-reaction-time"><i class="fa fa-check"></i><b>9.2.4</b> Our Data: Reaction Time</a></li>
+<li class="chapter" data-level="9.2.5" data-path="09-module-9.html"><a href="09-module-9.html#random-intercept-onlynull-model"><i class="fa fa-check"></i><b>9.2.5</b> Random-Intercept-Only/Null Model</a></li>
+<li class="chapter" data-level="9.2.6" data-path="09-module-9.html"><a href="09-module-9.html#adding-level-1-fixed-effects"><i class="fa fa-check"></i><b>9.2.6</b> Adding Level-1 Fixed Effects</a></li>
+<li class="chapter" data-level="9.2.7" data-path="09-module-9.html"><a href="09-module-9.html#adding-random-slopes"><i class="fa fa-check"></i><b>9.2.7</b> Adding Random Slopes</a></li>
+<li class="chapter" data-level="9.2.8" data-path="09-module-9.html"><a href="09-module-9.html#adding-level-2-fixed-effects"><i class="fa fa-check"></i><b>9.2.8</b> Adding Level-2 Fixed Effects</a></li>
+<li class="chapter" data-level="9.2.9" data-path="09-module-9.html"><a href="09-module-9.html#adding-cross-level-interactions"><i class="fa fa-check"></i><b>9.2.9</b> Adding Cross-Level Interactions</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="09-module-9.html"><a href="09-module-9.html#conclusion-7"><i class="fa fa-check"></i><b>9.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="10-module-10.html"><a href="10-module-10.html"><i class="fa fa-check"></i><b>10</b> Multilevel Modelling with Longitudinal Data</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="10-module-10.html"><a href="10-module-10.html#learning-objectives-8"><i class="fa fa-check"></i><b>10.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="10.2" data-path="10-module-10.html"><a href="10-module-10.html#data-demonstration-8"><i class="fa fa-check"></i><b>10.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="10-module-10.html"><a href="10-module-10.html#load-dependencies-1"><i class="fa fa-check"></i><b>10.2.1</b> Load Dependencies</a></li>
+<li class="chapter" data-level="10.2.2" data-path="10-module-10.html"><a href="10-module-10.html#multilevel-models-for-longitudinal-data"><i class="fa fa-check"></i><b>10.2.2</b> Multilevel Models for Longitudinal Data</a></li>
+<li class="chapter" data-level="10.2.3" data-path="10-module-10.html"><a href="10-module-10.html#visualizing-testosterone-levels-over-time"><i class="fa fa-check"></i><b>10.2.3</b> Visualizing Testosterone Levels Over Time</a></li>
+<li class="chapter" data-level="10.2.4" data-path="10-module-10.html"><a href="10-module-10.html#random-intercept-onlynull-model-1"><i class="fa fa-check"></i><b>10.2.4</b> Random-Intercept-Only/Null Model</a></li>
+<li class="chapter" data-level="10.2.5" data-path="10-module-10.html"><a href="10-module-10.html#adding-level-1-fixed-and-random-effects"><i class="fa fa-check"></i><b>10.2.5</b> Adding Level-1 Fixed and Random Effects</a></li>
+<li class="chapter" data-level="10.2.6" data-path="10-module-10.html"><a href="10-module-10.html#evidence-for-retaining-effects"><i class="fa fa-check"></i><b>10.2.6</b> Evidence for Retaining Effects</a></li>
+<li class="chapter" data-level="10.2.7" data-path="10-module-10.html"><a href="10-module-10.html#adding-level-2-fixed-effects-1"><i class="fa fa-check"></i><b>10.2.7</b> Adding Level-2 Fixed Effects</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="10-module-10.html"><a href="10-module-10.html#conclusion-8"><i class="fa fa-check"></i><b>10.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="11-module-11.html"><a href="11-module-11.html"><i class="fa fa-check"></i><b>11</b> Effect Sizes in Multilevel Models</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="11-module-11.html"><a href="11-module-11.html#learning-objectives-9"><i class="fa fa-check"></i><b>11.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="11.2" data-path="11-module-11.html"><a href="11-module-11.html#data-demonstration-9"><i class="fa fa-check"></i><b>11.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="11-module-11.html"><a href="11-module-11.html#load-data-and-dependencies-6"><i class="fa fa-check"></i><b>11.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="11.2.2" data-path="11-module-11.html"><a href="11-module-11.html#defining-effect-sizes"><i class="fa fa-check"></i><b>11.2.2</b> Defining Effect Sizes</a></li>
+<li class="chapter" data-level="11.2.3" data-path="11-module-11.html"><a href="11-module-11.html#r-squared-in-multilevel-models"><i class="fa fa-check"></i><b>11.2.3</b> R-squared in Multilevel Models</a></li>
+<li class="chapter" data-level="11.2.4" data-path="11-module-11.html"><a href="11-module-11.html#single-model-automatic-entry"><i class="fa fa-check"></i><b>11.2.4</b> Single Model, Automatic Entry</a></li>
+<li class="chapter" data-level="11.2.5" data-path="11-module-11.html"><a href="11-module-11.html#single-model-manual-entry"><i class="fa fa-check"></i><b>11.2.5</b> Single Model, Manual Entry</a></li>
+<li class="chapter" data-level="11.2.6" data-path="11-module-11.html"><a href="11-module-11.html#model-comparison"><i class="fa fa-check"></i><b>11.2.6</b> Model Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="11-module-11.html"><a href="11-module-11.html#conclusion-9"><i class="fa fa-check"></i><b>11.3</b> Conclusion</a></li>
+<li class="chapter" data-level="11.4" data-path="11-module-11.html"><a href="11-module-11.html#additional-reading"><i class="fa fa-check"></i><b>11.4</b> Additional Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="12-module-12.html"><a href="12-module-12.html"><i class="fa fa-check"></i><b>12</b> Assumptions</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="12-module-12.html"><a href="12-module-12.html#learning-objectives-10"><i class="fa fa-check"></i><b>12.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="12.2" data-path="12-module-12.html"><a href="12-module-12.html#data-demonstration-10"><i class="fa fa-check"></i><b>12.2</b> Data Demonstration</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="12-module-12.html"><a href="12-module-12.html#load-data-and-dependencies-7"><i class="fa fa-check"></i><b>12.2.1</b> Load Data and Dependencies</a></li>
+<li class="chapter" data-level="12.2.2" data-path="12-module-12.html"><a href="12-module-12.html#assumptions-of-mlms"><i class="fa fa-check"></i><b>12.2.2</b> Assumptions of MLMs</a></li>
+<li class="chapter" data-level="12.2.3" data-path="12-module-12.html"><a href="12-module-12.html#assumption-1-model-specification"><i class="fa fa-check"></i><b>12.2.3</b> Assumption 1: Model Specification</a></li>
+<li class="chapter" data-level="12.2.4" data-path="12-module-12.html"><a href="12-module-12.html#assumption-2-functional-form-is-correct"><i class="fa fa-check"></i><b>12.2.4</b> Assumption 2: Functional Form is Correct</a></li>
+<li class="chapter" data-level="12.2.5" data-path="12-module-12.html"><a href="12-module-12.html#an-aside-extracting-residuals"><i class="fa fa-check"></i><b>12.2.5</b> An Aside: Extracting Residuals</a></li>
+<li class="chapter" data-level="12.2.6" data-path="12-module-12.html"><a href="12-module-12.html#assumption-3-level-1-residuals-are-independent-and-normally-distributed"><i class="fa fa-check"></i><b>12.2.6</b> Assumption 3: Level-1 Residuals are Independent and Normally Distributed</a></li>
+<li class="chapter" data-level="12.2.7" data-path="12-module-12.html"><a href="12-module-12.html#assumption-4-level-2-residuals-are-independent-and-multivariate-normal"><i class="fa fa-check"></i><b>12.2.7</b> Assumption 4: Level-2 Residuals are Independent and Multivariate Normal</a></li>
+<li class="chapter" data-level="12.2.8" data-path="12-module-12.html"><a href="12-module-12.html#assumption-5-residuals-at-level-1-and-level-2-are-independent"><i class="fa fa-check"></i><b>12.2.8</b> Assumption 5: Residuals at Level-1 and Level-2 are Independent</a></li>
+<li class="chapter" data-level="12.2.9" data-path="12-module-12.html"><a href="12-module-12.html#assumption-6-level-1-residuals-independent-of-level-2-predictors-level-2-residuals-independent-of-level-1-predictors"><i class="fa fa-check"></i><b>12.2.9</b> Assumption 6: Level-1 Residuals Independent of Level-2 Predictors, Level-2 Residuals Independent of Level-1 Predictors</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="12-module-12.html"><a href="12-module-12.html#conclusion-10"><i class="fa fa-check"></i><b>12.3</b> Conclusion</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://twitter.com/maireadkshaw">Mairead Shaw</a></li>
+<li><a href="https://twitter.com/jkayflake">Jessica Kay Flake</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Multilevel Modelling</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="module-9" class="section level1" number="9">
+<h1><span class="header-section-number">Chapter 9</span> Multilevel Modelling with Repeated Measures Data</h1>
+<div id="learning-objectives-7" class="section level2" number="9.1">
+<h2><span class="header-section-number">9.1</span> Learning Objectives</h2>
+<p>JESS/MKS NOTE TO SELF REVIEW THE EQUATIONS IN THIS CHAPTER, THEY’RE A LITTLE MESSY</p>
+<p>In this chapter, we will review fitting MLMs for repeated measures data.</p>
+<p>The learning objectives for this chapter are:</p>
+<ol style="list-style-type: decimal">
+<li>Review multilevel modelling concepts discussed so far;</li>
+<li>Recognize when data are repeated measures and in the correct format for multilevel modelling;</li>
+<li>Conduct multilevel modelling on repeated measures data;</li>
+<li>Interpret coefficients for repeated measures data.</li>
+</ol>
+<p>All materials for this chapter are available for download <a href="www.learn-mlms.com/students">here</a>.</p>
+</div>
+<div id="data-demonstration-7" class="section level2" number="9.2">
+<h2><span class="header-section-number">9.2</span> Data Demonstration</h2>
+<div id="load-dependencies" class="section level3" number="9.2.1">
+<h3><span class="header-section-number">9.2.1</span> Load Dependencies</h3>
+<p>For this data demo, we will use the following packages:</p>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="09-module-9.html#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4) <span class="co"># for multilevel models</span></span>
+<span id="cb130-2"><a href="09-module-9.html#cb130-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest) <span class="co"># for p-values</span></span>
+<span id="cb130-3"><a href="09-module-9.html#cb130-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(performance) <span class="co"># for ICC</span></span></code></pre></div>
+</div>
+<div id="review-of-multilevel-modelling-procedure" class="section level3" number="9.2.2">
+<h3><span class="header-section-number">9.2.2</span> Review of Multilevel Modelling Procedure</h3>
+<p>Multilevel modelling in repeated measures data is a new application of the techniques we’ve covered so far, so let’s briefly review the steps in our modelling framework so far:</p>
+<ol style="list-style-type: decimal">
+<li>Establish solid theory and measurement, decide whether you need MLMs for your question</li>
+<li>Run random-intercept-only (i.e., null) model to calculate ICC and quantify extent of clustering in data</li>
+<li>Build model incrementally adding fixed and random effects per your theory, considering centering and estimation (REML or FIML) choices</li>
+<li>Conduct deviance test to compare model fits</li>
+<li>If you run into estimation issues, change your optimizer or remove problematic effects</li>
+<li>Report results: coefficients, significance, plausible values ranges, any changes made to address estimation issues</li>
+</ol>
+</div>
+<div id="multilevel-models-for-repeated-measures" class="section level3" number="9.2.3">
+<h3><span class="header-section-number">9.2.3</span> Multilevel Models for Repeated Measures</h3>
+<p>Thus far, we’ve been using a cross-sectional example of students clustered within schools. Our level-1 variables have been about traits that students vary on (e.g., age, gender, SES) while our level-2 variables have been about traits that schools vary on (e.g., whether they are public or private schools).</p>
+<p>With repeated measures data, measures are clustered within person rather than having people clustered within some organizational structure. The level-1 variables are about traits that the measures vary on (e.g., experimental manipulations) while level-2 variables are about traits that people vary on (e.g., age, gender, SES). For example, imagine we show participants pictures of lines and ask them to estimate the line length. We measure how long it takes them to rate each line. A level-1 variable would be the line length; each participant sees several lines of different lengths. A level-2 variable would be something demographic like a participant’s age or gender; each person has the same value on the variable for the entire experiment.</p>
+<p>In this chapter, we’ll look at repeated measures data without time in the model. In Chapter 10, we’ll look at repeated measures data with time in the model, i.e., longitudinal models.</p>
+<div id="data-structures-long-vs-wide" class="section level4" number="9.2.3.1">
+<h4><span class="header-section-number">9.2.3.1</span> Data Structures: Long vs Wide</h4>
+<p>Imagine you were measuring weight and caloric intake. If you have historically worked with repeated measures data in an ANOVA framework, you are probably used to working with data in a “wide” format, i.e., one row per participant with different variables for different measurement instances.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">id</th>
+<th align="center">weight1</th>
+<th align="center">weight2</th>
+<th align="center">calories1</th>
+<th align="center">calories2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">200</td>
+<td align="center">190</td>
+<td align="center">3500</td>
+<td align="center">3300</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">150</td>
+<td align="center">160</td>
+<td align="center">3200</td>
+<td align="center">3100</td>
+</tr>
+</tbody>
+</table>
+<p>In MLMs, you need to use data in a “long” format where one row is one measurement occasion:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">id</th>
+<th align="center">weight</th>
+<th align="center">calories</th>
+<th align="center">measurement_occasion</th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">200</td>
+<td align="center">3500</td>
+<td align="center">1</td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">190</td>
+<td align="center">3300</td>
+<td align="center">2</td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td align="center">2</td>
+<td align="center">150</td>
+<td align="center">3200</td>
+<td align="center">1</td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">160</td>
+<td align="center">3100</td>
+<td align="center">2</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p>This requires transposing your data, which you can read more about <a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">here</a>.</p>
+<p>An aside: you might also be used to thinking listwise deletion deletes an entire participant, because listwise deletion deletes rows with any missing data and in wide data one row <em>is</em> one participant. In long data, listwise deletion means deleting one measurement instance, not necessarily an entire participant. For example, if a participant answers a questionnaire a first time, then at one follow-up, but not at the second follow-up, listwise deletion will only remove their third row full of NAs; you’ll keep their data from the first two questionnaires.</p>
+</div>
+</div>
+<div id="our-data-reaction-time" class="section level3" number="9.2.4">
+<h3><span class="header-section-number">9.2.4</span> Our Data: Reaction Time</h3>
+<p>The data used in this module are used as an example in Hoffman and Rovine (2007). The article and supporting materials can be found here: <a href="http://www.lesahoffman.com/Research/MLM.html" class="uri">http://www.lesahoffman.com/Research/MLM.html</a></p>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="09-module-9.html#cb131-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;hoffman2007.csv&#39;</span>)</span></code></pre></div>
+<p>Let’s look at our data:</p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="09-module-9.html#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
+<pre><code>##   X id sex age    NAME rt_sec Item meaning salience     lg_rt oldage yrs65 c_mean c_sal
+## 1 1  1   1  20 rt_sec1  4.662    1     3.5      4.0 1.5394445      0     0    0.5   1.0
+## 2 2  1   1  20 rt_sec2  6.660    2     0.0      3.0 1.8961195      0     0   -3.0   0.0
+## 3 3  1   1  20 rt_sec3  6.602    3     4.0      2.0 1.8873726      0     0    1.0  -1.0
+## 4 4  1   1  20 rt_sec4  1.332    4     4.0      4.0 0.2866816      0     0    1.0   1.0
+## 5 5  1   1  20 rt_sec5  1.332    5     0.0      5.0 0.2866816      0     0   -3.0   2.0
+## 6 6  1   1  20 rt_sec7  1.302    7     3.5      4.5 0.2639015      0     0    0.5   1.5</code></pre>
+<p>For this data demo the outcome of interest is the log of reaction time for participants to detect a change during a picture viewing task (<code>rt_sec</code>). The pictures varied on two dimensions: how meaningful driving was to the picture (<code>meaning</code>) and how salient the change was in the picture (<code>salient</code>). For this analysis we will focus on the variables centered from the midpoint of the rating (3): <code>c_mean</code> and <code>c_sal</code>. One of the primary research questions was how age related to reaction time, given those differences in pictures. Participants were sampled in age categories: younger (<code>oldage</code> = 0, 40 and under) and older (<code>oldage</code> = 1, above 40). Repeated trials are nested within persons.</p>
+</div>
+<div id="random-intercept-onlynull-model" class="section level3" number="9.2.5">
+<h3><span class="header-section-number">9.2.5</span> Random-Intercept-Only/Null Model</h3>
+<p>Let’s estimate our null model with FIML as our estimator and calculate the ICC:</p>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="09-module-9.html#cb134-1" aria-hidden="true" tabindex="-1"></a>null_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>) <span class="co"># note that REML = FALSE</span></span>
+<span id="cb134-2"><a href="09-module-9.html#cb134-2" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(null_model)</span></code></pre></div>
+<pre><code>## # Intraclass Correlation Coefficient
+## 
+##      Adjusted ICC: 0.252
+##   Conditional ICC: 0.252</code></pre>
+<p>With repeated measures data, the ICC is interpreted as the proportion of variance between people: How much of the variance stems from people being different from one another versus fluctuating within themselves? A large ICC means that most of the variability is between people, not from people varying in their answers to a set of questions (or in this case, reaction time). The ICC is 0.252, indicating that 25.2% of the variance in log reaction time is attributed to a person.</p>
+<p>(Some bonus fun: when responses to questions are nested within person, Cronbach’s alpha is equivalent to the ICC: a high alpha indicates high “reliability” of the scale because most of the scale variance is between people, individuals have relatively consistent patterns of answering on the scale.)</p>
+</div>
+<div id="adding-level-1-fixed-effects" class="section level3" number="9.2.6">
+<h3><span class="header-section-number">9.2.6</span> Adding Level-1 Fixed Effects</h3>
+<p>Let’s add our level-1 predictors for picture meaning <code>c_mean</code> and picture salience <code>c_sal</code> to our model. This is represented with the following formulae:</p>
+<table>
+<colgroup>
+<col width="44%" />
+<col width="55%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Level</th>
+<th align="left">Equation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Level 1</td>
+<td align="left"><span class="math inline">\(lg\_rt_{ij} = \beta_{0j} + \beta_{1j}c\_mean_{ij} + \beta_{2j}c\_sal_{ij} + R_{ij}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Level 2</td>
+<td align="left"><span class="math inline">\(\beta_{0j} = \gamma_{00} + U_{0j}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"><span class="math inline">\(\beta_{1j} = \gamma_{10}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left"><span class="math inline">\(\beta_{2j} = \gamma_{20}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left">Combined</td>
+<td align="left"><span class="math inline">\(lg\_rt_{ij} = \gamma_{00} + \gamma_{10}c\_mean_{ij} + \gamma_{20}c\_sal_{ij} + U_{0j} + R_{ij}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>With this model, we’re estimating 5 parameters:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\gamma_{00}\)</span>: the fixed effect for the intercept, controlling for <code>c_mean</code> and <code>c_sal</code>;</li>
+<li><span class="math inline">\(\gamma_{10}\)</span>: the fixed effect for the slope of <code>c_mean</code>, controlling for <code>c_sal</code>. This represents how meaning affects a person’s reaction time — do people respond more quickly or slowly to photos with changes that are related to driving a car (perhaps because they’re often driving and are attuned to changes in the environment when operating a car)?</li>
+<li><span class="math inline">\(\gamma_{20}\)</span>: the fixed effect for the slope of <code>c_sal</code>, controlling for <code>c_mean</code>. This represents how salience affects a person’s reaction time — do people respond more quickly or slowly to photos with more obvious changes?</li>
+<li><span class="math inline">\(\tau_0^2\)</span>: a random effect for the intercept capturing the variance of people around the intercept, controlling for <code>c_mean</code> and <code>c_sal</code>;</li>
+<li><span class="math inline">\(\sigma^2\)</span>: a random effect capturing the variance of people around their own mean log reaction time, controlling for <code>c_mean</code> and <code>c_sal</code>.</li>
+</ol>
+<p>Let’s run the model with FIML as our estimator:</p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="09-module-9.html#cb136-1" aria-hidden="true" tabindex="-1"></a>l1_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> c_mean <span class="sc">+</span> c_sal <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb136-2"><a href="09-module-9.html#cb136-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(l1_model)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
+## Formula: lg_rt ~ 1 + c_mean + c_sal + (1 | id)
+##    Data: data
+## 
+##      AIC      BIC   logLik deviance df.resid 
+##  16525.9  16560.6  -8257.9  16515.9     7641 
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -2.5224 -0.7291 -0.1090  0.6177  3.8884 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  id       (Intercept) 0.1756   0.4191  
+##  Residual             0.4785   0.6917  
+## Number of obs: 7646, groups:  id, 153
+## 
+## Fixed effects:
+##                Estimate  Std. Error          df t value            Pr(&gt;|t|)    
+## (Intercept)    1.605254    0.034828  153.300086   46.09 &lt;0.0000000000000002 ***
+## c_mean        -0.051528    0.004304 7493.037128  -11.97 &lt;0.0000000000000002 ***
+## c_sal         -0.132320    0.007435 7493.183164  -17.80 &lt;0.0000000000000002 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Correlation of Fixed Effects:
+##        (Intr) c_mean
+## c_mean  0.044       
+## c_sal  -0.015 -0.219</code></pre>
+<p>The intercept of 1.61 is the mean log reaction time across all people at average values of meaning and salience. A one-unit increase in meaning is associated with a decrease in log reaction time of 0.05 (i.e., a faster reaction time), at the average level of salience. A one-unit increase in salience is associated with a decrease in log reaction time of 0.13 at the average level of meaning. All coefficients are significant. The term describing how people vary around the grand mean intercept is 0.18. The term describing how people vary around their own intercept is 0.48.</p>
+<p>Does this model have significantly less deviance (i.e., better fit) than the null model alone? Let’s use a deviance test to check. Note that we can compare the null and level-1 models because we used FIML as our estimator and they are nested (i.e., all variables in the level-1 model are in the null model).</p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="09-module-9.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(null_model, l1_model)</span></code></pre></div>
+<pre><code>## Data: data
+## Models:
+## null_model: lg_rt ~ 1 + (1 | id)
+## l1_model: lg_rt ~ 1 + c_mean + c_sal + (1 | id)
+##            npar   AIC   BIC  logLik deviance  Chisq Df            Pr(&gt;Chisq)    
+## null_model    3 17082 17103 -8537.9    17076                                    
+## l1_model      5 16526 16561 -8257.9    16516 559.94  2 &lt; 0.00000000000000022 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>The level-1 model does have significantly less deviance (16516 compared to 17076 for the null model), so is a better model. Hooray!</p>
+</div>
+<div id="adding-random-slopes" class="section level3" number="9.2.7">
+<h3><span class="header-section-number">9.2.7</span> Adding Random Slopes</h3>
+<p>Let’s try adding random slopes for our level-1 variables of meaning and salience. This allows slopes to vary across people. Maybe some people have stronger relationships between salience and reaction time — such that when the change is more salient they really notice it, and when it’s less salient they notice it less — while other people have eagle eyes and notice the changes no matter their salience.</p>
+<table>
+<colgroup>
+<col width="44%" />
+<col width="55%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Level</th>
+<th align="left">Equation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Level 1</td>
+<td align="left"><span class="math inline">\(lg\_rt_{ij} = \beta_{0j} + \beta_{1j}c\_mean_{ij} + \beta_{2j}c\_sal_{ij} + R_{ij}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Level 2</td>
+<td align="left"><span class="math inline">\(\beta_{0j} = \gamma_{00} + U_{0j}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"><span class="math inline">\(\beta_{1j} = \gamma_{10} + U_{1j}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left"><span class="math inline">\(\beta_{2j} = \gamma_{20} + U_{2j}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left">Combined</td>
+<td align="left"><span class="math inline">\(lg\_rt_{ij} = \gamma_{00} + \gamma_{10}c\_mean_{ij} + \gamma_{20}c\_sal_{ij} + U_{0j} + U_{1j}c\_mean_{ij} + U_{2j}c\_sal_{ij} + R_{ij}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Let’s not estimate random effect covariances, so with this model, we’re estimating 7 parameters:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\gamma_{00}\)</span>: the fixed effect for the intercept, controlling for <code>c_mean</code> and <code>c_sal</code>;</li>
+<li><span class="math inline">\(\gamma_{10}\)</span>: the fixed effect for the slope of <code>c_mean</code>, controlling for <code>c_sal</code>;</li>
+<li><span class="math inline">\(\gamma_{20}\)</span>: the fixed effect for the slope of <code>c_sal</code>, controlling for <code>c_mean</code>;</li>
+<li><span class="math inline">\(\tau_0^2\)</span>: a random effect for the intercept capturing the variance of people around the intercept, controlling for <code>c_mean</code> and <code>c_sal</code>;</li>
+<li><span class="math inline">\(\tau_1^2\)</span>: a random effect capturing how people’s slopes for <code>c_mean</code> vary around the grand mean slope, controlling for <code>c_sal</code>;</li>
+<li><span class="math inline">\(\tau_2^2\)</span>: a random effect capturing how people’s slopes for <code>c_sal</code> vary around the grand mean slope, controlling for <code>c_mean</code>;</li>
+<li><span class="math inline">\(\sigma^2\)</span>: a random effect capturing the variance of people around their own mean log reaction time, controlling for <code>c_mean</code> and <code>c_sal</code>.</li>
+</ol>
+<p>Let’s run our model with random slope effects (but no covariances) in R:</p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="09-module-9.html#cb140-1" aria-hidden="true" tabindex="-1"></a>l1_random <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> c_mean <span class="sc">+</span> c_sal <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> c_mean<span class="sc">|</span>id) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> c_sal<span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="09-module-9.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(l1_random)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
+## Formula: lg_rt ~ 1 + c_mean + c_sal + (1 | id) + (0 + c_mean | id) + (0 +  
+##     c_sal | id)
+##    Data: data
+## 
+##      AIC      BIC   logLik deviance df.resid 
+##  16529.4  16578.0  -8257.7  16515.4     7639 
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -2.5320 -0.7287 -0.1087  0.6142  3.8842 
+## 
+## Random effects:
+##  Groups   Name        Variance       Std.Dev.  
+##  id       (Intercept) 0.175630278350 0.41908266
+##  id.1     c_mean      0.000000003766 0.00006137
+##  id.2     c_sal       0.000685267135 0.02617761
+##  Residual             0.477680830140 0.69114458
+## Number of obs: 7646, groups:  id, 153
+## 
+## Fixed effects:
+##                Estimate  Std. Error          df t value            Pr(&gt;|t|)    
+## (Intercept)    1.605250    0.034825  153.308074   46.09 &lt;0.0000000000000002 ***
+## c_mean        -0.051539    0.004301 7337.355821  -11.98 &lt;0.0000000000000002 ***
+## c_sal         -0.132294    0.007724  169.044391  -17.13 &lt;0.0000000000000002 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Correlation of Fixed Effects:
+##        (Intr) c_mean
+## c_mean  0.044       
+## c_sal  -0.014 -0.211
+## optimizer (nloptwrap) convergence code: 0 (OK)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
+<p>We get an estimation error! Recall that singularity occurs when a variance term is close to zero or a correlation between variance terms is near 1 (high multicollinearity). Looking at our output, the variance terms for meaning and salience both look quite small. Let’s try to address our estimation issue by removing the smaller of the two, the random effect for <code>c_mean</code>.</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="09-module-9.html#cb144-1" aria-hidden="true" tabindex="-1"></a>l1_random_without_cmean <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> c_mean <span class="sc">+</span> c_sal <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> c_sal<span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb144-2"><a href="09-module-9.html#cb144-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(l1_random_without_cmean)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
+## Formula: lg_rt ~ 1 + c_mean + c_sal + (1 | id) + (0 + c_sal | id)
+##    Data: data
+## 
+##      AIC      BIC   logLik deviance df.resid 
+##  16527.4  16569.0  -8257.7  16515.4     7640 
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -2.5320 -0.7287 -0.1087  0.6142  3.8842 
+## 
+## Random effects:
+##  Groups   Name        Variance  Std.Dev.
+##  id       (Intercept) 0.1756384 0.41909 
+##  id.1     c_sal       0.0006842 0.02616 
+##  Residual             0.4776817 0.69115 
+## Number of obs: 7646, groups:  id, 153
+## 
+## Fixed effects:
+##                Estimate  Std. Error          df t value            Pr(&gt;|t|)    
+## (Intercept)    1.605250    0.034826  153.298193   46.09 &lt;0.0000000000000002 ***
+## c_mean        -0.051539    0.004301 7351.748763  -11.98 &lt;0.0000000000000002 ***
+## c_sal         -0.132294    0.007724  168.954450  -17.13 &lt;0.0000000000000002 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Correlation of Fixed Effects:
+##        (Intr) c_mean
+## c_mean  0.044       
+## c_sal  -0.014 -0.211</code></pre>
+<p>That took care of our singularity issue. However, the random effect for salience still looks very small. Let’s conduct a deviance test to see if including the random effect reduces deviance at all (that is, whether it is worth it to estimate).</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="09-module-9.html#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(l1_random, l1_random_without_cmean)</span></code></pre></div>
+<pre><code>## Data: data
+## Models:
+## l1_random_without_cmean: lg_rt ~ 1 + c_mean + c_sal + (1 | id) + (0 + c_sal | id)
+## l1_random: lg_rt ~ 1 + c_mean + c_sal + (1 | id) + (0 + c_mean | id) + (0 + c_sal | id)
+##                         npar   AIC   BIC  logLik deviance Chisq Df Pr(&gt;Chisq)
+## l1_random_without_cmean    6 16527 16569 -8257.7    16515                    
+## l1_random                  7 16529 16578 -8257.7    16515     0  1          1</code></pre>
+<p>There is no significant difference between these models, so there doesn’t seem to be much benefit to including the random effect for salience.</p>
+</div>
+<div id="adding-level-2-fixed-effects" class="section level3" number="9.2.8">
+<h3><span class="header-section-number">9.2.8</span> Adding Level-2 Fixed Effects</h3>
+<p>The level-2 variables in our dataset are demographic variables about participants, which in this dataset is their sex, age in years, whether they 40 or older (<code>oldage</code> = 1) or younger than 40 (<code>oldage</code> = 0), or their age centered at 65 years old for those who are older than 40 (<code>yrs65</code>). Let’s add <code>oldage</code> and <code>sex</code> as level-2 predictors of the intercept.</p>
+<table>
+<colgroup>
+<col width="44%" />
+<col width="55%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Level</th>
+<th align="left">Equation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Level 1</td>
+<td align="left"><span class="math inline">\(lg\_rt_{ij} = \beta_{0j} + \beta_{1j}c\_mean_{ij} + \beta_{2j}c\_sal_{ij} + R_{ij}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Level 2</td>
+<td align="left"><span class="math inline">\(\beta_{0j} = \gamma_{00} + \gamma_{01}oldage_j + \gamma_{02}sex_j + U_{0j}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"><span class="math inline">\(\beta_{1j} = \gamma_{10}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left"><span class="math inline">\(\beta_{2j} = \gamma_{20}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left">Combined</td>
+<td align="left"><span class="math inline">\(lg\_rt_{ij} = \gamma_{00} + \gamma_{01}oldage_j + \gamma_{02}sex_j + \gamma_{10}c\_mean_{ij} + \gamma_{20}c\_sal_{ij} + U_{0j} + R_{ij}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>We’re estimating 7 effects:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\gamma_{00}\)</span>: the fixed effect for the intercept, controlling for <code>c_mean</code> and <code>c_sal</code>;</li>
+<li><span class="math inline">\(\gamma_{10}\)</span>: the fixed effect for the slope of <code>c_mean</code>, controlling for <code>c_sal</code>;</li>
+<li><span class="math inline">\(\gamma_{20}\)</span>: the fixed effect for the slope of <code>c_sal</code>, controlling for <code>c_mean</code>;</li>
+<li><span class="math inline">\(\gamma_{01}\)</span>: the fixed effect for the slope of <code>oldage</code>, controlling for <code>sex</code>, <code>c_mean</code>, and <code>c_sal</code>;</li>
+<li><span class="math inline">\(\gamma_{02}\)</span>: the fixed effect for the slope of <code>sex</code>, controlling for <code>oldage</code>, <code>c_mean</code> and <code>c_sal</code>;</li>
+<li><span class="math inline">\(\tau_0^2\)</span>: a random effect capturing how people’s mean log reaction times vary around the grand mean log reaction time, controlling for <code>c_mean</code>, <code>c_sal</code>, <code>oldage</code>, and <code>sex</code>;</li>
+<li><span class="math inline">\(\sigma^2\)</span>: a random effect capturing the variance of people around their own mean log reaction time, controlling for <code>c_mean</code>, <code>c_sal</code>, <code>oldage</code>, and <code>sex</code>.</li>
+</ol>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="09-module-9.html#cb148-1" aria-hidden="true" tabindex="-1"></a>l2_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> c_mean <span class="sc">+</span> c_sal <span class="sc">+</span> oldage <span class="sc">+</span> sex <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb148-2"><a href="09-module-9.html#cb148-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(l2_model)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
+## Formula: lg_rt ~ 1 + c_mean + c_sal + oldage + sex + (1 | id)
+##    Data: data
+## 
+##      AIC      BIC   logLik deviance df.resid 
+##  16269.8  16318.4  -8127.9  16255.8     7639 
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -2.6108 -0.7341 -0.1058  0.6151  3.9626 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  id       (Intercept) 0.02424  0.1557  
+##  Residual             0.47852  0.6918  
+## Number of obs: 7646, groups:  id, 153
+## 
+## Fixed effects:
+##                Estimate  Std. Error          df t value            Pr(&gt;|t|)    
+## (Intercept)    1.280554    0.025655  153.175094  49.915 &lt;0.0000000000000002 ***
+## c_mean        -0.051502    0.004304 7494.186660 -11.965 &lt;0.0000000000000002 ***
+## c_sal         -0.132340    0.007434 7494.765418 -17.801 &lt;0.0000000000000002 ***
+## oldage         0.799398    0.030875  153.209862  25.891 &lt;0.0000000000000002 ***
+## sex            0.044666    0.030451  152.467294   1.467               0.144    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Correlation of Fixed Effects:
+##        (Intr) c_mean c_sal  oldage
+## c_mean  0.059                     
+## c_sal  -0.017 -0.219              
+## oldage -0.392 -0.002 -0.003       
+## sex    -0.681  0.001 -0.002 -0.075</code></pre>
+<p>The intercept of 1.28 is the mean log reaction time across all people at average values of meaning and salience for men (<code>sex</code> = 0) who are younger than 40 (<code>oldage</code> = 40). A one-unit increase in meaning is associated with a decrease in log reaction time of 0.05 (i.e., a faster reaction time), controlling for other variables. A one-unit increase in salience is associated with a decrease in log reaction time of 0.13 controlling for other variables. People older than 40 have 0.80 units longer of a log reaction time on average, controlling for other variables. Women have 0.04 unit-slower log reaction times on average, controlling for other variables. All coefficients are significant except for <code>sex</code>. The term describing how people vary around the grand mean intercept is 0.02. The term describing how people vary around their own intercept is 0.48.</p>
+<p>Let’s run a model without the non-significant <code>sex</code> predictor and conduct a deviance test to see if the model fit is negatively impacted.</p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="09-module-9.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="co"># model</span></span>
+<span id="cb150-2"><a href="09-module-9.html#cb150-2" aria-hidden="true" tabindex="-1"></a>l2_model_no_sex <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> c_mean <span class="sc">+</span> c_sal <span class="sc">+</span> oldage <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb150-3"><a href="09-module-9.html#cb150-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb150-4"><a href="09-module-9.html#cb150-4" aria-hidden="true" tabindex="-1"></a><span class="co"># deviance test</span></span>
+<span id="cb150-5"><a href="09-module-9.html#cb150-5" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(l2_model, l2_model_no_sex)</span></code></pre></div>
+<pre><code>## Data: data
+## Models:
+## l2_model_no_sex: lg_rt ~ 1 + c_mean + c_sal + oldage + (1 | id)
+## l2_model: lg_rt ~ 1 + c_mean + c_sal + oldage + sex + (1 | id)
+##                 npar   AIC   BIC  logLik deviance  Chisq Df Pr(&gt;Chisq)
+## l2_model_no_sex    6 16270 16312 -8129.0    16258                     
+## l2_model           7 16270 16318 -8127.9    16256 2.1363  1     0.1438</code></pre>
+<p>There is no significant difference in deviance, so we don’t lose on the model fit front if we don’t estimate <code>sex</code>.</p>
+</div>
+<div id="adding-cross-level-interactions" class="section level3" number="9.2.9">
+<h3><span class="header-section-number">9.2.9</span> Adding Cross-Level Interactions</h3>
+<p>For our final model, let’s remove the level-2 term for <code>sex</code> and look at a cross-level interaction between <code>oldage</code> and the slope of <code>c_mean</code> to consider the question: does age alter the effect of meaning on reaction times?</p>
+<table>
+<colgroup>
+<col width="44%" />
+<col width="55%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Level</th>
+<th align="left">Equation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Level 1</td>
+<td align="left"><span class="math inline">\(lg\_rt_{ij} = \beta_{0j} + \beta_{1j}c\_mean_{ij} + \beta_{2j}c\_sal_{ij} + R_{ij}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Level 2</td>
+<td align="left"><span class="math inline">\(\beta_{0j} = \gamma_{00} + \gamma_{01}oldage_j + U_{0j}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"><span class="math inline">\(\beta_{1j} = \gamma_{10} + \gamma_{11}oldage_j\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left"><span class="math inline">\(\beta_{2j} = \gamma_{20}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left">Combined</td>
+<td align="left"><span class="math inline">\(lg\_rt_{ij} = \gamma_{00} + \gamma_{01}oldage_j + \gamma_{10}c\_mean_{ij} + \gamma_{20}c\_sal_{ij} + \gamma_{11}c\_mean_{ij}*oldage_j + U_{0j} + R_{ij}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>We’re estimating 7 effects:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\gamma_{00}\)</span>: the fixed effect for the intercept, controlling for <code>c_mean</code>, <code>c_sal</code>, and <code>oldage</code>;</li>
+<li><span class="math inline">\(\gamma_{10}\)</span>: the fixed effect for the slope of <code>c_mean</code>, controlling for <code>c_sal</code> and <code>oldage</code>;</li>
+<li><span class="math inline">\(\gamma_{20}\)</span>: the fixed effect for the slope of <code>c_sal</code>, controlling for <code>c_mean</code> and <code>oldage</code>;</li>
+<li><span class="math inline">\(\gamma_{01}\)</span>: the fixed effect for the slope of <code>oldage</code>, controlling for <code>c_mean</code> and <code>c_sal</code>;</li>
+<li><span class="math inline">\(\gamma_{11}\)</span>: the fixed effect for the cross-level interaction of <code>oldage</code> with <code>c_mean</code>, controlling for <code>c_sal</code>;</li>
+<li><span class="math inline">\(\tau_0^2\)</span>: a random effect capturing how people’s mean log reaction times vary around the grand mean log reaction time, controlling for <code>c_mean</code>, <code>c_sal</code>, and <code>oldage</code>;</li>
+<li><span class="math inline">\(\sigma^2\)</span>: a random effect capturing the variance of people around their own mean log reaction time, controlling for <code>c_mean</code>, <code>c_sal</code>, and `oldage``.</li>
+</ol>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="09-module-9.html#cb152-1" aria-hidden="true" tabindex="-1"></a>crosslevel_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> c_mean <span class="sc">+</span> c_sal <span class="sc">+</span> oldage <span class="sc">+</span> oldage<span class="sc">:</span>c_mean <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb152-2"><a href="09-module-9.html#cb152-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(crosslevel_model)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
+## Formula: lg_rt ~ 1 + c_mean + c_sal + oldage + oldage:c_mean + (1 | id)
+##    Data: data
+## 
+##      AIC      BIC   logLik deviance df.resid 
+##  16253.8  16302.4  -8119.9  16239.8     7639 
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -2.6032 -0.7333 -0.0988  0.6125  3.9049 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  id       (Intercept) 0.0247   0.1572  
+##  Residual             0.4774   0.6909  
+## Number of obs: 7646, groups:  id, 153
+## 
+## Fixed effects:
+##                  Estimate  Std. Error          df t value             Pr(&gt;|t|)    
+## (Intercept)      1.301459    0.018951  154.490610  68.674 &lt; 0.0000000000000002 ***
+## c_mean          -0.064989    0.005337 7493.066384 -12.176 &lt; 0.0000000000000002 ***
+## c_sal           -0.132459    0.007425 7494.852621 -17.838 &lt; 0.0000000000000002 ***
+## oldage           0.815386    0.031128  156.060542  26.194 &lt; 0.0000000000000002 ***
+## c_mean:oldage    0.037168    0.008722 7495.089797   4.261            0.0000206 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Correlation of Fixed Effects:
+##             (Intr) c_mean c_sal  oldage
+## c_mean       0.100                     
+## c_sal       -0.025 -0.174              
+## oldage      -0.608 -0.057 -0.004       
+## c_mean:oldg -0.058 -0.593 -0.005  0.095</code></pre>
+<p>The interaction between <code>oldage</code> and <code>c_mean</code> is 0.04, suggesting that people older than 40 have 0.04 added to their (log) reaction times for more meaningful photos. That is, older people have slower reaction times even when photos are more related to driving. The other coefficient interpretations are similar to those we discussed in earlier models.</p>
+</div>
+</div>
+<div id="conclusion-7" class="section level2" number="9.3">
+<h2><span class="header-section-number">9.3</span> Conclusion</h2>
+<p>In this chapter, we reviewed our MLM pipeline and applied it to repeated measures without time in the model. In Chapter 10, we will look at longitudinal models, i.e., repeated measures with time in the model.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="08-module-8.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="10-module-10.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["open_mlm_materials.pdf", "open_mlm_materials.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"depth": 2,
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
