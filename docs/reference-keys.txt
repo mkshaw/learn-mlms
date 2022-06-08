@@ -3,13 +3,13 @@ overview
 goals
 prerequisites
 materials
-multiple-regression
+module-2
 learning-objectives
 data-demonstration
 creating-r-projects
 loading-data-and-dependencies
 simple-linear-regression
-multiple-regression-1
+multiple-regression
 interaction-terms
 conclusion
 module-3
@@ -127,3 +127,5 @@ multivariate-normal
 assumption-5-residuals-at-level-1-and-level-2-are-independent
 assumption-6-level-1-residuals-independent-of-level-2-predictors-level-2-residuals-independent-of-level-1-predictors
 conclusion-10
+download-materials
+date-2022-06-08

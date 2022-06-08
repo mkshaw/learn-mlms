@@ -151,7 +151,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2.1" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#creating-r-projects"><i class="fa fa-check"></i><b>2.2.1</b> Creating R Projects</a></li>
 <li class="chapter" data-level="2.2.2" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#loading-data-and-dependencies"><i class="fa fa-check"></i><b>2.2.2</b> Loading Data and Dependencies</a></li>
 <li class="chapter" data-level="2.2.3" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#simple-linear-regression"><i class="fa fa-check"></i><b>2.2.3</b> Simple Linear Regression</a></li>
-<li class="chapter" data-level="2.2.4" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#multiple-regression-1"><i class="fa fa-check"></i><b>2.2.4</b> Multiple Regression</a></li>
+<li class="chapter" data-level="2.2.4" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#multiple-regression"><i class="fa fa-check"></i><b>2.2.4</b> Multiple Regression</a></li>
 <li class="chapter" data-level="2.2.5" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#interaction-terms"><i class="fa fa-check"></i><b>2.2.5</b> Interaction Terms</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#conclusion"><i class="fa fa-check"></i><b>2.3</b> Conclusion</a></li>
@@ -297,6 +297,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="12.3" data-path="12-module-12.html"><a href="12-module-12.html#conclusion-10"><i class="fa fa-check"></i><b>12.3</b> Conclusion</a></li>
 </ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="13-appendix.html"><a href="13-appendix.html"><i class="fa fa-check"></i><b>A</b> Download Materials</a></li>
 <li class="divider"></li>
 <li><a href="https://twitter.com/maireadkshaw">Mairead Shaw</a></li>
 <li><a href="https://twitter.com/jkayflake">Jessica Kay Flake</a></li>
@@ -338,12 +340,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="load-data-and-dependencies-5" class="section level3" number="8.2.1">
 <h3><span class="header-section-number">8.2.1</span> Load Data and Dependencies</h3>
 <p>For this data demo, we will use the following packages:</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="08-module-8.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># for data manipulation</span></span>
-<span id="cb112-2"><a href="08-module-8.html#cb112-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr) <span class="co"># for assignment pipe %&lt;&gt;%</span></span>
-<span id="cb112-3"><a href="08-module-8.html#cb112-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4) <span class="co"># for multilevel models</span></span>
-<span id="cb112-4"><a href="08-module-8.html#cb112-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest) <span class="co"># for p-values</span></span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="08-module-8.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># for data manipulation</span></span>
+<span id="cb108-2"><a href="08-module-8.html#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr) <span class="co"># for assignment pipe %&lt;&gt;%</span></span>
+<span id="cb108-3"><a href="08-module-8.html#cb108-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4) <span class="co"># for multilevel models</span></span>
+<span id="cb108-4"><a href="08-module-8.html#cb108-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest) <span class="co"># for p-values</span></span></code></pre></div>
 <p>And the same dataset of students’ math achievement:</p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="08-module-8.html#cb113-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;heck2011.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="08-module-8.html#cb109-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;heck2011.csv&#39;</span>)</span></code></pre></div>
 </div>
 <div id="why-center-variables" class="section level3" number="8.2.2">
 <h3><span class="header-section-number">8.2.2</span> Why Center Variables?</h3>
@@ -391,8 +393,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="08-module-8.html#cb114-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb114-2"><a href="08-module-8.html#cb114-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="08-module-8.html#cb110-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb110-2"><a href="08-module-8.html#cb110-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
 ## Formula: math ~ 1 + ses + (1 | schcode)
 ##    Data: data
@@ -429,18 +431,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h4><span class="header-section-number">8.2.4.1</span> Centering Within Cluster (CWC)</h4>
 <p>Centering a variable within a cluster means each cluster will have a mean of zero. So, each school will have a mean of zero, and students’ scores on <code>ses_cwc</code> will reflect their variance around their school mean, not the grand mean of the whole dataset.</p>
 <p>To center SES within cluster, we first group our dataset by school and calculate the mean SES for each cluster:</p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="08-module-8.html#cb116-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&lt;&gt;%</span> <span class="co"># this symbol is an assignment operator and pipe, equivalent to data &lt;- data %&gt;% </span></span>
-<span id="cb116-2"><a href="08-module-8.html#cb116-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(schcode) <span class="sc">%&gt;%</span> </span>
-<span id="cb116-3"><a href="08-module-8.html#cb116-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ses_mean =</span> <span class="fu">mean</span>(ses))</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="08-module-8.html#cb112-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&lt;&gt;%</span> <span class="co"># this symbol is an assignment operator and pipe, equivalent to data &lt;- data %&gt;% </span></span>
+<span id="cb112-2"><a href="08-module-8.html#cb112-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(schcode) <span class="sc">%&gt;%</span> </span>
+<span id="cb112-3"><a href="08-module-8.html#cb112-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ses_mean =</span> <span class="fu">mean</span>(ses))</span></code></pre></div>
 <p>Then, we subtract this cluster mean from every individual student’s SES value: <span class="math inline">\(ses_{cwc} = ses - ses_{mean}\)</span>. For the students at the mean, the resulting value will be 0. Students above the mean will have positive values, and students below the mean will have negative values.</p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="08-module-8.html#cb117-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&lt;&gt;%</span></span>
-<span id="cb117-2"><a href="08-module-8.html#cb117-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ses_cwc =</span> ses <span class="sc">-</span> ses_mean)</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="08-module-8.html#cb113-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb113-2"><a href="08-module-8.html#cb113-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ses_cwc =</span> ses <span class="sc">-</span> ses_mean)</span></code></pre></div>
 <p>The values of <code>ses_cwc</code> are distributed around the mean for the cluster. The mean of the centered values for each school is now (essentially) zero:</p>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="08-module-8.html#cb118-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb118-2"><a href="08-module-8.html#cb118-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(schcode) <span class="sc">%&gt;%</span> </span>
-<span id="cb118-3"><a href="08-module-8.html#cb118-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb118-4"><a href="08-module-8.html#cb118-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(ses_cwc)</span>
-<span id="cb118-5"><a href="08-module-8.html#cb118-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="08-module-8.html#cb114-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb114-2"><a href="08-module-8.html#cb114-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(schcode) <span class="sc">%&gt;%</span> </span>
+<span id="cb114-3"><a href="08-module-8.html#cb114-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb114-4"><a href="08-module-8.html#cb114-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(ses_cwc)</span>
+<span id="cb114-5"><a href="08-module-8.html#cb114-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <pre><code>## # A tibble: 419 x 2
 ##    schcode `mean(ses_cwc)`
 ##      &lt;int&gt;           &lt;dbl&gt;
@@ -487,8 +489,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>Here, <span class="math inline">\(\gamma_{10}\)</span> represents how students vary around their school mean, which is our within effect. It only captures the effect of SES on achievement within schools, if we run this model we get an intercept of 57.67 and an effect for <code>ses_cwc</code> of 3.19 indicating that on average, within a school an increase in SES to one standard deviation above the mean is associated with an increase in math achievement of 3.19.</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="08-module-8.html#cb120-1" aria-hidden="true" tabindex="-1"></a>model_cwc <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses_cwc <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb120-2"><a href="08-module-8.html#cb120-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_cwc)</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="08-module-8.html#cb116-1" aria-hidden="true" tabindex="-1"></a>model_cwc <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses_cwc <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb116-2"><a href="08-module-8.html#cb116-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_cwc)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
 ## Formula: math ~ 1 + ses_cwc + (1 | schcode)
 ##    Data: data
@@ -555,8 +557,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\(\sigma^2\)</span>: a random effect capturing the variance of students around their school mean math achievement, controlling for <code>ses_cwc</code> and <code>ses_mean</code>.</li>
 </ol>
 <p>Let’s estimate it:</p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="08-module-8.html#cb122-1" aria-hidden="true" tabindex="-1"></a>model_cwc_l2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses_cwc <span class="sc">+</span> ses_mean <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb122-2"><a href="08-module-8.html#cb122-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_cwc_l2)</span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="08-module-8.html#cb118-1" aria-hidden="true" tabindex="-1"></a>model_cwc_l2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses_cwc <span class="sc">+</span> ses_mean <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb118-2"><a href="08-module-8.html#cb118-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_cwc_l2)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
 ## Formula: math ~ 1 + ses_cwc + ses_mean + (1 | schcode)
 ##    Data: data
@@ -592,17 +594,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h4><span class="header-section-number">8.2.4.2</span> Centering Grand Mean (CGM)</h4>
 <p>When we center a variable at the grand mean, we have information about how individuals vary around the mean of all individuals. So students’ scores on <code>ses_cgm</code> will reflect their variance around the mean of all students.</p>
 <p>To center SES at the grand mean, we first calculate the grand mean:</p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="08-module-8.html#cb124-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&lt;&gt;%</span></span>
-<span id="cb124-2"><a href="08-module-8.html#cb124-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> <span class="co"># remove the grouping by school that we added in the CWC section</span></span>
-<span id="cb124-3"><a href="08-module-8.html#cb124-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ses_grand_mean =</span> <span class="fu">mean</span>(ses))</span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="08-module-8.html#cb120-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb120-2"><a href="08-module-8.html#cb120-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> <span class="co"># remove the grouping by school that we added in the CWC section</span></span>
+<span id="cb120-3"><a href="08-module-8.html#cb120-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ses_grand_mean =</span> <span class="fu">mean</span>(ses))</span></code></pre></div>
 <p>Then, we subtract this grand mean from every individual student’s SES value: <span class="math inline">\(ses_{cgm} = ses - ses\_grand\_mean\)</span>. For the students at the grand mean, the resulting value will be 0. Students above the mean will have positive values, and students below the mean will have negative values.</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="08-module-8.html#cb125-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&lt;&gt;%</span></span>
-<span id="cb125-2"><a href="08-module-8.html#cb125-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ses_cgm =</span> ses <span class="sc">-</span> ses_grand_mean)</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="08-module-8.html#cb121-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb121-2"><a href="08-module-8.html#cb121-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ses_cgm =</span> ses <span class="sc">-</span> ses_grand_mean)</span></code></pre></div>
 <p>The values of <code>ses_cgm</code> are distributed around the grand mean. The mean of the students’ values of <code>ses_cgm</code> is now (essentially) zero.</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="08-module-8.html#cb126-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb126-2"><a href="08-module-8.html#cb126-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb126-3"><a href="08-module-8.html#cb126-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(ses_cgm)</span>
-<span id="cb126-4"><a href="08-module-8.html#cb126-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="08-module-8.html#cb122-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb122-2"><a href="08-module-8.html#cb122-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb122-3"><a href="08-module-8.html#cb122-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(ses_cgm)</span>
+<span id="cb122-4"><a href="08-module-8.html#cb122-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   `mean(ses_cgm)`
 ##             &lt;dbl&gt;
@@ -678,8 +680,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\(\sigma^2\)</span>: a random effect capturing the variance of students around their school mean math achievement, controlling for <code>ses_cgm</code> and <code>ses_mean</code>.</li>
 </ol>
 <p>Let’s estimate it in R:</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="08-module-8.html#cb128-1" aria-hidden="true" tabindex="-1"></a>cgm_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses_cgm <span class="sc">+</span> ses_mean <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb128-2"><a href="08-module-8.html#cb128-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cgm_model)</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="08-module-8.html#cb124-1" aria-hidden="true" tabindex="-1"></a>cgm_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses_cgm <span class="sc">+</span> ses_mean <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb124-2"><a href="08-module-8.html#cb124-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cgm_model)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
 ## Formula: math ~ 1 + ses_cgm + ses_mean + (1 | schcode)
 ##    Data: data

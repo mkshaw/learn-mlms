@@ -46,24 +46,11 @@ In brief, the assumptions underlying MLMs are as follows:
 5. Residuals at level-1 and level-2 are unrelated;
 6. Predictors at one level are not related to errors at another level.
 
-```{r}
-# 1. Model is correctly specified
-# 2. The functional form is correct -- Q1-3
-# 3. At L2, residuals are independent and normally distributed with a mean of 0 and some variance -- Q5
-# 4. L1 predictors are independent of L1 residuals for all predictors -- Q6
-# 5. L2 residuals are multivariate normal and are independent from one another and across L2 units --
-# 6. L2 predictors are unrelated to L2 residuals -- Q12-13
-# 7. Residuals at L1 and L2 are unrelated -- Q14
-# 8. Predictors at one level are not related to errors at another level -- Q15
-
-```
-
-
 In the data demonstration that follows, we will be showing some techniques for checking these assumptions. However, we note that there are many other ways to conduct similar checks; assumption checks are data exploration at the end of the day. If you know and prefer other methods of exploring the same facets of your data, go for it!
 
 ### Assumption 1: Model Specification
 
-Specifying your model means determining which predictors should be included and what parameters to estimate. A correctly-specified model is one that includes everything associated with your outcome and nothing not-associated. This is impossible to *know* for certain and most researchers are constrained by the resources they have to get data and ultimately by the data they have. A general approach for considering this is trying to include all possible relevant IVs when predicting a DV. When building your MLM, build a maximal model with all possibe random effects, and trim down as you see effects are zero. Comparing models with and without effects and reviewing the literature for important variables to consider are decent strategies here. Get experts to read your results and their ideas on if anything is missing!
+Specifying your model means determining which predictors should be included and what parameters to estimate. A correctly-specified model is one that includes everything associated with your outcome and nothing not-associated. This is impossible to *know* for certain and most researchers are constrained by the resources they have to get data and ultimately by the data they have. A general approach for considering this is trying to include all possible relevant IVs when predicting a DV. When building your MLM, build a maximal model with all possible random effects, and trim down as you see effects are zero. Comparing models with and without effects and reviewing the literature for important variables to consider are decent strategies here. Get experts to read your results and their ideas on if anything is missing!
 
 ### Assumption 2: Functional Form is Correct
 

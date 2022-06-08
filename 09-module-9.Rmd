@@ -2,8 +2,6 @@
 
 ## Learning Objectives
 
-JESS/MKS NOTE TO SELF REVIEW THE EQUATIONS IN THIS CHAPTER, THEY'RE A LITTLE MESSY
-
 In this chapter, we will review fitting MLMs for repeated measures data.
 
 The learning objectives for this chapter are:

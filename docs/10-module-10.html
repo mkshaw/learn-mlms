@@ -151,7 +151,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2.1" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#creating-r-projects"><i class="fa fa-check"></i><b>2.2.1</b> Creating R Projects</a></li>
 <li class="chapter" data-level="2.2.2" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#loading-data-and-dependencies"><i class="fa fa-check"></i><b>2.2.2</b> Loading Data and Dependencies</a></li>
 <li class="chapter" data-level="2.2.3" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#simple-linear-regression"><i class="fa fa-check"></i><b>2.2.3</b> Simple Linear Regression</a></li>
-<li class="chapter" data-level="2.2.4" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#multiple-regression-1"><i class="fa fa-check"></i><b>2.2.4</b> Multiple Regression</a></li>
+<li class="chapter" data-level="2.2.4" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#multiple-regression"><i class="fa fa-check"></i><b>2.2.4</b> Multiple Regression</a></li>
 <li class="chapter" data-level="2.2.5" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#interaction-terms"><i class="fa fa-check"></i><b>2.2.5</b> Interaction Terms</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#conclusion"><i class="fa fa-check"></i><b>2.3</b> Conclusion</a></li>
@@ -297,6 +297,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="12.3" data-path="12-module-12.html"><a href="12-module-12.html#conclusion-10"><i class="fa fa-check"></i><b>12.3</b> Conclusion</a></li>
 </ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="13-appendix.html"><a href="13-appendix.html"><i class="fa fa-check"></i><b>A</b> Download Materials</a></li>
 <li class="divider"></li>
 <li><a href="https://twitter.com/maireadkshaw">Mairead Shaw</a></li>
 <li><a href="https://twitter.com/jkayflake">Jessica Kay Flake</a></li>
@@ -337,11 +339,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="load-dependencies-1" class="section level3" number="10.2.1">
 <h3><span class="header-section-number">10.2.1</span> Load Dependencies</h3>
 <p>For this data demo, we will use the following packages:</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="10-module-10.html#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># for data manipulation</span></span>
-<span id="cb154-2"><a href="10-module-10.html#cb154-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># for graphing</span></span>
-<span id="cb154-3"><a href="10-module-10.html#cb154-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4) <span class="co"># for multilevel models</span></span>
-<span id="cb154-4"><a href="10-module-10.html#cb154-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest) <span class="co"># for p-values</span></span>
-<span id="cb154-5"><a href="10-module-10.html#cb154-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(performance) <span class="co"># for ICC</span></span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="10-module-10.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># for data manipulation</span></span>
+<span id="cb150-2"><a href="10-module-10.html#cb150-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># for graphing</span></span>
+<span id="cb150-3"><a href="10-module-10.html#cb150-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4) <span class="co"># for multilevel models</span></span>
+<span id="cb150-4"><a href="10-module-10.html#cb150-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest) <span class="co"># for p-values</span></span>
+<span id="cb150-5"><a href="10-module-10.html#cb150-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(performance) <span class="co"># for ICC</span></span></code></pre></div>
 </div>
 <div id="multilevel-models-for-longitudinal-data" class="section level3" number="10.2.2">
 <h3><span class="header-section-number">10.2.2</span> Multilevel Models for Longitudinal Data</h3>
@@ -426,8 +428,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">10.2.3</span> Visualizing Testosterone Levels Over Time</h3>
 <p>The data used in this chapter are a simplified version of the data from Casto, K.V., &amp; Edwards, D.A. (2016). Before, during, and after: How phases of competition differentially affect testosterone, cortisol, and estradiol levels in women athletes. Adaptive Human Behavior and Physiology, 2, 11-25. <a href="https://doi.org/10.1007/s40750-015-0028-2" class="uri">https://doi.org/10.1007/s40750-015-0028-2</a>.</p>
 <p>Dr. Kathleen Casto gave us permission to use these data for teaching purposes (thanks Kathleen!); any other use requires additional permission. You can see more of her work <a href="https://scholar.google.com/citations?user=xqhtNEIAAAAJ&amp;hl=en">here</a>.</p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="10-module-10.html#cb155-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;casto2016.csv&#39;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="10-module-10.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="10-module-10.html#cb151-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;casto2016.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="10-module-10.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
 <pre><code>##   Code position HormonCont Played minplayed game time Cortisol Testosterone Estradiol
 ## 1 1224        1          0      1        90    1    2    0.456       84.541     3.706
 ## 2 1224        1          0      1        90    1    3    0.575      118.942     5.631
@@ -444,29 +446,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 6     2</code></pre>
 <p>These data include hormone levels of female athletes in a competition setting (soccer game), if they played in the game or not (<code>Played</code>), what position they played (<code>position</code>), how long they played (<code>minplayed</code>), their testosterone levels (<code>Testosterone</code>), and if they were taking birth control (<code>HormonCont</code>). We will focus on testosterone, if they played, and if they were taking birth control for this example.</p>
 <p>Let’s start by visualizing testosterone levels over time for the entire sample:</p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="10-module-10.html#cb158-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb158-2"><a href="10-module-10.html#cb158-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(time0) <span class="sc">%&gt;%</span></span>
-<span id="cb158-3"><a href="10-module-10.html#cb158-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tmean =</span> <span class="fu">mean</span>(Testosterone)) <span class="sc">%&gt;%</span> <span class="co"># mean testosterone per timepoint</span></span>
-<span id="cb158-4"><a href="10-module-10.html#cb158-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> time0, <span class="at">y =</span> tmean)) <span class="sc">+</span></span>
-<span id="cb158-5"><a href="10-module-10.html#cb158-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb158-6"><a href="10-module-10.html#cb158-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Testosterone Over Time for Entire Sample&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="10-module-10.html#cb154-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb154-2"><a href="10-module-10.html#cb154-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(time0) <span class="sc">%&gt;%</span></span>
+<span id="cb154-3"><a href="10-module-10.html#cb154-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tmean =</span> <span class="fu">mean</span>(Testosterone)) <span class="sc">%&gt;%</span> <span class="co"># mean testosterone per timepoint</span></span>
+<span id="cb154-4"><a href="10-module-10.html#cb154-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> time0, <span class="at">y =</span> tmean)) <span class="sc">+</span></span>
+<span id="cb154-5"><a href="10-module-10.html#cb154-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb154-6"><a href="10-module-10.html#cb154-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Testosterone Over Time for Entire Sample&quot;</span>)</span></code></pre></div>
 <p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-92-1.png" width="672" /></p>
 <p>The relationship between time and testosterone doesn’t look exactly linear. Let’s check if there are different relationships between people who played and people who didn’t.</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="10-module-10.html#cb159-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb159-2"><a href="10-module-10.html#cb159-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(time0, Played) <span class="sc">%&gt;%</span> <span class="co"># group by timepoint and played</span></span>
-<span id="cb159-3"><a href="10-module-10.html#cb159-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tmean =</span> <span class="fu">mean</span>(Testosterone)) <span class="sc">%&gt;%</span> </span>
-<span id="cb159-4"><a href="10-module-10.html#cb159-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> time0, <span class="at">y =</span> tmean, <span class="at">colour =</span> <span class="fu">factor</span>(Played))) <span class="sc">+</span></span>
-<span id="cb159-5"><a href="10-module-10.html#cb159-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb159-6"><a href="10-module-10.html#cb159-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Testosterone Over Time, Played vs. Did Not Play&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="10-module-10.html#cb155-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb155-2"><a href="10-module-10.html#cb155-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(time0, Played) <span class="sc">%&gt;%</span> <span class="co"># group by timepoint and played</span></span>
+<span id="cb155-3"><a href="10-module-10.html#cb155-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tmean =</span> <span class="fu">mean</span>(Testosterone)) <span class="sc">%&gt;%</span> </span>
+<span id="cb155-4"><a href="10-module-10.html#cb155-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> time0, <span class="at">y =</span> tmean, <span class="at">colour =</span> <span class="fu">factor</span>(Played))) <span class="sc">+</span></span>
+<span id="cb155-5"><a href="10-module-10.html#cb155-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb155-6"><a href="10-module-10.html#cb155-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Testosterone Over Time, Played vs. Did Not Play&quot;</span>)</span></code></pre></div>
 <p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-93-1.png" width="672" /></p>
 <p>Those who played have a pretty linear increase in testosterone over time, while those who did not play go up from time 0 to 1 and then back down between 1 and 2, so it looks like playing or not might be an important level-2 predictor for our model intercepts and slopes.</p>
 <p>Finally, let’s check whether birth control seems like an important predictor of intercepts and slopes:</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="10-module-10.html#cb160-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb160-2"><a href="10-module-10.html#cb160-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(time0, HormonCont) <span class="sc">%&gt;%</span> <span class="co"># group by timepoint and birth control</span></span>
-<span id="cb160-3"><a href="10-module-10.html#cb160-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tmean =</span> <span class="fu">mean</span>(Testosterone)) <span class="sc">%&gt;%</span> </span>
-<span id="cb160-4"><a href="10-module-10.html#cb160-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> time0, <span class="at">y =</span> tmean, <span class="at">colour =</span> <span class="fu">factor</span>(HormonCont))) <span class="sc">+</span></span>
-<span id="cb160-5"><a href="10-module-10.html#cb160-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb160-6"><a href="10-module-10.html#cb160-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Testosterone Over Time, Birth Control or Not&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="10-module-10.html#cb156-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb156-2"><a href="10-module-10.html#cb156-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(time0, HormonCont) <span class="sc">%&gt;%</span> <span class="co"># group by timepoint and birth control</span></span>
+<span id="cb156-3"><a href="10-module-10.html#cb156-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tmean =</span> <span class="fu">mean</span>(Testosterone)) <span class="sc">%&gt;%</span> </span>
+<span id="cb156-4"><a href="10-module-10.html#cb156-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> time0, <span class="at">y =</span> tmean, <span class="at">colour =</span> <span class="fu">factor</span>(HormonCont))) <span class="sc">+</span></span>
+<span id="cb156-5"><a href="10-module-10.html#cb156-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb156-6"><a href="10-module-10.html#cb156-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Testosterone Over Time, Birth Control or Not&quot;</span>)</span></code></pre></div>
 <p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-94-1.png" width="672" /></p>
 <p>Looks like another variable we might want to consider in our model! Let’s begin with our null model and incrementally build from there.</p>
 </div>
@@ -501,8 +503,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\(\tau_0^2\)</span>: a random effect for the intercept capturing the variance of people’s average testosterone levels around the intercept;</li>
 <li><span class="math inline">\(\sigma^2\)</span>: a random effect capturing the variance of people around their own average testosterone level.</li>
 </ol>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="10-module-10.html#cb161-1" aria-hidden="true" tabindex="-1"></a>null_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Testosterone <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Code), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb161-2"><a href="10-module-10.html#cb161-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(null_model)</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="10-module-10.html#cb157-1" aria-hidden="true" tabindex="-1"></a>null_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Testosterone <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Code), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb157-2"><a href="10-module-10.html#cb157-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(null_model)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: Testosterone ~ 1 + (1 | Code)
@@ -526,7 +528,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## (Intercept)   59.643      3.569 24.876   16.71 0.00000000000000494 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="10-module-10.html#cb163-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(null_model)</span></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="10-module-10.html#cb159-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(null_model)</span></code></pre></div>
 <pre><code>## # Intraclass Correlation Coefficient
 ## 
 ##      Adjusted ICC: 0.576
@@ -576,8 +578,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\(\tau_{01}\)</span>: the covariance between the random intercept and random slope. Do people who have higher values of testosterone at time0 have particularly lower or higher slopes?</li>
 </ol>
 <p>Let’s run the model with FIML as our estimator:</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="10-module-10.html#cb165-1" aria-hidden="true" tabindex="-1"></a>l1_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Testosterone <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time0 <span class="sc">+</span> (time0<span class="sc">|</span>Code), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb165-2"><a href="10-module-10.html#cb165-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(l1_model)</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="10-module-10.html#cb161-1" aria-hidden="true" tabindex="-1"></a>l1_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Testosterone <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time0 <span class="sc">+</span> (time0<span class="sc">|</span>Code), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb161-2"><a href="10-module-10.html#cb161-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(l1_model)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: Testosterone ~ 1 + time0 + (time0 | Code)
@@ -607,7 +609,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Correlation of Fixed Effects:
 ##       (Intr)
 ## time0 0.114</code></pre>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="10-module-10.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.matrix</span>(Matrix<span class="sc">::</span><span class="fu">bdiag</span>(<span class="fu">VarCorr</span>(l1_model)))</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="10-module-10.html#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.matrix</span>(Matrix<span class="sc">::</span><span class="fu">bdiag</span>(<span class="fu">VarCorr</span>(l1_model)))</span></code></pre></div>
 <pre><code>##             (Intercept)    time0
 ## (Intercept)   154.67317 53.07523
 ## time0          53.07523 24.11744</code></pre>
@@ -618,9 +620,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">10.2.6</span> Evidence for Retaining Effects</h3>
 <p>The fixed effect for time seems both statistically and practically significant. Variances are difficult to interpret in isolation, so we can consider a few sources of evidence when examining whether to keep the random effect for slope: deviance testing, 95% confidence interval, 95% plausible values range, and visualizing variance.</p>
 <p>We can use the built-in <code>anova()</code> function to conduct our deviance test for the model with and without the slope covariance:</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="10-module-10.html#cb169-1" aria-hidden="true" tabindex="-1"></a>l1_model_no_U1j <span class="ot">&lt;-</span>  <span class="fu">lmer</span>(Testosterone <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time0 <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Code), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb169-2"><a href="10-module-10.html#cb169-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb169-3"><a href="10-module-10.html#cb169-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(l1_model, l1_model_no_U1j)</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="10-module-10.html#cb165-1" aria-hidden="true" tabindex="-1"></a>l1_model_no_U1j <span class="ot">&lt;-</span>  <span class="fu">lmer</span>(Testosterone <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time0 <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Code), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb165-2"><a href="10-module-10.html#cb165-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb165-3"><a href="10-module-10.html#cb165-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(l1_model, l1_model_no_U1j)</span></code></pre></div>
 <pre><code>## Data: data
 ## Models:
 ## l1_model_no_U1j: Testosterone ~ 1 + time0 + (1 | Code)
@@ -632,7 +634,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>There is significantly less deviance in the model with the slope variance term.</p>
 <p>Let’s look at 95% confidence intervals for all effects:</p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="10-module-10.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(l1_model, <span class="at">oldNames =</span> F)</span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="10-module-10.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(l1_model, <span class="at">oldNames =</span> F)</span></code></pre></div>
 <pre><code>## Computing profile confidence intervals ...</code></pre>
 <pre><code>##                                  2.5 %    97.5 %
 ## sd_(Intercept)|Code         8.08885766 18.508662
@@ -642,8 +644,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## (Intercept)                44.60763264 56.714968
 ## time0                       5.76797005 12.405566</code></pre>
 <p>We’ve suppressed the warnings in this output for brevity, but if you run this code yourself you’ll see a lot of warnings! That’s likely because of the covariance term, given that the correlation <code>cor_time0.(Intercept)|Code</code> runs up against the upper bound of 1.00 within the confidence interval. Let’s remove that term.</p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="10-module-10.html#cb174-1" aria-hidden="true" tabindex="-1"></a>l1_model_cov0 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Testosterone <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time0 <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Code) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> time0<span class="sc">|</span>Code), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb174-2"><a href="10-module-10.html#cb174-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(l1_model, l1_model_cov0)</span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="10-module-10.html#cb170-1" aria-hidden="true" tabindex="-1"></a>l1_model_cov0 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Testosterone <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time0 <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Code) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> time0<span class="sc">|</span>Code), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb170-2"><a href="10-module-10.html#cb170-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(l1_model, l1_model_cov0)</span></code></pre></div>
 <pre><code>## Data: data
 ## Models:
 ## l1_model_cov0: Testosterone ~ 1 + time0 + (1 | Code) + (0 + time0 | Code)
@@ -654,7 +656,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>Our model fit is not significantly different after removing the covariance term, so let’s proceed without it and look at our confidence intervals again:</p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="10-module-10.html#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(l1_model_cov0, <span class="at">oldNames =</span> F)</span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="10-module-10.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(l1_model_cov0, <span class="at">oldNames =</span> F)</span></code></pre></div>
 <pre><code>## Computing profile confidence intervals ...</code></pre>
 <pre><code>##                         2.5 %   97.5 %
 ## sd_(Intercept)|Code 10.123069 20.33901
@@ -664,10 +666,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## time0                5.589114 12.80020</code></pre>
 <p>The confidence interval for our slope variance, <code>sd_time0|Code</code>, does not contain 0, so it is significant.</p>
 <p>Finally, one way to visualize variability is with a graph: what are the different slope values across people? This is the same as our Empirical Bayes plotting exercise in Chapter 4.</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="10-module-10.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract Empirical Bayes estimates and graph them</span></span>
-<span id="cb179-2"><a href="10-module-10.html#cb179-2" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(<span class="fu">coef</span>(l1_model)<span class="sc">$</span>Code) <span class="sc">%&gt;%</span> </span>
-<span id="cb179-3"><a href="10-module-10.html#cb179-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> time0)) <span class="sc">+</span></span>
-<span id="cb179-4"><a href="10-module-10.html#cb179-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="10-module-10.html#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract Empirical Bayes estimates and graph them</span></span>
+<span id="cb175-2"><a href="10-module-10.html#cb175-2" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(<span class="fu">coef</span>(l1_model)<span class="sc">$</span>Code) <span class="sc">%&gt;%</span> </span>
+<span id="cb175-3"><a href="10-module-10.html#cb175-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> time0)) <span class="sc">+</span></span>
+<span id="cb175-4"><a href="10-module-10.html#cb175-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">5</span>)</span></code></pre></div>
 <p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-101-1.png" width="672" /></p>
 <p>To summarize our evidence: the model with the random slope effect fits better, the random effect confidence interval does not contain zero (i.e., it is significant), and we can see that slopes for time vary, many people’s slopes around 5 or 10 but some as high as ~20. All signs point to keeping the random effect.</p>
 </div>
@@ -715,8 +717,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\(\sigma^2\)</span>: a random effect capturing the variance of people around their own average testosterone level, controlling for time and playing;</li>
 </ol>
 <p>We are not estimating a covariance term.</p>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="10-module-10.html#cb180-1" aria-hidden="true" tabindex="-1"></a>l2_played <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Testosterone <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time0 <span class="sc">+</span> Played <span class="sc">+</span> Played<span class="sc">:</span>time0 <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Code) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> time0<span class="sc">|</span>Code), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb180-2"><a href="10-module-10.html#cb180-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(l2_played)</span></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="10-module-10.html#cb176-1" aria-hidden="true" tabindex="-1"></a>l2_played <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Testosterone <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time0 <span class="sc">+</span> Played <span class="sc">+</span> Played<span class="sc">:</span>time0 <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Code) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> time0<span class="sc">|</span>Code), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb176-2"><a href="10-module-10.html#cb176-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(l2_played)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: Testosterone ~ 1 + time0 + Played + Played:time0 + (1 | Code) +  
@@ -754,7 +756,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Looking at our fixed effects, the intercept of 44.53 is the average testosterone level at time 0 across people who didn’t play. The slope of time, 3.93, indicates the average increase in testosterone levels over one unit of time controlling for playing. The slope of having played, 9.00, indicates that those who played had on average 9 more units of Testosterone than those who didn’t at time 0. The interaction between time and having played indicates that those who played had a 7.39-higher slope on average than those who didn’t.</p>
 <p>The variance term describing how people vary around the intercept is 182.24. The variance term describing how people’s time slopes vary is 27.22.</p>
 <p>Let’s do a quick deviance test to see if including playing decreases deviance (i.e., improves model fit):</p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="10-module-10.html#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(l1_model_cov0, l2_played)</span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="10-module-10.html#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(l1_model_cov0, l2_played)</span></code></pre></div>
 <pre><code>## Data: data
 ## Models:
 ## l1_model_cov0: Testosterone ~ 1 + time0 + (1 | Code) + (0 + time0 | Code)
@@ -801,8 +803,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\(\gamma_{02}\)</span>: the fixed effect for birth control, effect of taking birth control on baseline testosterone levels controlling for playing;</li>
 <li><span class="math inline">\(\gamma_{12}\)</span>: interaction term between playing and birth control.</li>
 </ol>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="10-module-10.html#cb184-1" aria-hidden="true" tabindex="-1"></a>l2_played_birthcontrol <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Testosterone <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time0 <span class="sc">+</span> Played <span class="sc">+</span> time0<span class="sc">:</span>Played <span class="sc">+</span> HormonCont <span class="sc">+</span> time0<span class="sc">:</span>HormonCont <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Code) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> time0<span class="sc">|</span>Code), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb184-2"><a href="10-module-10.html#cb184-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(l2_played_birthcontrol)</span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="10-module-10.html#cb180-1" aria-hidden="true" tabindex="-1"></a>l2_played_birthcontrol <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Testosterone <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time0 <span class="sc">+</span> Played <span class="sc">+</span> time0<span class="sc">:</span>Played <span class="sc">+</span> HormonCont <span class="sc">+</span> time0<span class="sc">:</span>HormonCont <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Code) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> time0<span class="sc">|</span>Code), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb180-2"><a href="10-module-10.html#cb180-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(l2_played_birthcontrol)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: Testosterone ~ 1 + time0 + Played + time0:Played + HormonCont +  
@@ -841,12 +843,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## HormonCont  -0.591  0.169 -0.024              
 ## time0:Playd  0.183 -0.668 -0.280  0.007       
 ## tm0:HrmnCnt  0.171 -0.543  0.007 -0.289 -0.067</code></pre>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="10-module-10.html#cb186-1" aria-hidden="true" tabindex="-1"></a>Matrix<span class="sc">::</span><span class="fu">bdiag</span>(<span class="fu">VarCorr</span>(l2_played_birthcontrol))</span></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="10-module-10.html#cb182-1" aria-hidden="true" tabindex="-1"></a>Matrix<span class="sc">::</span><span class="fu">bdiag</span>(<span class="fu">VarCorr</span>(l2_played_birthcontrol))</span></code></pre></div>
 <pre><code>## 2 x 2 sparse Matrix of class &quot;dgCMatrix&quot;
 ##                       
 ## [1,] 159.2723  .      
 ## [2,]   .      27.99435</code></pre>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="10-module-10.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(l2_played, l2_played_birthcontrol)</span></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="10-module-10.html#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(l2_played, l2_played_birthcontrol)</span></code></pre></div>
 <pre><code>## Data: data
 ## Models:
 ## l2_played: Testosterone ~ 1 + time0 + Played + Played:time0 + (1 | Code) + (0 + time0 | Code)

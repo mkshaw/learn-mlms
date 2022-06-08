@@ -1,4 +1,4 @@
-# Multiple Regression Review {#multiple-regression}
+# Multiple Regression Review {#module-2}
 
 ## Learning Objectives
 
@@ -40,7 +40,7 @@ To create a project, open R, click "File" and "New Project...". If you have alre
 
 Next, let's load in the data and packages we'll be using for this demo. We'll be using the following packages:
 
-```{r data-dependencies, message=FALSE}
+```{r data-dependencies, message=FALSE, warning=FALSE}
 library(ggplot2) # for data visualization
 library(magrittr) # for pipe, %>% 
 ```

@@ -151,7 +151,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2.1" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#creating-r-projects"><i class="fa fa-check"></i><b>2.2.1</b> Creating R Projects</a></li>
 <li class="chapter" data-level="2.2.2" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#loading-data-and-dependencies"><i class="fa fa-check"></i><b>2.2.2</b> Loading Data and Dependencies</a></li>
 <li class="chapter" data-level="2.2.3" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#simple-linear-regression"><i class="fa fa-check"></i><b>2.2.3</b> Simple Linear Regression</a></li>
-<li class="chapter" data-level="2.2.4" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#multiple-regression-1"><i class="fa fa-check"></i><b>2.2.4</b> Multiple Regression</a></li>
+<li class="chapter" data-level="2.2.4" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#multiple-regression"><i class="fa fa-check"></i><b>2.2.4</b> Multiple Regression</a></li>
 <li class="chapter" data-level="2.2.5" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#interaction-terms"><i class="fa fa-check"></i><b>2.2.5</b> Interaction Terms</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html#conclusion"><i class="fa fa-check"></i><b>2.3</b> Conclusion</a></li>
@@ -297,6 +297,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="12.3" data-path="12-module-12.html"><a href="12-module-12.html#conclusion-10"><i class="fa fa-check"></i><b>12.3</b> Conclusion</a></li>
 </ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="13-appendix.html"><a href="13-appendix.html"><i class="fa fa-check"></i><b>A</b> Download Materials</a></li>
 <li class="divider"></li>
 <li><a href="https://twitter.com/maireadkshaw">Mairead Shaw</a></li>
 <li><a href="https://twitter.com/jkayflake">Jessica Kay Flake</a></li>
@@ -337,19 +339,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="load-data-and-dependencies-2" class="section level3" number="5.2.1">
 <h3><span class="header-section-number">5.2.1</span> Load Data and Dependencies</h3>
 <p>For this data demo, we will use the following packages:</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="05-module-5.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># for data manipulation</span></span>
-<span id="cb48-2"><a href="05-module-5.html#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># for visualizations</span></span>
-<span id="cb48-3"><a href="05-module-5.html#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4) <span class="co"># for multilevel models</span></span>
-<span id="cb48-4"><a href="05-module-5.html#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest) <span class="co"># for p-values</span></span>
-<span id="cb48-5"><a href="05-module-5.html#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(performance) <span class="co"># for intraclass correlation</span></span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="05-module-5.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># for data manipulation</span></span>
+<span id="cb44-2"><a href="05-module-5.html#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># for visualizations</span></span>
+<span id="cb44-3"><a href="05-module-5.html#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4) <span class="co"># for multilevel models</span></span>
+<span id="cb44-4"><a href="05-module-5.html#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest) <span class="co"># for p-values</span></span>
+<span id="cb44-5"><a href="05-module-5.html#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(performance) <span class="co"># for intraclass correlation</span></span></code></pre></div>
 <p>And the same dataset of students’ math achievement:</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="05-module-5.html#cb49-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;heck2011.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="05-module-5.html#cb45-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;heck2011.csv&#39;</span>)</span></code></pre></div>
 </div>
 <div id="mlm-with-level-1-predictor" class="section level3" number="5.2.2">
 <h3><span class="header-section-number">5.2.2</span> MLM with Level-1 Predictor</h3>
 <p>As a reminder, in Chapter 4 we estimated the random-intercept-only model, also called the null model:</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="05-module-5.html#cb50-1" aria-hidden="true" tabindex="-1"></a>null_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode), <span class="at">data =</span> data)</span>
-<span id="cb50-2"><a href="05-module-5.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(null_model)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="05-module-5.html#cb46-1" aria-hidden="true" tabindex="-1"></a>null_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode), <span class="at">data =</span> data)</span>
+<span id="cb46-2"><a href="05-module-5.html#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(null_model)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
 ## Formula: math ~ 1 + (1 | schcode)
 ##    Data: data
@@ -407,8 +409,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\(\sigma^2\)</span>: a random effect capturing the variance of students around their school mean math achievement, controlling for <code>ses</code>.</li>
 </ol>
 <p>Notice that the parameters are now conditional on <code>ses</code>. The intercept is no longer interpreted as the intercept across all schools; it’s the intercept across all schools <em>conditional on <code>ses</code> being equal to 0</em>, or at the mean <code>ses</code> level for the sample given that <code>ses</code> is z-scored in these data. Additionally, note that there is no <span class="math inline">\(U_j\)</span> term associated with the coefficient for <code>ses</code>; that’s because we’re only adding a fixed effect for <code>ses</code> right now. This implies that the relationship between <code>ses</code> and math achievement is the same across all schools (i.e., the slope is fixed, not randomly varying). We’ll look at adding random slope effects in the next chapter. For now, let’s run our model.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="05-module-5.html#cb52-1" aria-hidden="true" tabindex="-1"></a>ses_l1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> ses <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb52-2"><a href="05-module-5.html#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ses_l1)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="05-module-5.html#cb48-1" aria-hidden="true" tabindex="-1"></a>ses_l1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> ses <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb48-2"><a href="05-module-5.html#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ses_l1)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
 ## Formula: math ~ ses + (1 | schcode)
 ##    Data: data
@@ -437,14 +439,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## ses -0.025</code></pre>
 <p>Per the intercept, the average math achievement across all schools at mean <code>ses</code> is 57.596. A one-standard-deviation increase in <code>ses</code> is associated with a 3.87-point increase in math achievement. The variance term describing how schools vary around the intercept is 3.469, whereas the variance term describing how the students vary within schools, about their schools’ mean, is 62.807. These variance terms are different from our null model that had no predictors; we can quantify that difference in at least two ways.</p>
 <p>One option is to calculate how much level-1 variance was reduced by adding <code>ses</code> as a level-1 predictor. If we divide the difference between our null model’s level-1 variance and this new model’s (l1) level-1 variance by the null model variance, we can see what proportion of variance was reduced.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="05-module-5.html#cb54-1" aria-hidden="true" tabindex="-1"></a>null <span class="ot">&lt;-</span> <span class="fu">sigma</span>(null_model)<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb54-2"><a href="05-module-5.html#cb54-2" aria-hidden="true" tabindex="-1"></a>l1 <span class="ot">&lt;-</span> <span class="fu">sigma</span>(ses_l1)<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb54-3"><a href="05-module-5.html#cb54-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-4"><a href="05-module-5.html#cb54-4" aria-hidden="true" tabindex="-1"></a>(null <span class="sc">-</span> l1) <span class="sc">/</span> null</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="05-module-5.html#cb50-1" aria-hidden="true" tabindex="-1"></a>null <span class="ot">&lt;-</span> <span class="fu">sigma</span>(null_model)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb50-2"><a href="05-module-5.html#cb50-2" aria-hidden="true" tabindex="-1"></a>l1 <span class="ot">&lt;-</span> <span class="fu">sigma</span>(ses_l1)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb50-3"><a href="05-module-5.html#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="05-module-5.html#cb50-4" aria-hidden="true" tabindex="-1"></a>(null <span class="sc">-</span> l1) <span class="sc">/</span> null</span></code></pre></div>
 <pre><code>## [1] 0.05624991</code></pre>
 <p>So we reduced about 5.6% of level-1 variance by adding <code>ses</code> as a level-1 predictor. Another way of stating this is that we reduced the unexplained within school variance by 5.6%.</p>
 <p>Another option is to calculate the conditional ICC, or the proportion of variance explained by clustering after we account for <code>ses</code>. Recall from last chapter that the adjusted ICC accounts only for random effects, while the conditional ICC accounts for both random effects and fixed effects. With the null model, the adjusted and conditional ICC values from <code>performance</code> are the same because there are no predictors in the model, but with a fixed level-1 predictor in the model, we should reference the conditional ICC.</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="05-module-5.html#cb56-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(ses_l1)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="05-module-5.html#cb52-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(ses_l1)</span></code></pre></div>
 <pre><code>## # Intraclass Correlation Coefficient
 ## 
 ##      Adjusted ICC: 0.052
@@ -455,8 +457,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">5.2.3</span> Compare Regular and Multilevel Regression</h3>
 <p>In the previous chapter, we compared a regular regression to a cluster-robust standard error regression. Now, let’s compare those two with a multilevel model.</p>
 <p>The regular regression from Chapter 4:</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="05-module-5.html#cb58-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(math <span class="sc">~</span> ses, <span class="at">data =</span> data)</span>
-<span id="cb58-2"><a href="05-module-5.html#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="05-module-5.html#cb54-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(math <span class="sc">~</span> ses, <span class="at">data =</span> data)</span>
+<span id="cb54-2"><a href="05-module-5.html#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = math ~ ses, data = data)
@@ -476,8 +478,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Multiple R-squared:  0.143,  Adjusted R-squared:  0.1429 
 ## F-statistic:  1146 on 1 and 6869 DF,  p-value: &lt; 0.00000000000000022</code></pre>
 <p>The cluster-robust standard error regression from Chapter 4:</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="05-module-5.html#cb60-1" aria-hidden="true" tabindex="-1"></a>model_crse <span class="ot">&lt;-</span> lmtest<span class="sc">::</span><span class="fu">coeftest</span>(model, <span class="at">vcov =</span> sandwich<span class="sc">::</span>vcovCL, <span class="at">cluster =</span> <span class="sc">~</span> schcode)</span>
-<span id="cb60-2"><a href="05-module-5.html#cb60-2" aria-hidden="true" tabindex="-1"></a>model_crse</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="05-module-5.html#cb56-1" aria-hidden="true" tabindex="-1"></a>model_crse <span class="ot">&lt;-</span> lmtest<span class="sc">::</span><span class="fu">coeftest</span>(model, <span class="at">vcov =</span> sandwich<span class="sc">::</span>vcovCL, <span class="at">cluster =</span> <span class="sc">~</span> schcode)</span>
+<span id="cb56-2"><a href="05-module-5.html#cb56-2" aria-hidden="true" tabindex="-1"></a>model_crse</span></code></pre></div>
 <pre><code>## 
 ## t test of coefficients:
 ## 
@@ -488,7 +490,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>These two models had the same coefficients, with different significance values.</p>
 <p>This is our multilevel model:</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="05-module-5.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ses_l1)</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="05-module-5.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ses_l1)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
 ## Formula: math ~ ses + (1 | schcode)
 ##    Data: data
@@ -567,8 +569,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\(\sigma^2\)</span>: a random effect capturing the variance of students around their school mean math achievement, controlling for <code>ses</code> and <code>public</code>.</li>
 </ol>
 <p>Notice that the parameters are conditional on both <code>ses</code> and on <code>public</code> now. Let’s run our model.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="05-module-5.html#cb64-1" aria-hidden="true" tabindex="-1"></a>ses_l1_public_l2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">+</span> public <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb64-2"><a href="05-module-5.html#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ses_l1_public_l2)</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="05-module-5.html#cb60-1" aria-hidden="true" tabindex="-1"></a>ses_l1_public_l2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">+</span> public <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb60-2"><a href="05-module-5.html#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ses_l1_public_l2)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
 ## Formula: math ~ 1 + ses + public + (1 | schcode)
 ##    Data: data
@@ -600,15 +602,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Let’s look at our fixed effects, which describes the conditional mean effect of a variable on the outcome, across all schools. Per the intercept, the average math achievement across all private schools (<code>public</code> = 0) at mean SES (<code>ses</code> = 0) is 57.70. A one-standard-deviation increase in <code>ses</code> across all private schools is associated with a 3.87-point increase in math achievement. Public schools at mean <code>ses</code> have a -0.14-point decrease on average in math achievement relative to private schools.</p>
 <p>From our random effects, the variance term describing how schools vary around the intercept (at mean SES at private schools) is 3.48, and the variance term describing how students vary around their school means is 62.81.</p>
 <p>Let’s calculate variance reduced at level 1 and level 2 by adding school type as a predictor.</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="05-module-5.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># level-1 variance reduced</span></span>
-<span id="cb66-2"><a href="05-module-5.html#cb66-2" aria-hidden="true" tabindex="-1"></a>sigma2_null <span class="ot">&lt;-</span> <span class="fu">sigma</span>(null_model)<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb66-3"><a href="05-module-5.html#cb66-3" aria-hidden="true" tabindex="-1"></a>sigma2_public <span class="ot">&lt;-</span> <span class="fu">sigma</span>(ses_l1_public_l2)<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb66-4"><a href="05-module-5.html#cb66-4" aria-hidden="true" tabindex="-1"></a>(sigma2_null <span class="sc">-</span> sigma2_public) <span class="sc">/</span> sigma2_null</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="05-module-5.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># level-1 variance reduced</span></span>
+<span id="cb62-2"><a href="05-module-5.html#cb62-2" aria-hidden="true" tabindex="-1"></a>sigma2_null <span class="ot">&lt;-</span> <span class="fu">sigma</span>(null_model)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb62-3"><a href="05-module-5.html#cb62-3" aria-hidden="true" tabindex="-1"></a>sigma2_public <span class="ot">&lt;-</span> <span class="fu">sigma</span>(ses_l1_public_l2)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb62-4"><a href="05-module-5.html#cb62-4" aria-hidden="true" tabindex="-1"></a>(sigma2_null <span class="sc">-</span> sigma2_public) <span class="sc">/</span> sigma2_null</span></code></pre></div>
 <pre><code>## [1] 0.05624525</code></pre>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="05-module-5.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># level-2 variance reduced</span></span>
-<span id="cb68-2"><a href="05-module-5.html#cb68-2" aria-hidden="true" tabindex="-1"></a>tau2_null <span class="ot">&lt;-</span> <span class="fu">VarCorr</span>(null_model)<span class="sc">$</span>schcode[<span class="dv">1</span>]</span>
-<span id="cb68-3"><a href="05-module-5.html#cb68-3" aria-hidden="true" tabindex="-1"></a>tau2_public <span class="ot">&lt;-</span> <span class="fu">VarCorr</span>(ses_l1_public_l2)<span class="sc">$</span>schcode[<span class="dv">1</span>]</span>
-<span id="cb68-4"><a href="05-module-5.html#cb68-4" aria-hidden="true" tabindex="-1"></a>(tau2_null <span class="sc">-</span> tau2_public) <span class="sc">/</span> tau2_null</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="05-module-5.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># level-2 variance reduced</span></span>
+<span id="cb64-2"><a href="05-module-5.html#cb64-2" aria-hidden="true" tabindex="-1"></a>tau2_null <span class="ot">&lt;-</span> <span class="fu">VarCorr</span>(null_model)<span class="sc">$</span>schcode[<span class="dv">1</span>]</span>
+<span id="cb64-3"><a href="05-module-5.html#cb64-3" aria-hidden="true" tabindex="-1"></a>tau2_public <span class="ot">&lt;-</span> <span class="fu">VarCorr</span>(ses_l1_public_l2)<span class="sc">$</span>schcode[<span class="dv">1</span>]</span>
+<span id="cb64-4"><a href="05-module-5.html#cb64-4" aria-hidden="true" tabindex="-1"></a>(tau2_null <span class="sc">-</span> tau2_public) <span class="sc">/</span> tau2_null</span></code></pre></div>
 <pre><code>## [1] 0.6724414</code></pre>
 <p>We reduced around 5.6% of variance in math achievement at level-1 and 67.2% of variance at level-2 by adding <code>public</code> as a level-2 predictor. It makes sense that the variance at level-2 was reduced by so much more, because we added a level-2 predictor that varies at level-2.</p>
 <p>So, does it seem like school type is related to math achievement? We have two sources of information to consider so far: the regression coefficient and the variance reduced. While the regression coefficient is relatively small, the intercept variance reduced at level-2 is quite large (67%!), so it seems like school type is a valuable predictor in our model.</p>
