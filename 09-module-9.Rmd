@@ -11,7 +11,7 @@ The learning objectives for this chapter are:
 3. Conduct multilevel modelling on repeated measures data;
 4. Interpret coefficients for repeated measures data.
 
-All materials for this chapter are available for download [here](www.learn-mlms.com/students).
+All materials for this chapter are available for download [here](#appendix).
 
 ## Data Demonstration
 

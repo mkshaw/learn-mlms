@@ -1,17 +1,17 @@
-# (APPENDIX) Appendix {-}
+# (APPENDIX) Appendix {#appendix} {-} 
 
 # Download Materials
 
 |Chapter|Data|R Script|Worksheet|
 |:-----:|:--:|:------:|:-------:|
-|[2](#module-2)|`r xfun::embed_file('data/heck2011.csv', text = "heck2011.csv")`|filler2|`r xfun::embed_file('worksheets/module2', text = "Module 2")`|
-|[3](#module-3)|`r xfun::embed_file('data/heck2011.csv', text = "heck2011.csv")`|filler2|`r xfun::embed_file('worksheets/module3', text = "Module 3")`|
-|[4](#module-4)|`r xfun::embed_file('data/heck2011.csv', text = "heck2011.csv")`|filler2|`r xfun::embed_file('worksheets/module4', text = "Module 4")`|
-|[5](#module-5)|`r xfun::embed_file('data/heck2011.csv', text = "heck2011.csv")`|filler2|`r xfun::embed_file('worksheets/module5', text = "Module 5")`|
-|[6](#module-6)|`r xfun::embed_file('data/heck2011.csv', text = "heck2011.csv")`|filler2|`r xfun::embed_file('worksheets/module6', text = "Module 6")`|
-|[7](#module-7)|`r xfun::embed_file('data/heck2011.csv', text = "heck2011.csv")`|filler2|`r xfun::embed_file('worksheets/module7', text = "Module 7")`|
-|[8](#module-8)|`r xfun::embed_file('data/heck2011.csv', text = "heck2011.csv")`|filler2|`r xfun::embed_file('worksheets/module8', text = "Module 8")`|
-|[9](#module-9)|`r xfun::embed_file('data/hoffman2007.csv', text = "hoffman2007.csv")`|filler2|`r xfun::embed_file('worksheets/module9', text = "Module 9")`|
-|[10](#module-10)|`r xfun::embed_file('data/casto2016.csv', text = "casto2016.csv")`|filler2|`r xfun::embed_file('worksheets/module10', text = "Module 10")`|
-|[11](#module-11)|`teachsat` included in `r2mlm`|filler2|`r xfun::embed_file('worksheets/module11', text = "Module 11")`|
-|[12](#module-12)|`r xfun::embed_file('data/rb2002.csv', text = "rb2002.csv")`|filler2|`r xfun::embed_file('worksheets/module12', text = "Module 12")`|
+|[2](#module-2)|`r xfun::embed_file('data/heck2011.csv', text = "heck2011.csv")`|filler2|`r xfun::embed_file('worksheets/module2.docx', text = "Linear Regression Review")`|
+|[3](#module-3)|`r xfun::embed_file('data/heck2011.csv', text = "heck2011.csv")`|filler2|`r xfun::embed_file('worksheets/module3.docx', text = "Approaches to Multilevel Data")`|
+|[4](#module-4)|`r xfun::embed_file('data/heck2011.csv', text = "heck2011.csv")`|filler2|`r xfun::embed_file('worksheets/module4.docx', text = "Our First MLM: The Null Model")`|
+|[5](#module-5)|`r xfun::embed_file('data/heck2011.csv', text = "heck2011.csv")`|filler2|`r xfun::embed_file('worksheets/module5.docx', text = "Adding Fixed Predictors")`|
+|[6](#module-6)|`r xfun::embed_file('data/heck2011.csv', text = "heck2011.csv")`|filler2|`r xfun::embed_file('worksheets/module6.docx', text = "Random Effects and Cross-level Interactions")`|
+|[7](#module-7)|`r xfun::embed_file('data/heck2011.csv', text = "heck2011.csv")`|filler2|`r xfun::embed_file('worksheets/module7.docx', text = "Estimation Options and Troubleshooting")`|
+|[8](#module-8)|`r xfun::embed_file('data/heck2011.csv', text = "heck2011.csv")`|filler2|`r xfun::embed_file('worksheets/module8.docx', text = "Centering")`|
+|[9](#module-9)|`r xfun::embed_file('data/hoffman2007.csv', text = "hoffman2007.csv")`|filler2|`r xfun::embed_file('worksheets/module9.docx', text = "Repeated Measures")`|
+|[10](#module-10)|`r xfun::embed_file('data/casto2016.csv', text = "casto2016.csv")`|filler2|`r xfun::embed_file('worksheets/module10.docx', text = "Longitudinal Measures")`|
+|[11](#module-11)|`teachsat` included in `r2mlm`|filler2|`r xfun::embed_file('worksheets/module11.docx', text = "Effect Sizes in MLMs")`|
+|[12](#module-12)|`r xfun::embed_file('data/rb2002.csv', text = "rb2002.csv")`|filler2|`r xfun::embed_file('worksheets/module12.docx', text = "Assumptions")`|

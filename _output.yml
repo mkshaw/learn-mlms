@@ -9,8 +9,8 @@ bookdown::gitbook:
       before: |
         <li><a href="./">Introduction to Multilevel Modelling</li>
       after: |
-        <li><a href="https://twitter.com/maireadkshaw">Mairead Shaw</a></li>
-        <li><a href="https://twitter.com/jkayflake">Jessica Kay Flake</a></li>
+        <li><a href="https://twitter.com/maireadkshaw" target="_blank">Mairead Shaw</a></li>
+        <li><a href="https://twitter.com/jkayflake" target="_blank">Jessica Kay Flake</a></li>
     download: ["pdf", "epub"]
 # bookdown::pdf_book:
 #   includes:

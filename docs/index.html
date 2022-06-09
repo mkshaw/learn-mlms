@@ -31,7 +31,7 @@
   
   
 
-<link rel="next" href="02-multiple-regression.html"/>
+<link rel="next" href="01-module-1.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -136,12 +136,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Introduction to Multilevel Modelling</li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#goals"><i class="fa fa-check"></i><b>1.2</b> Goals</a></li>
-<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#prerequisites"><i class="fa fa-check"></i><b>1.3</b> Prerequisites</a></li>
-<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#materials"><i class="fa fa-check"></i><b>1.4</b> Materials</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-authors"><i class="fa fa-check"></i>About the Authors</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="01-module-1.html"><a href="01-module-1.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="01-module-1.html"><a href="01-module-1.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
+<li class="chapter" data-level="1.2" data-path="01-module-1.html"><a href="01-module-1.html#goals"><i class="fa fa-check"></i><b>1.2</b> Goals</a></li>
+<li class="chapter" data-level="1.3" data-path="01-module-1.html"><a href="01-module-1.html#prerequisites"><i class="fa fa-check"></i><b>1.3</b> Prerequisites</a></li>
+<li class="chapter" data-level="1.4" data-path="01-module-1.html"><a href="01-module-1.html#materials"><i class="fa fa-check"></i><b>1.4</b> Materials</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html"><i class="fa fa-check"></i><b>2</b> Multiple Regression Review</a>
 <ul>
@@ -297,11 +301,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="12.3" data-path="12-module-12.html"><a href="12-module-12.html#conclusion-10"><i class="fa fa-check"></i><b>12.3</b> Conclusion</a></li>
 </ul></li>
-<li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="A" data-path="13-appendix.html"><a href="13-appendix.html"><i class="fa fa-check"></i><b>A</b> Download Materials</a></li>
+<li class="chapter" data-level="13" data-path="13-appendix.html"><a href="13-appendix.html"><i class="fa fa-check"></i><b>13</b> (APPENDIX) Appendix {-}</a></li>
+<li class="chapter" data-level="14" data-path="13-appendix.html"><a href="13-appendix.html#download-materials"><i class="fa fa-check"></i><b>14</b> Download Materials</a></li>
 <li class="divider"></li>
-<li><a href="https://twitter.com/maireadkshaw">Mairead Shaw</a></li>
-<li><a href="https://twitter.com/jkayflake">Jessica Kay Flake</a></li>
+<li><a href="https://twitter.com/maireadkshaw" target="_blank">Mairead Shaw</a></li>
+<li><a href="https://twitter.com/jkayflake" target="_blank">Jessica Kay Flake</a></li>
 
 </ul>
 
@@ -324,35 +328,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1 class="title">Introduction to Multilevel Modelling</h1>
 <p class="author"><em>Mairead Shaw and Jessica Kay Flake</em></p>
 </div>
-<div id="introduction" class="section level1" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
-<div id="overview" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Overview</h2>
-<p>These materials focus on conceptual foundations of multilevel models (MLMs), specifiying them, and interpreting the results. Topics include multilevel data and approaches to dependence, specifying and interpreting fixed and random effects, model estimation, centering, repeated measures and longitudinal models, assumptions testing, and effect sizes in MLMs.</p>
-</div>
-<div id="goals" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> Goals</h2>
-<p>These materials are intended for students and instructors.</p>
-<p>By the end of this course, students will be able to:</p>
-<ol style="list-style-type: decimal">
-<li>Estimate variance components and interpret the intraclass correlation coefficient</li>
-<li>Decide if and when a multilevel model is needed</li>
-<li>Specify and build multilevel models with covariates at level 1 and 2 with both cross-sectional and repeated measures designs</li>
-<li>Interpret regression coefficients and variance components from multilevel models</li>
-<li>Assess the assumptions of multilevel models</li>
-<li>Calculate effect sizes for multilevel models</li>
-</ol>
-<p>For instructors, all of the chapters, datasets, demonstration steps, and code are available for reuse under a <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0 license</a>.</p>
-</div>
-<div id="prerequisites" class="section level2" number="1.3">
-<h2><span class="header-section-number">1.3</span> Prerequisites</h2>
-<p>Readers should be comfortable with multiple linear regression, including building regression models, interpreting regression output, and testing for and interpreting regression coefficients including interactions. The first module reviews multiple regression and can be used to gauge your preparedness for continuing. For those wishing to brush up their regression skills before working through these materials, we recommend UCLA’s Statistical Methods and Data Analytics resources and online seminars: <a href="https://stats.oarc.ucla.edu/other/mult-pkg/seminars/" class="uri">https://stats.oarc.ucla.edu/other/mult-pkg/seminars/</a></p>
-<p>The worked examples will be conducted using <code>lme4</code> in R. The <a href="https://cran.r-project.org/web/packages/lme4/vignettes/lmer.pdf"><code>lme4</code> documentation</a> provides details of the workings of <code>lme4</code>, for interested readers.</p>
-</div>
-<div id="materials" class="section level2" number="1.4">
-<h2><span class="header-section-number">1.4</span> Materials</h2>
-<p>If you are a student interested in following along with the data analysis demonstrations, you can download the data files <a href="https://www.learn-mlms.com/students">here</a>.</p>
-<p>If you are an instructor interested in using these files to create your own teaching materials, you can find data, blank worksheets, and R scripts <a href="https://www.learn-mlms.com/instructors">here</a>.</p>
+<div id="welcome" class="section level1 unnumbered">
+<h1>Welcome</h1>
+<p>Bonjour/hi, and welcome to <strong>learn-mlms.com</strong>. This website will teach you the fundamentals about multilevel modelling, from why and when you would use them and how to do so for various research questions and data structures.</p>
+<p>This website is free to use and is licensed under the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International</a>. If you notice any errors or would otherwise like to contribute, feel free to file an issue on <a href="https://github.com/mkshaw/learn-mlms">GitHub</a>.</p>
+<div id="about-the-authors" class="section level2 unnumbered">
+<h2>About the Authors</h2>
+<p>Mairead Shaw is a graduate student in the Quantitative Psychology and Modelling area at McGill University. Her research interests center around effect sizes in multilevel models and measurement considerations for multi-group and replication research.</p>
 
 </div>
 </div>
@@ -362,7 +344,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 
-<a href="02-multiple-regression.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="01-module-1.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

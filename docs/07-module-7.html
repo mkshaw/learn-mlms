@@ -136,12 +136,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Introduction to Multilevel Modelling</li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#goals"><i class="fa fa-check"></i><b>1.2</b> Goals</a></li>
-<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#prerequisites"><i class="fa fa-check"></i><b>1.3</b> Prerequisites</a></li>
-<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#materials"><i class="fa fa-check"></i><b>1.4</b> Materials</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-authors"><i class="fa fa-check"></i>About the Authors</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="01-module-1.html"><a href="01-module-1.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="01-module-1.html"><a href="01-module-1.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
+<li class="chapter" data-level="1.2" data-path="01-module-1.html"><a href="01-module-1.html#goals"><i class="fa fa-check"></i><b>1.2</b> Goals</a></li>
+<li class="chapter" data-level="1.3" data-path="01-module-1.html"><a href="01-module-1.html#prerequisites"><i class="fa fa-check"></i><b>1.3</b> Prerequisites</a></li>
+<li class="chapter" data-level="1.4" data-path="01-module-1.html"><a href="01-module-1.html#materials"><i class="fa fa-check"></i><b>1.4</b> Materials</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="02-multiple-regression.html"><a href="02-multiple-regression.html"><i class="fa fa-check"></i><b>2</b> Multiple Regression Review</a>
 <ul>
@@ -297,11 +301,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="12.3" data-path="12-module-12.html"><a href="12-module-12.html#conclusion-10"><i class="fa fa-check"></i><b>12.3</b> Conclusion</a></li>
 </ul></li>
-<li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="A" data-path="13-appendix.html"><a href="13-appendix.html"><i class="fa fa-check"></i><b>A</b> Download Materials</a></li>
+<li class="chapter" data-level="13" data-path="13-appendix.html"><a href="13-appendix.html"><i class="fa fa-check"></i><b>13</b> (APPENDIX) Appendix {-}</a></li>
+<li class="chapter" data-level="14" data-path="13-appendix.html"><a href="13-appendix.html#download-materials"><i class="fa fa-check"></i><b>14</b> Download Materials</a></li>
 <li class="divider"></li>
-<li><a href="https://twitter.com/maireadkshaw">Mairead Shaw</a></li>
-<li><a href="https://twitter.com/jkayflake">Jessica Kay Flake</a></li>
+<li><a href="https://twitter.com/maireadkshaw" target="_blank">Mairead Shaw</a></li>
+<li><a href="https://twitter.com/jkayflake" target="_blank">Jessica Kay Flake</a></li>
 
 </ul>
 
@@ -333,7 +337,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Recognize estimation errors in R output and examine output to identify error sources;</li>
 <li>Build and compare models to address errors.</li>
 </ol>
-<p>All materials for this chapter are available for download <a href="www.learn-mlms.com/students">here</a>.</p>
+<p>All materials for this chapter are available for download <a href="13-appendix.html#appendix">here</a>.</p>
 </div>
 <div id="data-demonstration-5" class="section level2" number="7.2">
 <h2><span class="header-section-number">7.2</span> Data Demonstration</h2>
@@ -375,13 +379,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">7.2.4</span> Non-Convergence</h3>
 <p>In the embedded Stat Quest video above, the narrator describes the iterative process in ML estimation of finding the maximum likelihood estimate of a parameter, trying multiple different options before settling on one as the value that maximizes the likelihood of observing their data about mice weights. When you’re working with many predictors at once — for example, an intercept and a slope for SES and a slope for school type and variance terms for all of those fixed effects — it is harder to try all possible combinations. So, optimization algorithms (AKA optimizers) are used to try to find the ML estimates by examining a subset of possible combinations. However, these optimizers cannot always find the combination of parameters that maximizes the likelihood of observing your data; they can’t find a solution to the problem of “what paramaters maximize the likelihood of observing this data?”. When the optimizers cannot find a solution, the result is called non-convergence: the model did not <em>converge</em> on a solution.</p>
 <p>You should not use the parameter estimates from a non-converged solution. A non-convergence warning is the computing equivalent of being unable to put a puzzle together, jamming the pieces in where you can, and saying “I don’t know, this is my best guess about where these pieces go.” Sure, the puzzle might sort of look like the image on the box, but it doesn’t really match, a bunch of the pieces have been contorted and bent to fit.</p>
-<p>(That was the puzzle analogy, was it worth sticking around?)</p>
 <p>There are two main strategies to solve a non-convergence problem: change your optimizer or change your model. You can manipulate a few characteristics of your optimizer to try to get convergence:</p>
 <ol style="list-style-type: decimal">
 <li>Number of iterations. If you increase the number of iterations, the algorithm will search for longer. This is the equivalent of getting our puzzle-doer to sit at the table for longer trying to assemble the puzzle, trying out different and more pieces.</li>
 <li>Algorithm: the algorithm determines how the optimizer chooses its next attempted solution. What strategy is our puzzle-doer using to fit pieces into the puzzle?</li>
-<li>Tolerance: this can get a bit technical, so we suggest <a href="https://doi.apa.org/doiLanding?doi=10.1037%2Fmet0000159">Brauer and Curtin, 2018</a> for more.</li>
+<li>Tolerance: this can get a bit technical and vary depending on context, so we suggest <a href="https://doi.apa.org/doiLanding?doi=10.1037%2Fmet0000159">Brauer and Curtin, 2018</a> for more. But in our case, we can think of it as the algorithm’s tolerance for differences in solutions. Lower tolerance means slightly different solutions will be seen as different, whereas higher tolerance means two different solutions that are still kind of close will be treated as essentially the same. Maybe our puzzle-doer needs glasses; tolerance is like whether they’re wearing their glasses and can distinguish between two close-but-not-identical assembled puzzles.</li>
 </ol>
+<p>(We hope you enjoyed the puzzle analogy.)</p>
 <p>You can alter these elements of your optimizer to see if giving it more time, a different strategy, or more leeway to say “yes, this converged” will lead to convergence. Alternatively, you can trim your model, removing variables you think are less likely to matter. We will discuss some approaches to doing this below.</p>
 </div>
 <div id="singularity" class="section level3" number="7.2.5">
@@ -431,8 +435,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="07-module-7.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(ses_l1_random, <span class="at">oldNames =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## Computing profile confidence intervals ...</code></pre>
 <pre><code>## Warning in FUN(X[[i]], ...): non-monotonic profile for cor_ses.(Intercept)|schcode</code></pre>
-<pre><code>## Warning in confint.thpr(pp, level = level, zeta = zeta): bad spline fit for cor_ses.
-## (Intercept)|schcode: falling back to linear interpolation</code></pre>
+<pre><code>## Warning in confint.thpr(pp, level = level, zeta = zeta): bad spline fit for cor_ses.(Intercept)|schcode: falling back to linear
+## interpolation</code></pre>
 <pre><code>##                                  2.5 %    97.5 %
 ## sd_(Intercept)|schcode       1.4944476  2.077295
 ## cor_ses.(Intercept)|schcode -1.0000000  1.000000
@@ -482,7 +486,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">7.2.6</span> Deviance Testing for Model Comparison</h3>
 <p>We removed the random effect covariance and our model is no longer singular (i.e., suffering from multicollinearity). That seems better! Now that we have a model without an error, let’s look at comparing the model with the random slope for SES (but no covariance, as we just removed that) and the model without the random slope for SES. If we want to formally test if a model fit is better or at least not worse, we can conduct a deviance test. You can find the “deviance” for your model under the “REML criterion at convergence” in your summary output. In short, deviance is bad and we don’t want more of it, so when we compare the model with and without the random slope for SES, we don’t want the model with the random slope to have more deviance. We want the same or less deviance.</p>
 <p>Note that deviance is based on the likelihood function for your model. Unlike probability, likelihood is not bound at 0 and 1. It can be any number. As a result, looking at likelihood or deviance in isolation is not informative, because it has no bounds. It is only useful for comparison between models, where less deviance indicates a better model (compared to the reference model).</p>
-<p>Here, we’re comparing models with the same fixed effects but different random effects so we can still use REML estimator that more accurately estimates random effects. We have our two model terms, <code>ses_l1_random</code> and <code>ses_l1_random_cov0</code>, and we can compare the deviance of each using the built-in ANOVA function. Specifying <code>refit = FALSE</code> stops the function from refitting the models with FIML. If we were comparing models with different fixed effects, we would use FIML to estimate our models.</p>
+<p>Here, we’re comparing models with the same fixed effects but different random effects so we can still use REML estimator that more accurately estimates random effects. We have our two model terms, <code>ses_l1</code> and <code>ses_l1_random_cov0</code>, and we can compare the deviance of each using the built-in ANOVA function. Specifying <code>refit = FALSE</code> stops the function from refitting the models with FIML. If we were comparing models with different fixed effects, we would use FIML to estimate our models.</p>
 <div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="07-module-7.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="co"># models</span></span>
 <span id="cb106-2"><a href="07-module-7.html#cb106-2" aria-hidden="true" tabindex="-1"></a>ses_l1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb106-3"><a href="07-module-7.html#cb106-3" aria-hidden="true" tabindex="-1"></a>ses_l1_random_cov0 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> ses<span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>

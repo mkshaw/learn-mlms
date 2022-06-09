@@ -4,7 +4,7 @@
 
 In this module, we will review simple and multiple linear regression to establish a strong foundation before moving onto multilevel models. Note that this is intended more as review than a comprehensive guide to regression; for the latter, we recommend https://stats.oarc.ucla.edu/other/mult-pkg/seminars/.
 
-All materials for this chapter are available for download [here](www.learn-mlms.com/students).
+All materials for this chapter are available for download [here](#appendix).
 
 The learning objectives for this chapter are:
 
