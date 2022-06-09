@@ -76,13 +76,13 @@ In the embedded Stat Quest video above, the narrator describes the iterative pro
 
 You should not use the parameter estimates from a non-converged solution. A non-convergence warning is the computing equivalent of being unable to put a puzzle together, jamming the pieces in where you can, and saying "I don't know, this is my best guess about where these pieces go." Sure, the puzzle might sort of look like the image on the box, but it doesn't really match, a bunch of the pieces have been contorted and bent to fit.
 
-(That was the puzzle analogy, was it worth sticking around?)
-
 There are two main strategies to solve a non-convergence problem: change your optimizer or change your model. You can manipulate a few characteristics of your optimizer to try to get convergence:
 
 1. Number of iterations. If you increase the number of iterations, the algorithm will search for longer. This is the equivalent of getting our puzzle-doer to sit at the table for longer trying to assemble the puzzle, trying out different and more pieces. 
 2. Algorithm: the algorithm determines how the optimizer chooses its next attempted solution. What strategy is our puzzle-doer using to fit pieces into the puzzle?
-3. Tolerance: this can get a bit technical, so we suggest [Brauer and Curtin, 2018](https://doi.apa.org/doiLanding?doi=10.1037%2Fmet0000159) for more.
+3. Tolerance: this can get a bit technical and vary depending on context, so we suggest [Brauer and Curtin, 2018](https://doi.apa.org/doiLanding?doi=10.1037%2Fmet0000159) for more. But in our case, we can think of it as the algorithm's tolerance for differences in solutions. Lower tolerance means slightly different solutions will be seen as different, whereas higher tolerance means two different solutions that are still kind of close will be treated as essentially the same. Maybe our puzzle-doer needs glasses; tolerance is like whether they're wearing their glasses and can distinguish between two close-but-not-identical assembled puzzles.
+
+(We hope you enjoyed the puzzle analogy.)
 
 You can alter these elements of your optimizer to see if giving it more time, a different strategy, or more leeway to say "yes, this converged" will lead to convergence. Alternatively, you can trim your model, removing variables you think are less likely to matter. We will discuss some approaches to doing this below.
 
@@ -135,7 +135,7 @@ We removed the random effect covariance and our model is no longer singular (i.e
 
 Note that deviance is based on the likelihood function for your model. Unlike probability, likelihood is not bound at 0 and 1. It can be any number. As a result, looking at likelihood or deviance in isolation is not informative, because it has no bounds. It is only useful for comparison between models, where less deviance indicates a better model (compared to the reference model). 
 
-Here, we're comparing models with the same fixed effects but different random effects so we can still use REML estimator that more accurately estimates random effects. We have our two model terms, `ses_l1_random` and `ses_l1_random_cov0`, and we can compare the deviance of each using the built-in ANOVA function. Specifying `refit = FALSE` stops the function from refitting the models with FIML. If we were comparing models with different fixed effects, we would use FIML to estimate our models.
+Here, we're comparing models with the same fixed effects but different random effects so we can still use REML estimator that more accurately estimates random effects. We have our two model terms, `ses_l1` and `ses_l1_random_cov0`, and we can compare the deviance of each using the built-in ANOVA function. Specifying `refit = FALSE` stops the function from refitting the models with FIML. If we were comparing models with different fixed effects, we would use FIML to estimate our models.
 
 ```{r}
 # models

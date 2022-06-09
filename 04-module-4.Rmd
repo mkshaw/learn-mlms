@@ -2,7 +2,7 @@
 
 ## Learning Objectives
 
-In this chapter, we will run our first multilevel models to account for the clustered nature of our data and begin asking multilevel research questions.
+In this chapter, we will run our first multilevel model to account for the clustered nature of our data and begin visualizing and understanding the variance in our data.
 
 The learning objectives for this chapter are:
 

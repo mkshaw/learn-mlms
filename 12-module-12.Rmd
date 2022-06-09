@@ -70,9 +70,7 @@ data %>%
   geom_point(alpha = .2)
 ```
 
-It looks loosely linear. Before we continue, for teaching purposes we'll take a subset of 30 schools to make plotting easier for the rest of this data demo. For your data, you should consider all observations; this is just to make examples clearer.
-
-I'D ADD EMPHASIS TO THE PART ABOUT THEIR DATA, ABOVE
+It looks loosely linear. Before we continue, for teaching purposes we'll take a subset of 30 schools to make plotting easier for the rest of this data demo. **For your data, you should consider all observations**; this is just to make examples clearer.
 
 ```{r}
 data <- data %>%

@@ -2,7 +2,7 @@
 
 ## Learning Objectives
 
-In this chapter, we will illustrate a clustered dataset and review non-multilevel-modelling options for handling that clustering. 
+In this chapter, we will discuss implications of clustered data and review non-multilevel-modelling options for handling that clustering. 
 
 The learning objectives for this chapter are:
 
