@@ -127,5 +127,4 @@ multivariate-normal
 assumption-5-residuals-at-level-1-and-level-2-are-independent
 assumption-6-level-1-residuals-independent-of-level-2-predictors-level-2-residuals-independent-of-level-1-predictors
 conclusion-10
-appendix
 download-materials

@@ -301,8 +301,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="12.3" data-path="12-module-12.html"><a href="12-module-12.html#conclusion-10"><i class="fa fa-check"></i><b>12.3</b> Conclusion</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="13-appendix.html"><a href="13-appendix.html"><i class="fa fa-check"></i><b>13</b> (APPENDIX) Appendix {-}</a></li>
-<li class="chapter" data-level="14" data-path="13-appendix.html"><a href="13-appendix.html#download-materials"><i class="fa fa-check"></i><b>14</b> Download Materials</a></li>
+<li class="appendix"><span><b>Appendix {#appendix}</b></span></li>
+<li class="chapter" data-level="A" data-path="13-appendix.html"><a href="13-appendix.html"><i class="fa fa-check"></i><b>A</b> Download Materials</a></li>
 <li class="divider"></li>
 <li><a href="https://twitter.com/maireadkshaw" target="_blank">Mairead Shaw</a></li>
 <li><a href="https://twitter.com/jkayflake" target="_blank">Jessica Kay Flake</a></li>
@@ -336,7 +336,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Interpret coefficients for longitudinal data;</li>
 <li>Review evidence to decide whether to retain effects.</li>
 </ol>
-<p>All materials for this chapter are available for download <a href="13-appendix.html#appendix">here</a>.</p>
+<p>All materials for this chapter are available for download <a href="#appendix">here</a>.</p>
 </div>
 <div id="data-demonstration-8" class="section level2" number="10.2">
 <h2><span class="header-section-number">10.2</span> Data Demonstration</h2>
@@ -434,13 +434,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Dr. Kathleen Casto gave us permission to use these data for teaching purposes (thanks Kathleen!); any other use requires additional permission. You can see more of her work <a href="https://scholar.google.com/citations?user=xqhtNEIAAAAJ&amp;hl=en">here</a>.</p>
 <div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="10-module-10.html#cb151-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;casto2016.csv&#39;</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="10-module-10.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
-<pre><code>##   Code position HormonCont Played minplayed game time Cortisol Testosterone Estradiol time0
-## 1 1224        1          0      1        90    1    2    0.456       84.541     3.706     0
-## 2 1224        1          0      1        90    1    3    0.575      118.942     5.631     1
-## 3 1224        1          0      1        90    1    4    0.303      104.803     3.372     2
-## 4 1348        2          0      1        90    1    2    0.649       39.547     2.620     0
-## 5 1348        2          0      1        90    1    3    0.323       44.291     3.010     1
-## 6 1348        2          0      1        90    1    4    0.879       62.774     3.650     2</code></pre>
+<pre><code>##   Code position HormonCont Played minplayed game time Cortisol Testosterone Estradiol
+## 1 1224        1          0      1        90    1    2    0.456       84.541     3.706
+## 2 1224        1          0      1        90    1    3    0.575      118.942     5.631
+## 3 1224        1          0      1        90    1    4    0.303      104.803     3.372
+## 4 1348        2          0      1        90    1    2    0.649       39.547     2.620
+## 5 1348        2          0      1        90    1    3    0.323       44.291     3.010
+## 6 1348        2          0      1        90    1    4    0.879       62.774     3.650
+##   time0
+## 1     0
+## 2     1
+## 3     2
+## 4     0
+## 5     1
+## 6     2</code></pre>
 <p>These data include hormone levels of female athletes in a competition setting (soccer game), if they played in the game or not (<code>Played</code>), what position they played (<code>position</code>), how long they played (<code>minplayed</code>), their testosterone levels (<code>Testosterone</code>), and if they were taking birth control (<code>HormonCont</code>). We will focus on testosterone, if they played, and if they were taking birth control for this example.</p>
 <p>Let’s start by visualizing testosterone levels over time for the entire sample:</p>
 <div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="10-module-10.html#cb154-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
@@ -502,7 +509,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="10-module-10.html#cb157-1" aria-hidden="true" tabindex="-1"></a>null_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Testosterone <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Code), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb157-2"><a href="10-module-10.html#cb157-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(null_model)</span></code></pre></div>
-<pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
+<pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
 ## Formula: Testosterone ~ 1 + (1 | Code)
 ##    Data: data
 ## 
@@ -576,7 +584,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Let’s run the model with FIML as our estimator:</p>
 <div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="10-module-10.html#cb161-1" aria-hidden="true" tabindex="-1"></a>l1_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Testosterone <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time0 <span class="sc">+</span> (time0<span class="sc">|</span>Code), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb161-2"><a href="10-module-10.html#cb161-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(l1_model)</span></code></pre></div>
-<pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
+<pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
 ## Formula: Testosterone ~ 1 + time0 + (time0 | Code)
 ##    Data: data
 ## 
@@ -714,8 +723,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We are not estimating a covariance term.</p>
 <div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="10-module-10.html#cb176-1" aria-hidden="true" tabindex="-1"></a>l2_played <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Testosterone <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time0 <span class="sc">+</span> Played <span class="sc">+</span> Played<span class="sc">:</span>time0 <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Code) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> time0<span class="sc">|</span>Code), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb176-2"><a href="10-module-10.html#cb176-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(l2_played)</span></code></pre></div>
-<pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
-## Formula: Testosterone ~ 1 + time0 + Played + Played:time0 + (1 | Code) +      (0 + time0 | Code)
+<pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
+## Formula: Testosterone ~ 1 + time0 + Played + Played:time0 + (1 | Code) +  
+##     (0 + time0 | Code)
 ##    Data: data
 ## 
 ##      AIC      BIC   logLik deviance df.resid 
@@ -798,8 +809,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="10-module-10.html#cb180-1" aria-hidden="true" tabindex="-1"></a>l2_played_birthcontrol <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Testosterone <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time0 <span class="sc">+</span> Played <span class="sc">+</span> time0<span class="sc">:</span>Played <span class="sc">+</span> HormonCont <span class="sc">+</span> time0<span class="sc">:</span>HormonCont <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Code) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> time0<span class="sc">|</span>Code), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb180-2"><a href="10-module-10.html#cb180-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(l2_played_birthcontrol)</span></code></pre></div>
-<pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
-## Formula: Testosterone ~ 1 + time0 + Played + time0:Played + HormonCont +      time0:HormonCont + (1 | Code) + (0 + time0 | Code)
+<pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
+## Formula: Testosterone ~ 1 + time0 + Played + time0:Played + HormonCont +  
+##     time0:HormonCont + (1 | Code) + (0 + time0 | Code)
 ##    Data: data
 ## 
 ##      AIC      BIC   logLik deviance df.resid 

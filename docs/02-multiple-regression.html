@@ -301,8 +301,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="12.3" data-path="12-module-12.html"><a href="12-module-12.html#conclusion-10"><i class="fa fa-check"></i><b>12.3</b> Conclusion</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="13-appendix.html"><a href="13-appendix.html"><i class="fa fa-check"></i><b>13</b> (APPENDIX) Appendix {-}</a></li>
-<li class="chapter" data-level="14" data-path="13-appendix.html"><a href="13-appendix.html#download-materials"><i class="fa fa-check"></i><b>14</b> Download Materials</a></li>
+<li class="appendix"><span><b>Appendix {#appendix}</b></span></li>
+<li class="chapter" data-level="A" data-path="13-appendix.html"><a href="13-appendix.html"><i class="fa fa-check"></i><b>A</b> Download Materials</a></li>
 <li class="divider"></li>
 <li><a href="https://twitter.com/maireadkshaw" target="_blank">Mairead Shaw</a></li>
 <li><a href="https://twitter.com/jkayflake" target="_blank">Jessica Kay Flake</a></li>
@@ -329,7 +329,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="learning-objectives" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Learning Objectives</h2>
 <p>In this module, we will review simple and multiple linear regression to establish a strong foundation before moving onto multilevel models. Note that this is intended more as review than a comprehensive guide to regression; for the latter, we recommend <a href="https://stats.oarc.ucla.edu/other/mult-pkg/seminars/" class="uri">https://stats.oarc.ucla.edu/other/mult-pkg/seminars/</a>.</p>
-<p>All materials for this chapter are available for download <a href="13-appendix.html#appendix">here</a>.</p>
+<p>All materials for this chapter are available for download <a href="#appendix">here</a>.</p>
 <p>The learning objectives for this chapter are:</p>
 <ol style="list-style-type: decimal">
 <li>Understand using file paths for project management/loading data.</li>
@@ -447,20 +447,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="02-multiple-regression.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.csv</span>(<span class="st">&#39;/Users/maireadshaw/open_mlm_materials/heck2011.csv&#39;</span>)</span></code></pre></div>
 <p>Let’s calculate some descriptive statistics and compare them to the above table to make sure we read our data in correctly.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="02-multiple-regression.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code></pre></div>
-<pre><code>##     schcode           Rid               id           female            ses              femses                math      
-##  Min.   :  1.0   Min.   : 1.000   Min.   :   1   Min.   :0.0000   Min.   :-2.4140   Min.   :-2.4140000   Min.   :27.42  
-##  1st Qu.:103.5   1st Qu.: 5.000   1st Qu.:1718   1st Qu.:0.0000   1st Qu.:-0.5180   1st Qu.:-0.0175000   1st Qu.:52.41  
-##  Median :209.0   Median : 9.000   Median :3436   Median :1.0000   Median : 0.0150   Median : 0.0000000   Median :60.67  
-##  Mean   :209.4   Mean   : 9.196   Mean   :3436   Mean   :0.5025   Mean   : 0.0319   Mean   : 0.0000984   Mean   :57.73  
-##  3rd Qu.:314.5   3rd Qu.:13.000   3rd Qu.:5154   3rd Qu.:1.0000   3rd Qu.: 0.6050   3rd Qu.: 0.0000000   3rd Qu.:62.38  
-##  Max.   :419.0   Max.   :37.000   Max.   :6871   Max.   :1.0000   Max.   : 1.8730   Max.   : 1.8540000   Max.   :99.98  
-##     ses_mean           pro4yrc           public      
-##  Min.   :-1.29673   Min.   :0.0000   Min.   :0.0000  
-##  1st Qu.:-0.30525   1st Qu.:1.0000   1st Qu.:0.0000  
-##  Median :-0.01050   Median :1.0000   Median :1.0000  
-##  Mean   : 0.03179   Mean   :0.8689   Mean   :0.7306  
-##  3rd Qu.: 0.29560   3rd Qu.:1.0000   3rd Qu.:1.0000  
-##  Max.   : 1.44315   Max.   :1.0000   Max.   :1.0000</code></pre>
+<pre><code>##     schcode           Rid               id           female            ses         
+##  Min.   :  1.0   Min.   : 1.000   Min.   :   1   Min.   :0.0000   Min.   :-2.4140  
+##  1st Qu.:103.5   1st Qu.: 5.000   1st Qu.:1718   1st Qu.:0.0000   1st Qu.:-0.5180  
+##  Median :209.0   Median : 9.000   Median :3436   Median :1.0000   Median : 0.0150  
+##  Mean   :209.4   Mean   : 9.196   Mean   :3436   Mean   :0.5025   Mean   : 0.0319  
+##  3rd Qu.:314.5   3rd Qu.:13.000   3rd Qu.:5154   3rd Qu.:1.0000   3rd Qu.: 0.6050  
+##  Max.   :419.0   Max.   :37.000   Max.   :6871   Max.   :1.0000   Max.   : 1.8730  
+##      femses                math          ses_mean           pro4yrc      
+##  Min.   :-2.4140000   Min.   :27.42   Min.   :-1.29673   Min.   :0.0000  
+##  1st Qu.:-0.0175000   1st Qu.:52.41   1st Qu.:-0.30525   1st Qu.:1.0000  
+##  Median : 0.0000000   Median :60.67   Median :-0.01050   Median :1.0000  
+##  Mean   : 0.0000984   Mean   :57.73   Mean   : 0.03179   Mean   :0.8689  
+##  3rd Qu.: 0.0000000   3rd Qu.:62.38   3rd Qu.: 0.29560   3rd Qu.:1.0000  
+##  Max.   : 1.8540000   Max.   :99.98   Max.   : 1.44315   Max.   :1.0000  
+##      public      
+##  Min.   :0.0000  
+##  1st Qu.:0.0000  
+##  Median :1.0000  
+##  Mean   :0.7306  
+##  3rd Qu.:1.0000  
+##  Max.   :1.0000</code></pre>
 <p>That looks good, so let’s proceed to conducting regressions.</p>
 </div>
 <div id="simple-linear-regression" class="section level3" number="2.2.3">
