@@ -19,4 +19,6 @@ This website is free to use and is licensed under the [Creative Commons Attribut
 
 ## About the Authors {-}
 
-Mairead Shaw is a graduate student in the Quantitative Psychology and Modelling area at McGill University. Her research interests center around effect sizes in multilevel models and measurement considerations for multi-group and replication research.
+Mairead Shaw is a graduate student in the Quantitative Psychology and Modelling area at McGill University. Her research interests center around effect sizes in multilevel models and measurement considerations for multi-group and replication research. 
+
+Dr. Jessica Flake is an Assistant Professor of Quantitative Psychology and Modelling at McGill University. She received an MA in quantitative psychology from James Madison University and a a PhD in Measurement, Evaluation, and Assessment from the University of Connecticut. Her work focuses on technical and applied aspects of psychological measurement including scale development, psychometric modelling, and scale use and replicability.
