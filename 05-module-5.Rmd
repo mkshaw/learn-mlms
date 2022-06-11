@@ -10,7 +10,7 @@ The learning objectives for this chapter are:
 2. Explain the difference between conditional and unconditional effects;
 3. Evaluate the utility of predictors in a model by considering the information from regression coefficients and variance reduced.
 
-All materials for this chapter are available for download [here](#appendix).
+All materials for this chapter are available for download [here](https://www.learn-mlms.com/13-appendix.html).
 
 ## Data Demonstration
 

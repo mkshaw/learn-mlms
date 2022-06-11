@@ -27,7 +27,7 @@ The worked examples will be conducted using `lme4` in R. The [`lme4` documentati
 
 ## Materials
 
-All materials are available for download in the [appendix](#appendix). The following are available for download:
+All materials are available for download in the [appendix](https://www.learn-mlms.com/13-appendix.html). The following are available for download:
 
 * Data: the data used in each chapter
 * R Script: an R script of the code used in each chapter

@@ -11,7 +11,7 @@ The learning objectives for this chapter are:
 3. Implement and interpret R-squared results for single models, via automatic and manual entry;
 4. Select models to compare for a given research question and interpret comparison output.
 
-All materials for this chapter are available for download [here](#appendix).
+All materials for this chapter are available for download [here](https://www.learn-mlms.com/13-appendix.html).
 
 ## Data Demonstration
 
