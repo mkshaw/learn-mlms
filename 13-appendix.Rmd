@@ -4,14 +4,14 @@
 
 |Chapter|Data|R Script|Worksheet|
 |:-----:|:--:|:------:|:-------:|
-|[2](#module-2)|`r xfun::embed_file('data/heck2011.csv', text = "heck2011.csv")`|`r xfun::embed_file('Rscripts/02-multiple-regression.R')`|`r xfun::embed_file('worksheets/module2.docx', text = "Linear Regression Review")`|
-|[3](#module-3)|`r xfun::embed_file('data/heck2011.csv', text = "heck2011.csv")`|`r xfun::embed_file('Rscripts/03-module-3.R')`|`r xfun::embed_file('worksheets/module3.docx', text = "Approaches to Multilevel Data")`|
-|[4](#module-4)|`r xfun::embed_file('data/heck2011.csv', text = "heck2011.csv")`|`r xfun::embed_file('Rscripts/04-module-4.R')`|`r xfun::embed_file('worksheets/module4.docx', text = "Our First MLM: The Null Model")`|
-|[5](#module-5)|`r xfun::embed_file('data/heck2011.csv', text = "heck2011.csv")`|`r xfun::embed_file('Rscripts/05-module-5.R')`|`r xfun::embed_file('worksheets/module5.docx', text = "Adding Fixed Predictors")`|
-|[6](#module-6)|`r xfun::embed_file('data/heck2011.csv', text = "heck2011.csv")`|`r xfun::embed_file('Rscripts/06-module-6.R')`|`r xfun::embed_file('worksheets/module6.docx', text = "Random Effects and Cross-level Interactions")`|
-|[7](#module-7)|`r xfun::embed_file('data/heck2011.csv', text = "heck2011.csv")`|`r xfun::embed_file('Rscripts/07-module-7.R')`|`r xfun::embed_file('worksheets/module7.docx', text = "Estimation Options and Troubleshooting")`|
-|[8](#module-8)|`r xfun::embed_file('data/heck2011.csv', text = "heck2011.csv")`|`r xfun::embed_file('Rscripts/08-module-8.R')`|`r xfun::embed_file('worksheets/module8.docx', text = "Centering")`|
-|[9](#module-9)|`r xfun::embed_file('data/hoffman2007.csv', text = "hoffman2007.csv")`|`r xfun::embed_file('Rscripts/09-module-9.R')`|`r xfun::embed_file('worksheets/module9.docx', text = "Repeated Measures")`|
-|[10](#module-10)|`r xfun::embed_file('data/casto2016.csv', text = "casto2016.csv")`|`r xfun::embed_file('Rscripts/10-module-10.R')`|`r xfun::embed_file('worksheets/module10.docx', text = "Longitudinal Measures")`|
-|[11](#module-11)|`teachsat` included in `r2mlm`|`r xfun::embed_file('Rscripts/11-module-11.R')`|`r xfun::embed_file('worksheets/module11.docx', text = "Effect Sizes in MLMs")`|
-|[12](#module-12)|`r xfun::embed_file('data/rb2002.csv', text = "rb2002.csv")`|`r xfun::embed_file('Rscripts/12-module-12.R')`|`r xfun::embed_file('worksheets/module12.docx', text = "Assumptions")`|
+|[2](#module-2)|`r xfun::embed_file('data/heck2011.csv', text = "heck2011.csv")`|`r xfun::embed_file('Rscripts/02-multiple-regression.R', text = "02-multiple-regression.R")`|`r xfun::embed_file('worksheets/module2.docx', text = "Linear Regression Review")`|
+|[3](#module-3)|`r xfun::embed_file('data/heck2011.csv', text = "heck2011.csv")`|`r xfun::embed_file('Rscripts/03-module-3.R', text = "03-module-3.R")`|`r xfun::embed_file('worksheets/module3.docx', text = "Approaches to Multilevel Data")`|
+|[4](#module-4)|`r xfun::embed_file('data/heck2011.csv', text = "heck2011.csv")`|`r xfun::embed_file('Rscripts/04-module-4.R', text = "04-module-4.R")`|`r xfun::embed_file('worksheets/module4.docx', text = "Our First MLM: The Null Model")`|
+|[5](#module-5)|`r xfun::embed_file('data/heck2011.csv', text = "heck2011.csv")`|`r xfun::embed_file('Rscripts/05-module-5.R', text = "05-module-5.R")`|`r xfun::embed_file('worksheets/module5.docx', text = "Adding Fixed Predictors")`|
+|[6](#module-6)|`r xfun::embed_file('data/heck2011.csv', text = "heck2011.csv")`|`r xfun::embed_file('Rscripts/06-module-6.R', text = "06-module-6.R")`|`r xfun::embed_file('worksheets/module6.docx', text = "Random Effects and Cross-level Interactions")`|
+|[7](#module-7)|`r xfun::embed_file('data/heck2011.csv', text = "heck2011.csv")`|`r xfun::embed_file('Rscripts/07-module-7.R', text = "07-module-7.R")`|`r xfun::embed_file('worksheets/module7.docx', text = "Estimation Options and Troubleshooting")`|
+|[8](#module-8)|`r xfun::embed_file('data/heck2011.csv', text = "heck2011.csv")`|`r xfun::embed_file('Rscripts/08-module-8.R', text = "08-module-8.R")`|`r xfun::embed_file('worksheets/module8.docx', text = "Centering")`|
+|[9](#module-9)|`r xfun::embed_file('data/hoffman2007.csv', text = "hoffman2007.csv")`|`r xfun::embed_file('Rscripts/09-module-9.R', text = "09-module-9.R")`|`r xfun::embed_file('worksheets/module9.docx', text = "Repeated Measures")`|
+|[10](#module-10)|`r xfun::embed_file('data/casto2016.csv', text = "casto2016.csv")`|`r xfun::embed_file('Rscripts/10-module-10.R', text = "10-module-10.R")`|`r xfun::embed_file('worksheets/module10.docx', text = "Longitudinal Measures")`|
+|[11](#module-11)|`teachsat` included in `r2mlm`|`r xfun::embed_file('Rscripts/11-module-11.R', text = "11-module-11.R")`|`r xfun::embed_file('worksheets/module11.docx', text = "Effect Sizes in MLMs")`|
+|[12](#module-12)|`r xfun::embed_file('data/rb2002.csv', text = "rb2002.csv")`|`r xfun::embed_file('Rscripts/12-module-12.R', text = "12-module-12.R")`|`r xfun::embed_file('worksheets/module12.docx', text = "Assumptions")`|
