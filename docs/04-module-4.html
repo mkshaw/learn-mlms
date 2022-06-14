@@ -345,32 +345,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="load-data-and-dependencies-1" class="section level3" number="4.2.1">
 <h3><span class="header-section-number">4.2.1</span> Load Data and Dependencies</h3>
 <p>For this data demo, we will use the following packages:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="04-module-4.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># for data manipulation</span></span>
-<span id="cb21-2"><a href="04-module-4.html#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># for visualizations</span></span>
-<span id="cb21-3"><a href="04-module-4.html#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4) <span class="co"># for multilevel models</span></span>
-<span id="cb21-4"><a href="04-module-4.html#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest) <span class="co"># for p-values</span></span>
-<span id="cb21-5"><a href="04-module-4.html#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(performance) <span class="co"># for intraclass correlation</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="04-module-4.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># for data manipulation</span></span>
+<span id="cb22-2"><a href="04-module-4.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># for visualizations</span></span>
+<span id="cb22-3"><a href="04-module-4.html#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4) <span class="co"># for multilevel models</span></span>
+<span id="cb22-4"><a href="04-module-4.html#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest) <span class="co"># for p-values</span></span>
+<span id="cb22-5"><a href="04-module-4.html#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(performance) <span class="co"># for intraclass correlation</span></span></code></pre></div>
 <p>And the same dataset of students’ math achievement from chapters 2 and 3:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="04-module-4.html#cb22-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;heck2011.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="04-module-4.html#cb23-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;heck2011.csv&#39;</span>)</span></code></pre></div>
 </div>
 <div id="why-multilevel-models" class="section level3" number="4.2.2">
 <h3><span class="header-section-number">4.2.2</span> Why Multilevel Models?</h3>
 <p>In chapter 3 we talked about cluster-robust standard errors, which handle clustering as a nuisance, but doesn’t investigate it as interesting or enable multilevel research questions. But if you’re interested in the clustered structure of the data, and you want to know how clusters differ or ask questions at multiple levels, you’ll need a multilevel model. To get a sense of how the outcome is clustered, let’s start by making some graphs. Our data set contains students clustered into 419 schools. For demonstration, we will take a subset of 10 schools.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="04-module-4.html#cb23-1" aria-hidden="true" tabindex="-1"></a>data_sub <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
-<span id="cb23-2"><a href="04-module-4.html#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(schcode <span class="sc">&lt;=</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="04-module-4.html#cb24-1" aria-hidden="true" tabindex="-1"></a>data_sub <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb24-2"><a href="04-module-4.html#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(schcode <span class="sc">&lt;=</span> <span class="dv">10</span>)</span></code></pre></div>
 <p>In chapter 2, we created a scatterplot with math achievement (<code>math</code>) on the y-axis and socioeconomic status (<code>ses</code>) on the x-axis. Let’s re-create that graph and overlay a line of best fit, first ignoring the clustering.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="04-module-4.html#cb24-1" aria-hidden="true" tabindex="-1"></a>data_sub <span class="sc">%&gt;%</span> </span>
-<span id="cb24-2"><a href="04-module-4.html#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> ses, <span class="at">y =</span> math)) <span class="sc">+</span></span>
-<span id="cb24-3"><a href="04-module-4.html#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb24-4"><a href="04-module-4.html#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">fullrange =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="04-module-4.html#cb25-1" aria-hidden="true" tabindex="-1"></a>data_sub <span class="sc">%&gt;%</span> </span>
+<span id="cb25-2"><a href="04-module-4.html#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> ses, <span class="at">y =</span> math)) <span class="sc">+</span></span>
+<span id="cb25-3"><a href="04-module-4.html#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb25-4"><a href="04-module-4.html#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">fullrange =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>Now, let’s create the same scatterplot, this time colouring the points by school (<code>schcode</code>).</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="04-module-4.html#cb26-1" aria-hidden="true" tabindex="-1"></a>data_sub <span class="sc">%&gt;%</span> </span>
-<span id="cb26-2"><a href="04-module-4.html#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> ses, <span class="at">y =</span> math, <span class="at">colour =</span> <span class="fu">factor</span>(schcode))) <span class="sc">+</span></span>
-<span id="cb26-3"><a href="04-module-4.html#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb26-4"><a href="04-module-4.html#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">group =</span> schcode), <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">fullrange =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb26-5"><a href="04-module-4.html#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">colour =</span> <span class="st">&quot;schcode&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="04-module-4.html#cb27-1" aria-hidden="true" tabindex="-1"></a>data_sub <span class="sc">%&gt;%</span> </span>
+<span id="cb27-2"><a href="04-module-4.html#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> ses, <span class="at">y =</span> math, <span class="at">colour =</span> <span class="fu">factor</span>(schcode))) <span class="sc">+</span></span>
+<span id="cb27-3"><a href="04-module-4.html#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb27-4"><a href="04-module-4.html#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">group =</span> schcode), <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">fullrange =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb27-5"><a href="04-module-4.html#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">colour =</span> <span class="st">&quot;schcode&quot;</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p>When we run a regular regression without accounting for the clustered structure of the data, we treat all schools as though they have the same intercept and slope. What do you notice about the intercepts and slopes for different schools?</p>
@@ -406,8 +406,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>Let’s run the model.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="04-module-4.html#cb28-1" aria-hidden="true" tabindex="-1"></a>null_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode), <span class="at">data =</span> data)</span>
-<span id="cb28-2"><a href="04-module-4.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(null_model)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="04-module-4.html#cb29-1" aria-hidden="true" tabindex="-1"></a>null_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode), <span class="at">data =</span> data)</span>
+<span id="cb29-2"><a href="04-module-4.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(null_model)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
 ## Formula: math ~ 1 + (1 | schcode)
 ##    Data: data
@@ -451,7 +451,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The intraclass correlation coefficient quantifies the extent of clustering in a dataset. It ranges from 0 to 1 and is the quotient of the variance between clusters to the total variance: <span class="math inline">\(ICC = \frac{\tau_0^2}{\tau_0^2 + \sigma^2}\)</span>. The more extensive the impact of clustering, the more variance between clusters, the larger the ICC. The ICCs can also be interpreted as (1) the proportion of variance in the outcome that is attributable to clusters or (2) the expected correlation between the outcome from randomly selected units from a randomly selected cluster.</p>
 <p>Per our model output, the total variance is <span class="math inline">\(\tau_0^2 + \sigma^2 = 10.64 + 66.55 = 77.19\)</span>, and the variance between schools is <span class="math inline">\(\tau_0^2\)</span>, 10.64. The ICC is then <span class="math inline">\(\frac{10.64}{77.19} = 0.138\)</span>; 13.8% of the total variance in math achievement can be attributed to school membership.</p>
 <p>We can use the <code>performance</code> package to calculate this automatically:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="04-module-4.html#cb30-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(null_model)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="04-module-4.html#cb31-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(null_model)</span></code></pre></div>
 <pre><code>## # Intraclass Correlation Coefficient
 ## 
 ##      Adjusted ICC: 0.138
@@ -461,14 +461,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="plausible-values-range" class="section level4" number="4.2.5.2">
 <h4><span class="header-section-number">4.2.5.2</span> Plausible Values Range</h4>
 <p>Another way to understand the variance in our data is by calculating a 95% plausible values range for a given effect. For example, the intercept: given the fixed effect for the intercept (<span class="math inline">\(\gamma_{00}\)</span>) and the variance of residuals around that fixed effect (<span class="math inline">\(\tau_0^2\)</span>), we can describe how much the schools vary in mean math achievement by calculating a 95% plausible values range. <span class="math inline">\(95\%\ plausible\ values\ range = \gamma_{00} ± 1.96\sqrt{\tau_0^2}\)</span>.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="04-module-4.html#cb32-1" aria-hidden="true" tabindex="-1"></a>Tau0 <span class="ot">&lt;-</span> <span class="fu">VarCorr</span>(null_model)<span class="sc">$</span>schcode[<span class="dv">1</span>]</span>
-<span id="cb32-2"><a href="04-module-4.html#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="04-module-4.html#cb32-3" aria-hidden="true" tabindex="-1"></a>lower_bound <span class="ot">&lt;-</span> null_model<span class="sc">@</span>beta <span class="sc">-</span> <span class="fl">1.96</span><span class="sc">*</span><span class="fu">sqrt</span>(Tau0)</span>
-<span id="cb32-4"><a href="04-module-4.html#cb32-4" aria-hidden="true" tabindex="-1"></a>upper_bound <span class="ot">&lt;-</span> null_model<span class="sc">@</span>beta <span class="sc">+</span> <span class="fl">1.96</span><span class="sc">*</span><span class="fu">sqrt</span>(Tau0)</span>
-<span id="cb32-5"><a href="04-module-4.html#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-6"><a href="04-module-4.html#cb32-6" aria-hidden="true" tabindex="-1"></a>lower_bound</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="04-module-4.html#cb33-1" aria-hidden="true" tabindex="-1"></a>Tau0 <span class="ot">&lt;-</span> <span class="fu">VarCorr</span>(null_model)<span class="sc">$</span>schcode[<span class="dv">1</span>]</span>
+<span id="cb33-2"><a href="04-module-4.html#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="04-module-4.html#cb33-3" aria-hidden="true" tabindex="-1"></a>lower_bound <span class="ot">&lt;-</span> null_model<span class="sc">@</span>beta <span class="sc">-</span> <span class="fl">1.96</span><span class="sc">*</span><span class="fu">sqrt</span>(Tau0)</span>
+<span id="cb33-4"><a href="04-module-4.html#cb33-4" aria-hidden="true" tabindex="-1"></a>upper_bound <span class="ot">&lt;-</span> null_model<span class="sc">@</span>beta <span class="sc">+</span> <span class="fl">1.96</span><span class="sc">*</span><span class="fu">sqrt</span>(Tau0)</span>
+<span id="cb33-5"><a href="04-module-4.html#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-6"><a href="04-module-4.html#cb33-6" aria-hidden="true" tabindex="-1"></a>lower_bound</span></code></pre></div>
 <pre><code>## [1] 51.28024</code></pre>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="04-module-4.html#cb34-1" aria-hidden="true" tabindex="-1"></a>upper_bound</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="04-module-4.html#cb35-1" aria-hidden="true" tabindex="-1"></a>upper_bound</span></code></pre></div>
 <pre><code>## [1] 64.06822</code></pre>
 <p>This range gives us a sense of the variance in school intercepts: 95% of intercepts will fall between 51 and 64. 13 points of variance is a fair amount for a scale from 0 to 100! It seems good that we’re accounting for that variance with our multilevel model, rather than treating all schools like they have the same intercept.</p>
 </div>
@@ -484,33 +484,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>The Empirical Bayes estimate of a residuals, <span class="math inline">\(U_{0j}\)</span>, is then the difference between the fixed effect <span class="math inline">\(\gamma_{0j}\)</span> and the EB estimate <span class="math inline">\(\hat\beta_{0j}^{EB}\)</span>. To develop an intuition about EB estimates, let’s manually calculate the residual for the intercept for school 1, or <span class="math inline">\(U_{01}\)</span>.</p>
 <p>First, we need the group mean math achievement, <span class="math inline">\(\hat{\beta_{01}}\)</span>:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="04-module-4.html#cb36-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb36-2"><a href="04-module-4.html#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(schcode <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="co"># select only school code 1</span></span>
-<span id="cb36-3"><a href="04-module-4.html#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb36-4"><a href="04-module-4.html#cb36-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(math)</span>
-<span id="cb36-5"><a href="04-module-4.html#cb36-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="04-module-4.html#cb37-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb37-2"><a href="04-module-4.html#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(schcode <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="co"># select only school code 1</span></span>
+<span id="cb37-3"><a href="04-module-4.html#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb37-4"><a href="04-module-4.html#cb37-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(math)</span>
+<span id="cb37-5"><a href="04-module-4.html#cb37-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <pre><code>##   mean(math)
 ## 1   58.99677</code></pre>
 <p>Next, we need the estimated population mean, <span class="math inline">\(\hat{\gamma_{00}}\)</span>. We have that from our earlier MLM: the intercept of 47.6742.</p>
 <p>Finally, we need the weight: <span class="math inline">\(\lambda_j = \frac{\tau_0^2}{\tau_0^2 + \frac{\sigma^2}{n_j}}\)</span>. We also have <span class="math inline">\(\tau_0^2 = 10.64\)</span> and <span class="math inline">\(\sigma^2 = 66.55\)</span> from our earlier MLM. We need the group sample size, <span class="math inline">\(n_1\)</span>:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="04-module-4.html#cb38-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb38-2"><a href="04-module-4.html#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(schcode <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb38-3"><a href="04-module-4.html#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="04-module-4.html#cb39-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb39-2"><a href="04-module-4.html#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(schcode <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-3"><a href="04-module-4.html#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
 <pre><code>##    n
 ## 1 12</code></pre>
 <p>So <span class="math inline">\(\lambda_j = \frac{\tau_0^2}{\tau_0^2 + \frac{\sigma^2}{n_j}} = \frac{10.64}{10.64 + \frac{66.55}{12}} = 0.657\)</span>.</p>
 <p>Combining this information into our Empirical Bayes formula, <span class="math inline">\(\hat\beta_{01}^{EB} = 58.545\)</span>. The residual between the intercept from our MLM — 57.6742 — and our Empirical Bayes estimate — 58.545 — is 0.87. We could repeat this manual calculation process and get an Empirical Bayes residual for every school, and then plot those residuals to visualize their distribution. Luckily, we don’t need to do this manual process 419 times; we can extract the Empirical Bayes estimates of the residuals using code:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="04-module-4.html#cb40-1" aria-hidden="true" tabindex="-1"></a>empirical_bayes_data <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(<span class="fu">ranef</span>(null_model))</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="04-module-4.html#cb41-1" aria-hidden="true" tabindex="-1"></a>empirical_bayes_data <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(<span class="fu">ranef</span>(null_model))</span></code></pre></div>
 <p>We can double-check our manual calculation:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="04-module-4.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(empirical_bayes_data, <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="04-module-4.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(empirical_bayes_data, <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 5
 ##   grpvar  term        grp   condval condsd
 ##   &lt;chr&gt;   &lt;fct&gt;       &lt;fct&gt;   &lt;dbl&gt;  &lt;dbl&gt;
 ## 1 schcode (Intercept) 1       0.869   1.91</code></pre>
 <p>Looks like the residual for school 1 (grp 1) is 0.87, just like we manually calculated! Then, we can plot the residuals to visualize their distribution.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="04-module-4.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> empirical_bayes_data, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> condval)) <span class="sc">+</span> <span class="co"># &quot;condval&quot; is the name of the EB estimates returned by the ranef function above </span></span>
-<span id="cb43-2"><a href="04-module-4.html#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
-<span id="cb43-3"><a href="04-module-4.html#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;EB estimate of U0j&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="04-module-4.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> empirical_bayes_data, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> condval)) <span class="sc">+</span> <span class="co"># &quot;condval&quot; is the name of the EB estimates returned by the ranef function above </span></span>
+<span id="cb44-2"><a href="04-module-4.html#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb44-3"><a href="04-module-4.html#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;EB estimate of U0j&quot;</span>)</span></code></pre></div>
 <p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 <p>As we would expect, the residuals have a mean of 0 because the process of estimating the model is a process of minimizing the residuals. It looks like they mostly range from -5 to 5 in a normal distribution. Again, looks like our intercepts vary fairly widely between schools, so it’s a good thing we’re modelling that variation.</p>
 </div>
