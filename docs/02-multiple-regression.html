@@ -139,6 +139,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
 <ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-authors"><i class="fa fa-check"></i>About the Authors</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#funding"><i class="fa fa-check"></i>Funding</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="01-module-1.html"><a href="01-module-1.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
@@ -300,6 +301,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.2.9" data-path="12-module-12.html"><a href="12-module-12.html#assumption-6-level-1-residuals-independent-of-level-2-predictors-level-2-residuals-independent-of-level-1-predictors"><i class="fa fa-check"></i><b>12.2.9</b> Assumption 6: Level-1 Residuals Independent of Level-2 Predictors, Level-2 Residuals Independent of Level-1 Predictors</a></li>
 </ul></li>
 <li class="chapter" data-level="12.3" data-path="12-module-12.html"><a href="12-module-12.html#conclusion-10"><i class="fa fa-check"></i><b>12.3</b> Conclusion</a></li>
+<li class="chapter" data-level="12.4" data-path="12-module-12.html"><a href="12-module-12.html#further-reading-3"><i class="fa fa-check"></i><b>12.4</b> Further Reading</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="13-appendix.html"><a href="13-appendix.html"><i class="fa fa-check"></i><b>A</b> Download Materials</a></li>
@@ -332,7 +334,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>All materials for this chapter are available for download <a href="https://www.learn-mlms.com/13-appendix.html">here</a>.</p>
 <p>The learning objectives for this chapter are:</p>
 <ol style="list-style-type: decimal">
-<li>Understand using file paths for project management/loading data.</li>
+<li>Understand using file paths for project management/loading data;</li>
 <li>Review using simple and multiple linear regression to analyze data.</li>
 </ol>
 </div>
@@ -563,9 +565,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The <code>ses:female</code> interaction term, .34, represents the effect of being female on the relationship between SES and math achievement. Alternatively, it could represent the effect of SES on the relationship between being female and math achievement. In this case, the latter is a more intuitive interpretation: female students from higher socioeconomic statuses are slightly insulated from the negative relationship between female and math achievement in this sample. As SES increases by one point, the relationship between being female and math achievement becomes less negative, from -1.07 to -.73 (-1.07 + .34). However, this interaction term is not statistically significantly different from zero per the p-value.</p>
 <p>We can see this graphically using the <code>sjPlot</code> package:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="02-multiple-regression.html#cb14-1" aria-hidden="true" tabindex="-1"></a>sjPlot<span class="sc">::</span><span class="fu">plot_model</span>(model3, <span class="at">type =</span> <span class="st">&quot;pred&quot;</span>, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">&quot;ses&quot;</span>, <span class="st">&quot;female&quot;</span>))</span></code></pre></div>
-<pre><code>## Registered S3 method overwritten by &#39;parameters&#39;:
-##   method                         from      
-##   format.parameters_distribution datawizard</code></pre>
 <p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>As we can see, math scores for males (<code>female</code> = 0, the red line) are higher than those for females (<code>female</code> = 1, the blue line) at all levels of SES. However, the difference between males and females shrinks with increasing SES, as indicated by math scores at higher SES levels being closer than those at lower levels of SES.</p>
 <p>The other coefficients have the same interpretations as before. The R-squared indicates that SES and sex account for 14.7% of the variance in math achievement.</p>

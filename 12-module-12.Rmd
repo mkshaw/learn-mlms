@@ -351,11 +351,9 @@ Looks great!
 
 ## Conclusion
 
-In this (final!) chapter, we reviewed the assumptions underlying multilevel models and examined some methods to assess them. 
+In this chapter, we reviewed the assumptions underlying multilevel models and examined some methods to assess them. 
 
-## Parting Words
-
-This is the last chapter of the book! If you have any suggestions or feedback, feel free to get in touch on Twitter ([Mairead](www.twitter.com/maireadkshaw), [Jessica](www.twitter.com/jkayflake)) or on [GitHub](https://github.com/mkshaw/learn-mlms).
+This is the last chapter of the book! We've covered the fundamentals: when and why you would use a multilevel model, models of varying complexity and completeness, and considerations as you build your models like estimation, various data structures, and interpreting effect sizes. Thank you for reading. If you have any suggestions or feedback, feel free to get in touch on Twitter ([Mairead](www.twitter.com/maireadkshaw), [Jessica](www.twitter.com/jkayflake)) or on [GitHub](https://github.com/mkshaw/learn-mlms).
 
 ## Further Reading
 

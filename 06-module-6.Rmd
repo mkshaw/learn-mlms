@@ -6,8 +6,8 @@ In this chapter, we will introduce cross-level interactions and random effects.
 
 The learning objectives for this chapter are:
 
-1. Code and interpret models with random slope effects and cross-level interactions.
-2. Interpret meaning of different elements of a Tau matrix.
+1. Code and interpret models with random slope effects and cross-level interactions;
+2. Interpret meaning of different elements of a Tau matrix;
 3. Visualize a random effect covariance using Empirical Bayes estimates.
 
 All materials for this chapter are available for download [here](https://www.learn-mlms.com/13-appendix.html).
