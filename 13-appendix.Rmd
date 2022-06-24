@@ -13,5 +13,5 @@
 |[8](#module-8)|`r xfun::embed_file('data/heck2011.csv', text = "heck2011.csv")`|`r xfun::embed_file('Rscripts/08-module-8.R', text = "08-module-8.R")`|`r xfun::embed_file('worksheets/module8.docx', text = "Centering")`|
 |[9](#module-9)|`r xfun::embed_file('data/hoffman2007.csv', text = "hoffman2007.csv")`|`r xfun::embed_file('Rscripts/09-module-9.R', text = "09-module-9.R")`|`r xfun::embed_file('worksheets/module9.docx', text = "Repeated Measures")`|
 |[10](#module-10)|`r xfun::embed_file('data/casto2016.csv', text = "casto2016.csv")`|`r xfun::embed_file('Rscripts/10-module-10.R', text = "10-module-10.R")`|`r xfun::embed_file('worksheets/module10.docx', text = "Longitudinal Measures")`|
-|[11](#module-11)|`teachsat` included in `r2mlm`|`r xfun::embed_file('Rscripts/11-module-11.R', text = "11-module-11.R")`|`r xfun::embed_file('worksheets/module11.docx', text = "Effect Sizes in MLMs")`|
+|[11](#module-11)|`r xfun::embed_file('data/teachsat.csv', text = "teachsat.csv")`|`r xfun::embed_file('Rscripts/11-module-11.R', text = "11-module-11.R")`|`r xfun::embed_file('worksheets/module11.docx', text = "Effect Sizes in MLMs")`|
 |[12](#module-12)|`r xfun::embed_file('data/rb2002.csv', text = "rb2002.csv")`|`r xfun::embed_file('Rscripts/12-module-12.R', text = "12-module-12.R")`|`r xfun::embed_file('worksheets/module12.docx', text = "Assumptions")`|

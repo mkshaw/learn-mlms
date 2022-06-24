@@ -7,7 +7,7 @@ output:
 documentclass: book
 biblio-style: apalike
 link-citations: yes
-description: "This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and criticially analyze their use in the literature."
+description: "This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and critically analyze their use in the literature."
 url: 'https\://www.learn-mlms.com'
 github-repo: 'mkshaw/multilevel-modelling/'
 ---
@@ -15,7 +15,7 @@ github-repo: 'mkshaw/multilevel-modelling/'
 
 Bonjour/hi, and welcome to **learn-mlms.com**. This website will teach you the fundamentals about multilevel modelling, from why and when you would use them and how to do so for various research questions and data structures. 
 
-This website is free to use and is licensed under the [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/). If you notice any errors or would otherwise like to contribute, feel free to file an issue on [GitHub](https://github.com/mkshaw/learn-mlms). 
+This website is free to use and is licensed under the <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International</a>, so instructors can feel free to borrow and alter materials to structure their own courses. If you notice any errors or would otherwise like to contribute, feel free to file an issue on <a href="https://github.com/mkshaw/learn-mlms" target="_blank">GitHub</a>. 
 
 ## About the Authors {-}
 
@@ -25,4 +25,4 @@ Dr. Jessica Flake is an Assistant Professor of Quantitative Psychology and Model
 
 ## Funding {-}
 
-These materials were made possible by funding from the APS Fund for Teaching and Public Understanding of Psychological Science. You can read more about the fund [here](https://www.psychologicalscience.org/members/teaching/fund).
+These materials were made possible by funding from the APS Fund for Teaching and Public Understanding of Psychological Science. You can read more about the fund <a href="https://www.psychologicalscience.org/members/teaching/fund" target="_blank">here</a>.

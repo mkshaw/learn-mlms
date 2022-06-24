@@ -10,24 +10,22 @@ These materials are intended for students and instructors.
 
 By the end of this course, students will be able to:
 
-1. Estimate variance components and interpret the intraclass correlation coefficient
-2. Decide if and when a multilevel model is needed
-3. Specify and build multilevel models with covariates at level 1 and 2 with both cross-sectional and repeated measures designs
-4. Interpret regression coefficients and variance components from multilevel models
-5. Assess the assumptions of multilevel models
-6. Calculate effect sizes for multilevel models
-
-All of the chapters, datasets, demonstration steps, and code are available for reuse under a [CC BY 4.0 license](https://creativecommons.org/licenses/by/4.0/), so instructors can feel free to borrow and alter materials to structure their own courses.
+1. Estimate variance components and interpret the intraclass correlation coefficient;
+2. Decide if and when a multilevel model is needed;
+3. Specify and build multilevel models with covariates at level 1 and 2 with both cross-sectional and repeated measures designs;
+4. Interpret regression coefficients and variance components from multilevel models;
+5. Assess the assumptions of multilevel models;
+6. Calculate effect sizes for multilevel models.
 
 ## Prerequisites
 
 Readers should be comfortable with multiple linear regression, including building regression models, interpreting regression output, and testing for and interpreting regression coefficients including interactions. The first module reviews multiple regression and can be used to gauge your preparedness for continuing. For those wishing to brush up their regression skills before working through these materials, we recommend UCLA's Statistical Methods and Data Analytics resources and online seminars: https://stats.oarc.ucla.edu/other/mult-pkg/seminars/
 
-The worked examples will be conducted using `lme4` in R. The [`lme4` documentation](https://cran.r-project.org/web/packages/lme4/vignettes/lmer.pdf) provides details of the workings of `lme4`, for interested readers.
+The worked examples will be conducted using `lme4` in R. The <a href="https://cran.r-project.org/web/packages/lme4/vignettes/lmer.pdf" target="_blank">`lme4` documentation</a> provides details of the workings of `lme4`, for interested readers.
 
 ## Materials
 
-All materials are available for download in the [appendix](https://www.learn-mlms.com/13-appendix.html). The following are available for download:
+All materials are available for download in the <a href="https://www.learn-mlms.com/13-appendix.html" target="_blank">appendix</a>. The following are available for download:
 
 * Data: the data used in each chapter
 * R Script: an R script of the code used in each chapter
