@@ -27,7 +27,7 @@ library(performance) # for ICC
 
 ### Review of Multilevel Modelling Procedure
 
-Multilevel modelling in repeated measures data is a new application of the techniques we've covered so far, so let's briefly review the steps in our modelling framework so far:
+Multilevel modelling in repeated measures data is a new application of the techniques we've covered so far, so let's briefly review the steps in our modelling framework:
 
 1. Establish solid theory and measurement, decide whether you need MLMs for your question
 2. Run random-intercept-only (i.e., null) model to calculate ICC and quantify extent of clustering in data
@@ -40,9 +40,9 @@ Multilevel modelling in repeated measures data is a new application of the techn
 
 Thus far, we've been using a cross-sectional example of students clustered within schools. Our level-1 variables have been about traits that students vary on (e.g., age, gender, SES) while our level-2 variables have been about traits that schools vary on (e.g., whether they are public or private schools). 
 
-With repeated measures data, measures are clustered within person rather than having people clustered within some organizational structure. The level-1 variables are about traits that the measures vary on (e.g., experimental manipulations) while level-2 variables are about traits that people vary on (e.g., age, gender, SES). For example, imagine we show participants pictures of lines and ask them to estimate the line length. We measure how long it takes them to rate each line. A level-1 variable would be the line length; each participant sees several lines of different lengths. A level-2 variable would be something demographic like a participant's age or gender; each person has the same value on the variable for the entire experiment.
+With repeated measures data, measures are clustered within person rather than having people clustered within some organizational structure. The level-1 variables are about traits that the measures vary on (e.g., experimental manipulations) whereas level-2 variables are about traits that people vary on (e.g., age, gender, SES). For example, imagine we show participants pictures of lines and ask them to estimate the line length. We measure how long it takes them to rate each line, making their reaction time the dependent variable. A level-1 predictor variable would be the line length; each participant sees several lines of different lengths. A level-2 predictor variable would be something demographic like a participant's age or gender; each person has the same value on the variable for the entire experiment.
 
-In this chapter, we'll look at repeated measures data without time in the model. In Chapter 10, we'll look at repeated measures data with time in the model, i.e., longitudinal models. 
+In this chapter, we'll look at repeated measures data without time in the model. This approaches assumes that time is not related to the outcome in the model. In Chapter 10, we'll look at repeated measures data with time in the model, i.e., longitudinal models, which focus on how an outcome changes over time.
 
 #### Data Structures: Long vs Wide
 
@@ -62,7 +62,7 @@ In MLMs, you need to use data in a "long" format where one row is one measuremen
 |2|150|3200|1|
 |2|160|3100|2|
 
-This requires transposing your data, which you can read more about [here](https://tidyr.tidyverse.org/reference/pivot_longer.html). 
+This requires transposing your data, which you can read more about <a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" target="_blank">here</a>. 
 
 An aside: you might also be used to thinking listwise deletion deletes an entire participant, because listwise deletion deletes rows with any missing data and in wide data one row *is* one participant. In long data, listwise deletion means deleting one measurement instance, not necessarily an entire participant. For example, if a participant answers a questionnaire a first time, then at one follow-up, but not at the second follow-up, listwise deletion will only remove their third row full of NAs; you'll keep their data from the first two questionnaires.
 
@@ -97,7 +97,7 @@ performance::icc(null_model)
 
 With repeated measures data, the ICC is interpreted as the proportion of variance between people: How much of the variance stems from people being different from one another versus fluctuating within themselves? A large ICC means that most of the variability is between people, not from people varying in their answers to a set of questions (or in this case, reaction time). The ICC is 0.252, indicating that 25.2% of the variance in log reaction time is attributed to a person. 
 
-(Some bonus fun: when responses to questions are nested within person, Cronbach's alpha is equivalent to the ICC: a high alpha indicates high "reliability" of the scale because most of the scale variance is between people, individuals have relatively consistent patterns of answering on the scale.)
+(Some bonus fun: when responses to questions are nested within person, Cronbach's alpha is equivalent to the ICC: a high alpha indicates high "reliability" of the scale because most of the scale variance is between people. By contrast, if individuals answered inconsistently, most of the scale variance would be within person and we would get a lower alpha.)
 
 ### Adding Level-1 Fixed Effects
 
@@ -178,11 +178,11 @@ That took care of our singularity issue. However, the random effect for salience
 anova(l1_random, l1_random_without_cmean)
 ```
 
-There is no significant difference between these models, so there doesn't seem to be much benefit to including the random effect for salience.
+There is no significant difference between these models, so there doesn't seem to be much benefit to including the random effect for salience because the model fits just as well without it.
 
 ### Adding Level-2 Fixed Effects
 
-The level-2 variables in our dataset are demographic variables about participants, which in this dataset is their sex, age in years, whether they 40 or older (`oldage` = 1) or younger than 40 (`oldage` = 0), or their age centered at 65 years old for those who are older than 40 (`yrs65`). Let's add `oldage` and `sex` as level-2 predictors of the intercept.
+The level-2 variables in our dataset are demographic variables about participants, which in this dataset are their sex, age in years, whether they 40 or older (`oldage` = 1) or younger than 40 (`oldage` = 0), or their age centered at 65 years old for those who are older than 40 (`yrs65`). Let's add `oldage` and `sex` as level-2 predictors of the intercept.
 
 | Level  | Equation |
 |:-------|:---------|
@@ -220,7 +220,7 @@ l2_model_no_sex <- lmer(lg_rt ~ 1 + c_mean + c_sal + oldage + (1|id), data = dat
 anova(l2_model, l2_model_no_sex)
 ```
 
-There is no significant difference in deviance, so we don't lose on the model fit front if we don't estimate `sex`.
+There is no significant difference in deviance, so we don't lose on the model fit front if we don't estimate the effect of `sex`.
 
 ### Adding Cross-Level Interactions
 
@@ -249,8 +249,19 @@ crosslevel_model <- lmer(lg_rt ~ 1 + c_mean + c_sal + oldage + oldage:c_mean + (
 summary(crosslevel_model)
 ```
 
-The interaction between `oldage` and `c_mean` is 0.04, suggesting that people older than 40 have 0.04 added to their (log) reaction times for more meaningful photos. That is, older people have slower reaction times even when photos are more related to driving. The other coefficient interpretations are similar to those we discussed in earlier models.
+The interaction between `oldage` and `c_mean` is 0.04, suggesting that people older than 40 have 0.04 added to their (log) reaction times for more meaningful photos. Let's do some quick calculations to emphasize that point. Remember that lower reaction time is better here (faster response).
+
+* The intercept represents average log reaction time for someone under 40 with a stimulus at average salience and meaning: 1.30
+* For people over 40, the average reaction time increases by 0.82 (coefficient for `oldage`) to `1.30 + 0.82 = 2.12`
+* When photos are related to driving, the log reaction time decreases by -0.06 (the coefficient for `c_mean`). For people under 40, that's `1.30 - 0.06 = 1.24`
+* But when people are also older the benefit of the meaning is offset by age it increases by 0.03: `1.30 + 0.82 - 0.06 + 0.03 = 2.09`
+
+In summary, older people have slower reaction times. Photos being related to driving helps offset the effect of age somewhat, but even when photos are more related to driving they still have slower reaction times.
+
+The other coefficient interpretations are similar to those we discussed in earlier models.
 
 ## Conclusion
 
-In this chapter, we reviewed our MLM pipeline and applied it to repeated measures without time in the model. In Chapter 10, we will look at longitudinal models, i.e., repeated measures with time in the model.
+In this chapter, we reviewed our MLM pipeline and applied it to repeated measures without time in the model. In short, MLMs on repeated measures data can be executed in the same way as organizational models, however, the interpretations shift from being about a person clustered within some unit, to being about responses clustered within a person. In an organizational model, level-1 variables tend to measure aspects of a person, whereas these variables are often level-2 variables in a repeated measures model.
+
+In Chapter 10, we will look at longitudinal models, i.e., repeated measures with time in the model.

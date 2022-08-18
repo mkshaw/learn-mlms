@@ -29,11 +29,11 @@ library(performance) # for ICC
 
 ### Multilevel Models for Longitudinal Data 
 
-When we use cross-sectional data, level-1 variables vary between individuals (e.g., age, gender, SES) while level-2 variables vary between clusters (e.g., whether schools are public or private, number of students in a classroom, school funding).
+When we use cross-sectional data, level-1 variables vary between individuals (e.g., age, gender, SES) whereas level-2 variables vary between clusters (e.g., whether schools are public or private, number of students in a classroom, school funding).
 
 With repeated measures data *without* time in the model, level-1 variables vary between measurement occasions (e.g., experimental manipulations, stimulus volume or brightness) while level-2 variables vary between people (e.g., age, gender, SES).
 
-In this chapter, we're looking at longitudinal models, i.e., repeated measures *with* time in the model. With longitudinal data, level-1 variables vary over time (e.g., weight at time 1, time 2, time 3; Testosterone levels at 10 minutes into game, 20 minutes into game, 30 minutes into game). Level-1 variables are also called "time-varying covariates" because they vary with time. Level-2 variables are the same across time (also called "time invariant covariates"), for example age, gender, SES (assuming these things don't change over the study period, if you wait long enough these will or may change).
+In this chapter, we're looking at longitudinal models, i.e., repeated measures *with* time in the model. With longitudinal data, level-1 variables vary over time (e.g., weight at time 1, time 2, time 3; Testosterone levels at 10 minutes into game, 20 minutes into game, 30 minutes into game). Level-1 variables are also called "time-varying covariates" because they vary with time. Level-2 variables are the same across time (also called "time invariant covariates"), for example age, gender, SES (assuming these things don't change over the study period, if you wait long enough these will or may change). For more on the topic of time-varying covariates, see <a href="https://pubmed.ncbi.nlm.nih.gov/21607073/" target="_blank">McCoach and Kaniskan (2010)</a>.
 
 #### Data Structures: Long vs Wide
 
@@ -55,7 +55,7 @@ In MLMs, you need to use data in a "long" format where one row is one measuremen
 
 ### Visualizing Testosterone Levels Over Time
 
-The data used in this chapter are a simplified version of the data from Casto, K.V., & Edwards, D.A. (2016). Before, during, and after: How phases of competition differentially affect testosterone, cortisol, and estradiol levels in women athletes. Adaptive Human Behavior and Physiology, 2, 11-25. https://doi.org/10.1007/s40750-015-0028-2.
+The data used in this chapter are a simplified version of the data from Casto, K.V., & Edwards, D.A. (2016). Before, during, and after: How phases of competition differentially affect testosterone, cortisol, and estradiol levels in women athletes. Adaptive Human Behavior and Physiology, 2, 11-25. https://doi.org/10.1007/s40750-015-0028-2.
 
 Dr. Kathleen Casto gave us permission to use these data for teaching purposes (thanks Kathleen!); any other use requires additional permission. You can see more of her work [here](https://scholar.google.com/citations?user=xqhtNEIAAAAJ&hl=en).
 
@@ -74,39 +74,44 @@ head(data)
 
 These data include hormone levels of female athletes in a competition setting (soccer game), if they played in the game or not (`Played`), what position they played (`position`), how long they played (`minplayed`), their testosterone levels (`Testosterone`), and if they were taking birth control (`HormonCont`). We will focus on testosterone, if they played, and if they were taking birth control for this example.
 
+Graphs are very helpful for understanding patterns over time visually, which has two immediate implications for our model-building. First, we can get a sense of whether predictors are valuable additions to our model. Second, they can be used to determine the functional form of a model (e.g., is the relationship between variables over time linear? exponential? something else?). Note that in our example, there are three time points: before a game starts, during the game, and after the game. These are indicated in the below graphs with x-axis labels  0, 1, and 2, respectively. Three is the minimal number of points required to estimate a slope for time in a longitudinal analysis, because with only two time points you are just looking at the difference between two time points, not a trend over time. See McCoach and Kaniskan (2010) for more.
+
 Let's start by visualizing testosterone levels over time for the entire sample:
 
-```{r}
+```{r warning=F}
 data %>% 
   group_by(time0) %>%
   mutate(tmean = mean(Testosterone)) %>% # mean testosterone per timepoint
   ggplot(mapping = aes(x = time0, y = tmean)) +
   geom_line() +
-  labs(title = "Testosterone Over Time for Entire Sample")
+  labs(title = "Testosterone Over Time for Entire Sample") +
+  scale_x_discrete(limits = c(0, 1, 2)) # adjust x-axis labels
 ```
 
 The relationship between time and testosterone doesn't look exactly linear. Let's check if there are different relationships between people who played and people who didn't.
 
-```{r}
+```{r warning=F}
 data %>% 
   group_by(time0, Played) %>% # group by timepoint and played
   mutate(tmean = mean(Testosterone)) %>% 
   ggplot(mapping = aes(x = time0, y = tmean, colour = factor(Played))) +
   geom_line() +
-  labs(title = "Testosterone Over Time, Played vs. Did Not Play")
+  labs(title = "Testosterone Over Time, Played vs. Did Not Play") +
+  scale_x_discrete(limits = c(0, 1, 2))
 ```
 
 Those who played have a pretty linear increase in testosterone over time, while those who did not play go up from time 0 to 1 and then back down between 1 and 2, so it looks like playing or not might be an important level-2 predictor for our model intercepts and slopes.
 
 Finally, let's check whether birth control seems like an important predictor of intercepts and slopes:
 
-```{r}
+```{r warning=F}
 data %>% 
   group_by(time0, HormonCont) %>% # group by timepoint and birth control
   mutate(tmean = mean(Testosterone)) %>% 
   ggplot(mapping = aes(x = time0, y = tmean, colour = factor(HormonCont))) +
   geom_line() +
-  labs(title = "Testosterone Over Time, Birth Control or Not")
+  labs(title = "Testosterone Over Time, Birth Control or Not") +
+  scale_x_discrete(limits = c(0, 1, 2))
 ```
 
 Looks like another variable we might want to consider in our model! Let's begin with our null model and incrementally build from there.
@@ -164,7 +169,7 @@ summary(l1_model)
 as.matrix(Matrix::bdiag(VarCorr(l1_model)))
 ```
 
-Looking at our fixed effects, the intercept of 50.67 is the average testosterone level across people at time 0. The slope of 9.09 indicates the average increase in testosterone levels over one unit of time. 
+Looking at our fixed effects, the intercept of 50.67 is the average testosterone level across people at time 0. The slope of 9.09 indicates the average increase in testosterone levels as time increases by one. 
 
 The variance term describing how people vary around the intercept is 154.67. The variance term describing how people's slopes vary is 24.12. The covariance between the random intercept and random slope is 53.07 (correlation of 0.87), indicating that those with higher initial levels of testosterone also have higher slopes (more intense increase in testosterone over time). 
 
@@ -242,7 +247,7 @@ l2_played <- lmer(Testosterone ~ 1 + time0 + Played + Played:time0 + (1|Code) + 
 summary(l2_played)
 ```
 
-Looking at our fixed effects, the intercept of 44.53 is the average testosterone level at time 0 across people who didn't play. The slope of time, 3.93, indicates the average increase in testosterone levels over one unit of time controlling for playing. The slope of having played, 9.00, indicates that those who played had on average 9 more units of Testosterone than those who didn't at time 0. The interaction between time and having played indicates that those who played had a 7.39-higher slope on average than those who didn't.
+Looking at our fixed effects, the intercept of 44.53 is the average testosterone level at time 0 across people who didn't play. The slope of time, 3.93, indicates the average increase in testosterone levels over one unit of time controlling for playing. The slope of having played, 9.00, indicates that those who played had on average 9 more units of Testosterone than those who didn't at time 0. The interaction between time and having played indicates that those who played had a 7.39-unit higher slope on average than those who didn't.
 
 The variance term describing how people vary around the intercept is 182.24. The variance term describing how people's time slopes vary is 27.22. 
 
@@ -282,4 +287,12 @@ Taking birth control is associated with a drop in Testosterone by 9.71 units, co
 
 ## Conclusion
 
-In this chapter, we estimated and interpreted models for longitudinal data and reviewed some of the evidence available to us in making model construction decisions: deviance testing, 95% confidence intervals, and visualizing Empirical Bayes estimates. In Chapter 11, we will review another source of evidence for model-building and interpretation: effect sizes and R-squared in multilevel models.
+In this chapter, we estimated and interpreted models for longitudinal data and reviewed some of the evidence available to us in making model construction decisions: deviance testing, 95% confidence intervals, and visualizing Empirical Bayes estimates. Longitudinal models are complex and an entire course could be spent on them. This was an introduction to a simple example case. For more, we recommend Dr. Lesa Hoffman's <a href="https://www.routledge.com/Longitudinal-Analysis-Modeling-Within-Person-Fluctuation-and-Change/Hoffman/p/book/9780415876025" target="_blank">textbook</a> as a starting point.
+
+In Chapter 11, we will review another source of evidence for model-building and interpretation: effect sizes and R-squared in multilevel models.
+
+## Further Reading
+
+Hoffman, L. (2015). Longitudinal analysis: Modeling within-person fluctuation and change. Routledge/Taylor & Francis Group.
+
+McCoach, D. B., & Kaniskan, B. (2010). Using time-varying covariates in multilevel growth models. Frontiers in psychology, 1, 17. https://doi.org/10.3389/fpsyg.2010.00017
