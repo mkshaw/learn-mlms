@@ -1,6 +1,6 @@
 ## Introduction to Multilevel Modelling
 
-<a href="www.learn-mlms.com" target="_blank">learn-mlms.com</a> focuses on conceptual foundations of multilevel models (MLMs), specifiying them, and interpreting the results. Topics include multilevel data and approaches to dependence, specifying and interpreting fixed and random effects, model estimation, centering, repeated measures and longitudinal models, assumptions testing, and effect sizes in MLMs.
+<a href="https://www.learn-mlms.com" target="_blank">learn-mlms.com</a> focuses on conceptual foundations of multilevel models (MLMs), specifiying them, and interpreting the results. Topics include multilevel data and approaches to dependence, specifying and interpreting fixed and random effects, model estimation, centering, repeated measures and longitudinal models, assumptions testing, and effect sizes in MLMs.
 
 The chapters are:
 
