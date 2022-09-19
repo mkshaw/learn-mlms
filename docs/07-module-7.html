@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 7 Model Estimation Options, Problems, and Troubleshooting | Introduction to Multilevel Modelling</title>
   <meta name="description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and critically analyze their use in the literature." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 7 Model Estimation Options, Problems, and Troubleshooting | Introduction to Multilevel Modelling" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://www.learn-mlms.com" />
   
   <meta property="og:description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and critically analyze their use in the literature." />
   <meta name="github-repo" content="mkshaw/multilevel-modelling/" />
@@ -32,7 +31,6 @@
   
 <link rel="prev" href="06-module-6.html"/>
 <link rel="next" href="08-module-8.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -50,8 +48,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -269,6 +268,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2.7" data-path="10-module-10.html"><a href="10-module-10.html#adding-level-2-fixed-effects-1"><i class="fa fa-check"></i><b>10.2.7</b> Adding Level-2 Fixed Effects</a></li>
 </ul></li>
 <li class="chapter" data-level="10.3" data-path="10-module-10.html"><a href="10-module-10.html#conclusion-8"><i class="fa fa-check"></i><b>10.3</b> Conclusion</a></li>
+<li class="chapter" data-level="10.4" data-path="10-module-10.html"><a href="10-module-10.html#further-reading-3"><i class="fa fa-check"></i><b>10.4</b> Further Reading</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="11-module-11.html"><a href="11-module-11.html"><i class="fa fa-check"></i><b>11</b> Effect Sizes in Multilevel Models</a>
 <ul>
@@ -301,7 +301,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.2.9" data-path="12-module-12.html"><a href="12-module-12.html#assumption-6-level-1-residuals-independent-of-level-2-predictors-level-2-residuals-independent-of-level-1-predictors"><i class="fa fa-check"></i><b>12.2.9</b> Assumption 6: Level-1 Residuals Independent of Level-2 Predictors, Level-2 Residuals Independent of Level-1 Predictors</a></li>
 </ul></li>
 <li class="chapter" data-level="12.3" data-path="12-module-12.html"><a href="12-module-12.html#conclusion-10"><i class="fa fa-check"></i><b>12.3</b> Conclusion</a></li>
-<li class="chapter" data-level="12.4" data-path="12-module-12.html"><a href="12-module-12.html#further-reading-3"><i class="fa fa-check"></i><b>12.4</b> Further Reading</a></li>
+<li class="chapter" data-level="12.4" data-path="12-module-12.html"><a href="12-module-12.html#further-reading-4"><i class="fa fa-check"></i><b>12.4</b> Further Reading</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="13-appendix.html"><a href="13-appendix.html"><i class="fa fa-check"></i><b>A</b> Download Materials</a></li>
@@ -326,10 +326,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="module-7" class="section level1" number="7">
-<h1><span class="header-section-number">Chapter 7</span> Model Estimation Options, Problems, and Troubleshooting</h1>
-<div id="learning-objectives-5" class="section level2" number="7.1">
-<h2><span class="header-section-number">7.1</span> Learning Objectives</h2>
+<div id="module-7" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Model Estimation Options, Problems, and Troubleshooting<a href="07-module-7.html#module-7" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="learning-objectives-5" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Learning Objectives<a href="07-module-7.html#learning-objectives-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In this chapter, we will review common estimation options, problems that can arise, and how to troubleshoot those problems.</p>
 <p>The learning objectives for this chapter are:</p>
 <ol style="list-style-type: decimal">
@@ -341,44 +341,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>All materials for this chapter are available for download <a href="https://www.learn-mlms.com/13-appendix.html">here</a>.</p>
 </div>
-<div id="data-demonstration-5" class="section level2" number="7.2">
-<h2><span class="header-section-number">7.2</span> Data Demonstration</h2>
+<div id="data-demonstration-5" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Data Demonstration<a href="07-module-7.html#data-demonstration-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The data for this chapter were taken from chapter 3 of Heck, R. H., Thomas, S. L., &amp; Tabata, L. N. (2011). <em>Multilevel and Longitudinal Modeling with IBM SPSS</em>: Taylor &amp; Francis. Students are clustered within schools in the data.</p>
-<div id="load-data-and-dependencies-4" class="section level3" number="7.2.1">
-<h3><span class="header-section-number">7.2.1</span> Load Data and Dependencies</h3>
+<div id="load-data-and-dependencies-4" class="section level3 hasAnchor" number="7.2.1">
+<h3><span class="header-section-number">7.2.1</span> Load Data and Dependencies<a href="07-module-7.html#load-data-and-dependencies-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For this data demo, we will use the following packages:</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="07-module-7.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># for data manipulation</span></span>
-<span id="cb85-2"><a href="07-module-7.html#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># for graphing</span></span>
-<span id="cb85-3"><a href="07-module-7.html#cb85-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4) <span class="co"># for multilevel models</span></span>
-<span id="cb85-4"><a href="07-module-7.html#cb85-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest) <span class="co"># for p-values</span></span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="07-module-7.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># for data manipulation</span></span>
+<span id="cb87-2"><a href="07-module-7.html#cb87-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># for graphing</span></span>
+<span id="cb87-3"><a href="07-module-7.html#cb87-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4) <span class="co"># for multilevel models</span></span>
+<span id="cb87-4"><a href="07-module-7.html#cb87-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest) <span class="co"># for p-values</span></span></code></pre></div>
 <p>And the same dataset of students’ math achievement:</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="07-module-7.html#cb86-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;heck2011.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="07-module-7.html#cb88-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;heck2011.csv&#39;</span>)</span></code></pre></div>
 </div>
-<div id="introduction-to-estimation-problems" class="section level3" number="7.2.2">
-<h3><span class="header-section-number">7.2.2</span> Introduction to Estimation Problems</h3>
+<div id="introduction-to-estimation-problems" class="section level3 hasAnchor" number="7.2.2">
+<h3><span class="header-section-number">7.2.2</span> Introduction to Estimation Problems<a href="07-module-7.html#introduction-to-estimation-problems" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In Chapter 6, we modelled the relationship between SES and math achievement with a random intercept and random slope as follows:</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="07-module-7.html#cb87-1" aria-hidden="true" tabindex="-1"></a>ses_l1_random <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> ses<span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="07-module-7.html#cb89-1" aria-hidden="true" tabindex="-1"></a>ses_l1_random <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> ses<span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
 <p>As indicated by the warning message from R, our model is singular (which we’ll define in a moment). In this chapter, we will examine estimation issues like this and how to troubleshoot them. This is one of the less interactive chapters in these materials, but if you want a reason to stick around, there is a fun puzzle analogy. We’ll begin with some notes on model estimation and then move onto possible issues and how to address them.</p>
 </div>
-<div id="estimation-and-optimizers" class="section level3" number="7.2.3">
-<h3><span class="header-section-number">7.2.3</span> Estimation and Optimizers</h3>
+<div id="estimation-and-optimizers" class="section level3 hasAnchor" number="7.2.3">
+<h3><span class="header-section-number">7.2.3</span> Estimation and Optimizers<a href="07-module-7.html#estimation-and-optimizers" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In linear regression, Ordinary Least Squares estimation is used to find a combination of parameters (intercepts and slopes) that minimize the residual sum of squares. If we imagine a simple linear regression with math achievement as an outcome and SES as a predictor, we have our regression line (line of best fit) and our actual data points around that line.</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="07-module-7.html#cb89-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb89-2"><a href="07-module-7.html#cb89-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(schcode <span class="sc">&lt;=</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span> <span class="co"># subset data to make it easier to see</span></span>
-<span id="cb89-3"><a href="07-module-7.html#cb89-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> ses, <span class="at">y =</span> math)) <span class="sc">+</span></span>
-<span id="cb89-4"><a href="07-module-7.html#cb89-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb89-5"><a href="07-module-7.html#cb89-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">fullrange =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="07-module-7.html#cb91-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb91-2"><a href="07-module-7.html#cb91-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(schcode <span class="sc">&lt;=</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span> <span class="co"># subset data to make it easier to see</span></span>
+<span id="cb91-3"><a href="07-module-7.html#cb91-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> ses, <span class="at">y =</span> math)) <span class="sc">+</span></span>
+<span id="cb91-4"><a href="07-module-7.html#cb91-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb91-5"><a href="07-module-7.html#cb91-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">fullrange =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
 <p>For a given value of SES on the x-axis, the distance between our prediction (regression line) and our actual observation (data point) is our residual, and if we sum all of the residuals (after squaring them so the negative residuals below the line and positive residuals above it don’t cancel out), we get our residual sum of squares. OLS regression will select the regression line with the smallest residuals, which is the line that is as close as possible to the data points. You can see this process and play around with it on this interactive website: <a href="https://seeing-theory.brown.edu/regression-analysis/index.html#section1" class="uri">https://seeing-theory.brown.edu/regression-analysis/index.html#section1</a></p>
 <p>In multilevel modelling, we use maximum likelihood (ML) estimation instead of OLS estimation. In ML estimation, we have our data points and we want to find the combination of parameters (intercepts and slopes) that maximize the likelihood that we observed that data. This is an iterative process, where we select parameters that maximize the probability of getting our data (i.e., that maximize the likelihood). We select set after set of parameters, and eventually stop when the parameter sets aren’t getting better. You can play around with likelihood here: <a href="https://seeing-theory.brown.edu/bayesian-inference/index.html#section2" class="uri">https://seeing-theory.brown.edu/bayesian-inference/index.html#section2</a> This video from Stat Quest walks through the concept:</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/XepXtl9YKwc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 </iframe>
 <p>We have two options for ML estimation in multilevel modelling: restricted maximum likelihood (REML) and full information maximum likelihood (FIML or ML). The key difference between them is how the estimation methods handle the variance components. When using REML, there is a penalty applied to the degrees of freedom when estimating the variance components <span class="math inline">\(\sigma^2\)</span>, <span class="math inline">\(\tau_1^2\)</span>, etc. When using FIML, there is no such penalty and as a result the variance components are usually underestimated. A linear regression analogy might help clarify this point: the formula for population variance is <span class="math inline">\(S = \frac{\Sigma(x_i - \overline{x})^2}{n}\)</span>. The formula for sample variance is <span class="math inline">\(s = \frac{\Sigma(x_i - \overline{x})^2}{n - 1}\)</span>. The sample variance imposes a penalty of n - 1 and is a REML estimator, while the population variance formula is the corresponding FIML estimator. Because we want accurate information about our variance components, we will usually use REML. We will only use FIML when we want to compare two models with different fixed effects. We’ll discuss model comparison later in this chapter.</p>
 </div>
-<div id="non-convergence" class="section level3" number="7.2.4">
-<h3><span class="header-section-number">7.2.4</span> Non-Convergence</h3>
+<div id="non-convergence" class="section level3 hasAnchor" number="7.2.4">
+<h3><span class="header-section-number">7.2.4</span> Non-Convergence<a href="07-module-7.html#non-convergence" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In the embedded Stat Quest video above, the narrator describes the iterative process in ML estimation of finding the maximum likelihood estimate of a parameter, trying multiple different options before settling on one as the value that maximizes the likelihood of observing their data about mice weights. When you’re working with many predictors at once — for example, an intercept and a slope for SES and a slope for school type and variance terms for all of those fixed effects — it is harder to try all possible combinations. So, optimization algorithms (AKA optimizers) are used to try to find the ML estimates by examining a subset of possible combinations. However, these optimizers cannot always find the combination of parameters that maximizes the likelihood of observing your data; they can’t find a solution to the problem of “what paramaters maximize the likelihood of observing this data?”. When the optimizers cannot find a solution, the result is called non-convergence: the model did not <em>converge</em> on a solution.</p>
 <p>You should not use the parameter estimates from a non-converged solution. A non-convergence warning is the computing equivalent of being unable to put a puzzle together, jamming the pieces in where you can, and saying “I don’t know, this is my best guess about where these pieces go.” Sure, the puzzle might sort of look like the image on the box, but it doesn’t really match, a bunch of the pieces have been contorted and bent to fit.</p>
 <p>There are two main strategies to solve a non-convergence problem: change your optimizer or change your model. You can manipulate a few characteristics of your optimizer to try to get convergence:</p>
@@ -390,20 +390,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>(We hope you enjoyed the puzzle analogy.)</p>
 <p>You can alter these elements of your optimizer to see if giving it more time, a different strategy, or more leeway to say “yes, this converged” will lead to convergence. Alternatively, you can trim your model, removing variables you think are less likely to matter. We will discuss some approaches to doing this below.</p>
 </div>
-<div id="singularity" class="section level3" number="7.2.5">
-<h3><span class="header-section-number">7.2.5</span> Singularity</h3>
+<div id="singularity" class="section level3 hasAnchor" number="7.2.5">
+<h3><span class="header-section-number">7.2.5</span> Singularity<a href="07-module-7.html#singularity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Singularity occurs when an element of your variance-covariance matrix is estimated as essentially zero as a result of extreme multicollinearity or because the parameter is actually essentially zero.</p>
 <p>You can find singularity by examining your variance-covariance estimates and the correlations between them. It will often show up as co/variances near zero or correlations between variances at -1 or 1. Let’s return to our example from Chapter 6, predicting math achievement from SES with a random slope:</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="07-module-7.html#cb91-1" aria-hidden="true" tabindex="-1"></a>ses_l1_random <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> ses<span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="07-module-7.html#cb93-1" aria-hidden="true" tabindex="-1"></a>ses_l1_random <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> ses<span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
 <p>As we can see, our output contains a helpful warning message notifying us that the model is singular. We can investigate this issue in three ways. First, we can look at our Tau matrix:</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="07-module-7.html#cb93-1" aria-hidden="true" tabindex="-1"></a>Matrix<span class="sc">::</span><span class="fu">bdiag</span>(<span class="fu">VarCorr</span>(ses_l1_random))</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="07-module-7.html#cb95-1" aria-hidden="true" tabindex="-1"></a>Matrix<span class="sc">::</span><span class="fu">bdiag</span>(<span class="fu">VarCorr</span>(ses_l1_random))</span></code></pre></div>
 <pre><code>## 2 x 2 sparse Matrix of class &quot;dgCMatrix&quot;
 ##             (Intercept)        ses
 ## (Intercept)    3.204184 -1.5802590
 ## ses           -1.580259  0.7793617</code></pre>
 <p>Things look okay here, no elements appear to be close to or zero. Our second method of investigation is looking at our overall output:</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="07-module-7.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ses_l1_random)</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="07-module-7.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ses_l1_random)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
 ## Formula: math ~ 1 + ses + (1 + ses | schcode)
 ##    Data: data
@@ -434,11 +434,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## optimizer (nloptwrap) convergence code: 0 (OK)
 ## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
 <p>Here, in our random effects section, we can see that the correlation between our random effects is -1.00, a sign of perfect multicollinearity. We can dig into the confidence intervals of our estimates up close to confirm this:</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="07-module-7.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(ses_l1_random, <span class="at">oldNames =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="07-module-7.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(ses_l1_random, <span class="at">oldNames =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## Computing profile confidence intervals ...</code></pre>
 <pre><code>## Warning in FUN(X[[i]], ...): non-monotonic profile for cor_ses.(Intercept)|schcode</code></pre>
-<pre><code>## Warning in confint.thpr(pp, level = level, zeta = zeta): bad spline fit for cor_ses.
-## (Intercept)|schcode: falling back to linear interpolation</code></pre>
+<pre><code>## Warning in confint.thpr(pp, level = level, zeta = zeta): bad spline fit for cor_ses.(Intercept)|
+## schcode: falling back to linear interpolation</code></pre>
 <pre><code>##                                  2.5 %    97.5 %
 ## sd_(Intercept)|schcode       1.4944476  2.077295
 ## cor_ses.(Intercept)|schcode -1.0000000  1.000000
@@ -447,8 +447,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## (Intercept)                 57.4362972 57.956350
 ## ses                          3.6716229  4.252084</code></pre>
 <p>Note that <code>oldNames = FALSE</code> just makes the output easier to read. This will take a moment to run, but when it does we can see that the 95% confidence interval for the correlation between our random effects spans -1 to 1 (i.e. the entire possible range). Our singularity issue started when we added the random slope effect, which added both a random slope variance <span class="math inline">\(\tau_1^2\)</span> and the random intercept-slope covariance <span class="math inline">\(\tau_{01}\)</span>. Let’s see if we can fix the issue by removing that problematic covariance.</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="07-module-7.html#cb102-1" aria-hidden="true" tabindex="-1"></a>ses_l1_random_cov0 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> ses<span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb102-2"><a href="07-module-7.html#cb102-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ses_l1_random_cov0)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="07-module-7.html#cb104-1" aria-hidden="true" tabindex="-1"></a>ses_l1_random_cov0 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> ses<span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb104-2"><a href="07-module-7.html#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ses_l1_random_cov0)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
 ## Formula: math ~ 1 + ses + (1 | schcode) + (0 + ses | schcode)
 ##    Data: data
@@ -477,24 +477,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##     (Intr)
 ## ses -0.023</code></pre>
 <p>Here, we specify our random intercept <code>(1|schcode)</code> and random slope with no covariance <code>(0 + ses|schcode)</code> separately, and that fixed the singularity issue! If we print our Tau matrix we can see that the covariance is fixed to 0.</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="07-module-7.html#cb104-1" aria-hidden="true" tabindex="-1"></a>Matrix<span class="sc">::</span><span class="fu">bdiag</span>(<span class="fu">VarCorr</span>(ses_l1_random_cov0))</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="07-module-7.html#cb106-1" aria-hidden="true" tabindex="-1"></a>Matrix<span class="sc">::</span><span class="fu">bdiag</span>(<span class="fu">VarCorr</span>(ses_l1_random_cov0))</span></code></pre></div>
 <pre><code>## 2 x 2 sparse Matrix of class &quot;dgCMatrix&quot;
 ##                        
 ## [1,] 3.322166 .        
 ## [2,] .        0.7204535</code></pre>
 <p>In general, it is best practice to build a maximal multilevel model, one that includes all possible fixed and random effects that are not zero (Barr et al., 2013). This maximal model will produce parameter estimates with the least amount of bias and provide the best shot at your model fitting the data. However, the maximal model that tries to estimate extreme random effects (those near zero or with high multicollinearity) will have trouble converging and produce estimation errors. When this happens, often an inspection of the random effects will reveal which parameters need to be removed from the model. It can be helpful, ahead of running your MLMs, to consider the key variables of interest, their random effects, and plan, if the maximal model has errors, which parameters should be removed and in what order. Overall, building MLMs is about balancing complexity with utility. Sometimes we do not have enough information in our data to estimate the complex model we planned, so having a plan for how to decrease complexity ahead of time can prevent getting lost in the <a href="http://www.stat.columbia.edu/~gelman/research/unpublished/p_hacking.pdf">garden of forking paths</a>.</p>
 </div>
-<div id="deviance-testing-for-model-comparison" class="section level3" number="7.2.6">
-<h3><span class="header-section-number">7.2.6</span> Deviance Testing for Model Comparison</h3>
+<div id="deviance-testing-for-model-comparison" class="section level3 hasAnchor" number="7.2.6">
+<h3><span class="header-section-number">7.2.6</span> Deviance Testing for Model Comparison<a href="07-module-7.html#deviance-testing-for-model-comparison" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We removed the random effect covariance and our model is no longer singular (i.e., suffering from multicollinearity). That seems better! Now that we have a model without an error, let’s look at comparing the model with the random slope for SES (but no covariance, as we just removed that) and the model without the random slope for SES. If we want to formally test if a model fit is better or at least not worse, we can conduct a deviance test. You can find the “deviance” for your model under the “REML criterion at convergence” in your summary output. In short, deviance is bad and we don’t want more of it, so when we compare the model with and without the random slope for SES, we don’t want the model with the random slope to have more deviance. We want the same or less deviance.</p>
 <p>Note that deviance is based on the likelihood function for your model. Unlike probability, likelihood is not bound at 0 and 1. It can be any number. As a result, looking at likelihood or deviance in isolation is not informative, because it has no bounds. It is only useful for comparison between models, where less deviance indicates a better model (compared to the reference model).</p>
 <p>Here, we’re comparing models with the same fixed effects but different random effects so we can still use REML estimator that more accurately estimates random effects. We have our two model terms, <code>ses_l1</code> and <code>ses_l1_random_cov0</code>, and we can compare the deviance of each using the built-in ANOVA function. Specifying <code>refit = FALSE</code> stops the function from refitting the models with FIML. If we were comparing models with different fixed effects, we would use FIML to estimate our models.</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="07-module-7.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="co"># models</span></span>
-<span id="cb106-2"><a href="07-module-7.html#cb106-2" aria-hidden="true" tabindex="-1"></a>ses_l1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb106-3"><a href="07-module-7.html#cb106-3" aria-hidden="true" tabindex="-1"></a>ses_l1_random_cov0 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> ses<span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb106-4"><a href="07-module-7.html#cb106-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb106-5"><a href="07-module-7.html#cb106-5" aria-hidden="true" tabindex="-1"></a><span class="co"># deviance test to compare model fit</span></span>
-<span id="cb106-6"><a href="07-module-7.html#cb106-6" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ses_l1, ses_l1_random_cov0, <span class="at">refit =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="07-module-7.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="co"># models</span></span>
+<span id="cb108-2"><a href="07-module-7.html#cb108-2" aria-hidden="true" tabindex="-1"></a>ses_l1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb108-3"><a href="07-module-7.html#cb108-3" aria-hidden="true" tabindex="-1"></a>ses_l1_random_cov0 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> ses<span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb108-4"><a href="07-module-7.html#cb108-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-5"><a href="07-module-7.html#cb108-5" aria-hidden="true" tabindex="-1"></a><span class="co"># deviance test to compare model fit</span></span>
+<span id="cb108-6"><a href="07-module-7.html#cb108-6" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ses_l1, ses_l1_random_cov0, <span class="at">refit =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## Data: data
 ## Models:
 ## ses_l1: math ~ 1 + ses + (1 | schcode)
@@ -517,12 +517,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We’ll discuss model specification, fit, and comparison more in Chapter 11 when discussing effect sizes. In closing, when assessing model fit or troubleshooting estimation problems, it is preferable to pre-register what troubleshooting you expect to try or models you expect to estimate. At minimum, you should keep a record of changes you make and report all of them.</p>
 </div>
 </div>
-<div id="conclusion-5" class="section level2" number="7.3">
-<h2><span class="header-section-number">7.3</span> Conclusion</h2>
+<div id="conclusion-5" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Conclusion<a href="07-module-7.html#conclusion-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In this chapter, we considered convergence options, how to diagnose and troubleshoot issues, and comparing model fits using deviance testing. In Chapter 8, we’ll consider different centering options in MLMs.</p>
 </div>
-<div id="further-reading-1" class="section level2" number="7.4">
-<h2><span class="header-section-number">7.4</span> Further Reading</h2>
+<div id="further-reading-1" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Further Reading<a href="07-module-7.html#further-reading-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Barr, D. J., Levy, R., Scheepers, C., &amp; Tily, H. J. (2013). Random effects structure for confirmatory hypothesis testing: Keep it maximal. Journal of memory and language, 68(3), 10.1016/j.jml.2012.11.001. <a href="https://doi.org/10.1016/j.jml.2012.11.001" class="uri">https://doi.org/10.1016/j.jml.2012.11.001</a></p>
 <p>Brauer, M., &amp; Curtin, J. J. (2018). Linear mixed-effects models and the analysis of nonindependent data: A unified framework to analyze categorical and continuous independent variables that vary within-subjects and/or within-items. Psychological Methods, 23(3), 389–411.</p>
 
@@ -596,7 +596,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

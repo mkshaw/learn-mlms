@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Introduction to Multilevel Modelling</title>
   <meta name="description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and critically analyze their use in the literature." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Introduction to Multilevel Modelling" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://www.learn-mlms.com" />
   
   <meta property="og:description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and critically analyze their use in the literature." />
   <meta name="github-repo" content="mkshaw/multilevel-modelling/" />
@@ -32,7 +31,6 @@
   
 
 <link rel="next" href="01-module-1.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -50,8 +48,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -269,6 +268,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2.7" data-path="10-module-10.html"><a href="10-module-10.html#adding-level-2-fixed-effects-1"><i class="fa fa-check"></i><b>10.2.7</b> Adding Level-2 Fixed Effects</a></li>
 </ul></li>
 <li class="chapter" data-level="10.3" data-path="10-module-10.html"><a href="10-module-10.html#conclusion-8"><i class="fa fa-check"></i><b>10.3</b> Conclusion</a></li>
+<li class="chapter" data-level="10.4" data-path="10-module-10.html"><a href="10-module-10.html#further-reading-3"><i class="fa fa-check"></i><b>10.4</b> Further Reading</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="11-module-11.html"><a href="11-module-11.html"><i class="fa fa-check"></i><b>11</b> Effect Sizes in Multilevel Models</a>
 <ul>
@@ -301,7 +301,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.2.9" data-path="12-module-12.html"><a href="12-module-12.html#assumption-6-level-1-residuals-independent-of-level-2-predictors-level-2-residuals-independent-of-level-1-predictors"><i class="fa fa-check"></i><b>12.2.9</b> Assumption 6: Level-1 Residuals Independent of Level-2 Predictors, Level-2 Residuals Independent of Level-1 Predictors</a></li>
 </ul></li>
 <li class="chapter" data-level="12.3" data-path="12-module-12.html"><a href="12-module-12.html#conclusion-10"><i class="fa fa-check"></i><b>12.3</b> Conclusion</a></li>
-<li class="chapter" data-level="12.4" data-path="12-module-12.html"><a href="12-module-12.html#further-reading-3"><i class="fa fa-check"></i><b>12.4</b> Further Reading</a></li>
+<li class="chapter" data-level="12.4" data-path="12-module-12.html"><a href="12-module-12.html#further-reading-4"><i class="fa fa-check"></i><b>12.4</b> Further Reading</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="13-appendix.html"><a href="13-appendix.html"><i class="fa fa-check"></i><b>A</b> Download Materials</a></li>
@@ -330,17 +330,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1 class="title">Introduction to Multilevel Modelling</h1>
 <p class="author"><em>Mairead Shaw and Jessica Kay Flake</em></p>
 </div>
-<div id="welcome" class="section level1 unnumbered">
-<h1>Welcome</h1>
+<div id="welcome" class="section level1 unnumbered hasAnchor">
+<h1>Welcome<a href="index.html#welcome" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Bonjour/hi, and welcome to <strong>learn-mlms.com</strong>. This website will teach you the fundamentals about multilevel modelling, from why and when you would use them and how to do so for various research questions and data structures.</p>
 <p>This website is free to use and is licensed under the <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International</a>, so instructors can feel free to borrow and alter materials to structure their own courses. If you notice any errors or would otherwise like to contribute, feel free to file an issue on <a href="https://github.com/mkshaw/learn-mlms" target="_blank">GitHub</a>.</p>
-<div id="about-the-authors" class="section level2 unnumbered">
-<h2>About the Authors</h2>
+<div id="about-the-authors" class="section level2 unnumbered hasAnchor">
+<h2>About the Authors<a href="index.html#about-the-authors" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Mairead Shaw is a graduate student in the Quantitative Psychology and Modelling area at McGill University. Her research interests center around effect sizes in multilevel models and measurement considerations for multi-group and replication research.</p>
 <p>Dr. Jessica Flake is an Assistant Professor of Quantitative Psychology and Modelling at McGill University. She received an MA in quantitative psychology from James Madison University and a a PhD in Measurement, Evaluation, and Assessment from the University of Connecticut. Her work focuses on technical and applied aspects of psychological measurement including scale development, psychometric modelling, and scale use and replicability.</p>
 </div>
-<div id="funding" class="section level2 unnumbered">
-<h2>Funding</h2>
+<div id="funding" class="section level2 unnumbered hasAnchor">
+<h2>Funding<a href="index.html#funding" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>These materials were made possible by funding from the APS Fund for Teaching and Public Understanding of Psychological Science. You can read more about the fund <a href="https://www.psychologicalscience.org/members/teaching/fund" target="_blank">here</a>.</p>
 
 </div>
@@ -413,7 +413,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 9 Multilevel Modelling with Repeated Measures Data | Introduction to Multilevel Modelling</title>
   <meta name="description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and critically analyze their use in the literature." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 9 Multilevel Modelling with Repeated Measures Data | Introduction to Multilevel Modelling" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://www.learn-mlms.com" />
   
   <meta property="og:description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and critically analyze their use in the literature." />
   <meta name="github-repo" content="mkshaw/multilevel-modelling/" />
@@ -32,7 +31,6 @@
   
 <link rel="prev" href="08-module-8.html"/>
 <link rel="next" href="10-module-10.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -50,8 +48,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -269,6 +268,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2.7" data-path="10-module-10.html"><a href="10-module-10.html#adding-level-2-fixed-effects-1"><i class="fa fa-check"></i><b>10.2.7</b> Adding Level-2 Fixed Effects</a></li>
 </ul></li>
 <li class="chapter" data-level="10.3" data-path="10-module-10.html"><a href="10-module-10.html#conclusion-8"><i class="fa fa-check"></i><b>10.3</b> Conclusion</a></li>
+<li class="chapter" data-level="10.4" data-path="10-module-10.html"><a href="10-module-10.html#further-reading-3"><i class="fa fa-check"></i><b>10.4</b> Further Reading</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="11-module-11.html"><a href="11-module-11.html"><i class="fa fa-check"></i><b>11</b> Effect Sizes in Multilevel Models</a>
 <ul>
@@ -301,7 +301,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.2.9" data-path="12-module-12.html"><a href="12-module-12.html#assumption-6-level-1-residuals-independent-of-level-2-predictors-level-2-residuals-independent-of-level-1-predictors"><i class="fa fa-check"></i><b>12.2.9</b> Assumption 6: Level-1 Residuals Independent of Level-2 Predictors, Level-2 Residuals Independent of Level-1 Predictors</a></li>
 </ul></li>
 <li class="chapter" data-level="12.3" data-path="12-module-12.html"><a href="12-module-12.html#conclusion-10"><i class="fa fa-check"></i><b>12.3</b> Conclusion</a></li>
-<li class="chapter" data-level="12.4" data-path="12-module-12.html"><a href="12-module-12.html#further-reading-3"><i class="fa fa-check"></i><b>12.4</b> Further Reading</a></li>
+<li class="chapter" data-level="12.4" data-path="12-module-12.html"><a href="12-module-12.html#further-reading-4"><i class="fa fa-check"></i><b>12.4</b> Further Reading</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="13-appendix.html"><a href="13-appendix.html"><i class="fa fa-check"></i><b>A</b> Download Materials</a></li>
@@ -326,10 +326,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="module-9" class="section level1" number="9">
-<h1><span class="header-section-number">Chapter 9</span> Multilevel Modelling with Repeated Measures Data</h1>
-<div id="learning-objectives-7" class="section level2" number="9.1">
-<h2><span class="header-section-number">9.1</span> Learning Objectives</h2>
+<div id="module-9" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">Chapter 9</span> Multilevel Modelling with Repeated Measures Data<a href="09-module-9.html#module-9" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="learning-objectives-7" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Learning Objectives<a href="09-module-9.html#learning-objectives-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In this chapter, we will review fitting MLMs for repeated measures data.</p>
 <p>The learning objectives for this chapter are:</p>
 <ol style="list-style-type: decimal">
@@ -340,18 +340,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>All materials for this chapter are available for download <a href="https://www.learn-mlms.com/13-appendix.html">here</a>.</p>
 </div>
-<div id="data-demonstration-7" class="section level2" number="9.2">
-<h2><span class="header-section-number">9.2</span> Data Demonstration</h2>
-<div id="load-dependencies" class="section level3" number="9.2.1">
-<h3><span class="header-section-number">9.2.1</span> Load Dependencies</h3>
+<div id="data-demonstration-7" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Data Demonstration<a href="09-module-9.html#data-demonstration-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="load-dependencies" class="section level3 hasAnchor" number="9.2.1">
+<h3><span class="header-section-number">9.2.1</span> Load Dependencies<a href="09-module-9.html#load-dependencies" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For this data demo, we will use the following packages:</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="09-module-9.html#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4) <span class="co"># for multilevel models</span></span>
-<span id="cb126-2"><a href="09-module-9.html#cb126-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest) <span class="co"># for p-values</span></span>
-<span id="cb126-3"><a href="09-module-9.html#cb126-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(performance) <span class="co"># for ICC</span></span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="09-module-9.html#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4) <span class="co"># for multilevel models</span></span>
+<span id="cb128-2"><a href="09-module-9.html#cb128-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest) <span class="co"># for p-values</span></span>
+<span id="cb128-3"><a href="09-module-9.html#cb128-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(performance) <span class="co"># for ICC</span></span></code></pre></div>
 </div>
-<div id="review-of-multilevel-modelling-procedure" class="section level3" number="9.2.2">
-<h3><span class="header-section-number">9.2.2</span> Review of Multilevel Modelling Procedure</h3>
-<p>Multilevel modelling in repeated measures data is a new application of the techniques we’ve covered so far, so let’s briefly review the steps in our modelling framework so far:</p>
+<div id="review-of-multilevel-modelling-procedure" class="section level3 hasAnchor" number="9.2.2">
+<h3><span class="header-section-number">9.2.2</span> Review of Multilevel Modelling Procedure<a href="09-module-9.html#review-of-multilevel-modelling-procedure" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Multilevel modelling in repeated measures data is a new application of the techniques we’ve covered so far, so let’s briefly review the steps in our modelling framework:</p>
 <ol style="list-style-type: decimal">
 <li>Establish solid theory and measurement, decide whether you need MLMs for your question</li>
 <li>Run random-intercept-only (i.e., null) model to calculate ICC and quantify extent of clustering in data</li>
@@ -361,13 +361,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Report results: coefficients, significance, plausible values ranges, any changes made to address estimation issues</li>
 </ol>
 </div>
-<div id="multilevel-models-for-repeated-measures" class="section level3" number="9.2.3">
-<h3><span class="header-section-number">9.2.3</span> Multilevel Models for Repeated Measures</h3>
+<div id="multilevel-models-for-repeated-measures" class="section level3 hasAnchor" number="9.2.3">
+<h3><span class="header-section-number">9.2.3</span> Multilevel Models for Repeated Measures<a href="09-module-9.html#multilevel-models-for-repeated-measures" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Thus far, we’ve been using a cross-sectional example of students clustered within schools. Our level-1 variables have been about traits that students vary on (e.g., age, gender, SES) while our level-2 variables have been about traits that schools vary on (e.g., whether they are public or private schools).</p>
-<p>With repeated measures data, measures are clustered within person rather than having people clustered within some organizational structure. The level-1 variables are about traits that the measures vary on (e.g., experimental manipulations) while level-2 variables are about traits that people vary on (e.g., age, gender, SES). For example, imagine we show participants pictures of lines and ask them to estimate the line length. We measure how long it takes them to rate each line. A level-1 variable would be the line length; each participant sees several lines of different lengths. A level-2 variable would be something demographic like a participant’s age or gender; each person has the same value on the variable for the entire experiment.</p>
-<p>In this chapter, we’ll look at repeated measures data without time in the model. In Chapter 10, we’ll look at repeated measures data with time in the model, i.e., longitudinal models.</p>
-<div id="data-structures-long-vs-wide" class="section level4" number="9.2.3.1">
-<h4><span class="header-section-number">9.2.3.1</span> Data Structures: Long vs Wide</h4>
+<p>With repeated measures data, measures are clustered within person rather than having people clustered within some organizational structure. The level-1 variables are about traits that the measures vary on (e.g., experimental manipulations) whereas level-2 variables are about traits that people vary on (e.g., age, gender, SES). For example, imagine we show participants pictures of lines and ask them to estimate the line length. We measure how long it takes them to rate each line, making their reaction time the dependent variable. A level-1 predictor variable would be the line length; each participant sees several lines of different lengths. A level-2 predictor variable would be something demographic like a participant’s age or gender; each person has the same value on the variable for the entire experiment.</p>
+<p>In this chapter, we’ll look at repeated measures data without time in the model. This approaches assumes that time is not related to the outcome in the model. In Chapter 10, we’ll look at repeated measures data with time in the model, i.e., longitudinal models, which focus on how an outcome changes over time.</p>
+<div id="data-structures-long-vs-wide" class="section level4 hasAnchor" number="9.2.3.1">
+<h4><span class="header-section-number">9.2.3.1</span> Data Structures: Long vs Wide<a href="09-module-9.html#data-structures-long-vs-wide" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Imagine you were measuring weight and caloric intake. If you have historically worked with repeated measures data in an ANOVA framework, you are probably used to working with data in a “wide” format, i.e., one row per participant with different variables for different measurement instances.</p>
 <table>
 <thead>
@@ -438,16 +438,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<p>This requires transposing your data, which you can read more about <a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">here</a>.</p>
+<p>This requires transposing your data, which you can read more about <a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" target="_blank">here</a>.</p>
 <p>An aside: you might also be used to thinking listwise deletion deletes an entire participant, because listwise deletion deletes rows with any missing data and in wide data one row <em>is</em> one participant. In long data, listwise deletion means deleting one measurement instance, not necessarily an entire participant. For example, if a participant answers a questionnaire a first time, then at one follow-up, but not at the second follow-up, listwise deletion will only remove their third row full of NAs; you’ll keep their data from the first two questionnaires.</p>
 </div>
 </div>
-<div id="our-data-reaction-time" class="section level3" number="9.2.4">
-<h3><span class="header-section-number">9.2.4</span> Our Data: Reaction Time</h3>
+<div id="our-data-reaction-time" class="section level3 hasAnchor" number="9.2.4">
+<h3><span class="header-section-number">9.2.4</span> Our Data: Reaction Time<a href="09-module-9.html#our-data-reaction-time" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The data used in this module are used as an example in Hoffman and Rovine (2007). The article and supporting materials can be found here: <a href="http://www.lesahoffman.com/Research/MLM.html" class="uri">http://www.lesahoffman.com/Research/MLM.html</a></p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="09-module-9.html#cb127-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;hoffman2007.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="09-module-9.html#cb129-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;hoffman2007.csv&#39;</span>)</span></code></pre></div>
 <p>Let’s look at our data:</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="09-module-9.html#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="09-module-9.html#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
 <pre><code>##   X id sex age    NAME rt_sec Item meaning salience     lg_rt oldage yrs65 c_mean c_sal
 ## 1 1  1   1  20 rt_sec1  4.662    1     3.5      4.0 1.5394445      0     0    0.5   1.0
 ## 2 2  1   1  20 rt_sec2  6.660    2     0.0      3.0 1.8961195      0     0   -3.0   0.0
@@ -457,20 +457,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 6 6  1   1  20 rt_sec7  1.302    7     3.5      4.5 0.2639015      0     0    0.5   1.5</code></pre>
 <p>For this data demo the outcome of interest is the log of reaction time for participants to detect a change during a picture viewing task (<code>rt_sec</code>). The pictures varied on two dimensions: how meaningful driving was to the picture (<code>meaning</code>) and how salient the change was in the picture (<code>salient</code>). For this analysis we will focus on the variables centered from the midpoint of the rating (3): <code>c_mean</code> and <code>c_sal</code>. One of the primary research questions was how age related to reaction time, given those differences in pictures. Participants were sampled in age categories: younger (<code>oldage</code> = 0, 40 and under) and older (<code>oldage</code> = 1, above 40). Repeated trials are nested within persons.</p>
 </div>
-<div id="random-intercept-onlynull-model" class="section level3" number="9.2.5">
-<h3><span class="header-section-number">9.2.5</span> Random-Intercept-Only/Null Model</h3>
+<div id="random-intercept-onlynull-model" class="section level3 hasAnchor" number="9.2.5">
+<h3><span class="header-section-number">9.2.5</span> Random-Intercept-Only/Null Model<a href="09-module-9.html#random-intercept-onlynull-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s estimate our null model with FIML as our estimator and calculate the ICC:</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="09-module-9.html#cb130-1" aria-hidden="true" tabindex="-1"></a>null_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>) <span class="co"># note that REML = FALSE</span></span>
-<span id="cb130-2"><a href="09-module-9.html#cb130-2" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(null_model)</span></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="09-module-9.html#cb132-1" aria-hidden="true" tabindex="-1"></a>null_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>) <span class="co"># note that REML = FALSE</span></span>
+<span id="cb132-2"><a href="09-module-9.html#cb132-2" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(null_model)</span></code></pre></div>
 <pre><code>## # Intraclass Correlation Coefficient
 ## 
-##      Adjusted ICC: 0.252
-##   Conditional ICC: 0.252</code></pre>
+##     Adjusted ICC: 0.252
+##   Unadjusted ICC: 0.252</code></pre>
 <p>With repeated measures data, the ICC is interpreted as the proportion of variance between people: How much of the variance stems from people being different from one another versus fluctuating within themselves? A large ICC means that most of the variability is between people, not from people varying in their answers to a set of questions (or in this case, reaction time). The ICC is 0.252, indicating that 25.2% of the variance in log reaction time is attributed to a person.</p>
-<p>(Some bonus fun: when responses to questions are nested within person, Cronbach’s alpha is equivalent to the ICC: a high alpha indicates high “reliability” of the scale because most of the scale variance is between people, individuals have relatively consistent patterns of answering on the scale.)</p>
+<p>(Some bonus fun: when responses to questions are nested within person, Cronbach’s alpha is equivalent to the ICC: a high alpha indicates high “reliability” of the scale because most of the scale variance is between people. By contrast, if individuals answered inconsistently, most of the scale variance would be within person and we would get a lower alpha.)</p>
 </div>
-<div id="adding-level-1-fixed-effects" class="section level3" number="9.2.6">
-<h3><span class="header-section-number">9.2.6</span> Adding Level-1 Fixed Effects</h3>
+<div id="adding-level-1-fixed-effects" class="section level3 hasAnchor" number="9.2.6">
+<h3><span class="header-section-number">9.2.6</span> Adding Level-1 Fixed Effects<a href="09-module-9.html#adding-level-1-fixed-effects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s add our level-1 predictors for picture meaning <code>c_mean</code> and picture salience <code>c_sal</code> to our model. This is represented with the following formulae:</p>
 <table>
 <colgroup>
@@ -515,8 +515,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\(\sigma^2\)</span>: a random effect capturing the variance of people around their own mean log reaction time, controlling for <code>c_mean</code> and <code>c_sal</code>.</li>
 </ol>
 <p>Let’s run the model with FIML as our estimator:</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="09-module-9.html#cb132-1" aria-hidden="true" tabindex="-1"></a>l1_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> c_mean <span class="sc">+</span> c_sal <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb132-2"><a href="09-module-9.html#cb132-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(l1_model)</span></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="09-module-9.html#cb134-1" aria-hidden="true" tabindex="-1"></a>l1_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> c_mean <span class="sc">+</span> c_sal <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb134-2"><a href="09-module-9.html#cb134-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(l1_model)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: lg_rt ~ 1 + c_mean + c_sal + (1 | id)
@@ -549,7 +549,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## c_sal  -0.015 -0.219</code></pre>
 <p>The intercept of 1.61 is the mean log reaction time across all people at average values of meaning and salience. A one-unit increase in meaning is associated with a decrease in log reaction time of 0.05 (i.e., a faster reaction time), at the average level of salience. A one-unit increase in salience is associated with a decrease in log reaction time of 0.13 at the average level of meaning. All coefficients are significant. The term describing how people vary around the grand mean intercept is 0.18. The term describing how people vary around their own intercept is 0.48.</p>
 <p>Does this model have significantly less deviance (i.e., better fit) than the null model alone? Let’s use a deviance test to check. Note that we can compare the null and level-1 models because we used FIML as our estimator and they are nested (i.e., all variables in the level-1 model are in the null model).</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="09-module-9.html#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(null_model, l1_model)</span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="09-module-9.html#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(null_model, l1_model)</span></code></pre></div>
 <pre><code>## Data: data
 ## Models:
 ## null_model: lg_rt ~ 1 + (1 | id)
@@ -561,8 +561,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>The level-1 model does have significantly less deviance (16516 compared to 17076 for the null model), so is a better model. Hooray!</p>
 </div>
-<div id="adding-random-slopes" class="section level3" number="9.2.7">
-<h3><span class="header-section-number">9.2.7</span> Adding Random Slopes</h3>
+<div id="adding-random-slopes" class="section level3 hasAnchor" number="9.2.7">
+<h3><span class="header-section-number">9.2.7</span> Adding Random Slopes<a href="09-module-9.html#adding-random-slopes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s try adding random slopes for our level-1 variables of meaning and salience. This allows slopes to vary across people. Maybe some people have stronger relationships between salience and reaction time — such that when the change is more salient they really notice it, and when it’s less salient they notice it less — while other people have eagle eyes and notice the changes no matter their salience.</p>
 <table>
 <colgroup>
@@ -609,13 +609,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\(\sigma^2\)</span>: a random effect capturing the variance of people around their own mean log reaction time, controlling for <code>c_mean</code> and <code>c_sal</code>.</li>
 </ol>
 <p>Let’s run our model with random slope effects (but no covariances) in R:</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="09-module-9.html#cb136-1" aria-hidden="true" tabindex="-1"></a>l1_random <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> c_mean <span class="sc">+</span> c_sal <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> c_mean<span class="sc">|</span>id) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> c_sal<span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="09-module-9.html#cb138-1" aria-hidden="true" tabindex="-1"></a>l1_random <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> c_mean <span class="sc">+</span> c_sal <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> c_mean<span class="sc">|</span>id) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> c_sal<span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="09-module-9.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(l1_random)</span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="09-module-9.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(l1_random)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
-## Formula: lg_rt ~ 1 + c_mean + c_sal + (1 | id) + (0 + c_mean | id) + (0 +  
-##     c_sal | id)
+## Formula: lg_rt ~ 1 + c_mean + c_sal + (1 | id) + (0 + c_mean | id) + (0 +      c_sal | id)
 ##    Data: data
 ## 
 ##      AIC      BIC   logLik deviance df.resid 
@@ -648,8 +647,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## optimizer (nloptwrap) convergence code: 0 (OK)
 ## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
 <p>We get an estimation error! Recall that singularity occurs when a variance term is close to zero or a correlation between variance terms is near 1 (high multicollinearity). Looking at our output, the variance terms for meaning and salience both look quite small. Let’s try to address our estimation issue by removing the smaller of the two, the random effect for <code>c_mean</code>.</p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="09-module-9.html#cb140-1" aria-hidden="true" tabindex="-1"></a>l1_random_without_cmean <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> c_mean <span class="sc">+</span> c_sal <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> c_sal<span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb140-2"><a href="09-module-9.html#cb140-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(l1_random_without_cmean)</span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="09-module-9.html#cb142-1" aria-hidden="true" tabindex="-1"></a>l1_random_without_cmean <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> c_mean <span class="sc">+</span> c_sal <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> c_sal<span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb142-2"><a href="09-module-9.html#cb142-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(l1_random_without_cmean)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: lg_rt ~ 1 + c_mean + c_sal + (1 | id) + (0 + c_sal | id)
@@ -682,7 +681,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## c_mean  0.044       
 ## c_sal  -0.014 -0.211</code></pre>
 <p>That took care of our singularity issue. However, the random effect for salience still looks very small. Let’s conduct a deviance test to see if including the random effect reduces deviance at all (that is, whether it is worth it to estimate).</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="09-module-9.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(l1_random, l1_random_without_cmean)</span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="09-module-9.html#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(l1_random, l1_random_without_cmean)</span></code></pre></div>
 <pre><code>## Data: data
 ## Models:
 ## l1_random_without_cmean: lg_rt ~ 1 + c_mean + c_sal + (1 | id) + (0 + c_sal | id)
@@ -690,11 +689,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##                         npar   AIC   BIC  logLik deviance Chisq Df Pr(&gt;Chisq)
 ## l1_random_without_cmean    6 16527 16569 -8257.7    16515                    
 ## l1_random                  7 16529 16578 -8257.7    16515     0  1          1</code></pre>
-<p>There is no significant difference between these models, so there doesn’t seem to be much benefit to including the random effect for salience.</p>
+<p>There is no significant difference between these models, so there doesn’t seem to be much benefit to including the random effect for salience because the model fits just as well without it.</p>
 </div>
-<div id="adding-level-2-fixed-effects" class="section level3" number="9.2.8">
-<h3><span class="header-section-number">9.2.8</span> Adding Level-2 Fixed Effects</h3>
-<p>The level-2 variables in our dataset are demographic variables about participants, which in this dataset is their sex, age in years, whether they 40 or older (<code>oldage</code> = 1) or younger than 40 (<code>oldage</code> = 0), or their age centered at 65 years old for those who are older than 40 (<code>yrs65</code>). Let’s add <code>oldage</code> and <code>sex</code> as level-2 predictors of the intercept.</p>
+<div id="adding-level-2-fixed-effects" class="section level3 hasAnchor" number="9.2.8">
+<h3><span class="header-section-number">9.2.8</span> Adding Level-2 Fixed Effects<a href="09-module-9.html#adding-level-2-fixed-effects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The level-2 variables in our dataset are demographic variables about participants, which in this dataset are their sex, age in years, whether they 40 or older (<code>oldage</code> = 1) or younger than 40 (<code>oldage</code> = 0), or their age centered at 65 years old for those who are older than 40 (<code>yrs65</code>). Let’s add <code>oldage</code> and <code>sex</code> as level-2 predictors of the intercept.</p>
 <table>
 <colgroup>
 <col width="44%" />
@@ -739,8 +738,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\(\tau_0^2\)</span>: a random effect capturing how people’s mean log reaction times vary around the grand mean log reaction time, controlling for <code>c_mean</code>, <code>c_sal</code>, <code>oldage</code>, and <code>sex</code>;</li>
 <li><span class="math inline">\(\sigma^2\)</span>: a random effect capturing the variance of people around their own mean log reaction time, controlling for <code>c_mean</code>, <code>c_sal</code>, <code>oldage</code>, and <code>sex</code>.</li>
 </ol>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="09-module-9.html#cb144-1" aria-hidden="true" tabindex="-1"></a>l2_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> c_mean <span class="sc">+</span> c_sal <span class="sc">+</span> oldage <span class="sc">+</span> sex <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb144-2"><a href="09-module-9.html#cb144-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(l2_model)</span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="09-module-9.html#cb146-1" aria-hidden="true" tabindex="-1"></a>l2_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> c_mean <span class="sc">+</span> c_sal <span class="sc">+</span> oldage <span class="sc">+</span> sex <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb146-2"><a href="09-module-9.html#cb146-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(l2_model)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: lg_rt ~ 1 + c_mean + c_sal + oldage + sex + (1 | id)
@@ -777,11 +776,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## sex    -0.681  0.001 -0.002 -0.075</code></pre>
 <p>The intercept of 1.28 is the mean log reaction time across all people at average values of meaning and salience for men (<code>sex</code> = 0) who are younger than 40 (<code>oldage</code> = 40). A one-unit increase in meaning is associated with a decrease in log reaction time of 0.05 (i.e., a faster reaction time), controlling for other variables. A one-unit increase in salience is associated with a decrease in log reaction time of 0.13 controlling for other variables. People older than 40 have 0.80 units longer of a log reaction time on average, controlling for other variables. Women have 0.04 unit-slower log reaction times on average, controlling for other variables. All coefficients are significant except for <code>sex</code>. The term describing how people vary around the grand mean intercept is 0.02. The term describing how people vary around their own intercept is 0.48.</p>
 <p>Let’s run a model without the non-significant <code>sex</code> predictor and conduct a deviance test to see if the model fit is negatively impacted.</p>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="09-module-9.html#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="co"># model</span></span>
-<span id="cb146-2"><a href="09-module-9.html#cb146-2" aria-hidden="true" tabindex="-1"></a>l2_model_no_sex <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> c_mean <span class="sc">+</span> c_sal <span class="sc">+</span> oldage <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb146-3"><a href="09-module-9.html#cb146-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb146-4"><a href="09-module-9.html#cb146-4" aria-hidden="true" tabindex="-1"></a><span class="co"># deviance test</span></span>
-<span id="cb146-5"><a href="09-module-9.html#cb146-5" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(l2_model, l2_model_no_sex)</span></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="09-module-9.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="co"># model</span></span>
+<span id="cb148-2"><a href="09-module-9.html#cb148-2" aria-hidden="true" tabindex="-1"></a>l2_model_no_sex <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> c_mean <span class="sc">+</span> c_sal <span class="sc">+</span> oldage <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb148-3"><a href="09-module-9.html#cb148-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb148-4"><a href="09-module-9.html#cb148-4" aria-hidden="true" tabindex="-1"></a><span class="co"># deviance test</span></span>
+<span id="cb148-5"><a href="09-module-9.html#cb148-5" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(l2_model, l2_model_no_sex)</span></code></pre></div>
 <pre><code>## Data: data
 ## Models:
 ## l2_model_no_sex: lg_rt ~ 1 + c_mean + c_sal + oldage + (1 | id)
@@ -789,10 +788,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##                 npar   AIC   BIC  logLik deviance  Chisq Df Pr(&gt;Chisq)
 ## l2_model_no_sex    6 16270 16312 -8129.0    16258                     
 ## l2_model           7 16270 16318 -8127.9    16256 2.1363  1     0.1438</code></pre>
-<p>There is no significant difference in deviance, so we don’t lose on the model fit front if we don’t estimate <code>sex</code>.</p>
+<p>There is no significant difference in deviance, so we don’t lose on the model fit front if we don’t estimate the effect of <code>sex</code>.</p>
 </div>
-<div id="adding-cross-level-interactions" class="section level3" number="9.2.9">
-<h3><span class="header-section-number">9.2.9</span> Adding Cross-Level Interactions</h3>
+<div id="adding-cross-level-interactions" class="section level3 hasAnchor" number="9.2.9">
+<h3><span class="header-section-number">9.2.9</span> Adding Cross-Level Interactions<a href="09-module-9.html#adding-cross-level-interactions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For our final model, let’s remove the level-2 term for <code>sex</code> and look at a cross-level interaction between <code>oldage</code> and the slope of <code>c_mean</code> to consider the question: does age alter the effect of meaning on reaction times?</p>
 <table>
 <colgroup>
@@ -838,8 +837,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\(\tau_0^2\)</span>: a random effect capturing how people’s mean log reaction times vary around the grand mean log reaction time, controlling for <code>c_mean</code>, <code>c_sal</code>, and <code>oldage</code>;</li>
 <li><span class="math inline">\(\sigma^2\)</span>: a random effect capturing the variance of people around their own mean log reaction time, controlling for <code>c_mean</code>, <code>c_sal</code>, and `oldage``.</li>
 </ol>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="09-module-9.html#cb148-1" aria-hidden="true" tabindex="-1"></a>crosslevel_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> c_mean <span class="sc">+</span> c_sal <span class="sc">+</span> oldage <span class="sc">+</span> oldage<span class="sc">:</span>c_mean <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb148-2"><a href="09-module-9.html#cb148-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(crosslevel_model)</span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="09-module-9.html#cb150-1" aria-hidden="true" tabindex="-1"></a>crosslevel_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> c_mean <span class="sc">+</span> c_sal <span class="sc">+</span> oldage <span class="sc">+</span> oldage<span class="sc">:</span>c_mean <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb150-2"><a href="09-module-9.html#cb150-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(crosslevel_model)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: lg_rt ~ 1 + c_mean + c_sal + oldage + oldage:c_mean + (1 | id)
@@ -874,12 +873,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## c_sal       -0.025 -0.174              
 ## oldage      -0.608 -0.057 -0.004       
 ## c_mean:oldg -0.058 -0.593 -0.005  0.095</code></pre>
-<p>The interaction between <code>oldage</code> and <code>c_mean</code> is 0.04, suggesting that people older than 40 have 0.04 added to their (log) reaction times for more meaningful photos. That is, older people have slower reaction times even when photos are more related to driving. The other coefficient interpretations are similar to those we discussed in earlier models.</p>
+<p>The interaction between <code>oldage</code> and <code>c_mean</code> is 0.04, suggesting that people older than 40 have 0.04 added to their (log) reaction times for more meaningful photos. Let’s do some quick calculations to emphasize that point. Remember that lower reaction time is better here (faster response).</p>
+<ul>
+<li>The intercept represents average log reaction time for someone under 40 with a stimulus at average salience and meaning: 1.30</li>
+<li>For people over 40, the average reaction time increases by 0.82 (coefficient for <code>oldage</code>) to <code>1.30 + 0.82 = 2.12</code></li>
+<li>When photos are related to driving, the log reaction time decreases by -0.06 (the coefficient for <code>c_mean</code>). For people under 40, that’s <code>1.30 - 0.06 = 1.24</code></li>
+<li>But when people are also older the benefit of the meaning is offset by age it increases by 0.03: <code>1.30 + 0.82 - 0.06 + 0.03 = 2.09</code></li>
+</ul>
+<p>In summary, older people have slower reaction times. Photos being related to driving helps offset the effect of age somewhat, but even when photos are more related to driving they still have slower reaction times.</p>
+<p>The other coefficient interpretations are similar to those we discussed in earlier models.</p>
 </div>
 </div>
-<div id="conclusion-7" class="section level2" number="9.3">
-<h2><span class="header-section-number">9.3</span> Conclusion</h2>
-<p>In this chapter, we reviewed our MLM pipeline and applied it to repeated measures without time in the model. In Chapter 10, we will look at longitudinal models, i.e., repeated measures with time in the model.</p>
+<div id="conclusion-7" class="section level2 hasAnchor" number="9.3">
+<h2><span class="header-section-number">9.3</span> Conclusion<a href="09-module-9.html#conclusion-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this chapter, we reviewed our MLM pipeline and applied it to repeated measures without time in the model. In short, MLMs on repeated measures data can be executed in the same way as organizational models, however, the interpretations shift from being about a person clustered within some unit, to being about responses clustered within a person. In an organizational model, level-1 variables tend to measure aspects of a person, whereas these variables are often level-2 variables in a repeated measures model.</p>
+<p>In Chapter 10, we will look at longitudinal models, i.e., repeated measures with time in the model.</p>
 
 </div>
 </div>
@@ -951,7 +959,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

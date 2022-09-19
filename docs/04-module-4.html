@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Our First Multilevel Models | Introduction to Multilevel Modelling</title>
   <meta name="description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and critically analyze their use in the literature." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Our First Multilevel Models | Introduction to Multilevel Modelling" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://www.learn-mlms.com" />
   
   <meta property="og:description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and critically analyze their use in the literature." />
   <meta name="github-repo" content="mkshaw/multilevel-modelling/" />
@@ -32,7 +31,6 @@
   
 <link rel="prev" href="03-module-3.html"/>
 <link rel="next" href="05-module-5.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -50,8 +48,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -269,6 +268,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2.7" data-path="10-module-10.html"><a href="10-module-10.html#adding-level-2-fixed-effects-1"><i class="fa fa-check"></i><b>10.2.7</b> Adding Level-2 Fixed Effects</a></li>
 </ul></li>
 <li class="chapter" data-level="10.3" data-path="10-module-10.html"><a href="10-module-10.html#conclusion-8"><i class="fa fa-check"></i><b>10.3</b> Conclusion</a></li>
+<li class="chapter" data-level="10.4" data-path="10-module-10.html"><a href="10-module-10.html#further-reading-3"><i class="fa fa-check"></i><b>10.4</b> Further Reading</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="11-module-11.html"><a href="11-module-11.html"><i class="fa fa-check"></i><b>11</b> Effect Sizes in Multilevel Models</a>
 <ul>
@@ -301,7 +301,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.2.9" data-path="12-module-12.html"><a href="12-module-12.html#assumption-6-level-1-residuals-independent-of-level-2-predictors-level-2-residuals-independent-of-level-1-predictors"><i class="fa fa-check"></i><b>12.2.9</b> Assumption 6: Level-1 Residuals Independent of Level-2 Predictors, Level-2 Residuals Independent of Level-1 Predictors</a></li>
 </ul></li>
 <li class="chapter" data-level="12.3" data-path="12-module-12.html"><a href="12-module-12.html#conclusion-10"><i class="fa fa-check"></i><b>12.3</b> Conclusion</a></li>
-<li class="chapter" data-level="12.4" data-path="12-module-12.html"><a href="12-module-12.html#further-reading-3"><i class="fa fa-check"></i><b>12.4</b> Further Reading</a></li>
+<li class="chapter" data-level="12.4" data-path="12-module-12.html"><a href="12-module-12.html#further-reading-4"><i class="fa fa-check"></i><b>12.4</b> Further Reading</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="13-appendix.html"><a href="13-appendix.html"><i class="fa fa-check"></i><b>A</b> Download Materials</a></li>
@@ -326,10 +326,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="module-4" class="section level1" number="4">
-<h1><span class="header-section-number">Chapter 4</span> Our First Multilevel Models</h1>
-<div id="learning-objectives-2" class="section level2" number="4.1">
-<h2><span class="header-section-number">4.1</span> Learning Objectives</h2>
+<div id="module-4" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Our First Multilevel Models<a href="04-module-4.html#module-4" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="learning-objectives-2" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Learning Objectives<a href="04-module-4.html#learning-objectives-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In this chapter, we will run our first multilevel model to account for the clustered nature of our data and begin visualizing and understanding the variance in our data.</p>
 <p>The learning objectives for this chapter are:</p>
 <ol style="list-style-type: decimal">
@@ -341,11 +341,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>All materials for this chapter are available for download <a href="https://www.learn-mlms.com/13-appendix.html">here</a>.</p>
 </div>
-<div id="data-demonstration-2" class="section level2" number="4.2">
-<h2><span class="header-section-number">4.2</span> Data Demonstration</h2>
+<div id="data-demonstration-2" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Data Demonstration<a href="04-module-4.html#data-demonstration-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The data for this chapter were taken from chapter 3 of Heck, R. H., Thomas, S. L., &amp; Tabata, L. N. (2011). <em>Multilevel and Longitudinal Modeling with IBM SPSS</em>: Taylor &amp; Francis. Students are clustered within schools in the dataset.</p>
-<div id="load-data-and-dependencies-1" class="section level3" number="4.2.1">
-<h3><span class="header-section-number">4.2.1</span> Load Data and Dependencies</h3>
+<div id="load-data-and-dependencies-1" class="section level3 hasAnchor" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Load Data and Dependencies<a href="04-module-4.html#load-data-and-dependencies-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For this data demo, we will use the following packages:</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="04-module-4.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># for data manipulation</span></span>
 <span id="cb21-2"><a href="04-module-4.html#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># for visualizations</span></span>
@@ -355,8 +355,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>And the same dataset of students’ math achievement from chapters 2 and 3:</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="04-module-4.html#cb22-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;heck2011.csv&#39;</span>)</span></code></pre></div>
 </div>
-<div id="why-multilevel-models" class="section level3" number="4.2.2">
-<h3><span class="header-section-number">4.2.2</span> Why Multilevel Models?</h3>
+<div id="why-multilevel-models" class="section level3 hasAnchor" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Why Multilevel Models?<a href="04-module-4.html#why-multilevel-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In chapter 3 we talked about cluster-robust standard errors, which handle clustering as a nuisance, but doesn’t investigate it as interesting or enable multilevel research questions. But if you’re interested in the clustered structure of the data, and you want to know how clusters differ or ask questions at multiple levels, you’ll need a multilevel model. To get a sense of how the outcome is clustered, let’s start by making some graphs. Our data set contains students clustered into 419 schools. For demonstration, we will take a subset of 10 schools.</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="04-module-4.html#cb23-1" aria-hidden="true" tabindex="-1"></a>data_sub <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
 <span id="cb23-2"><a href="04-module-4.html#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(schcode <span class="sc">&lt;=</span> <span class="dv">10</span>)</span></code></pre></div>
@@ -378,12 +378,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>When we run a regular regression without accounting for the clustered structure of the data, we treat all schools as though they have the same intercept and slope. What do you notice about the intercepts and slopes for different schools?</p>
 <p>The intercepts and slopes vary widely! For example, school 4 has an intercept around 62, compared to the intercept of school 3 around 49. School 8 has a relatively large positive slope, while school 6 has a slightly negative slope. With multilevel models, we can quantify this variance and ask questions about it.</p>
 </div>
-<div id="fixed-vs-random-effects" class="section level3" number="4.2.3">
-<h3><span class="header-section-number">4.2.3</span> Fixed vs Random Effects</h3>
+<div id="fixed-vs-random-effects" class="section level3 hasAnchor" number="4.2.3">
+<h3><span class="header-section-number">4.2.3</span> Fixed vs Random Effects<a href="04-module-4.html#fixed-vs-random-effects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Multilevel models have two main ingredients: fixed and random effects. For our purposes of executing and interpreting MLMs, a fixed effect is an average effect across all clusters and a random effect is a variance that describes how much an effect differs across clusters. Generally, fixed effects in MLMs capture the mean of an effect and the random effect captures the variance of an effect. For example, we might have a fixed effect for the intercept that describes average math achievement across all schools. Then we have a random effect that describes how intercepts for math achievement vary across schools. Together, the fixed and random effect describe math achievement scores across schools.</p>
 </div>
-<div id="the-null-model" class="section level3" number="4.2.4">
-<h3><span class="header-section-number">4.2.4</span> The Null Model</h3>
+<div id="the-null-model" class="section level3 hasAnchor" number="4.2.4">
+<h3><span class="header-section-number">4.2.4</span> The Null Model<a href="04-module-4.html#the-null-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In the simplest MLM we can run, we let intercepts vary between clusters by estimating random effects for the intercepts in addition to a fixed effect. The random effect allows the intercepts to randomly vary about the fixed effect, the grand mean of the intercepts. As a result, this model is called the “random intercept only model,” also known as the “null model.” For our example, math achievement is our outcome variable, and the equations for the null model look like this:</p>
 <table>
 <thead>
@@ -444,38 +444,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\(\tau_0^2\)</span>: a random effect for the intercept capturing the variance of schools around the intercept. Each <span class="math inline">\(U_{0j}\)</span> is the residual of a school around the intercept; that is, it describes how the school’s mean math achievement at the intercept deviates from the intercept for the entire sample. Every school has a <span class="math inline">\(U_{0j}\)</span>, and the variance of all of the <span class="math inline">\(U_{0j}\)</span>s is <span class="math inline">\(\tau_0^2\)</span>;</li>
 <li><span class="math inline">\(\sigma^2\)</span>: a random effect capturing the variance of students around their school mean math achievement. Each student has a residual, <span class="math inline">\(R_{ij}\)</span>, and the variance of all the <span class="math inline">\(R_{ij}\)</span>s is <span class="math inline">\(\sigma^2\)</span>.</li>
 </ol>
+<p>We can double-check we’ve counted parameters correctly using the <code>logLik</code> function from the <code>stats</code> package.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="04-module-4.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">logLik</span>(null_model)</span></code></pre></div>
+<pre><code>## &#39;log Lik.&#39; -24438.63 (df=3)</code></pre>
+<p>The degrees of freedom listed, (df = 3), correspond to the number of parameters we’re estimating. We’ll discuss log likelihoods a bit more in chapter 7, so ignore the other number for now.</p>
 <p>The fixed effect for the intercept is 57.67, representing the average math achievement score across all schools. The variance of schools around the intercept is 10.64, and of students around their school’s mean is 66.55.</p>
 </div>
-<div id="understanding-variance" class="section level3" number="4.2.5">
-<h3><span class="header-section-number">4.2.5</span> Understanding Variance</h3>
-<div id="intraclass-correlation-coefficient-icc" class="section level4" number="4.2.5.1">
-<h4><span class="header-section-number">4.2.5.1</span> Intraclass Correlation Coefficient (ICC)</h4>
+<div id="understanding-variance" class="section level3 hasAnchor" number="4.2.5">
+<h3><span class="header-section-number">4.2.5</span> Understanding Variance<a href="04-module-4.html#understanding-variance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="intraclass-correlation-coefficient-icc" class="section level4 hasAnchor" number="4.2.5.1">
+<h4><span class="header-section-number">4.2.5.1</span> Intraclass Correlation Coefficient (ICC)<a href="04-module-4.html#intraclass-correlation-coefficient-icc" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The intraclass correlation coefficient quantifies the extent of clustering in a dataset. It ranges from 0 to 1 and is the quotient of the variance between clusters to the total variance: <span class="math inline">\(ICC = \frac{\tau_0^2}{\tau_0^2 + \sigma^2}\)</span>. The more extensive the impact of clustering, the more variance between clusters, the larger the ICC. The ICCs can also be interpreted as (1) the proportion of variance in the outcome that is attributable to clusters or (2) the expected correlation between the outcome from randomly selected units from a randomly selected cluster.</p>
 <p>Per our model output, the total variance is <span class="math inline">\(\tau_0^2 + \sigma^2 = 10.64 + 66.55 = 77.19\)</span>, and the variance between schools is <span class="math inline">\(\tau_0^2\)</span>, 10.64. The ICC is then <span class="math inline">\(\frac{10.64}{77.19} = 0.138\)</span>; 13.8% of the total variance in math achievement can be attributed to school membership.</p>
 <p>We can use the <code>performance</code> package to calculate this automatically:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="04-module-4.html#cb30-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(null_model)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="04-module-4.html#cb32-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(null_model)</span></code></pre></div>
 <pre><code>## # Intraclass Correlation Coefficient
 ## 
-##      Adjusted ICC: 0.138
-##   Conditional ICC: 0.138</code></pre>
+##     Adjusted ICC: 0.138
+##   Unadjusted ICC: 0.138</code></pre>
 <p>Don’t worry about the adjusted vs conditional ICC here. In short, the adjusted ICC accounts only for the random effect variances, while the conditional ICC accounts for the fixed effect variances, too. You can read more about it <a href="https://easystats.github.io/performance/reference/icc.html#adjusted-and-conditional-icc">here</a>.</p>
 </div>
-<div id="plausible-values-range" class="section level4" number="4.2.5.2">
-<h4><span class="header-section-number">4.2.5.2</span> Plausible Values Range</h4>
+<div id="plausible-values-range" class="section level4 hasAnchor" number="4.2.5.2">
+<h4><span class="header-section-number">4.2.5.2</span> Plausible Values Range<a href="04-module-4.html#plausible-values-range" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Another way to understand the variance in our data is by calculating a 95% plausible values range for a given effect. For example, the intercept: given the fixed effect for the intercept (<span class="math inline">\(\gamma_{00}\)</span>) and the variance of residuals around that fixed effect (<span class="math inline">\(\tau_0^2\)</span>), we can describe how much the schools vary in mean math achievement by calculating a 95% plausible values range. <span class="math inline">\(95\%\ plausible\ values\ range = \gamma_{00} ± 1.96\sqrt{\tau_0^2}\)</span>.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="04-module-4.html#cb32-1" aria-hidden="true" tabindex="-1"></a>Tau0 <span class="ot">&lt;-</span> <span class="fu">VarCorr</span>(null_model)<span class="sc">$</span>schcode[<span class="dv">1</span>]</span>
-<span id="cb32-2"><a href="04-module-4.html#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="04-module-4.html#cb32-3" aria-hidden="true" tabindex="-1"></a>lower_bound <span class="ot">&lt;-</span> null_model<span class="sc">@</span>beta <span class="sc">-</span> <span class="fl">1.96</span><span class="sc">*</span><span class="fu">sqrt</span>(Tau0)</span>
-<span id="cb32-4"><a href="04-module-4.html#cb32-4" aria-hidden="true" tabindex="-1"></a>upper_bound <span class="ot">&lt;-</span> null_model<span class="sc">@</span>beta <span class="sc">+</span> <span class="fl">1.96</span><span class="sc">*</span><span class="fu">sqrt</span>(Tau0)</span>
-<span id="cb32-5"><a href="04-module-4.html#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-6"><a href="04-module-4.html#cb32-6" aria-hidden="true" tabindex="-1"></a>lower_bound</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="04-module-4.html#cb34-1" aria-hidden="true" tabindex="-1"></a>Tau0 <span class="ot">&lt;-</span> <span class="fu">VarCorr</span>(null_model)<span class="sc">$</span>schcode[<span class="dv">1</span>]</span>
+<span id="cb34-2"><a href="04-module-4.html#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="04-module-4.html#cb34-3" aria-hidden="true" tabindex="-1"></a>lower_bound <span class="ot">&lt;-</span> null_model<span class="sc">@</span>beta <span class="sc">-</span> <span class="fl">1.96</span><span class="sc">*</span><span class="fu">sqrt</span>(Tau0)</span>
+<span id="cb34-4"><a href="04-module-4.html#cb34-4" aria-hidden="true" tabindex="-1"></a>upper_bound <span class="ot">&lt;-</span> null_model<span class="sc">@</span>beta <span class="sc">+</span> <span class="fl">1.96</span><span class="sc">*</span><span class="fu">sqrt</span>(Tau0)</span>
+<span id="cb34-5"><a href="04-module-4.html#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-6"><a href="04-module-4.html#cb34-6" aria-hidden="true" tabindex="-1"></a>lower_bound</span></code></pre></div>
 <pre><code>## [1] 51.28024</code></pre>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="04-module-4.html#cb34-1" aria-hidden="true" tabindex="-1"></a>upper_bound</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="04-module-4.html#cb36-1" aria-hidden="true" tabindex="-1"></a>upper_bound</span></code></pre></div>
 <pre><code>## [1] 64.06822</code></pre>
 <p>This range gives us a sense of the variance in school intercepts: 95% of intercepts will fall between 51 and 64. 13 points of variance is a fair amount for a scale from 0 to 100! It seems good that we’re accounting for that variance with our multilevel model, rather than treating all schools like they have the same intercept.</p>
 </div>
-<div id="empirical-bayes-estimates" class="section level4" number="4.2.5.3">
-<h4><span class="header-section-number">4.2.5.3</span> Empirical Bayes Estimates</h4>
+<div id="empirical-bayes-estimates" class="section level4 hasAnchor" number="4.2.5.3">
+<h4><span class="header-section-number">4.2.5.3</span> Empirical Bayes Estimates<a href="04-module-4.html#empirical-bayes-estimates" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>As noted, every school has its own intercept residual, <span class="math inline">\(U_{0j}\)</span>. We’re not usually interested in individual residuals; rather, we’re interested in the <em>variance</em> of those residuals to understand the clustering in our data. But we can visualize at the individual residuals as a third way of understanding that variation. We can extract and plot the residuals as Empirical Bayes estimates, which are weighted. The random effects for the intercept (the <span class="math inline">\(U_{0j}\)</span>s) are latent variables rather than statistical parameters, but we can estimate them to visualize how much they vary (and thus how much schools vary around the grand mean intercept). We can estimate a weighted intercept for a given group with the following equation:</p>
 <p><span class="math inline">\(\hat\beta_{0j}^{EB} = \lambda_j\hat\beta_{0j} + (1 - \lambda_j)\hat\gamma_{00}\)</span></p>
 <p>To calculate the weighted intercept, we use the following information:</p>
@@ -486,40 +490,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>The Empirical Bayes estimate of a residuals, <span class="math inline">\(U_{0j}\)</span>, is then the difference between the fixed effect <span class="math inline">\(\gamma_{0j}\)</span> and the EB estimate <span class="math inline">\(\hat\beta_{0j}^{EB}\)</span>. To develop an intuition about EB estimates, let’s manually calculate the residual for the intercept for school 1, or <span class="math inline">\(U_{01}\)</span>.</p>
 <p>First, we need the group mean math achievement, <span class="math inline">\(\hat{\beta_{01}}\)</span>:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="04-module-4.html#cb36-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb36-2"><a href="04-module-4.html#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(schcode <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="co"># select only school code 1</span></span>
-<span id="cb36-3"><a href="04-module-4.html#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb36-4"><a href="04-module-4.html#cb36-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(math)</span>
-<span id="cb36-5"><a href="04-module-4.html#cb36-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="04-module-4.html#cb38-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb38-2"><a href="04-module-4.html#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(schcode <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="co"># select only school code 1</span></span>
+<span id="cb38-3"><a href="04-module-4.html#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb38-4"><a href="04-module-4.html#cb38-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(math)</span>
+<span id="cb38-5"><a href="04-module-4.html#cb38-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <pre><code>##   mean(math)
 ## 1   58.99677</code></pre>
 <p>Next, we need the estimated population mean, <span class="math inline">\(\hat{\gamma_{00}}\)</span>. We have that from our earlier MLM: the intercept of 47.6742.</p>
 <p>Finally, we need the weight: <span class="math inline">\(\lambda_j = \frac{\tau_0^2}{\tau_0^2 + \frac{\sigma^2}{n_j}}\)</span>. We also have <span class="math inline">\(\tau_0^2 = 10.64\)</span> and <span class="math inline">\(\sigma^2 = 66.55\)</span> from our earlier MLM. We need the group sample size, <span class="math inline">\(n_1\)</span>:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="04-module-4.html#cb38-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb38-2"><a href="04-module-4.html#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(schcode <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb38-3"><a href="04-module-4.html#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="04-module-4.html#cb40-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb40-2"><a href="04-module-4.html#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(schcode <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb40-3"><a href="04-module-4.html#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
 <pre><code>##    n
 ## 1 12</code></pre>
 <p>So <span class="math inline">\(\lambda_j = \frac{\tau_0^2}{\tau_0^2 + \frac{\sigma^2}{n_j}} = \frac{10.64}{10.64 + \frac{66.55}{12}} = 0.657\)</span>.</p>
 <p>Combining this information into our Empirical Bayes formula, <span class="math inline">\(\hat\beta_{01}^{EB} = 58.545\)</span>. The residual between the intercept from our MLM — 57.6742 — and our Empirical Bayes estimate — 58.545 — is 0.87. We could repeat this manual calculation process and get an Empirical Bayes residual for every school, and then plot those residuals to visualize their distribution. Luckily, we don’t need to do this manual process 419 times; we can extract the Empirical Bayes estimates of the residuals using code:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="04-module-4.html#cb40-1" aria-hidden="true" tabindex="-1"></a>empirical_bayes_data <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(<span class="fu">ranef</span>(null_model))</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="04-module-4.html#cb42-1" aria-hidden="true" tabindex="-1"></a>empirical_bayes_data <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(<span class="fu">ranef</span>(null_model))</span></code></pre></div>
 <p>We can double-check our manual calculation:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="04-module-4.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(empirical_bayes_data, <span class="dv">1</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 5
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="04-module-4.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(empirical_bayes_data, <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 5
 ##   grpvar  term        grp   condval condsd
 ##   &lt;chr&gt;   &lt;fct&gt;       &lt;fct&gt;   &lt;dbl&gt;  &lt;dbl&gt;
 ## 1 schcode (Intercept) 1       0.869   1.91</code></pre>
 <p>Looks like the residual for school 1 (grp 1) is 0.87, just like we manually calculated! Then, we can plot the residuals to visualize their distribution.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="04-module-4.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> empirical_bayes_data, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> condval)) <span class="sc">+</span> <span class="co"># &quot;condval&quot; is the name of the EB estimates returned by the ranef function above </span></span>
-<span id="cb43-2"><a href="04-module-4.html#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
-<span id="cb43-3"><a href="04-module-4.html#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;EB estimate of U0j&quot;</span>)</span></code></pre></div>
-<p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="04-module-4.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> empirical_bayes_data, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> condval)) <span class="sc">+</span> <span class="co"># &quot;condval&quot; is the name of the EB estimates returned by the ranef function above </span></span>
+<span id="cb45-2"><a href="04-module-4.html#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb45-3"><a href="04-module-4.html#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;EB estimate of U0j&quot;</span>)</span></code></pre></div>
+<p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <p>As we would expect, the residuals have a mean of 0 because the process of estimating the model is a process of minimizing the residuals. It looks like they mostly range from -5 to 5 in a normal distribution. Again, looks like our intercepts vary fairly widely between schools, so it’s a good thing we’re modelling that variation.</p>
 </div>
 </div>
 </div>
-<div id="conclusion-2" class="section level2" number="4.3">
-<h2><span class="header-section-number">4.3</span> Conclusion</h2>
+<div id="conclusion-2" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Conclusion<a href="04-module-4.html#conclusion-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In this chapter, we discussed why and when one should use multilevel models, reviewed different ways to visualize and understand the variance in your data at different levels, and estimated our first multilevel model: the random-intercept-only model (also called the null model). In the next chapter, we’ll start adding more fixed effects.</p>
 
 </div>
@@ -592,7 +596,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

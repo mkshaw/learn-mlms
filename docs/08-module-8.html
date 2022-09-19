@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 8 Centering Options and Interpretations | Introduction to Multilevel Modelling</title>
   <meta name="description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and critically analyze their use in the literature." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 8 Centering Options and Interpretations | Introduction to Multilevel Modelling" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://www.learn-mlms.com" />
   
   <meta property="og:description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and critically analyze their use in the literature." />
   <meta name="github-repo" content="mkshaw/multilevel-modelling/" />
@@ -32,7 +31,6 @@
   
 <link rel="prev" href="07-module-7.html"/>
 <link rel="next" href="09-module-9.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -50,8 +48,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -269,6 +268,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2.7" data-path="10-module-10.html"><a href="10-module-10.html#adding-level-2-fixed-effects-1"><i class="fa fa-check"></i><b>10.2.7</b> Adding Level-2 Fixed Effects</a></li>
 </ul></li>
 <li class="chapter" data-level="10.3" data-path="10-module-10.html"><a href="10-module-10.html#conclusion-8"><i class="fa fa-check"></i><b>10.3</b> Conclusion</a></li>
+<li class="chapter" data-level="10.4" data-path="10-module-10.html"><a href="10-module-10.html#further-reading-3"><i class="fa fa-check"></i><b>10.4</b> Further Reading</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="11-module-11.html"><a href="11-module-11.html"><i class="fa fa-check"></i><b>11</b> Effect Sizes in Multilevel Models</a>
 <ul>
@@ -301,7 +301,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.2.9" data-path="12-module-12.html"><a href="12-module-12.html#assumption-6-level-1-residuals-independent-of-level-2-predictors-level-2-residuals-independent-of-level-1-predictors"><i class="fa fa-check"></i><b>12.2.9</b> Assumption 6: Level-1 Residuals Independent of Level-2 Predictors, Level-2 Residuals Independent of Level-1 Predictors</a></li>
 </ul></li>
 <li class="chapter" data-level="12.3" data-path="12-module-12.html"><a href="12-module-12.html#conclusion-10"><i class="fa fa-check"></i><b>12.3</b> Conclusion</a></li>
-<li class="chapter" data-level="12.4" data-path="12-module-12.html"><a href="12-module-12.html#further-reading-3"><i class="fa fa-check"></i><b>12.4</b> Further Reading</a></li>
+<li class="chapter" data-level="12.4" data-path="12-module-12.html"><a href="12-module-12.html#further-reading-4"><i class="fa fa-check"></i><b>12.4</b> Further Reading</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="13-appendix.html"><a href="13-appendix.html"><i class="fa fa-check"></i><b>A</b> Download Materials</a></li>
@@ -326,10 +326,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="module-8" class="section level1" number="8">
-<h1><span class="header-section-number">Chapter 8</span> Centering Options and Interpretations</h1>
-<div id="learning-objectives-6" class="section level2" number="8.1">
-<h2><span class="header-section-number">8.1</span> Learning Objectives</h2>
+<div id="module-8" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">Chapter 8</span> Centering Options and Interpretations<a href="08-module-8.html#module-8" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="learning-objectives-6" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Learning Objectives<a href="08-module-8.html#learning-objectives-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In this chapter, we will review options for and interpretations of centering variables in multilevel models. The examples are adapted from Dr. Dan McNeish’s lecture (thanks Dan!), and you can see an overview of his other work <a href="https://sites.google.com/site/danielmmcneish/">here</a>.</p>
 <p>The learning objectives for this chapter are:</p>
 <ol style="list-style-type: decimal">
@@ -340,38 +340,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>All materials for this chapter are available for download <a href="https://www.learn-mlms.com/13-appendix.html">here</a>.</p>
 </div>
-<div id="data-demonstration-6" class="section level2" number="8.2">
-<h2><span class="header-section-number">8.2</span> Data Demonstration</h2>
+<div id="data-demonstration-6" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Data Demonstration<a href="08-module-8.html#data-demonstration-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The data for this chapter were taken from chapter 3 of Heck, R. H., Thomas, S. L., &amp; Tabata, L. N. (2011). <em>Multilevel and Longitudinal Modeling with IBM SPSS</em>: Taylor &amp; Francis. Students are clustered within schools in the data.</p>
-<div id="load-data-and-dependencies-5" class="section level3" number="8.2.1">
-<h3><span class="header-section-number">8.2.1</span> Load Data and Dependencies</h3>
+<div id="load-data-and-dependencies-5" class="section level3 hasAnchor" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> Load Data and Dependencies<a href="08-module-8.html#load-data-and-dependencies-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For this data demo, we will use the following packages:</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="08-module-8.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># for data manipulation</span></span>
-<span id="cb108-2"><a href="08-module-8.html#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr) <span class="co"># for assignment pipe %&lt;&gt;%</span></span>
-<span id="cb108-3"><a href="08-module-8.html#cb108-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4) <span class="co"># for multilevel models</span></span>
-<span id="cb108-4"><a href="08-module-8.html#cb108-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest) <span class="co"># for p-values</span></span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="08-module-8.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># for data manipulation</span></span>
+<span id="cb110-2"><a href="08-module-8.html#cb110-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr) <span class="co"># for assignment pipe %&lt;&gt;%</span></span>
+<span id="cb110-3"><a href="08-module-8.html#cb110-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4) <span class="co"># for multilevel models</span></span>
+<span id="cb110-4"><a href="08-module-8.html#cb110-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest) <span class="co"># for p-values</span></span></code></pre></div>
 <p>And the same dataset of students’ math achievement:</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="08-module-8.html#cb109-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;heck2011.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="08-module-8.html#cb111-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;heck2011.csv&#39;</span>)</span></code></pre></div>
 </div>
-<div id="why-center-variables" class="section level3" number="8.2.2">
-<h3><span class="header-section-number">8.2.2</span> Why Center Variables?</h3>
+<div id="why-center-variables" class="section level3 hasAnchor" number="8.2.2">
+<h3><span class="header-section-number">8.2.2</span> Why Center Variables?<a href="08-module-8.html#why-center-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>If you’ve worked with single-level regression before, you’re probably already familiar with centering variables. Centering in regression facilitates interpretation of the intercept, which is the average value of your outcome variable when all predictors are set to zero. If your predictors do not have meaningful zero points, then the intercept can be non-sensical. For example, imagine we were predicting the number of goals scored by players in an adult hockey league based on their age in a simple regression:</p>
 <p><span class="math inline">\(goals_{i} = \beta_{0} + \beta_{1}age_{i} + \epsilon_{i}\)</span></p>
 <p>If we had age in years without centering it, the intercept would represent the average number of goals scored by players 0 years old. There are no players in adult hockey leagues that are zero years old, so this intercept is not really useful to us. If we instead centered age, the intercept would represent the average number of goals scored by players at the average league age (maybe something like 38 years old). This is a more meaningful interpretation that lies within the range of our data.</p>
 <p>Centering in multilevel models is also used to make coefficients more meaningful, but also changes the interpretation of coefficients and can be used to decompose total effects into estimates of the within, between, and contextual effects of a variable. Let’s dig more into those different effects.</p>
 </div>
-<div id="within-between-and-contextual-effects" class="section level3" number="8.2.3">
-<h3><span class="header-section-number">8.2.3</span> Within, Between, and Contextual Effects</h3>
+<div id="within-between-and-contextual-effects" class="section level3 hasAnchor" number="8.2.3">
+<h3><span class="header-section-number">8.2.3</span> Within, Between, and Contextual Effects<a href="08-module-8.html#within-between-and-contextual-effects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To define within, between, and contextual effects, let’s think about Marsh’s Big Fish-Little Pond effect. This effect describes the situation in which high achieving students in a school that is low achieving on average, will feel better about their abilities than high achieving students in a school with higher average achievement. You may have experienced this feeling when you went from being one of the best undergraduates at your institution (i.e., you were the big fish in the little pond) to feeling less confident in your abilities when you went to graduate school (i.e., when you became a small or medium sized fish in a big pond). In the example data we have students in different schools and have measured their levels of academic achievement (their grades, for example) and academic self-concept (do they feel like they’re succeeding in school?).</p>
 <p>The within effect describes the relationship between students’ grades and their feelings of succeeding in school within a given school: how does a student’s grades affect their feelings of success? We might expect that higher grades are associated with stronger feelings of “yes, I am succeeding.”</p>
 <p>The between effect describes the relationship between a school’s average grades and the average of students’ feelings of success: how does a school’s average grade affect students’ average feelings of success? We might expect that in higher-performing schools, the students actually feel less successful on average.</p>
 <p>The contextual effect describes the difference in feelings of success for students with <em>the same</em> grades in schools with <em>different</em> average grades. What would happen if we plopped the same student into a different context (i.e., cluster)? We might expect that Student A with a grade of 80% in a school with an average grade of 60% feels great about their success, but what if we take that student with a grade of 80% and put them into a school with an average grade of 99%? They probably don’t feel as successful. This is the Big Fish-Little Pond effect, and it is a contextual effect: what effect does context have on the outcome variable?</p>
 <p>We can see this illustrated in the following graph adapted from Dan McNeish’s slides:</p>
-<p><img src="img/effect_types.png" /><!-- --></p>
+<p><img src="img/effect_types.png" width="406" /></p>
 <p>Note how the effects relate to one another: <span class="math inline">\(between\ effect = within\ effect + contextual\ effect\)</span>. One way of thinking of this is that the between effect shows the overall, average relationship, but using MLMs, we can decompose it into a within and contextual effect. To estimate these effects, We use different centering options!</p>
 </div>
-<div id="options-for-centering-in-mlms" class="section level3" number="8.2.4">
-<h3><span class="header-section-number">8.2.4</span> Options for Centering in MLMs</h3>
+<div id="options-for-centering-in-mlms" class="section level3 hasAnchor" number="8.2.4">
+<h3><span class="header-section-number">8.2.4</span> Options for Centering in MLMs<a href="08-module-8.html#options-for-centering-in-mlms" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s return to our example of SES predicting math achievement to understand if there is a contextual effect of students’ achievement from being in higher or lower on average SES schools. So far, we’ve been using the following model:</p>
 <table>
 <thead>
@@ -399,8 +399,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="08-module-8.html#cb110-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb110-2"><a href="08-module-8.html#cb110-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="08-module-8.html#cb112-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb112-2"><a href="08-module-8.html#cb112-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
 ## Formula: math ~ 1 + ses + (1 | schcode)
 ##    Data: data
@@ -433,23 +433,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Centering within cluster (CWC)</li>
 <li>Centering around grand mean (CGM).</li>
 </ol>
-<div id="centering-within-cluster-cwc" class="section level4" number="8.2.4.1">
-<h4><span class="header-section-number">8.2.4.1</span> Centering Within Cluster (CWC)</h4>
+<div id="centering-within-cluster-cwc" class="section level4 hasAnchor" number="8.2.4.1">
+<h4><span class="header-section-number">8.2.4.1</span> Centering Within Cluster (CWC)<a href="08-module-8.html#centering-within-cluster-cwc" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Centering a variable within a cluster means each cluster will have a mean of zero. So, each school will have a mean of zero, and students’ scores on <code>ses_cwc</code> will reflect their variance around their school mean, not the grand mean of the whole dataset.</p>
 <p>To center SES within cluster, we first group our dataset by school and calculate the mean SES for each cluster:</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="08-module-8.html#cb112-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&lt;&gt;%</span> <span class="co"># this symbol is an assignment operator and pipe, equivalent to data &lt;- data %&gt;% </span></span>
-<span id="cb112-2"><a href="08-module-8.html#cb112-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(schcode) <span class="sc">%&gt;%</span> </span>
-<span id="cb112-3"><a href="08-module-8.html#cb112-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ses_mean =</span> <span class="fu">mean</span>(ses))</span></code></pre></div>
-<p>Then, we subtract this cluster mean from every individual student’s SES value: <span class="math inline">\(ses_{cwc} = ses - ses_{mean}\)</span>. For the students at the mean, the resulting value will be 0. Students above the mean will have positive values, and students below the mean will have negative values.</p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="08-module-8.html#cb113-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&lt;&gt;%</span></span>
-<span id="cb113-2"><a href="08-module-8.html#cb113-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ses_cwc =</span> ses <span class="sc">-</span> ses_mean)</span></code></pre></div>
-<p>The values of <code>ses_cwc</code> are distributed around the mean for the cluster. The mean of the centered values for each school is now (essentially) zero:</p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="08-module-8.html#cb114-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="08-module-8.html#cb114-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&lt;&gt;%</span> <span class="co"># this symbol is an assignment operator and pipe, equivalent to data &lt;- data %&gt;% </span></span>
 <span id="cb114-2"><a href="08-module-8.html#cb114-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(schcode) <span class="sc">%&gt;%</span> </span>
-<span id="cb114-3"><a href="08-module-8.html#cb114-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb114-4"><a href="08-module-8.html#cb114-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(ses_cwc)</span>
-<span id="cb114-5"><a href="08-module-8.html#cb114-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<pre><code>## # A tibble: 419 x 2
+<span id="cb114-3"><a href="08-module-8.html#cb114-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ses_mean =</span> <span class="fu">mean</span>(ses))</span></code></pre></div>
+<p>Then, we subtract this cluster mean from every individual student’s SES value: <span class="math inline">\(ses_{cwc} = ses - ses_{mean}\)</span>. For the students at the mean, the resulting value will be 0. Students above the mean will have positive values, and students below the mean will have negative values.</p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="08-module-8.html#cb115-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb115-2"><a href="08-module-8.html#cb115-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ses_cwc =</span> ses <span class="sc">-</span> ses_mean)</span></code></pre></div>
+<p>The values of <code>ses_cwc</code> are distributed around the mean for the cluster. The mean of the centered values for each school is now (essentially) zero:</p>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="08-module-8.html#cb116-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb116-2"><a href="08-module-8.html#cb116-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(schcode) <span class="sc">%&gt;%</span> </span>
+<span id="cb116-3"><a href="08-module-8.html#cb116-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb116-4"><a href="08-module-8.html#cb116-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(ses_cwc)</span>
+<span id="cb116-5"><a href="08-module-8.html#cb116-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## # A tibble: 419 × 2
 ##    schcode `mean(ses_cwc)`
 ##      &lt;int&gt;           &lt;dbl&gt;
 ##  1       1        3.01e-17
@@ -495,8 +495,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>Here, <span class="math inline">\(\gamma_{10}\)</span> represents how students vary around their school mean, which is our within effect. It only captures the effect of SES on achievement within schools, if we run this model we get an intercept of 57.67 and an effect for <code>ses_cwc</code> of 3.19 indicating that on average, within a school an increase in SES to one standard deviation above the mean is associated with an increase in math achievement of 3.19.</p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="08-module-8.html#cb116-1" aria-hidden="true" tabindex="-1"></a>model_cwc <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses_cwc <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb116-2"><a href="08-module-8.html#cb116-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_cwc)</span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="08-module-8.html#cb118-1" aria-hidden="true" tabindex="-1"></a>model_cwc <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses_cwc <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb118-2"><a href="08-module-8.html#cb118-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_cwc)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
 ## Formula: math ~ 1 + ses_cwc + (1 | schcode)
 ##    Data: data
@@ -563,8 +563,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\(\sigma^2\)</span>: a random effect capturing the variance of students around their school mean math achievement, controlling for <code>ses_cwc</code> and <code>ses_mean</code>.</li>
 </ol>
 <p>Let’s estimate it:</p>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="08-module-8.html#cb118-1" aria-hidden="true" tabindex="-1"></a>model_cwc_l2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses_cwc <span class="sc">+</span> ses_mean <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb118-2"><a href="08-module-8.html#cb118-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_cwc_l2)</span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="08-module-8.html#cb120-1" aria-hidden="true" tabindex="-1"></a>model_cwc_l2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses_cwc <span class="sc">+</span> ses_mean <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb120-2"><a href="08-module-8.html#cb120-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_cwc_l2)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
 ## Formula: math ~ 1 + ses_cwc + ses_mean + (1 | schcode)
 ##    Data: data
@@ -596,22 +596,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The average student math achievement at the average school is 57.55. A one-unit increase in SES within a school is associated with a 3.19-unit increase in math achievement. A one-unit increase in the school’s average SES is associated with a 5.89-unit increase in math achievement.</p>
 <p>Recall our earlier formula detailing the relationship between the within, between, and contextual effects: <span class="math inline">\(between\ effect = within\ effect + contextual\ effect\)</span>. Armed with our between effect (<span class="math inline">\(\gamma_{01}\)</span>) and within effect (<span class="math inline">\(\gamma_{10}\)</span>), we can reorganize this equation and calculate our contextual effect: <span class="math inline">\(contextual = between - within = \gamma_{01} - \gamma_{10} = 5.89 - 3.19 = 2.70\)</span>, so with two hypothetical students with the same level of SES, the one in the school with higher average SES has 2.70-unit higher math achievement. This represents the contextual effect of a school’s SES on math achievement.</p>
 </div>
-<div id="centering-grand-mean-cgm" class="section level4" number="8.2.4.2">
-<h4><span class="header-section-number">8.2.4.2</span> Centering Grand Mean (CGM)</h4>
+<div id="centering-grand-mean-cgm" class="section level4 hasAnchor" number="8.2.4.2">
+<h4><span class="header-section-number">8.2.4.2</span> Centering Grand Mean (CGM)<a href="08-module-8.html#centering-grand-mean-cgm" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>When we center a variable at the grand mean, we have information about how individuals vary around the mean of all individuals. So students’ scores on <code>ses_cgm</code> will reflect their variance around the mean of all students.</p>
 <p>To center SES at the grand mean, we first calculate the grand mean:</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="08-module-8.html#cb120-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&lt;&gt;%</span></span>
-<span id="cb120-2"><a href="08-module-8.html#cb120-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> <span class="co"># remove the grouping by school that we added in the CWC section</span></span>
-<span id="cb120-3"><a href="08-module-8.html#cb120-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ses_grand_mean =</span> <span class="fu">mean</span>(ses))</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="08-module-8.html#cb122-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb122-2"><a href="08-module-8.html#cb122-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> <span class="co"># remove the grouping by school that we added in the CWC section</span></span>
+<span id="cb122-3"><a href="08-module-8.html#cb122-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ses_grand_mean =</span> <span class="fu">mean</span>(ses))</span></code></pre></div>
 <p>Then, we subtract this grand mean from every individual student’s SES value: <span class="math inline">\(ses_{cgm} = ses - ses\_grand\_mean\)</span>. For the students at the grand mean, the resulting value will be 0. Students above the mean will have positive values, and students below the mean will have negative values.</p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="08-module-8.html#cb121-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&lt;&gt;%</span></span>
-<span id="cb121-2"><a href="08-module-8.html#cb121-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ses_cgm =</span> ses <span class="sc">-</span> ses_grand_mean)</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="08-module-8.html#cb123-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb123-2"><a href="08-module-8.html#cb123-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ses_cgm =</span> ses <span class="sc">-</span> ses_grand_mean)</span></code></pre></div>
 <p>The values of <code>ses_cgm</code> are distributed around the grand mean. The mean of the students’ values of <code>ses_cgm</code> is now (essentially) zero.</p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="08-module-8.html#cb122-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb122-2"><a href="08-module-8.html#cb122-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb122-3"><a href="08-module-8.html#cb122-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(ses_cgm)</span>
-<span id="cb122-4"><a href="08-module-8.html#cb122-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 1
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="08-module-8.html#cb124-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb124-2"><a href="08-module-8.html#cb124-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb124-3"><a href="08-module-8.html#cb124-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(ses_cgm)</span>
+<span id="cb124-4"><a href="08-module-8.html#cb124-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 1
 ##   `mean(ses_cgm)`
 ##             &lt;dbl&gt;
 ## 1        3.15e-18</code></pre>
@@ -686,8 +686,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\(\sigma^2\)</span>: a random effect capturing the variance of students around their school mean math achievement, controlling for <code>ses_cgm</code> and <code>ses_mean</code>.</li>
 </ol>
 <p>Let’s estimate it in R:</p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="08-module-8.html#cb124-1" aria-hidden="true" tabindex="-1"></a>cgm_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses_cgm <span class="sc">+</span> ses_mean <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb124-2"><a href="08-module-8.html#cb124-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cgm_model)</span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="08-module-8.html#cb126-1" aria-hidden="true" tabindex="-1"></a>cgm_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses_cgm <span class="sc">+</span> ses_mean <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb126-2"><a href="08-module-8.html#cb126-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cgm_model)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
 ## Formula: math ~ 1 + ses_cgm + ses_mean + (1 | schcode)
 ##    Data: data
@@ -720,8 +720,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Recall our earlier formula detailing the relationship between the within, between, and contextual effects: <span class="math inline">\(between\ effect = within\ effect + contextual\ effect\)</span>. Armed with our contextual effect (<span class="math inline">\(\gamma_{01}\)</span>) and within effect (<span class="math inline">\(\gamma_{10}\)</span>), we can calculate our between effect: <span class="math inline">\(between = within + contextual = \gamma_{10} + \gamma_{01} = 3.19 + 2.70 = 5.89\)</span>, so an increase in a school’s average SES by one unit is associated with an increase of 5.89-unit math achievement.</p>
 </div>
 </div>
-<div id="what-kind-of-centering-should-you-use" class="section level3" number="8.2.5">
-<h3><span class="header-section-number">8.2.5</span> What Kind of Centering Should You Use?</h3>
+<div id="what-kind-of-centering-should-you-use" class="section level3 hasAnchor" number="8.2.5">
+<h3><span class="header-section-number">8.2.5</span> What Kind of Centering Should You Use?<a href="08-module-8.html#what-kind-of-centering-should-you-use" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Here is a reference table to keep track of what coefficients represent what effects in CWC or CGM models:</p>
 <table>
 <colgroup>
@@ -781,12 +781,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>If you’re not interested in contextual results, you can use the following shorthand for deciding whether to center around the grand mean or within cluster: if you’re interested in level-1 predictors, CWC is best because it gives an unbiased estimate of the within cluster effect and produces better estimates of the slope variance, though as we saw you can get an unbiased estimate of the within cluster effect with CGM if you add the aggregate back in at level 2. If you’re interested in level-2 predictors, but you have covariates at level-1 you want to control for, CGM is best because it controls for level-1 predictors by producing adjusted means. If you are interested in interactions (at level-1 or cross-level), use CWC to get an unbiased estimate of the within cluster slope and slope variance. See Enders &amp; Tofighi (2007) for a detailed discussion.</p>
 </div>
 </div>
-<div id="conclusion-6" class="section level2" number="8.3">
-<h2><span class="header-section-number">8.3</span> Conclusion</h2>
+<div id="conclusion-6" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> Conclusion<a href="08-module-8.html#conclusion-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In this chapter, we reviewed two options for centering variables in MLMs (centering within cluster and centering grand mean), when to use each option, and how to interpret coefficients under each option. In the first 8 chapters, we’ve covered a lot of the basics of MLMs. In Chapter 9, we’ll revisit a number of concepts we’ve already seen, but in the context of repeated-measure rather than the cross-sectional data we’ve been using to this point.</p>
 </div>
-<div id="further-reading-2" class="section level2" number="8.4">
-<h2><span class="header-section-number">8.4</span> Further Reading</h2>
+<div id="further-reading-2" class="section level2 hasAnchor" number="8.4">
+<h2><span class="header-section-number">8.4</span> Further Reading<a href="08-module-8.html#further-reading-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Enders, C. K., &amp; Tofighi, D. (2007). Centering predictor variables in cross-sectional multilevel models: A new look at an old issue. Psychological Methods, 12(2), 121–138. <a href="https://doi.org/10.1037/1082-989X.12.2.121" class="uri">https://doi.org/10.1037/1082-989X.12.2.121</a></p>
 
 </div>
@@ -859,7 +859,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

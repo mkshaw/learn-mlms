@@ -96,6 +96,7 @@ adding-level-1-fixed-and-random-effects
 evidence-for-retaining-effects
 adding-level-2-fixed-effects-1
 conclusion-8
+further-reading-3
 module-11
 learning-objectives-9
 data-demonstration-9
@@ -127,5 +128,5 @@ multivariate-normal
 assumption-5-residuals-at-level-1-and-level-2-are-independent
 assumption-6-level-1-residuals-independent-of-level-2-predictors-level-2-residuals-independent-of-level-1-predictors
 conclusion-10
-further-reading-3
+further-reading-4
 download-materials
