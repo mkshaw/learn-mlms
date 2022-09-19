@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 Multiple Regression Review | Introduction to Multilevel Modelling</title>
   <meta name="description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and critically analyze their use in the literature." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 Multiple Regression Review | Introduction to Multilevel Modelling" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://www.learn-mlms.com" />
   
   <meta property="og:description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and critically analyze their use in the literature." />
   <meta name="github-repo" content="mkshaw/multilevel-modelling/" />
@@ -32,7 +31,6 @@
   
 <link rel="prev" href="01-module-1.html"/>
 <link rel="next" href="03-module-3.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -50,8 +48,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -269,6 +268,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2.7" data-path="10-module-10.html"><a href="10-module-10.html#adding-level-2-fixed-effects-1"><i class="fa fa-check"></i><b>10.2.7</b> Adding Level-2 Fixed Effects</a></li>
 </ul></li>
 <li class="chapter" data-level="10.3" data-path="10-module-10.html"><a href="10-module-10.html#conclusion-8"><i class="fa fa-check"></i><b>10.3</b> Conclusion</a></li>
+<li class="chapter" data-level="10.4" data-path="10-module-10.html"><a href="10-module-10.html#further-reading-3"><i class="fa fa-check"></i><b>10.4</b> Further Reading</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="11-module-11.html"><a href="11-module-11.html"><i class="fa fa-check"></i><b>11</b> Effect Sizes in Multilevel Models</a>
 <ul>
@@ -301,7 +301,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.2.9" data-path="12-module-12.html"><a href="12-module-12.html#assumption-6-level-1-residuals-independent-of-level-2-predictors-level-2-residuals-independent-of-level-1-predictors"><i class="fa fa-check"></i><b>12.2.9</b> Assumption 6: Level-1 Residuals Independent of Level-2 Predictors, Level-2 Residuals Independent of Level-1 Predictors</a></li>
 </ul></li>
 <li class="chapter" data-level="12.3" data-path="12-module-12.html"><a href="12-module-12.html#conclusion-10"><i class="fa fa-check"></i><b>12.3</b> Conclusion</a></li>
-<li class="chapter" data-level="12.4" data-path="12-module-12.html"><a href="12-module-12.html#further-reading-3"><i class="fa fa-check"></i><b>12.4</b> Further Reading</a></li>
+<li class="chapter" data-level="12.4" data-path="12-module-12.html"><a href="12-module-12.html#further-reading-4"><i class="fa fa-check"></i><b>12.4</b> Further Reading</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="13-appendix.html"><a href="13-appendix.html"><i class="fa fa-check"></i><b>A</b> Download Materials</a></li>
@@ -326,10 +326,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="module-2" class="section level1" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Multiple Regression Review</h1>
-<div id="learning-objectives" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> Learning Objectives</h2>
+<div id="module-2" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Multiple Regression Review<a href="02-multiple-regression.html#module-2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="learning-objectives" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Learning Objectives<a href="02-multiple-regression.html#learning-objectives" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In this module, we will review simple and multiple linear regression to establish a strong foundation before moving onto multilevel models. Note that this is intended more as review than a comprehensive guide to regression; for the latter, we recommend <a href="https://stats.oarc.ucla.edu/other/mult-pkg/seminars/" class="uri">https://stats.oarc.ucla.edu/other/mult-pkg/seminars/</a>.</p>
 <p>All materials for this chapter are available for download <a href="https://www.learn-mlms.com/13-appendix.html" target="_blank">here</a>.</p>
 <p>The learning objectives for this chapter are:</p>
@@ -338,8 +338,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Review using simple and multiple linear regression to analyze data.</li>
 </ol>
 </div>
-<div id="data-demonstration" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> Data Demonstration</h2>
+<div id="data-demonstration" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Data Demonstration<a href="02-multiple-regression.html#data-demonstration" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In this data demo, we will first review setting up an R session, then simple and multiple linear regression.</p>
 <p>The data for this chapter were taken from chapter 3 of Heck, R. H., Thomas, S. L., &amp; Tabata, L. N. (2011). <em>Multilevel and Longitudinal Modeling with IBM SPSS</em>: Taylor &amp; Francis. These data have a multilevel structure, which we will work with in chapter 3, but for this chapter we will ignore the clustering structure and conduct regular regression. The following variables are in this data set:</p>
 <table>
@@ -432,13 +432,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<div id="creating-r-projects" class="section level3" number="2.2.1">
-<h3><span class="header-section-number">2.2.1</span> Creating R Projects</h3>
+<div id="creating-r-projects" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Creating R Projects<a href="02-multiple-regression.html#creating-r-projects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Before we get into analyzing the data, let’s start by creating a new project file for this module. R project files help you keep all of the files associated with your project – data, R scripts, and output (including figures) – in one location so you can easily navigate everything related to your project.</p>
 <p>To create a project, open R, click “File” and “New Project…”. If you have already created a folder for this chapter, you can add an R Project to that folder by clicking “Existing Directory”; the R project file will take on the name of that folder. If you do not already have a folder, click “New Directory,” choose where you want to put your new folder and what you want to call it. The R Project file will again take on the name of your new folder.</p>
 </div>
-<div id="loading-data-and-dependencies" class="section level3" number="2.2.2">
-<h3><span class="header-section-number">2.2.2</span> Loading Data and Dependencies</h3>
+<div id="loading-data-and-dependencies" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Loading Data and Dependencies<a href="02-multiple-regression.html#loading-data-and-dependencies" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Next, let’s load in the data and packages we’ll be using for this demo. We’ll be using the following packages:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="02-multiple-regression.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># for data visualization</span></span>
 <span id="cb1-2"><a href="02-multiple-regression.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr) <span class="co"># for pipe, %&gt;% </span></span></code></pre></div>
@@ -456,24 +456,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  Mean   :209.4   Mean   : 9.196   Mean   :3436   Mean   :0.5025   Mean   : 0.0319  
 ##  3rd Qu.:314.5   3rd Qu.:13.000   3rd Qu.:5154   3rd Qu.:1.0000   3rd Qu.: 0.6050  
 ##  Max.   :419.0   Max.   :37.000   Max.   :6871   Max.   :1.0000   Max.   : 1.8730  
-##      femses                math          ses_mean           pro4yrc      
-##  Min.   :-2.4140000   Min.   :27.42   Min.   :-1.29673   Min.   :0.0000  
-##  1st Qu.:-0.0175000   1st Qu.:52.41   1st Qu.:-0.30525   1st Qu.:1.0000  
-##  Median : 0.0000000   Median :60.67   Median :-0.01050   Median :1.0000  
-##  Mean   : 0.0000984   Mean   :57.73   Mean   : 0.03179   Mean   :0.8689  
-##  3rd Qu.: 0.0000000   3rd Qu.:62.38   3rd Qu.: 0.29560   3rd Qu.:1.0000  
-##  Max.   : 1.8540000   Max.   :99.98   Max.   : 1.44315   Max.   :1.0000  
-##      public      
-##  Min.   :0.0000  
-##  1st Qu.:0.0000  
-##  Median :1.0000  
-##  Mean   :0.7306  
-##  3rd Qu.:1.0000  
-##  Max.   :1.0000</code></pre>
+##      femses                math          ses_mean           pro4yrc           public      
+##  Min.   :-2.4140000   Min.   :27.42   Min.   :-1.29673   Min.   :0.0000   Min.   :0.0000  
+##  1st Qu.:-0.0175000   1st Qu.:52.41   1st Qu.:-0.30525   1st Qu.:1.0000   1st Qu.:0.0000  
+##  Median : 0.0000000   Median :60.67   Median :-0.01050   Median :1.0000   Median :1.0000  
+##  Mean   : 0.0000984   Mean   :57.73   Mean   : 0.03179   Mean   :0.8689   Mean   :0.7306  
+##  3rd Qu.: 0.0000000   3rd Qu.:62.38   3rd Qu.: 0.29560   3rd Qu.:1.0000   3rd Qu.:1.0000  
+##  Max.   : 1.8540000   Max.   :99.98   Max.   : 1.44315   Max.   :1.0000   Max.   :1.0000</code></pre>
 <p>That looks good, so let’s proceed to conducting regressions.</p>
 </div>
-<div id="simple-linear-regression" class="section level3" number="2.2.3">
-<h3><span class="header-section-number">2.2.3</span> Simple Linear Regression</h3>
+<div id="simple-linear-regression" class="section level3 hasAnchor" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> Simple Linear Regression<a href="02-multiple-regression.html#simple-linear-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s run a simple linear regression predicting math achievement (<code>math</code>) from socioeconomic status (<code>ses</code>). The syntax for the <code>lm()</code> (linear modelling) command in R is <code>lm(DV ~ IV1 + IV2 + ... + IVn, data = dataframe)</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="02-multiple-regression.html#cb6-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(math <span class="sc">~</span> ses, <span class="at">data =</span> data)</span>
 <span id="cb6-2"><a href="02-multiple-regression.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code></pre></div>
@@ -504,8 +497,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="open_mlm_materials_files/figure-html/graph-1.png" width="672" /></p>
 <p>Our graph reflects the positive relationship between SES and math achievement (and also shows a lot of math scores collecting around the 60 mark).</p>
 </div>
-<div id="multiple-regression" class="section level3" number="2.2.4">
-<h3><span class="header-section-number">2.2.4</span> Multiple Regression</h3>
+<div id="multiple-regression" class="section level3 hasAnchor" number="2.2.4">
+<h3><span class="header-section-number">2.2.4</span> Multiple Regression<a href="02-multiple-regression.html#multiple-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Next, let’s add the available sex variable <code>female</code> (0 = male, 1 = female) as a predictor in our regression and interpret the coefficients and R-squared value.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="02-multiple-regression.html#cb9-1" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(math <span class="sc">~</span> ses <span class="sc">+</span> female, <span class="at">data =</span> data)</span>
 <span id="cb9-2"><a href="02-multiple-regression.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code></pre></div>
@@ -530,8 +523,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## F-statistic: 590.3 on 2 and 6868 DF,  p-value: &lt; 0.00000000000000022</code></pre>
 <p>The intercept of 58.13 reflects the average math achievement score (out of 100) for male students (<code>female</code> = 0) at their class average SES (<code>ses</code> = 0). For a one-unit increase in SES, math achievement increases by 4.23 points, controlling for sex. Female students had a math achievement score lower by 1.06 points on average, controlling for SES. SES and sex together explain 14.6% of the variance in math achievement.</p>
 </div>
-<div id="interaction-terms" class="section level3" number="2.2.5">
-<h3><span class="header-section-number">2.2.5</span> Interaction Terms</h3>
+<div id="interaction-terms" class="section level3 hasAnchor" number="2.2.5">
+<h3><span class="header-section-number">2.2.5</span> Interaction Terms<a href="02-multiple-regression.html#interaction-terms" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In the previous model, we assumed that the relationship between SES and math achievement was constant for both sexes (homogeneity of regression slopes, i.e., an ANCOVA model). As a final exercise, let’s add an interaction term to our regression between sex and SES.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="02-multiple-regression.html#cb11-1" aria-hidden="true" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(math <span class="sc">~</span> ses <span class="sc">+</span> female <span class="sc">+</span> ses<span class="sc">:</span>female, <span class="at">data =</span> data)</span>
 <span id="cb11-2"><a href="02-multiple-regression.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model3)</span></code></pre></div>
@@ -570,8 +563,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The other coefficients have the same interpretations as before. The R-squared indicates that SES and sex account for 14.7% of the variance in math achievement.</p>
 </div>
 </div>
-<div id="conclusion" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> Conclusion</h2>
+<div id="conclusion" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Conclusion<a href="02-multiple-regression.html#conclusion" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>If you feel comfortable with the material presented in this data demonstration, then you have a sufficiently strong baseline to move forward with the materials. In this chapter, we ignored that students were clustered into schools; in the next chapter, we’ll examine that clustering, consider its implications for our analyses, and introduce one non-multilevel-model method for handling clustered data.</p>
 
 </div>
@@ -644,7 +637,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
