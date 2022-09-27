@@ -497,7 +497,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb38-5"><a href="04-module-4.html#cb38-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <pre><code>##   mean(math)
 ## 1   58.99677</code></pre>
-<p>Next, we need the estimated population mean, <span class="math inline">\(\hat{\gamma_{00}}\)</span>. We have that from our earlier MLM: the intercept of 47.6742.</p>
+<p>Next, we need the estimated population mean, <span class="math inline">\(\hat{\gamma_{00}}\)</span>. We have that from our earlier MLM: the intercept of 57.6742.</p>
 <p>Finally, we need the weight: <span class="math inline">\(\lambda_j = \frac{\tau_0^2}{\tau_0^2 + \frac{\sigma^2}{n_j}}\)</span>. We also have <span class="math inline">\(\tau_0^2 = 10.64\)</span> and <span class="math inline">\(\sigma^2 = 66.55\)</span> from our earlier MLM. We need the group sample size, <span class="math inline">\(n_1\)</span>:</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="04-module-4.html#cb40-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
 <span id="cb40-2"><a href="04-module-4.html#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(schcode <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>

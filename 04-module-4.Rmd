@@ -174,7 +174,7 @@ data %>%
   )
 ```
 
-Next, we need the estimated population mean, $\hat{\gamma_{00}}$. We have that from our earlier MLM: the intercept of 47.6742.
+Next, we need the estimated population mean, $\hat{\gamma_{00}}$. We have that from our earlier MLM: the intercept of 57.6742.
 
 Finally, we need the weight: $\lambda_j = \frac{\tau_0^2}{\tau_0^2 + \frac{\sigma^2}{n_j}}$. We also have $\tau_0^2 = 10.64$ and $\sigma^2 = 66.55$ from our earlier MLM. We need the group sample size, $n_1$:
 
