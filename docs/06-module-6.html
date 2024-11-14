@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 6 Random Effects and Cross-level Interactions | Introduction to Multilevel Modelling</title>
   <meta name="description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and critically analyze their use in the literature." />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 6 Random Effects and Cross-level Interactions | Introduction to Multilevel Modelling" />
   <meta property="og:type" content="book" />
@@ -91,7 +91,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -104,7 +104,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -118,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -330,7 +334,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 6</span> Random Effects and Cross-level Interactions<a href="06-module-6.html#module-6" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="learning-objectives-4" class="section level2 hasAnchor" number="6.1">
 <h2><span class="header-section-number">6.1</span> Learning Objectives<a href="06-module-6.html#learning-objectives-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In this chapter, we will introduce cross-level interactions and random effects.</p>
+<p>In this chapter, we will introduce cross-level interactions and random effect covariances.</p>
 <p>The learning objectives for this chapter are:</p>
 <ol style="list-style-type: decimal">
 <li>Code and interpret models with random slope effects and cross-level interactions;</li>
@@ -345,26 +349,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="load-data-and-dependencies-3" class="section level3 hasAnchor" number="6.2.1">
 <h3><span class="header-section-number">6.2.1</span> Load Data and Dependencies<a href="06-module-6.html#load-data-and-dependencies-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For this data demo, we will use the following packages:</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="06-module-6.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># for data manipulation</span></span>
-<span id="cb68-2"><a href="06-module-6.html#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># for visualizations</span></span>
-<span id="cb68-3"><a href="06-module-6.html#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4) <span class="co"># for multilevel models</span></span>
-<span id="cb68-4"><a href="06-module-6.html#cb68-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest) <span class="co"># for p-values</span></span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="06-module-6.html#cb68-1" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># for data manipulation</span></span>
+<span id="cb68-2"><a href="06-module-6.html#cb68-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># for visualizations</span></span>
+<span id="cb68-3"><a href="06-module-6.html#cb68-3" tabindex="-1"></a><span class="fu">library</span>(lme4) <span class="co"># for multilevel models</span></span>
+<span id="cb68-4"><a href="06-module-6.html#cb68-4" tabindex="-1"></a><span class="fu">library</span>(lmerTest) <span class="co"># for p-values</span></span></code></pre></div>
 <p>And the same dataset of students’ math achievement:</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="06-module-6.html#cb69-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;heck2011.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="06-module-6.html#cb69-1" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;heck2011.csv&#39;</span>)</span></code></pre></div>
 </div>
 <div id="mlm-with-random-slope-effect" class="section level3 hasAnchor" number="6.2.2">
 <h3><span class="header-section-number">6.2.2</span> MLM with Random Slope Effect<a href="06-module-6.html#mlm-with-random-slope-effect" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>As a reminder, in Chapter 4 we made the following scatterplot visualizing the relationship between math achievement and socioeconomic status across different schools:</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="06-module-6.html#cb70-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb70-2"><a href="06-module-6.html#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(schcode <span class="sc">&lt;=</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb70-3"><a href="06-module-6.html#cb70-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> ses, <span class="at">y =</span> math, <span class="at">colour =</span> <span class="fu">factor</span>(schcode))) <span class="sc">+</span></span>
-<span id="cb70-4"><a href="06-module-6.html#cb70-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb70-5"><a href="06-module-6.html#cb70-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">group =</span> schcode), <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">fullrange =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb70-6"><a href="06-module-6.html#cb70-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">colour =</span> <span class="st">&quot;schcode&quot;</span>)</span></code></pre></div>
-<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="06-module-6.html#cb70-1" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb70-2"><a href="06-module-6.html#cb70-2" tabindex="-1"></a>  <span class="fu">filter</span>(schcode <span class="sc">&lt;=</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb70-3"><a href="06-module-6.html#cb70-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> ses, <span class="at">y =</span> math, <span class="at">colour =</span> <span class="fu">factor</span>(schcode))) <span class="sc">+</span></span>
+<span id="cb70-4"><a href="06-module-6.html#cb70-4" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb70-5"><a href="06-module-6.html#cb70-5" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">group =</span> schcode), <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">fullrange =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb70-6"><a href="06-module-6.html#cb70-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">colour =</span> <span class="st">&quot;schcode&quot;</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
 <p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
 <p>As we can see, the intercept and slope values are quite different across schools. For example, school 3 has an intercept around 38 and a small positive slope, whereas school 8 has an intercept around 55 and a larger positive slope. In Chapter 5, we modelled the relationship between math achievement and SES as follows:</p>
 <table>
+<colgroup>
+<col width="44%" />
+<col width="55%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">Level</th>
@@ -421,21 +429,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<p>With this model, we’ll now be estimating 6 parameters — 2 fixed effects, 3 random effects, and a random effect covariance:</p>
+<p>With this model, we’ll now be estimating 6 parameters — 2 fixed effects, 3 random effect variances, and a random effect covariance:</p>
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\(\gamma_{00}\)</span>: the fixed effect for the intercept, controlling for <code>ses</code>;</li>
 <li><span class="math inline">\(\gamma_{10}\)</span>: the fixed effect for the slope of <code>ses</code>;</li>
-<li><span class="math inline">\(\sigma^2\)</span>: a random effect capturing the variance of students around their school’s mean math achievement, controlling for <code>ses</code>;</li>
-<li><span class="math inline">\(\tau_0^2\)</span>: a random effect for the intercept capturing the variance of schools around the intercept, controlling for <code>ses</code>;</li>
-<li><span class="math inline">\(\tau_1^2\)</span>: a random effect for the slope capturing variance of school slopes around the grand mean slope, controlling for <code>ses</code>;</li>
+<li><span class="math inline">\(\sigma^2\)</span>: a random effect variance capturing the variance of students around their school’s mean math achievement, controlling for <code>ses</code>;</li>
+<li><span class="math inline">\(\tau_0^2\)</span>: a random effect variance for the intercept capturing the variance of schools around the intercept, controlling for <code>ses</code>;</li>
+<li><span class="math inline">\(\tau_1^2\)</span>: a random effect variance for the slope capturing variance of school slopes around the grand mean slope, controlling for <code>ses</code>;</li>
 <li><span class="math inline">\(\tau_{01}\)</span>: a random effect covariance capturing how the intercept variance and slope variance relate to each other.</li>
 </ol>
 <p>The random effect covariance <span class="math inline">\(\tau_{01}\)</span> quantifies the relationship between <span class="math inline">\(\tau_0^2\)</span> and <span class="math inline">\(\tau_1^2\)</span>. It is interpreted like any other covariance, as the unstandardized relationship, but <code>lme4</code> also outputs the standardized form, the correlation. If the covariance is positive, then a higher intercept value is associated with a higher slope. If negative, a higher intercept value is associated with a lower slope. If near-zero, there is minimal/no relationship between the intercept and slope values.</p>
 <p>In our example, that would indicate schools with higher mean levels of math achievement at the intercept of <code>ses = 0</code> would also have a larger slope of <code>ses</code>. If the covariance is negative, then a higher intercept value is associated with a lower slope. In our example, schools with higher intercepts of math achievement at <code>ses = 0</code> would have lower slopes for <code>ses</code>. We’ll look at the actual random effect covariance in a moment.</p>
 <p>To estimate a random slope effect in <code>lme4</code>, you place the predictor for which you want a random slope before the <code>|</code> in the code as follows:</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="06-module-6.html#cb72-1" aria-hidden="true" tabindex="-1"></a>ses_l1_random <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> ses <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> ses<span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="06-module-6.html#cb72-1" tabindex="-1"></a>ses_l1_random <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> ses <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> ses<span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="06-module-6.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ses_l1_random)</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="06-module-6.html#cb74-1" tabindex="-1"></a><span class="fu">summary</span>(ses_l1_random)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
 ## Formula: math ~ ses + (1 + ses | schcode)
 ##    Data: data
@@ -454,9 +462,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Number of obs: 6871, groups:  schcode, 419
 ## 
 ## Fixed effects:
-##              Estimate Std. Error        df t value            Pr(&gt;|t|)    
-## (Intercept)   57.6959     0.1315  378.6378  438.78 &lt;0.0000000000000002 ***
-## ses            3.9602     0.1408 1450.7730   28.12 &lt;0.0000000000000002 ***
+##              Estimate Std. Error        df t value Pr(&gt;|t|)    
+## (Intercept)   57.6959     0.1315  378.6378  438.78   &lt;2e-16 ***
+## ses            3.9602     0.1408 1450.7730   28.12   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -467,30 +475,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
 <p>Note that the 1 indicates a random intercept term, and is a default setting so you can also estimate both a random intercept and slope with just <code>(ses|schcode)</code>. If you want to exclude the random intercept from the model you need to write <code>(0 + ses|schcode)</code> to override the default.</p>
 <p>Let’s look at our fixed effects. Per the intercept, the average math achievement at mean SES (<code>ses</code> = 0) is 57.70. A one-standard-deviation increase in <code>ses</code> across all private schools is associated with a 3.96-point increase in math achievement.</p>
-<p>From our random effects, the variance term describing how schools vary around the intercept (at mean ses) is 3.20 (<span class="math inline">\(\tau_0^2\)</span>), the variance term describing how school SES slopes vary around the grand mean slope is 0.78 (<span class="math inline">\(\tau_1^2\)</span>), and the variance term describing how students vary around their school’s mean math achievement is 62.59 (<span class="math inline">\(\sigma^2\)</span>). We can find our random effect covariance by examining our Tau matrix. The Tau matrix is called a Tau matrix because it contains the estimates for our random effects, or Taus: <span class="math inline">\(\tau_0^2\)</span>, <span class="math inline">\(\tau_1^2\)</span>, etc. We have always been estimating a Tau matrix, but when we only had a random intercept it was just a 1-by-1 matrix of the random intercept term <span class="math inline">\(\tau_0^2\)</span>.</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="06-module-6.html#cb76-1" aria-hidden="true" tabindex="-1"></a>Matrix<span class="sc">::</span><span class="fu">bdiag</span>(<span class="fu">VarCorr</span>(ses_l1_random))</span></code></pre></div>
-<pre><code>## 2 x 2 sparse Matrix of class &quot;dgCMatrix&quot;
+<p>From our random effect variances, the variance term describing how schools vary around the intercept (at mean ses) is 3.20 (<span class="math inline">\(\tau_0^2\)</span>), the variance term describing how school SES slopes vary around the grand mean slope is 0.78 (<span class="math inline">\(\tau_1^2\)</span>), and the variance term describing how students vary around their school’s mean math achievement is 62.59 (<span class="math inline">\(\sigma^2\)</span>). We can find our random effect covariance by examining our Tau matrix. The Tau matrix is called a Tau matrix because it contains the estimates for our random effect variances, or Taus: <span class="math inline">\(\tau_0^2\)</span>, <span class="math inline">\(\tau_1^2\)</span>, etc. We have always been estimating a Tau matrix, but when we only had a random intercept it was just a 1-by-1 matrix of the random intercept term <span class="math inline">\(\tau_0^2\)</span>.</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="06-module-6.html#cb76-1" tabindex="-1"></a>Matrix<span class="sc">::</span><span class="fu">bdiag</span>(<span class="fu">VarCorr</span>(ses_l1_random))</span></code></pre></div>
+<pre><code>## 2 x 2 sparse Matrix of class &quot;dsCMatrix&quot;
 ##             (Intercept)        ses
 ## (Intercept)    3.204184 -1.5802590
 ## ses           -1.580259  0.7793617</code></pre>
 <p>The code looks a little busy, but there are two steps. First, we extract our random effects variance-covariance matrix (Tau matrix) with <code>VarCorr(ses_l1_random)</code>. Then, we use the <code>bdiag()</code> function from the Matrix package to construct a matrix that’s easy for us to read at a glance.</p>
-<p>In the first row and first column, we have our intercept variance term <span class="math inline">\(\tau_0^2\)</span>, 3.20. In the second row and second column, we have our slope variance term, <span class="math inline">\(\tau_1^2\)</span>, 0.78. In the second row and first column OR in the first row and second column, we have our random effect covariance, -1.58. This negative covariance indicates that for higher intercepts, the slope value is lower: the relationship between SES and math achievement decreases as mean math achievement increases. The matrix we’ve shown here only includes the level-2 random effects organized in matrix form, which you may see in other software programs and which can be easier to read. Information about the relationship between random effects is also output by <code>lme4</code> under the “Random effects:” section. The <code>lme4</code> output includes all random effects in variance and standard deviation units, as well as the <em>correlation</em> (not covariance) between the intercept and slope variances.</p>
+<p>In the first row and first column, we have our intercept variance term <span class="math inline">\(\tau_0^2\)</span>, 3.20. In the second row and second column, we have our slope variance term, <span class="math inline">\(\tau_1^2\)</span>, 0.78. In the second row and first column OR in the first row and second column, we have our random effect covariance, -1.58. This negative covariance indicates that for higher intercepts, the slope value is lower: the relationship between SES and math achievement decreases as mean math achievement increases. The matrix we’ve shown here only includes the level-2 random effect variances organized in matrix form, which you may see in other software programs and which can be easier to read. Information about the relationship between random effect variances is also output by <code>lme4</code> under the “Random effects:” section. The <code>lme4</code> output includes all random effect variances in variance and standard deviation units, as well as the <em>correlation</em> (not covariance) between the intercept and slope variances.</p>
 <p>We can convert the covariance between <span class="math inline">\(\tau_0^2\)</span> and <span class="math inline">\(\tau_1^2\)</span> to the correlation using the standard deviations of each:</p>
 <p><span class="math display">\[corr = \frac{cov(X, Y)}{sd_x*sd_y}\]</span></p>
 <p>We have our covariance from our Tau matrix: -1.58. We can see the standard deviations in the <code>lme4</code> output: the standard deviation of the intercept variance is 1.79, the standard deviation of the slope variance 0.88. We can then compute the correlation:</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="06-module-6.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fl">1.58</span><span class="sc">/</span>(<span class="fl">1.79</span><span class="sc">*</span><span class="fl">0.88</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="06-module-6.html#cb78-1" tabindex="-1"></a><span class="sc">-</span><span class="fl">1.58</span><span class="sc">/</span>(<span class="fl">1.79</span><span class="sc">*</span><span class="fl">0.88</span>)</span></code></pre></div>
 <pre><code>## [1] -1.003047</code></pre>
 <p>So there is a correlation of -1 between the intercept variance and slope variance, which matches the printed output of -1.00 under the “Corr” column in the “Random effects” section of the <code>lme4</code> output.</p>
 <p>Let’s visualize the relationship using Empirical Bayes estimates (see Chapter 4 for more on EB estimates) of the intercepts and slopes for each school; we expect to see a negative relationship between them.</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="06-module-6.html#cb80-1" aria-hidden="true" tabindex="-1"></a>empirical_bayes_data <span class="ot">&lt;-</span> <span class="fu">ranef</span>(ses_l1_random) <span class="co"># extract random effects for each school</span></span>
-<span id="cb80-2"><a href="06-module-6.html#cb80-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb80-3"><a href="06-module-6.html#cb80-3" aria-hidden="true" tabindex="-1"></a>empirical_bayes_intercepts <span class="ot">&lt;-</span> empirical_bayes_data<span class="sc">$</span>schcode[<span class="st">&quot;(Intercept)&quot;</span>]</span>
-<span id="cb80-4"><a href="06-module-6.html#cb80-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb80-5"><a href="06-module-6.html#cb80-5" aria-hidden="true" tabindex="-1"></a>empirical_bayes_slopes <span class="ot">&lt;-</span> empirical_bayes_data<span class="sc">$</span>schcode[<span class="st">&quot;ses&quot;</span>] <span class="co"># extracts the SES/slope EB estimates from the list</span></span>
-<span id="cb80-6"><a href="06-module-6.html#cb80-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb80-7"><a href="06-module-6.html#cb80-7" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_cols</span>(empirical_bayes_intercepts, empirical_bayes_slopes) <span class="sc">%&gt;%</span>  <span class="co"># combine EB slopes and intercepts into a useable dataframe for graphing</span></span>
-<span id="cb80-8"><a href="06-module-6.html#cb80-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> ses, <span class="at">y =</span> <span class="st">`</span><span class="at">(Intercept)</span><span class="st">`</span>)) <span class="sc">+</span></span>
-<span id="cb80-9"><a href="06-module-6.html#cb80-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="06-module-6.html#cb80-1" tabindex="-1"></a>empirical_bayes_data <span class="ot">&lt;-</span> <span class="fu">ranef</span>(ses_l1_random) <span class="co"># extract random effects for each school</span></span>
+<span id="cb80-2"><a href="06-module-6.html#cb80-2" tabindex="-1"></a></span>
+<span id="cb80-3"><a href="06-module-6.html#cb80-3" tabindex="-1"></a>empirical_bayes_intercepts <span class="ot">&lt;-</span> empirical_bayes_data<span class="sc">$</span>schcode[<span class="st">&quot;(Intercept)&quot;</span>]</span>
+<span id="cb80-4"><a href="06-module-6.html#cb80-4" tabindex="-1"></a></span>
+<span id="cb80-5"><a href="06-module-6.html#cb80-5" tabindex="-1"></a>empirical_bayes_slopes <span class="ot">&lt;-</span> empirical_bayes_data<span class="sc">$</span>schcode[<span class="st">&quot;ses&quot;</span>] <span class="co"># extracts the SES/slope EB estimates from the list</span></span>
+<span id="cb80-6"><a href="06-module-6.html#cb80-6" tabindex="-1"></a></span>
+<span id="cb80-7"><a href="06-module-6.html#cb80-7" tabindex="-1"></a><span class="fu">bind_cols</span>(empirical_bayes_intercepts, empirical_bayes_slopes) <span class="sc">%&gt;%</span>  <span class="co"># combine EB slopes and intercepts into a useable dataframe for graphing</span></span>
+<span id="cb80-8"><a href="06-module-6.html#cb80-8" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> ses, <span class="at">y =</span> <span class="st">`</span><span class="at">(Intercept)</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb80-9"><a href="06-module-6.html#cb80-9" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 <p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
 <p>Looks like we expect! That’s a covariance of -1.58 visualized.</p>
 <p>Finally, note that we get a convergence issue with this model: <code>boundary (singular) fit: see help('isSingular')</code>. For now, we’re going to ignore that. In Chapter 7 we will focus on estimation issues and troubleshooting.</p>
@@ -529,7 +537,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>What if we want to know how school type affects the slope of <code>ses</code>, though? In other words, is there a difference in the effect of SES on math achievement in a private or public school? We can answer this question by adding school type as a predictor of SES slopes and create a cross-level interaction. This is an interaction because it allows us to estimate a different slope based on school type, whereas our previous model assumed the relationship between SES and math achievement was the same for both school types. The logic is the same as in regular regression.</p>
-<p>We can describe this model with the following equations. Note that we are also including our slope random effect (<span class="math inline">\(\tau_1^2\)</span> / <span class="math inline">\(U_{1j}\)</span>), which allows the slopes to vary across schools. This is logically consistent with the idea that slopes might vary due to school type, but not required. We could run this model without random slopes.</p>
+<p>We can describe this model with the following equations. Note that we are also including our slope random effect variance (<span class="math inline">\(\tau_1^2\)</span> / <span class="math inline">\(U_{1j}\)</span>), which allows the slopes to vary across schools. This is logically consistent with the idea that slopes might vary due to school type, but not required. We could run this model without random slopes.</p>
 <table>
 <colgroup>
 <col width="44%" />
@@ -560,22 +568,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<p>With this model, we will be estimating 8 parameters — 4 fixed effects, 3 random effects, and a random effect covariance:</p>
+<p>With this model, we will be estimating 8 parameters — 4 fixed effects, 3 random effect variances, and a random effect covariance:</p>
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\(\gamma_{00}\)</span>: the fixed effect for the intercept, controlling for <code>ses</code> and <code>public</code>;</li>
 <li><span class="math inline">\(\gamma_{01}\)</span>: the fixed effect for the slope of <code>public</code>, controlling for <code>ses</code>;</li>
 <li><span class="math inline">\(\gamma_{10}\)</span>: the fixed effect for the slope of <code>ses</code>, controlling for <code>public</code>;</li>
 <li><span class="math inline">\(\gamma_{11}\)</span>: the fixed effect for the effect of <code>public</code> on the slope of <code>ses</code>;</li>
-<li><span class="math inline">\(\sigma^2\)</span>: a random effect capturing the variance of students around their school’s mean math achievement, controlling for <code>ses</code> and <code>public</code>;</li>
-<li><span class="math inline">\(\tau_0^2\)</span>: a random effect for the intercept capturing the variance of schools around the intercept, controlling for <code>ses</code> and <code>public</code>;</li>
-<li><span class="math inline">\(\tau_1^2\)</span>: a random effect for the slope capturing variance of school slopes around the grand mean slope, controlling for <code>ses</code> and <code>public</code>;</li>
+<li><span class="math inline">\(\sigma^2\)</span>: a random effect variance capturing the variance of students around their school’s mean math achievement, controlling for <code>ses</code> and <code>public</code>;</li>
+<li><span class="math inline">\(\tau_0^2\)</span>: a random effect variance for the intercept capturing the variance of schools around the intercept, controlling for <code>ses</code> and <code>public</code>;</li>
+<li><span class="math inline">\(\tau_1^2\)</span>: a random effect variance for the slope capturing variance of school slopes around the grand mean slope, controlling for <code>ses</code> and <code>public</code>;</li>
 <li><span class="math inline">\(\tau_{01}\)</span>: a random effect covariance capturing how the intercept variance and slope variance relate to each other.</li>
 </ol>
 <p>A cross-level interaction is interpreted like an interaction in regular regression: the effect of school type on the effect of SES on math achievement. Like in regular regression interactions, it can also be interpreted as the effect of SES on school type on math achievement. And as in regular regression, either interpretation is accurate, but one of the other might be more intuitive for a specific research question.</p>
 <p>Let’s run our model:</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="06-module-6.html#cb81-1" aria-hidden="true" tabindex="-1"></a>crosslevel_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">+</span> public <span class="sc">+</span> ses<span class="sc">:</span>public <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> ses<span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="06-module-6.html#cb81-1" tabindex="-1"></a>crosslevel_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">+</span> public <span class="sc">+</span> ses<span class="sc">:</span>public <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> ses<span class="sc">|</span>schcode), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="06-module-6.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(crosslevel_model)</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="06-module-6.html#cb83-1" tabindex="-1"></a><span class="fu">summary</span>(crosslevel_model)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
 ## Formula: math ~ 1 + ses + public + ses:public + (1 + ses | schcode)
 ##    Data: data
@@ -594,11 +602,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Number of obs: 6871, groups:  schcode, 419
 ## 
 ## Fixed effects:
-##               Estimate Std. Error         df t value            Pr(&gt;|t|)    
-## (Intercept)   57.72440    0.25183  382.39815 229.216 &lt;0.0000000000000002 ***
-## ses            4.42383    0.27427 1283.55622  16.130 &lt;0.0000000000000002 ***
-## public        -0.02632    0.29472  387.41741  -0.089              0.9289    
-## ses:public    -0.62520    0.31957 1363.95273  -1.956              0.0506 .  
+##               Estimate Std. Error         df t value Pr(&gt;|t|)    
+## (Intercept)   57.72440    0.25183  382.39815 229.216   &lt;2e-16 ***
+## ses            4.42383    0.27427 1283.55622  16.130   &lt;2e-16 ***
+## public        -0.02632    0.29472  387.41741  -0.089   0.9289    
+## ses:public    -0.62520    0.31957 1363.95273  -1.956   0.0506 .  
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -612,9 +620,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Note that we can include interactions in two ways. Here, we are using verbose code, listing the individual effects (<code>ses</code> and <code>public</code>) and indicating their interaction with <code>ses:public</code>. You can also capture all of this information with an asterisk: <code>ses*public</code> is equivalent to <code>ses + public + ses:public</code>.</p>
 <p>We have a convergence warning again: <code>boundary (singular) fit: see help('isSingular')</code>, and again we’re going to ignore it for now (see Chapter 7 for a deeper dive into these issues).</p>
 <p>Let’s look at our fixed effects. Per the intercept, the average math achievement across all private schools (<code>public</code> = 0) at mean SES (<code>ses</code> = 0) is 57.72. A one-standard-deviation increase in <code>ses</code> across all private schools is associated with a 4.42-point increase in math achievement. Public schools (<code>public</code> = 1) at mean <code>ses</code> have a -0.02-point decrease on average in math achievement relative to private schools. The effect of <code>ses</code> on math achievement is lower in public schools by -0.63 points on average, which quantifies the interaction. We can calculate the expected slope for SES in public schools by using these coefficients: <code>4.42 - 0.63 = 3.79</code>, so a one-unit increase in SES in public schools is associated with a 3.79-unit increase in math achievement, less of an affect than at private schools.</p>
-<p>From our random effects, the variance term describing how schools vary around the intercept (at mean SES at public schools) is 3.21, the variance of school slopes around the grand mean is 0.80, and the variance term describing how students vary around their school means is 62.56. We can see our random effect covariance of -1.6 with our Tau matrix, indicating that schools with higher values of mean math achievement at the intercept of <code>ses = 0</code> have lower slopes of <code>ses</code>.</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="06-module-6.html#cb85-1" aria-hidden="true" tabindex="-1"></a>Matrix<span class="sc">::</span><span class="fu">bdiag</span>(<span class="fu">VarCorr</span>(crosslevel_model))</span></code></pre></div>
-<pre><code>## 2 x 2 sparse Matrix of class &quot;dgCMatrix&quot;
+<p>From our random effect variances, the variance term describing how schools vary around the intercept (at mean SES at public schools) is 3.21, the variance of school slopes around the grand mean is 0.80, and the variance term describing how students vary around their school means is 62.56. We can see our random effect covariance of -1.6 with our Tau matrix, indicating that schools with higher values of mean math achievement at the intercept of <code>ses = 0</code> have lower slopes of <code>ses</code>.</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="06-module-6.html#cb85-1" tabindex="-1"></a>Matrix<span class="sc">::</span><span class="fu">bdiag</span>(<span class="fu">VarCorr</span>(crosslevel_model))</span></code></pre></div>
+<pre><code>## 2 x 2 sparse Matrix of class &quot;dsCMatrix&quot;
 ##             (Intercept)        ses
 ## (Intercept)    3.214435 -1.6048897
 ## ses           -1.604890  0.8012825</code></pre>

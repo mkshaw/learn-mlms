@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 9 Multilevel Modelling with Repeated Measures Data | Introduction to Multilevel Modelling</title>
   <meta name="description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and critically analyze their use in the literature." />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 9 Multilevel Modelling with Repeated Measures Data | Introduction to Multilevel Modelling" />
   <meta property="og:type" content="book" />
@@ -91,7 +91,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -104,7 +104,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -118,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -345,9 +349,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="load-dependencies" class="section level3 hasAnchor" number="9.2.1">
 <h3><span class="header-section-number">9.2.1</span> Load Dependencies<a href="09-module-9.html#load-dependencies" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For this data demo, we will use the following packages:</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="09-module-9.html#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4) <span class="co"># for multilevel models</span></span>
-<span id="cb128-2"><a href="09-module-9.html#cb128-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest) <span class="co"># for p-values</span></span>
-<span id="cb128-3"><a href="09-module-9.html#cb128-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(performance) <span class="co"># for ICC</span></span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="09-module-9.html#cb126-1" tabindex="-1"></a><span class="fu">library</span>(lme4) <span class="co"># for multilevel models</span></span>
+<span id="cb126-2"><a href="09-module-9.html#cb126-2" tabindex="-1"></a><span class="fu">library</span>(lmerTest) <span class="co"># for p-values</span></span>
+<span id="cb126-3"><a href="09-module-9.html#cb126-3" tabindex="-1"></a><span class="fu">library</span>(performance) <span class="co"># for ICC</span></span></code></pre></div>
 </div>
 <div id="review-of-multilevel-modelling-procedure" class="section level3 hasAnchor" number="9.2.2">
 <h3><span class="header-section-number">9.2.2</span> Review of Multilevel Modelling Procedure<a href="09-module-9.html#review-of-multilevel-modelling-procedure" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -445,9 +449,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="our-data-reaction-time" class="section level3 hasAnchor" number="9.2.4">
 <h3><span class="header-section-number">9.2.4</span> Our Data: Reaction Time<a href="09-module-9.html#our-data-reaction-time" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The data used in this module are used as an example in Hoffman and Rovine (2007). The article and supporting materials can be found here: <a href="http://www.lesahoffman.com/Research/MLM.html" class="uri">http://www.lesahoffman.com/Research/MLM.html</a></p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="09-module-9.html#cb129-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;hoffman2007.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="09-module-9.html#cb127-1" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;hoffman2007.csv&#39;</span>)</span></code></pre></div>
 <p>Let’s look at our data:</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="09-module-9.html#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="09-module-9.html#cb128-1" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
 <pre><code>##   X id sex age    NAME rt_sec Item meaning salience     lg_rt oldage yrs65 c_mean c_sal
 ## 1 1  1   1  20 rt_sec1  4.662    1     3.5      4.0 1.5394445      0     0    0.5   1.0
 ## 2 2  1   1  20 rt_sec2  6.660    2     0.0      3.0 1.8961195      0     0   -3.0   0.0
@@ -460,8 +464,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="random-intercept-onlynull-model" class="section level3 hasAnchor" number="9.2.5">
 <h3><span class="header-section-number">9.2.5</span> Random-Intercept-Only/Null Model<a href="09-module-9.html#random-intercept-onlynull-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s estimate our null model with FIML as our estimator and calculate the ICC:</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="09-module-9.html#cb132-1" aria-hidden="true" tabindex="-1"></a>null_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>) <span class="co"># note that REML = FALSE</span></span>
-<span id="cb132-2"><a href="09-module-9.html#cb132-2" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(null_model)</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="09-module-9.html#cb130-1" tabindex="-1"></a>null_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>) <span class="co"># note that REML = FALSE</span></span>
+<span id="cb130-2"><a href="09-module-9.html#cb130-2" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(null_model)</span></code></pre></div>
 <pre><code>## # Intraclass Correlation Coefficient
 ## 
 ##     Adjusted ICC: 0.252
@@ -511,14 +515,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\(\gamma_{00}\)</span>: the fixed effect for the intercept, controlling for <code>c_mean</code> and <code>c_sal</code>;</li>
 <li><span class="math inline">\(\gamma_{10}\)</span>: the fixed effect for the slope of <code>c_mean</code>, controlling for <code>c_sal</code>. This represents how meaning affects a person’s reaction time — do people respond more quickly or slowly to photos with changes that are related to driving a car (perhaps because they’re often driving and are attuned to changes in the environment when operating a car)?</li>
 <li><span class="math inline">\(\gamma_{20}\)</span>: the fixed effect for the slope of <code>c_sal</code>, controlling for <code>c_mean</code>. This represents how salience affects a person’s reaction time — do people respond more quickly or slowly to photos with more obvious changes?</li>
-<li><span class="math inline">\(\tau_0^2\)</span>: a random effect for the intercept capturing the variance of people around the intercept, controlling for <code>c_mean</code> and <code>c_sal</code>;</li>
-<li><span class="math inline">\(\sigma^2\)</span>: a random effect capturing the variance of people around their own mean log reaction time, controlling for <code>c_mean</code> and <code>c_sal</code>.</li>
+<li><span class="math inline">\(\tau_0^2\)</span>: a random effect variance for the intercept capturing the variance of people around the intercept, controlling for <code>c_mean</code> and <code>c_sal</code>;</li>
+<li><span class="math inline">\(\sigma^2\)</span>: a random effect variance capturing the variance of people around their own mean log reaction time, controlling for <code>c_mean</code> and <code>c_sal</code>.</li>
 </ol>
 <p>Let’s run the model with FIML as our estimator:</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="09-module-9.html#cb134-1" aria-hidden="true" tabindex="-1"></a>l1_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> c_mean <span class="sc">+</span> c_sal <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb134-2"><a href="09-module-9.html#cb134-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(l1_model)</span></code></pre></div>
-<pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [
-## lmerModLmerTest]
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="09-module-9.html#cb132-1" tabindex="-1"></a>l1_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> c_mean <span class="sc">+</span> c_sal <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb132-2"><a href="09-module-9.html#cb132-2" tabindex="-1"></a><span class="fu">summary</span>(l1_model)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
 ## Formula: lg_rt ~ 1 + c_mean + c_sal + (1 | id)
 ##    Data: data
 ## 
@@ -536,10 +539,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Number of obs: 7646, groups:  id, 153
 ## 
 ## Fixed effects:
-##                Estimate  Std. Error          df t value            Pr(&gt;|t|)    
-## (Intercept)    1.605254    0.034828  153.300086   46.09 &lt;0.0000000000000002 ***
-## c_mean        -0.051528    0.004304 7493.037128  -11.97 &lt;0.0000000000000002 ***
-## c_sal         -0.132320    0.007435 7493.183164  -17.80 &lt;0.0000000000000002 ***
+##               Estimate Std. Error         df t value Pr(&gt;|t|)    
+## (Intercept)  1.605e+00  3.483e-02  1.533e+02   46.09   &lt;2e-16 ***
+## c_mean      -5.153e-02  4.304e-03  7.493e+03  -11.97   &lt;2e-16 ***
+## c_sal       -1.323e-01  7.435e-03  7.493e+03  -17.80   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -549,14 +552,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## c_sal  -0.015 -0.219</code></pre>
 <p>The intercept of 1.61 is the mean log reaction time across all people at average values of meaning and salience. A one-unit increase in meaning is associated with a decrease in log reaction time of 0.05 (i.e., a faster reaction time), at the average level of salience. A one-unit increase in salience is associated with a decrease in log reaction time of 0.13 at the average level of meaning. All coefficients are significant. The term describing how people vary around the grand mean intercept is 0.18. The term describing how people vary around their own intercept is 0.48.</p>
 <p>Does this model have significantly less deviance (i.e., better fit) than the null model alone? Let’s use a deviance test to check. Note that we can compare the null and level-1 models because we used FIML as our estimator and they are nested (i.e., all variables in the level-1 model are in the null model).</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="09-module-9.html#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(null_model, l1_model)</span></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="09-module-9.html#cb134-1" tabindex="-1"></a><span class="fu">anova</span>(null_model, l1_model)</span></code></pre></div>
 <pre><code>## Data: data
 ## Models:
 ## null_model: lg_rt ~ 1 + (1 | id)
 ## l1_model: lg_rt ~ 1 + c_mean + c_sal + (1 | id)
-##            npar   AIC   BIC  logLik deviance  Chisq Df            Pr(&gt;Chisq)    
-## null_model    3 17082 17103 -8537.9    17076                                    
-## l1_model      5 16526 16561 -8257.9    16516 559.94  2 &lt; 0.00000000000000022 ***
+##            npar   AIC   BIC  logLik deviance  Chisq Df Pr(&gt;Chisq)    
+## null_model    3 17082 17103 -8537.9    17076                         
+## l1_model      5 16526 16561 -8257.9    16516 559.94  2  &lt; 2.2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>The level-1 model does have significantly less deviance (16516 compared to 17076 for the null model), so is a better model. Hooray!</p>
@@ -603,17 +606,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\(\gamma_{00}\)</span>: the fixed effect for the intercept, controlling for <code>c_mean</code> and <code>c_sal</code>;</li>
 <li><span class="math inline">\(\gamma_{10}\)</span>: the fixed effect for the slope of <code>c_mean</code>, controlling for <code>c_sal</code>;</li>
 <li><span class="math inline">\(\gamma_{20}\)</span>: the fixed effect for the slope of <code>c_sal</code>, controlling for <code>c_mean</code>;</li>
-<li><span class="math inline">\(\tau_0^2\)</span>: a random effect for the intercept capturing the variance of people around the intercept, controlling for <code>c_mean</code> and <code>c_sal</code>;</li>
-<li><span class="math inline">\(\tau_1^2\)</span>: a random effect capturing how people’s slopes for <code>c_mean</code> vary around the grand mean slope, controlling for <code>c_sal</code>;</li>
-<li><span class="math inline">\(\tau_2^2\)</span>: a random effect capturing how people’s slopes for <code>c_sal</code> vary around the grand mean slope, controlling for <code>c_mean</code>;</li>
-<li><span class="math inline">\(\sigma^2\)</span>: a random effect capturing the variance of people around their own mean log reaction time, controlling for <code>c_mean</code> and <code>c_sal</code>.</li>
+<li><span class="math inline">\(\tau_0^2\)</span>: a random effect variance for the intercept capturing the variance of people around the intercept, controlling for <code>c_mean</code> and <code>c_sal</code>;</li>
+<li><span class="math inline">\(\tau_1^2\)</span>: a random effect variance capturing how people’s slopes for <code>c_mean</code> vary around the grand mean slope, controlling for <code>c_sal</code>;</li>
+<li><span class="math inline">\(\tau_2^2\)</span>: a random effect variance capturing how people’s slopes for <code>c_sal</code> vary around the grand mean slope, controlling for <code>c_mean</code>;</li>
+<li><span class="math inline">\(\sigma^2\)</span>: a random effect variance capturing the variance of people around their own mean log reaction time, controlling for <code>c_mean</code> and <code>c_sal</code>.</li>
 </ol>
 <p>Let’s run our model with random slope effects (but no covariances) in R:</p>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="09-module-9.html#cb138-1" aria-hidden="true" tabindex="-1"></a>l1_random <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> c_mean <span class="sc">+</span> c_sal <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> c_mean<span class="sc">|</span>id) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> c_sal<span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="09-module-9.html#cb136-1" tabindex="-1"></a>l1_random <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> c_mean <span class="sc">+</span> c_sal <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> c_mean<span class="sc">|</span>id) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> c_sal<span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="09-module-9.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(l1_random)</span></code></pre></div>
-<pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [
-## lmerModLmerTest]
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="09-module-9.html#cb138-1" tabindex="-1"></a><span class="fu">summary</span>(l1_random)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
 ## Formula: lg_rt ~ 1 + c_mean + c_sal + (1 | id) + (0 + c_mean | id) + (0 +      c_sal | id)
 ##    Data: data
 ## 
@@ -625,18 +627,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## -2.5320 -0.7287 -0.1087  0.6142  3.8842 
 ## 
 ## Random effects:
-##  Groups   Name        Variance       Std.Dev.  
-##  id       (Intercept) 0.175630278350 0.41908266
-##  id.1     c_mean      0.000000003766 0.00006137
-##  id.2     c_sal       0.000685267135 0.02617761
-##  Residual             0.477680830140 0.69114458
+##  Groups   Name        Variance  Std.Dev. 
+##  id       (Intercept) 1.756e-01 4.191e-01
+##  id.1     c_mean      3.766e-09 6.137e-05
+##  id.2     c_sal       6.853e-04 2.618e-02
+##  Residual             4.777e-01 6.911e-01
 ## Number of obs: 7646, groups:  id, 153
 ## 
 ## Fixed effects:
-##                Estimate  Std. Error          df t value            Pr(&gt;|t|)    
-## (Intercept)    1.605250    0.034825  153.308074   46.09 &lt;0.0000000000000002 ***
-## c_mean        -0.051539    0.004301 7337.355821  -11.98 &lt;0.0000000000000002 ***
-## c_sal         -0.132294    0.007724  169.044391  -17.13 &lt;0.0000000000000002 ***
+##               Estimate Std. Error         df t value Pr(&gt;|t|)    
+## (Intercept)  1.605e+00  3.483e-02  1.533e+02   46.09   &lt;2e-16 ***
+## c_mean      -5.154e-02  4.301e-03  7.337e+03  -11.98   &lt;2e-16 ***
+## c_sal       -1.323e-01  7.724e-03  1.690e+02  -17.13   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -647,10 +649,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## optimizer (nloptwrap) convergence code: 0 (OK)
 ## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
 <p>We get an estimation error! Recall that singularity occurs when a variance term is close to zero or a correlation between variance terms is near 1 (high multicollinearity). Looking at our output, the variance terms for meaning and salience both look quite small. Let’s try to address our estimation issue by removing the smaller of the two, the random effect for <code>c_mean</code>.</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="09-module-9.html#cb142-1" aria-hidden="true" tabindex="-1"></a>l1_random_without_cmean <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> c_mean <span class="sc">+</span> c_sal <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> c_sal<span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb142-2"><a href="09-module-9.html#cb142-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(l1_random_without_cmean)</span></code></pre></div>
-<pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [
-## lmerModLmerTest]
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="09-module-9.html#cb140-1" tabindex="-1"></a>l1_random_without_cmean <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> c_mean <span class="sc">+</span> c_sal <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id) <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> c_sal<span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb140-2"><a href="09-module-9.html#cb140-2" tabindex="-1"></a><span class="fu">summary</span>(l1_random_without_cmean)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
 ## Formula: lg_rt ~ 1 + c_mean + c_sal + (1 | id) + (0 + c_sal | id)
 ##    Data: data
 ## 
@@ -669,10 +670,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Number of obs: 7646, groups:  id, 153
 ## 
 ## Fixed effects:
-##                Estimate  Std. Error          df t value            Pr(&gt;|t|)    
-## (Intercept)    1.605250    0.034826  153.298193   46.09 &lt;0.0000000000000002 ***
-## c_mean        -0.051539    0.004301 7351.748763  -11.98 &lt;0.0000000000000002 ***
-## c_sal         -0.132294    0.007724  168.954450  -17.13 &lt;0.0000000000000002 ***
+##               Estimate Std. Error         df t value Pr(&gt;|t|)    
+## (Intercept)  1.605e+00  3.483e-02  1.533e+02   46.09   &lt;2e-16 ***
+## c_mean      -5.154e-02  4.301e-03  7.352e+03  -11.98   &lt;2e-16 ***
+## c_sal       -1.323e-01  7.724e-03  1.690e+02  -17.13   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -680,8 +681,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##        (Intr) c_mean
 ## c_mean  0.044       
 ## c_sal  -0.014 -0.211</code></pre>
-<p>That took care of our singularity issue. However, the random effect for salience still looks very small. Let’s conduct a deviance test to see if including the random effect reduces deviance at all (that is, whether it is worth it to estimate).</p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="09-module-9.html#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(l1_random, l1_random_without_cmean)</span></code></pre></div>
+<p>That took care of our singularity issue. However, the random effect variance for salience still looks very small. Let’s conduct a deviance test to see if including the random effect reduces deviance at all (that is, whether it is worth it to estimate).</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="09-module-9.html#cb142-1" tabindex="-1"></a><span class="fu">anova</span>(l1_random, l1_random_without_cmean)</span></code></pre></div>
 <pre><code>## Data: data
 ## Models:
 ## l1_random_without_cmean: lg_rt ~ 1 + c_mean + c_sal + (1 | id) + (0 + c_sal | id)
@@ -735,13 +736,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\(\gamma_{20}\)</span>: the fixed effect for the slope of <code>c_sal</code>, controlling for <code>c_mean</code>;</li>
 <li><span class="math inline">\(\gamma_{01}\)</span>: the fixed effect for the slope of <code>oldage</code>, controlling for <code>sex</code>, <code>c_mean</code>, and <code>c_sal</code>;</li>
 <li><span class="math inline">\(\gamma_{02}\)</span>: the fixed effect for the slope of <code>sex</code>, controlling for <code>oldage</code>, <code>c_mean</code> and <code>c_sal</code>;</li>
-<li><span class="math inline">\(\tau_0^2\)</span>: a random effect capturing how people’s mean log reaction times vary around the grand mean log reaction time, controlling for <code>c_mean</code>, <code>c_sal</code>, <code>oldage</code>, and <code>sex</code>;</li>
-<li><span class="math inline">\(\sigma^2\)</span>: a random effect capturing the variance of people around their own mean log reaction time, controlling for <code>c_mean</code>, <code>c_sal</code>, <code>oldage</code>, and <code>sex</code>.</li>
+<li><span class="math inline">\(\tau_0^2\)</span>: a random effect variance capturing how people’s mean log reaction times vary around the grand mean log reaction time, controlling for <code>c_mean</code>, <code>c_sal</code>, <code>oldage</code>, and <code>sex</code>;</li>
+<li><span class="math inline">\(\sigma^2\)</span>: a random effect variance capturing the variance of people around their own mean log reaction time, controlling for <code>c_mean</code>, <code>c_sal</code>, <code>oldage</code>, and <code>sex</code>.</li>
 </ol>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="09-module-9.html#cb146-1" aria-hidden="true" tabindex="-1"></a>l2_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> c_mean <span class="sc">+</span> c_sal <span class="sc">+</span> oldage <span class="sc">+</span> sex <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb146-2"><a href="09-module-9.html#cb146-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(l2_model)</span></code></pre></div>
-<pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [
-## lmerModLmerTest]
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="09-module-9.html#cb144-1" tabindex="-1"></a>l2_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> c_mean <span class="sc">+</span> c_sal <span class="sc">+</span> oldage <span class="sc">+</span> sex <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb144-2"><a href="09-module-9.html#cb144-2" tabindex="-1"></a><span class="fu">summary</span>(l2_model)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
 ## Formula: lg_rt ~ 1 + c_mean + c_sal + oldage + sex + (1 | id)
 ##    Data: data
 ## 
@@ -759,12 +759,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Number of obs: 7646, groups:  id, 153
 ## 
 ## Fixed effects:
-##                Estimate  Std. Error          df t value            Pr(&gt;|t|)    
-## (Intercept)    1.280554    0.025655  153.175094  49.915 &lt;0.0000000000000002 ***
-## c_mean        -0.051502    0.004304 7494.186660 -11.965 &lt;0.0000000000000002 ***
-## c_sal         -0.132340    0.007434 7494.765418 -17.801 &lt;0.0000000000000002 ***
-## oldage         0.799398    0.030875  153.209862  25.891 &lt;0.0000000000000002 ***
-## sex            0.044666    0.030451  152.467294   1.467               0.144    
+##               Estimate Std. Error         df t value Pr(&gt;|t|)    
+## (Intercept)  1.281e+00  2.566e-02  1.532e+02  49.915   &lt;2e-16 ***
+## c_mean      -5.150e-02  4.304e-03  7.494e+03 -11.965   &lt;2e-16 ***
+## c_sal       -1.323e-01  7.434e-03  7.495e+03 -17.801   &lt;2e-16 ***
+## oldage       7.994e-01  3.087e-02  1.532e+02  25.891   &lt;2e-16 ***
+## sex          4.467e-02  3.045e-02  1.525e+02   1.467    0.144    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -776,11 +776,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## sex    -0.681  0.001 -0.002 -0.075</code></pre>
 <p>The intercept of 1.28 is the mean log reaction time across all people at average values of meaning and salience for men (<code>sex</code> = 0) who are younger than 40 (<code>oldage</code> = 40). A one-unit increase in meaning is associated with a decrease in log reaction time of 0.05 (i.e., a faster reaction time), controlling for other variables. A one-unit increase in salience is associated with a decrease in log reaction time of 0.13 controlling for other variables. People older than 40 have 0.80 units longer of a log reaction time on average, controlling for other variables. Women have 0.04 unit-slower log reaction times on average, controlling for other variables. All coefficients are significant except for <code>sex</code>. The term describing how people vary around the grand mean intercept is 0.02. The term describing how people vary around their own intercept is 0.48.</p>
 <p>Let’s run a model without the non-significant <code>sex</code> predictor and conduct a deviance test to see if the model fit is negatively impacted.</p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="09-module-9.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="co"># model</span></span>
-<span id="cb148-2"><a href="09-module-9.html#cb148-2" aria-hidden="true" tabindex="-1"></a>l2_model_no_sex <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> c_mean <span class="sc">+</span> c_sal <span class="sc">+</span> oldage <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb148-3"><a href="09-module-9.html#cb148-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb148-4"><a href="09-module-9.html#cb148-4" aria-hidden="true" tabindex="-1"></a><span class="co"># deviance test</span></span>
-<span id="cb148-5"><a href="09-module-9.html#cb148-5" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(l2_model, l2_model_no_sex)</span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="09-module-9.html#cb146-1" tabindex="-1"></a><span class="co"># model</span></span>
+<span id="cb146-2"><a href="09-module-9.html#cb146-2" tabindex="-1"></a>l2_model_no_sex <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> c_mean <span class="sc">+</span> c_sal <span class="sc">+</span> oldage <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb146-3"><a href="09-module-9.html#cb146-3" tabindex="-1"></a></span>
+<span id="cb146-4"><a href="09-module-9.html#cb146-4" tabindex="-1"></a><span class="co"># deviance test</span></span>
+<span id="cb146-5"><a href="09-module-9.html#cb146-5" tabindex="-1"></a><span class="fu">anova</span>(l2_model, l2_model_no_sex)</span></code></pre></div>
 <pre><code>## Data: data
 ## Models:
 ## l2_model_no_sex: lg_rt ~ 1 + c_mean + c_sal + oldage + (1 | id)
@@ -834,13 +834,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\(\gamma_{20}\)</span>: the fixed effect for the slope of <code>c_sal</code>, controlling for <code>c_mean</code> and <code>oldage</code>;</li>
 <li><span class="math inline">\(\gamma_{01}\)</span>: the fixed effect for the slope of <code>oldage</code>, controlling for <code>c_mean</code> and <code>c_sal</code>;</li>
 <li><span class="math inline">\(\gamma_{11}\)</span>: the fixed effect for the cross-level interaction of <code>oldage</code> with <code>c_mean</code>, controlling for <code>c_sal</code>;</li>
-<li><span class="math inline">\(\tau_0^2\)</span>: a random effect capturing how people’s mean log reaction times vary around the grand mean log reaction time, controlling for <code>c_mean</code>, <code>c_sal</code>, and <code>oldage</code>;</li>
-<li><span class="math inline">\(\sigma^2\)</span>: a random effect capturing the variance of people around their own mean log reaction time, controlling for <code>c_mean</code>, <code>c_sal</code>, and `oldage``.</li>
+<li><span class="math inline">\(\tau_0^2\)</span>: a random effect variance capturing how people’s mean log reaction times vary around the grand mean log reaction time, controlling for <code>c_mean</code>, <code>c_sal</code>, and <code>oldage</code>;</li>
+<li><span class="math inline">\(\sigma^2\)</span>: a random effect variance capturing the variance of people around their own mean log reaction time, controlling for <code>c_mean</code>, <code>c_sal</code>, and `oldage``.</li>
 </ol>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="09-module-9.html#cb150-1" aria-hidden="true" tabindex="-1"></a>crosslevel_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> c_mean <span class="sc">+</span> c_sal <span class="sc">+</span> oldage <span class="sc">+</span> oldage<span class="sc">:</span>c_mean <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb150-2"><a href="09-module-9.html#cb150-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(crosslevel_model)</span></code></pre></div>
-<pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [
-## lmerModLmerTest]
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="09-module-9.html#cb148-1" tabindex="-1"></a>crosslevel_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lg_rt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> c_mean <span class="sc">+</span> c_sal <span class="sc">+</span> oldage <span class="sc">+</span> oldage<span class="sc">:</span>c_mean <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id), <span class="at">data =</span> data, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb148-2"><a href="09-module-9.html#cb148-2" tabindex="-1"></a><span class="fu">summary</span>(crosslevel_model)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
 ## Formula: lg_rt ~ 1 + c_mean + c_sal + oldage + oldage:c_mean + (1 | id)
 ##    Data: data
 ## 
@@ -858,12 +857,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Number of obs: 7646, groups:  id, 153
 ## 
 ## Fixed effects:
-##                  Estimate  Std. Error          df t value             Pr(&gt;|t|)    
-## (Intercept)      1.301459    0.018951  154.490610  68.674 &lt; 0.0000000000000002 ***
-## c_mean          -0.064989    0.005337 7493.066384 -12.176 &lt; 0.0000000000000002 ***
-## c_sal           -0.132459    0.007425 7494.852621 -17.838 &lt; 0.0000000000000002 ***
-## oldage           0.815386    0.031128  156.060542  26.194 &lt; 0.0000000000000002 ***
-## c_mean:oldage    0.037168    0.008722 7495.089797   4.261            0.0000206 ***
+##                 Estimate Std. Error         df t value Pr(&gt;|t|)    
+## (Intercept)    1.301e+00  1.895e-02  1.545e+02  68.674  &lt; 2e-16 ***
+## c_mean        -6.499e-02  5.337e-03  7.493e+03 -12.176  &lt; 2e-16 ***
+## c_sal         -1.325e-01  7.425e-03  7.495e+03 -17.838  &lt; 2e-16 ***
+## oldage         8.154e-01  3.113e-02  1.561e+02  26.194  &lt; 2e-16 ***
+## c_mean:oldage  3.717e-02  8.722e-03  7.495e+03   4.261 2.06e-05 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 

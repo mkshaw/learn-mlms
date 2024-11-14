@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 Multiple Regression Review | Introduction to Multilevel Modelling</title>
   <meta name="description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and critically analyze their use in the literature." />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 Multiple Regression Review | Introduction to Multilevel Modelling" />
   <meta property="og:type" content="book" />
@@ -91,7 +91,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -104,7 +104,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -118,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -440,15 +444,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="loading-data-and-dependencies" class="section level3 hasAnchor" number="2.2.2">
 <h3><span class="header-section-number">2.2.2</span> Loading Data and Dependencies<a href="02-multiple-regression.html#loading-data-and-dependencies" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Next, let’s load in the data and packages we’ll be using for this demo. We’ll be using the following packages:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="02-multiple-regression.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># for data visualization</span></span>
-<span id="cb1-2"><a href="02-multiple-regression.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr) <span class="co"># for pipe, %&gt;% </span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="02-multiple-regression.html#cb1-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># for data visualization</span></span>
+<span id="cb1-2"><a href="02-multiple-regression.html#cb1-2" tabindex="-1"></a><span class="fu">library</span>(magrittr) <span class="co"># for pipe, %&gt;% </span></span></code></pre></div>
 <p>You must install a given package before you can use it. For example: <code>install.package("ggplot2")</code>. Once you have installed a package, you can load it into any future sessions with <code>library(package_name)</code>.</p>
 <p>Next, let’s read in the data. If you have your code and data in the same directory, you can read the data in as follows:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="02-multiple-regression.html#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;heck2011.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="02-multiple-regression.html#cb2-1" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;heck2011.csv&#39;</span>)</span></code></pre></div>
 <p>This is called a <em>relative</em> file path, because you’re telling your computer where to find the data relative to your current folder (a folder can also be called a “directory”). You could also use an absolute file path that fully states where your files are located, like:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="02-multiple-regression.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.csv</span>(<span class="st">&#39;/Users/maireadshaw/open_mlm_materials/heck2011.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="02-multiple-regression.html#cb3-1" tabindex="-1"></a><span class="fu">read.csv</span>(<span class="st">&#39;/Users/maireadshaw/open_mlm_materials/heck2011.csv&#39;</span>)</span></code></pre></div>
 <p>Let’s calculate some descriptive statistics and compare them to the above table to make sure we read our data in correctly.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="02-multiple-regression.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="02-multiple-regression.html#cb4-1" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code></pre></div>
 <pre><code>##     schcode           Rid               id           female            ses         
 ##  Min.   :  1.0   Min.   : 1.000   Min.   :   1   Min.   :0.0000   Min.   :-2.4140  
 ##  1st Qu.:103.5   1st Qu.: 5.000   1st Qu.:1718   1st Qu.:0.0000   1st Qu.:-0.5180  
@@ -468,8 +472,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="simple-linear-regression" class="section level3 hasAnchor" number="2.2.3">
 <h3><span class="header-section-number">2.2.3</span> Simple Linear Regression<a href="02-multiple-regression.html#simple-linear-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s run a simple linear regression predicting math achievement (<code>math</code>) from socioeconomic status (<code>ses</code>). The syntax for the <code>lm()</code> (linear modelling) command in R is <code>lm(DV ~ IV1 + IV2 + ... + IVn, data = dataframe)</code>.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="02-multiple-regression.html#cb6-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(math <span class="sc">~</span> ses, <span class="at">data =</span> data)</span>
-<span id="cb6-2"><a href="02-multiple-regression.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="02-multiple-regression.html#cb6-1" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(math <span class="sc">~</span> ses, <span class="at">data =</span> data)</span>
+<span id="cb6-2"><a href="02-multiple-regression.html#cb6-2" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = math ~ ses, data = data)
@@ -479,29 +483,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## -31.459  -4.678   1.144   5.355  47.560 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value            Pr(&gt;|t|)    
-## (Intercept) 57.59817    0.09819  586.61 &lt;0.0000000000000002 ***
-## ses          4.25468    0.12566   33.86 &lt;0.0000000000000002 ***
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 57.59817    0.09819  586.61   &lt;2e-16 ***
+## ses          4.25468    0.12566   33.86   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 8.132 on 6869 degrees of freedom
 ## Multiple R-squared:  0.143,  Adjusted R-squared:  0.1429 
-## F-statistic:  1146 on 1 and 6869 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+## F-statistic:  1146 on 1 and 6869 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>The intercept from this regression is 57.60, indicating that students at the mean level of SES within a school (i.e., when SES = 0, given that SES is z-scored) have an average math achievement score of 57.6 out of 100. This score is significantly different from 0, per the p-value.</p>
 <p>Per the coefficient for SES, a one-unit increase in SES is associated with a 4.25-point increase in student math achievement on average, also significant.</p>
 <p>The adjusted R-squared value is 14.3%, indicating that 14.3% of the variance in math achievement is explained by socioeconomic status.</p>
 <p>We can visualize this relationship by graphing a scatter plot.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="02-multiple-regression.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> ses, <span class="at">y =</span> math)) <span class="sc">+</span></span>
-<span id="cb8-2"><a href="02-multiple-regression.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="02-multiple-regression.html#cb8-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> ses, <span class="at">y =</span> math)) <span class="sc">+</span></span>
+<span id="cb8-2"><a href="02-multiple-regression.html#cb8-2" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 <p><img src="open_mlm_materials_files/figure-html/graph-1.png" width="672" /></p>
 <p>Our graph reflects the positive relationship between SES and math achievement (and also shows a lot of math scores collecting around the 60 mark).</p>
 </div>
 <div id="multiple-regression" class="section level3 hasAnchor" number="2.2.4">
 <h3><span class="header-section-number">2.2.4</span> Multiple Regression<a href="02-multiple-regression.html#multiple-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Next, let’s add the available sex variable <code>female</code> (0 = male, 1 = female) as a predictor in our regression and interpret the coefficients and R-squared value.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="02-multiple-regression.html#cb9-1" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(math <span class="sc">~</span> ses <span class="sc">+</span> female, <span class="at">data =</span> data)</span>
-<span id="cb9-2"><a href="02-multiple-regression.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="02-multiple-regression.html#cb9-1" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(math <span class="sc">~</span> ses <span class="sc">+</span> female, <span class="at">data =</span> data)</span>
+<span id="cb9-2"><a href="02-multiple-regression.html#cb9-2" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = math ~ ses + female, data = data)
@@ -511,23 +515,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## -30.923  -4.606   1.176   5.317  48.054 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value             Pr(&gt;|t|)    
-## (Intercept)  58.1330     0.1390 418.093 &lt; 0.0000000000000002 ***
-## ses           4.2269     0.1255  33.679 &lt; 0.0000000000000002 ***
-## female       -1.0626     0.1960  -5.422         0.0000000609 ***
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  58.1330     0.1390 418.093  &lt; 2e-16 ***
+## ses           4.2269     0.1255  33.679  &lt; 2e-16 ***
+## female       -1.0626     0.1960  -5.422 6.09e-08 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 8.115 on 6868 degrees of freedom
 ## Multiple R-squared:  0.1467, Adjusted R-squared:  0.1464 
-## F-statistic: 590.3 on 2 and 6868 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+## F-statistic: 590.3 on 2 and 6868 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>The intercept of 58.13 reflects the average math achievement score (out of 100) for male students (<code>female</code> = 0) at their class average SES (<code>ses</code> = 0). For a one-unit increase in SES, math achievement increases by 4.23 points, controlling for sex. Female students had a math achievement score lower by 1.06 points on average, controlling for SES. SES and sex together explain 14.6% of the variance in math achievement.</p>
 </div>
 <div id="interaction-terms" class="section level3 hasAnchor" number="2.2.5">
 <h3><span class="header-section-number">2.2.5</span> Interaction Terms<a href="02-multiple-regression.html#interaction-terms" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In the previous model, we assumed that the relationship between SES and math achievement was constant for both sexes (homogeneity of regression slopes, i.e., an ANCOVA model). As a final exercise, let’s add an interaction term to our regression between sex and SES.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="02-multiple-regression.html#cb11-1" aria-hidden="true" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(math <span class="sc">~</span> ses <span class="sc">+</span> female <span class="sc">+</span> ses<span class="sc">:</span>female, <span class="at">data =</span> data)</span>
-<span id="cb11-2"><a href="02-multiple-regression.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model3)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="02-multiple-regression.html#cb11-1" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(math <span class="sc">~</span> ses <span class="sc">+</span> female <span class="sc">+</span> ses<span class="sc">:</span>female, <span class="at">data =</span> data)</span>
+<span id="cb11-2"><a href="02-multiple-regression.html#cb11-2" tabindex="-1"></a><span class="fu">summary</span>(model3)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = math ~ ses + female + ses:female, data = data)
@@ -537,19 +541,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## -30.975  -4.596   1.172   5.288  48.265 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value             Pr(&gt;|t|)    
-## (Intercept)  58.1441     0.1393 417.506 &lt; 0.0000000000000002 ***
-## ses           4.0533     0.1775  22.840 &lt; 0.0000000000000002 ***
-## female       -1.0737     0.1961  -5.475         0.0000000454 ***
-## ses:female    0.3472     0.2510   1.383                0.167    
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  58.1441     0.1393 417.506  &lt; 2e-16 ***
+## ses           4.0533     0.1775  22.840  &lt; 2e-16 ***
+## female       -1.0737     0.1961  -5.475 4.54e-08 ***
+## ses:female    0.3472     0.2510   1.383    0.167    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 8.115 on 6867 degrees of freedom
 ## Multiple R-squared:  0.1469, Adjusted R-squared:  0.1465 
-## F-statistic: 394.2 on 3 and 6867 DF,  p-value: &lt; 0.00000000000000022</code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="02-multiple-regression.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Could also succinctly code it as follows:</span></span>
-<span id="cb13-2"><a href="02-multiple-regression.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># lm(math ~ ses*female, data = data)</span></span></code></pre></div>
+## F-statistic: 394.2 on 3 and 6867 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="02-multiple-regression.html#cb13-1" tabindex="-1"></a><span class="co"># Could also succinctly code it as follows:</span></span>
+<span id="cb13-2"><a href="02-multiple-regression.html#cb13-2" tabindex="-1"></a><span class="co"># lm(math ~ ses*female, data = data)</span></span></code></pre></div>
 <p>An interaction captures that the relationship between two variables may differ based on the level of another variable (i.e., different slopes for different folks). An interaction term, A:B, has two possible interpretations:</p>
 <ol style="list-style-type: decimal">
 <li>The effect of A on the effect of B on your outcome Y.</li>
@@ -557,7 +561,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>The <code>ses:female</code> interaction term, .34, represents the effect of being female on the relationship between SES and math achievement. Alternatively, it could represent the effect of SES on the relationship between being female and math achievement. In this case, the latter is a more intuitive interpretation: female students from higher socioeconomic statuses are slightly insulated from the negative relationship between female and math achievement in this sample. As SES increases by one point, the relationship between being female and math achievement becomes less negative, from -1.07 to -.73 (-1.07 + .34). However, this interaction term is not statistically significantly different from zero per the p-value.</p>
 <p>We can see this graphically using the <code>sjPlot</code> package:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="02-multiple-regression.html#cb14-1" aria-hidden="true" tabindex="-1"></a>sjPlot<span class="sc">::</span><span class="fu">plot_model</span>(model3, <span class="at">type =</span> <span class="st">&quot;pred&quot;</span>, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">&quot;ses&quot;</span>, <span class="st">&quot;female&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="02-multiple-regression.html#cb14-1" tabindex="-1"></a>sjPlot<span class="sc">::</span><span class="fu">plot_model</span>(model3, <span class="at">type =</span> <span class="st">&quot;pred&quot;</span>, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">&quot;ses&quot;</span>, <span class="st">&quot;female&quot;</span>))</span></code></pre></div>
 <p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>As we can see, math scores for males (<code>female</code> = 0, the red line) are higher than those for females (<code>female</code> = 1, the blue line) at all levels of SES. However, the difference between males and females shrinks with increasing SES, as indicated by math scores at higher SES levels being closer than those at lower levels of SES.</p>
 <p>The other coefficients have the same interpretations as before. The R-squared indicates that SES and sex account for 14.7% of the variance in math achievement.</p>

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 11 Effect Sizes in Multilevel Models | Introduction to Multilevel Modelling</title>
   <meta name="description" content="This is an introduction to multilevel modelling. We establish a comprehensive foundational understanding of multilevel modelling that prepares readers to recognize when such models are needed, conduct their own, and critically analyze their use in the literature." />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 11 Effect Sizes in Multilevel Models | Introduction to Multilevel Modelling" />
   <meta property="og:type" content="book" />
@@ -91,7 +91,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -104,7 +104,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -118,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -345,12 +349,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="load-data-and-dependencies-6" class="section level3 hasAnchor" number="11.2.1">
 <h3><span class="header-section-number">11.2.1</span> Load Data and Dependencies<a href="11-module-11.html#load-data-and-dependencies-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For this data demo, we will use the following packages:</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="11-module-11.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(r2mlm) <span class="co"># for R-squared values</span></span>
-<span id="cb188-2"><a href="11-module-11.html#cb188-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4) <span class="co"># for multilevel models</span></span>
-<span id="cb188-3"><a href="11-module-11.html#cb188-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest) <span class="co"># for p-values</span></span>
-<span id="cb188-4"><a href="11-module-11.html#cb188-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(performance) <span class="co"># for ICC</span></span></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="11-module-11.html#cb186-1" tabindex="-1"></a><span class="fu">library</span>(r2mlm) <span class="co"># for R-squared values</span></span>
+<span id="cb186-2"><a href="11-module-11.html#cb186-2" tabindex="-1"></a><span class="fu">library</span>(lme4) <span class="co"># for multilevel models</span></span>
+<span id="cb186-3"><a href="11-module-11.html#cb186-3" tabindex="-1"></a><span class="fu">library</span>(lmerTest) <span class="co"># for p-values</span></span>
+<span id="cb186-4"><a href="11-module-11.html#cb186-4" tabindex="-1"></a><span class="fu">library</span>(performance) <span class="co"># for ICC</span></span></code></pre></div>
 <p>We will be using the <code>teachsat</code> dataset included in the <code>r2mlm</code> package. This is simulated data about teacher job satisfaction. Teachers are clustered within schools. The level-1 variables are school-centered salary and control over curriculum, and the level-2 variables are school average salary, school average control over curriculum, and student-teacher ratio.</p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="11-module-11.html#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(teachsat)</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="11-module-11.html#cb187-1" tabindex="-1"></a><span class="fu">data</span>(teachsat)</span></code></pre></div>
 </div>
 <div id="defining-effect-sizes" class="section level3 hasAnchor" number="11.2.2">
 <h3><span class="header-section-number">11.2.2</span> Defining Effect Sizes<a href="11-module-11.html#defining-effect-sizes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -498,60 +502,60 @@ The third and final higher-level term is total variance explained by fixed effec
 <p>We’re estimating 3 parameters here:</p>
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\(\gamma_{00}\)</span>: the fixed effect for the intercept, mean teacher job satisfaction across all schools;</li>
-<li><span class="math inline">\(\tau_0^2\)</span>: a random effect for the intercept capturing the variance of school’s average job satisfaction levels around the intercept;</li>
-<li><span class="math inline">\(\sigma^2\)</span>: a random effect capturing the variance of teachers around their school average job satisfaction.</li>
+<li><span class="math inline">\(\tau_0^2\)</span>: a random effect variance for the intercept capturing the variance of school’s average job satisfaction levels around the intercept;</li>
+<li><span class="math inline">\(\sigma^2\)</span>: a random effect variance capturing the variance of teachers around their school average job satisfaction.</li>
 </ol>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="11-module-11.html#cb190-1" aria-hidden="true" tabindex="-1"></a>null_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(satisfaction <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schoolID), <span class="at">data =</span> teachsat, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb190-2"><a href="11-module-11.html#cb190-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(null_model)</span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="11-module-11.html#cb188-1" tabindex="-1"></a>null_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(satisfaction <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schoolID), <span class="at">data =</span> teachsat, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb188-2"><a href="11-module-11.html#cb188-2" tabindex="-1"></a><span class="fu">summary</span>(null_model)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
 ## Formula: satisfaction ~ 1 + (1 | schoolID)
 ##    Data: teachsat
 ## 
-## REML criterion at convergence: 30098.4
+## REML criterion at convergence: 29426.6
 ## 
 ## Scaled residuals: 
 ##     Min      1Q  Median      3Q     Max 
-## -3.8269 -0.6385  0.0012  0.6435  3.2874 
+## -4.8004 -0.6500 -0.0083  0.6370  3.4825 
 ## 
 ## Random effects:
 ##  Groups   Name        Variance Std.Dev.
-##  schoolID (Intercept) 0.699    0.836   
-##  Residual             1.516    1.231   
+##  schoolID (Intercept) 0.8376   0.9152  
+##  Residual             1.3955   1.1813  
 ## Number of obs: 9000, groups:  schoolID, 300
 ## 
 ## Fixed effects:
-##              Estimate Std. Error        df t value            Pr(&gt;|t|)    
-## (Intercept)   5.99677    0.04998 299.00000     120 &lt;0.0000000000000002 ***
+##              Estimate Std. Error        df t value Pr(&gt;|t|)    
+## (Intercept)   5.99852    0.05429 298.99999   110.5   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<p>The fixed effect for our intercept is 6.00, indicating the average teacher job satisfaction across all schools. The random effect describing how schools vary around that average is 0.70, and the random effect describing how teachers vary around their school averages is 1.52.</p>
+<p>The fixed effect for our intercept is 6.00, indicating the average teacher job satisfaction across all schools. The random effect variance describing how schools vary around that average is 0.70, and the random effect variance describing how teachers vary around their school averages is 1.52.</p>
 <p>Let’s use the automatic <code>r2mlm()</code> function for the first time to calculate how much variance in teacher job satisfaction is explained by the null model.</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="11-module-11.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="fu">r2mlm</span>(null_model)</span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="11-module-11.html#cb190-1" tabindex="-1"></a><span class="fu">r2mlm</span>(null_model)</span></code></pre></div>
 <p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-110-1.png" width="672" /></p>
 <pre><code>## $Decompositions
 ##                     total within between
 ## fixed, within   0.0000000      0      NA
 ## fixed, between  0.0000000     NA       0
 ## slope variation 0.0000000      0      NA
-## mean variation  0.3155468     NA       1
-## sigma2          0.6844532      1      NA
+## mean variation  0.3750827     NA       1
+## sigma2          0.6249173      1      NA
 ## 
 ## $R2s
 ##         total within between
 ## f1  0.0000000      0      NA
 ## f2  0.0000000     NA       0
 ## v   0.0000000      0      NA
-## m   0.3155468     NA       1
+## m   0.3750827     NA       1
 ## f   0.0000000     NA      NA
 ## fv  0.0000000      0      NA
-## fvm 0.3155468     NA      NA</code></pre>
+## fvm 0.3750827     NA      NA</code></pre>
 <p>There are three parts to our output: Decompositions, R2s, and a graph. The decompositions output gives us all of our unique R-squared estimates. The R2s output gives us the unique output plus the higher-level combination output: (1) variance explained by all fixed effects at both level-1 and level-2 (represented by “f”), (2) variance explained by all fixed effects and random slope variances (“fv”), and (3) variance explained by all fixed effects, random slope variances, and the random intercept variance (“fvm”). The graph visualizes the unique R-squared estimates from the Decompositions output and includes a legend.</p>
 <p>Looking at our output, we can see that the variance explained by our random intercept, “m”, is 0.316, or 31.6%. What is this number? It’s the ICC, the variance attributed to school membership! We can use our familiar ICC function to see that it matches our <code>r2mlm</code> output:</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="11-module-11.html#cb194-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(null_model)</span></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="11-module-11.html#cb192-1" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(null_model)</span></code></pre></div>
 <pre><code>## # Intraclass Correlation Coefficient
 ## 
-##     Adjusted ICC: 0.316
-##   Unadjusted ICC: 0.316</code></pre>
+##     Adjusted ICC: 0.375
+##   Unadjusted ICC: 0.375</code></pre>
 <p>Let’s now use <code>r2mlm</code> to fit a larger model predicting job satisfaction from salary (with a random slope), control over curriculum, and student-teacher ratio:</p>
 <table>
 <colgroup>
@@ -593,73 +597,73 @@ The third and final higher-level term is total variance explained by fixed effec
 <li><span class="math inline">\(\gamma_{01}\)</span>: the fixed effect for student-teacher ratio, effect of school-wide class size on job satisfaction controlling for salary and curriculum;</li>
 <li><span class="math inline">\(\gamma_{10}\)</span>: the fixed effect for salary_c, effect of salary on job satisfaction within a school, controlling for curriculum and student-teacher ratio;</li>
 <li><span class="math inline">\(\gamma_{20}\)</span>: the fixed effect for control_c, effect of control over curriculum on job satisfaction within a school, controlling for salary and student-teacher ratio;</li>
-<li><span class="math inline">\(\tau_0^2\)</span>: a random effect for the intercept capturing the variance of schools’ average job satisfaction around the intercept controlling for salary, curriculum, and student-teacher ratio;</li>
-<li><span class="math inline">\(\tau_2^2\)</span>: a random effect for the slope of curriculum control capturing the variance of schools’ curriculum slopes around the grand mean slope controlling for salary and student-teacher ratio;</li>
-<li><span class="math inline">\(\sigma^2\)</span>: a random effect capturing the variance of teachers around their school average job satisfaction, controlling for salary, curriculum, and student-teacher ratio;</li>
+<li><span class="math inline">\(\tau_0^2\)</span>: a random effect variance for the intercept capturing the variance of schools’ average job satisfaction around the intercept controlling for salary, curriculum, and student-teacher ratio;</li>
+<li><span class="math inline">\(\tau_2^2\)</span>: a random effect variance for the slope of curriculum control capturing the variance of schools’ curriculum slopes around the grand mean slope controlling for salary and student-teacher ratio;</li>
+<li><span class="math inline">\(\sigma^2\)</span>: a random effect variance capturing the variance of teachers around their school average job satisfaction, controlling for salary, curriculum, and student-teacher ratio;</li>
 <li><span class="math inline">\(\tau_{02}\)</span>: the covariance between the random intercept and random slope. Do schools with higher job satisfaction intercepts have higher/lower effects of curriculum?</li>
 </ol>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="11-module-11.html#cb196-1" aria-hidden="true" tabindex="-1"></a>full_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(satisfaction <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> control_c <span class="sc">+</span> salary_c <span class="sc">+</span> s_t_ratio <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> control_c <span class="sc">|</span> schoolID), </span>
-<span id="cb196-2"><a href="11-module-11.html#cb196-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> teachsat,</span>
-<span id="cb196-3"><a href="11-module-11.html#cb196-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb196-4"><a href="11-module-11.html#cb196-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(full_model)</span></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="11-module-11.html#cb194-1" tabindex="-1"></a>full_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(satisfaction <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> control_c <span class="sc">+</span> salary_c <span class="sc">+</span> s_t_ratio <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> control_c <span class="sc">|</span> schoolID), </span>
+<span id="cb194-2"><a href="11-module-11.html#cb194-2" tabindex="-1"></a>                 <span class="at">data =</span> teachsat,</span>
+<span id="cb194-3"><a href="11-module-11.html#cb194-3" tabindex="-1"></a>                 <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb194-4"><a href="11-module-11.html#cb194-4" tabindex="-1"></a><span class="fu">summary</span>(full_model)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
 ## Formula: satisfaction ~ 1 + control_c + salary_c + s_t_ratio + (1 + control_c |      schoolID)
 ##    Data: teachsat
 ## 
-## REML criterion at convergence: 24507.4
+## REML criterion at convergence: 24144.6
 ## 
 ## Scaled residuals: 
 ##     Min      1Q  Median      3Q     Max 
-## -4.6115 -0.6275  0.0108  0.6414  3.7958 
+## -3.8197 -0.6599 -0.0026  0.6555  3.8699 
 ## 
 ## Random effects:
 ##  Groups   Name        Variance Std.Dev. Corr
-##  schoolID (Intercept) 0.57478  0.7581       
-##           control_c   0.02826  0.1681   0.07
-##  Residual             0.76561  0.8750       
+##  schoolID (Intercept) 0.66952  0.8182       
+##           control_c   0.02962  0.1721   0.06
+##  Residual             0.72895  0.8538       
 ## Number of obs: 9000, groups:  schoolID, 300
 ## 
 ## Fixed effects:
-##                Estimate  Std. Error          df t value             Pr(&gt;|t|)    
-## (Intercept)    7.186462    0.144236  298.156241  49.824 &lt; 0.0000000000000002 ***
-## control_c      0.311279    0.011361  297.410490  27.398 &lt; 0.0000000000000002 ***
-## salary_c       0.074132    0.001078 8534.742576  68.752 &lt; 0.0000000000000002 ***
-## s_t_ratio     -0.037178    0.004285  297.992425  -8.676 0.000000000000000271 ***
+##               Estimate Std. Error         df t value Pr(&gt;|t|)    
+## (Intercept)  7.364e+00  1.573e-01  2.981e+02  46.819   &lt;2e-16 ***
+## control_c    2.742e-01  1.149e-02  2.957e+02  23.865   &lt;2e-16 ***
+## salary_c     7.295e-02  1.055e-03  8.531e+03  69.115   &lt;2e-16 ***
+## s_t_ratio   -4.119e-02  4.518e-03  2.980e+02  -9.116   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Correlation of Fixed Effects:
 ##           (Intr) cntrl_ slry_c
-## control_c  0.017              
-## salary_c   0.000 -0.004       
-## s_t_ratio -0.951  0.000  0.000</code></pre>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="11-module-11.html#cb198-1" aria-hidden="true" tabindex="-1"></a>Matrix<span class="sc">::</span><span class="fu">bdiag</span>(<span class="fu">VarCorr</span>(full_model))</span></code></pre></div>
-<pre><code>## 2 x 2 sparse Matrix of class &quot;dgCMatrix&quot;
+## control_c  0.016              
+## salary_c   0.000  0.008       
+## s_t_ratio -0.952  0.000  0.000</code></pre>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="11-module-11.html#cb196-1" tabindex="-1"></a>Matrix<span class="sc">::</span><span class="fu">bdiag</span>(<span class="fu">VarCorr</span>(full_model))</span></code></pre></div>
+<pre><code>## 2 x 2 sparse Matrix of class &quot;dsCMatrix&quot;
 ##             (Intercept)   control_c
-## (Intercept) 0.574775228 0.008596084
-## control_c   0.008596084 0.028261325</code></pre>
+## (Intercept) 0.669517927 0.008950089
+## control_c   0.008950089 0.029619351</code></pre>
 <p>The average teaching satisfaction across all schools at average levels of curriculum control and salary and a student-teacher ratio of 0 is 7.19. (Note: this is an example of an uninterpretable zero point because there is no meaning behind a student-teacher ratio of zero. However, for demonstration purposes we’re going to keep going and ignore that issue.) A one-unit increase in control over the curriculum within a school is associated with a 0.31-unit increase in teacher job satisfaction (on the 1-10 scale), controlling for salary and student-teacher ratio. A one-unit increase in salary within school is associated with a 0.07-unit increase in job satisfaction, controlling for curriculum control and student-teacher ratio. A one-unit increase in student-teacher ratio (i.e., one more student per class; all classes in one school have the same number of students) is associated with a 0.03-unit decrease in job satisfaction, at school average salary and control over curriculum.</p>
-<p>Looking at random effects, the term describing how the intercepts vary across schools is 0.57. The term describing how schools’ curriculum-control slopes vary around the grand mean is 0.03. The term describing how teachers’ intercepts vary around the grand mean intercept is 0.77. The covariance between the random intercept and random slope of curriculum is 0.01, so there is a negligible relationship between intercept and slope values.</p>
+<p>Looking at random effect variances, the term describing how the intercepts vary across schools is 0.57. The term describing how schools’ curriculum-control slopes vary around the grand mean is 0.03. The term describing how teachers’ intercepts vary around the grand mean intercept is 0.77. The covariance between the random intercept and random slope of curriculum is 0.01, so there is a negligible relationship between intercept and slope values.</p>
 <p>Recall that interpreting these coefficients in this way — a one-unit change is associated with an X-unit change in the outcome — is also an embodiment of effect sizes. Now let’s also calculate and interpret R-squared for this model.</p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="11-module-11.html#cb200-1" aria-hidden="true" tabindex="-1"></a><span class="fu">r2mlm</span>(full_model)</span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="11-module-11.html#cb198-1" tabindex="-1"></a><span class="fu">r2mlm</span>(full_model)</span></code></pre></div>
 <p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-113-1.png" width="672" /></p>
 <pre><code>## $Decompositions
 ##                      total     within   between
-## fixed, within   0.29643181 0.44026309        NA
-## fixed, between  0.06766959         NA 0.2071345
-## slope variation 0.03184779 0.04730061        NA
-## mean variation  0.25902436         NA 0.7928655
-## sigma2          0.34502647 0.51243630        NA
+## fixed, within   0.25683985 0.41735597        NA
+## fixed, between  0.08559698         NA 0.2225596
+## slope variation 0.03301136 0.05364234        NA
+## mean variation  0.29900545         NA 0.7774404
+## sigma2          0.32554636 0.52900169        NA
 ## 
 ## $R2s
 ##          total     within   between
-## f1  0.29643181 0.44026309        NA
-## f2  0.06766959         NA 0.2071345
-## v   0.03184779 0.04730061        NA
-## m   0.25902436         NA 0.7928655
-## f   0.36410139         NA        NA
-## fv  0.39594918 0.48756370        NA
-## fvm 0.65497353         NA        NA</code></pre>
+## f1  0.25683985 0.41735597        NA
+## f2  0.08559698         NA 0.2225596
+## v   0.03301136 0.05364234        NA
+## m   0.29900545         NA 0.7774404
+## f   0.34243683         NA        NA
+## fv  0.37544820 0.47099831        NA
+## fvm 0.67445364         NA        NA</code></pre>
 <p>With our larger model, our R-squared output is filling out. Let’s look at our Decompositions output, the top of the output printed to the console. The first column represents total variance explained. Reading from top to bottom, we can see that for this model:</p>
 <ul>
 <li>Fixed effects at level-1 explain 29.6% of total variance in teacher job satisfaction</li>
@@ -766,73 +770,73 @@ The third and final higher-level term is total variance explained by fixed effec
 </tbody>
 </table>
 <p>If we enter these values into <code>r2mlm_manual()</code>, we’ll get the same results as from our automatic function:</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="11-module-11.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="fu">r2mlm_manual</span>(<span class="at">data =</span> teachsat,</span>
-<span id="cb202-2"><a href="11-module-11.html#cb202-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">within_covs =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>),</span>
-<span id="cb202-3"><a href="11-module-11.html#cb202-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">between_covs =</span> <span class="fu">c</span>(<span class="dv">8</span>),</span>
-<span id="cb202-4"><a href="11-module-11.html#cb202-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">random_covs =</span> <span class="fu">c</span>(<span class="dv">4</span>),</span>
-<span id="cb202-5"><a href="11-module-11.html#cb202-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">gamma_w =</span> <span class="fu">c</span>(<span class="fl">0.311</span>, <span class="fl">0.074</span>),</span>
-<span id="cb202-6"><a href="11-module-11.html#cb202-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">gamma_b =</span> <span class="fu">c</span>(<span class="fl">7.186</span>, <span class="sc">-</span><span class="fl">0.037</span>),</span>
-<span id="cb202-7"><a href="11-module-11.html#cb202-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">Tau =</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">0.575</span>, <span class="fl">0.009</span>, <span class="fl">0.009</span>, <span class="fl">0.028</span>), <span class="dv">2</span>, <span class="dv">2</span>),</span>
-<span id="cb202-8"><a href="11-module-11.html#cb202-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">sigma2 =</span> <span class="fl">0.766</span>,</span>
-<span id="cb202-9"><a href="11-module-11.html#cb202-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">has_intercept =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb202-10"><a href="11-module-11.html#cb202-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">clustermeancentered =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="11-module-11.html#cb200-1" tabindex="-1"></a><span class="fu">r2mlm_manual</span>(<span class="at">data =</span> teachsat,</span>
+<span id="cb200-2"><a href="11-module-11.html#cb200-2" tabindex="-1"></a>             <span class="at">within_covs =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>),</span>
+<span id="cb200-3"><a href="11-module-11.html#cb200-3" tabindex="-1"></a>             <span class="at">between_covs =</span> <span class="fu">c</span>(<span class="dv">8</span>),</span>
+<span id="cb200-4"><a href="11-module-11.html#cb200-4" tabindex="-1"></a>             <span class="at">random_covs =</span> <span class="fu">c</span>(<span class="dv">4</span>),</span>
+<span id="cb200-5"><a href="11-module-11.html#cb200-5" tabindex="-1"></a>             <span class="at">gamma_w =</span> <span class="fu">c</span>(<span class="fl">0.311</span>, <span class="fl">0.074</span>),</span>
+<span id="cb200-6"><a href="11-module-11.html#cb200-6" tabindex="-1"></a>             <span class="at">gamma_b =</span> <span class="fu">c</span>(<span class="fl">7.186</span>, <span class="sc">-</span><span class="fl">0.037</span>),</span>
+<span id="cb200-7"><a href="11-module-11.html#cb200-7" tabindex="-1"></a>             <span class="at">Tau =</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">0.575</span>, <span class="fl">0.009</span>, <span class="fl">0.009</span>, <span class="fl">0.028</span>), <span class="dv">2</span>, <span class="dv">2</span>),</span>
+<span id="cb200-8"><a href="11-module-11.html#cb200-8" tabindex="-1"></a>             <span class="at">sigma2 =</span> <span class="fl">0.766</span>,</span>
+<span id="cb200-9"><a href="11-module-11.html#cb200-9" tabindex="-1"></a>             <span class="at">has_intercept =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb200-10"><a href="11-module-11.html#cb200-10" tabindex="-1"></a>             <span class="at">clustermeancentered =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-114-1.png" width="672" /></p>
 <pre><code>## $Decompositions
 ##                      total     within   between
-## fixed, within   0.29602242 0.43962515        NA
-## fixed, between  0.06712648         NA 0.2055009
-## slope variation 0.03160152 0.04693165        NA
-## mean variation  0.25952163         NA 0.7944991
-## sigma2          0.34572795 0.51344320        NA
+## fixed, within   0.28983748 0.43323407        NA
+## fixed, between  0.07015859         NA 0.2119652
+## slope variation 0.03169734 0.04737954        NA
+## mean variation  0.26083243         NA 0.7880348
+## sigma2          0.34747416 0.51938639        NA
 ## 
 ## $R2s
 ##          total     within   between
-## f1  0.29602242 0.43962515        NA
-## f2  0.06712648         NA 0.2055009
-## v   0.03160152 0.04693165        NA
-## m   0.25952163         NA 0.7944991
-## f   0.36314890         NA        NA
-## fv  0.39475042 0.48655680        NA
-## fvm 0.65427205         NA        NA</code></pre>
+## f1  0.28983748 0.43323407        NA
+## f2  0.07015859         NA 0.2119652
+## v   0.03169734 0.04737954        NA
+## m   0.26083243         NA 0.7880348
+## f   0.35999607         NA        NA
+## fv  0.39169341 0.48061361        NA
+## fvm 0.65252584         NA        NA</code></pre>
 </div>
 <div id="model-comparison" class="section level3 hasAnchor" number="11.2.6">
 <h3><span class="header-section-number">11.2.6</span> Model Comparison<a href="11-module-11.html#model-comparison" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In some earlier chapters, we calculated proportion of variance reduced to get a sense of the impact of adding or removing a predictor using the equation <span class="math inline">\(\frac{variance\ model\ A - variance\ model\ B}{variance\ model\ A}\)</span>. The issue with calculating variance reduced this way is it can yield impossible negative values. Model B might have “more” variance than model A at a given level. This would suggest that variance increases when adding a predictor to a model, when really the variance has been re-allocated elsewhere. We can more accurately quantify differences between models using <code>r2mlm</code>. To do so, we run two models and give them to the <code>r2mlm_comp()</code> function. Let’s compare our full model with a model without the level-2 fixed effect of student-teacher ratio. First, create a model object for this reduced-size model:</p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="11-module-11.html#cb204-1" aria-hidden="true" tabindex="-1"></a>reduced_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(satisfaction <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> control_c <span class="sc">+</span> salary_c <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> control_c <span class="sc">|</span> schoolID), </span>
-<span id="cb204-2"><a href="11-module-11.html#cb204-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> teachsat,</span>
-<span id="cb204-3"><a href="11-module-11.html#cb204-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">REML =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="11-module-11.html#cb202-1" tabindex="-1"></a>reduced_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(satisfaction <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> control_c <span class="sc">+</span> salary_c <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> control_c <span class="sc">|</span> schoolID), </span>
+<span id="cb202-2"><a href="11-module-11.html#cb202-2" tabindex="-1"></a>                 <span class="at">data =</span> teachsat,</span>
+<span id="cb202-3"><a href="11-module-11.html#cb202-3" tabindex="-1"></a>                 <span class="at">REML =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>Then, we run <code>r2mlm_comp()</code>:</p>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="11-module-11.html#cb205-1" aria-hidden="true" tabindex="-1"></a><span class="fu">r2mlm_comp</span>(full_model, reduced_model)</span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="11-module-11.html#cb203-1" tabindex="-1"></a><span class="fu">r2mlm_comp</span>(full_model, reduced_model)</span></code></pre></div>
 <p><img src="open_mlm_materials_files/figure-html/unnamed-chunk-116-1.png" width="672" /><img src="open_mlm_materials_files/figure-html/unnamed-chunk-116-2.png" width="672" /><img src="open_mlm_materials_files/figure-html/unnamed-chunk-116-3.png" width="672" /><img src="open_mlm_materials_files/figure-html/unnamed-chunk-116-4.png" width="672" /><img src="open_mlm_materials_files/figure-html/unnamed-chunk-116-5.png" width="672" /></p>
 <pre><code>## $`Model A R2s`
 ##          total     within   between
-## f1  0.29643181 0.44026309        NA
-## f2  0.06766959         NA 0.2071345
-## v   0.03184779 0.04730061        NA
-## m   0.25902436         NA 0.7928655
-## f   0.36410139         NA        NA
-## fv  0.39594918 0.48756370        NA
-## fvm 0.65497353         NA        NA
+## f1  0.25683985 0.41735597        NA
+## f2  0.08559698         NA 0.2225596
+## v   0.03301136 0.05364234        NA
+## m   0.29900545         NA 0.7774404
+## f   0.34243683         NA        NA
+## fv  0.37544820 0.47099831        NA
+## fvm 0.67445364         NA        NA
 ## 
 ## $`Model B R2s`
-##          total     within between
-## f1  0.29656716 0.44027521      NA
-## f2  0.00000000         NA       0
-## v   0.03185975 0.04729809      NA
-## m   0.32640505         NA       1
-## f   0.29656716         NA      NA
-## fv  0.32842691 0.48757330      NA
-## fvm 0.65483196         NA      NA
+##         total     within between
+## f1  0.2569912 0.41735356      NA
+## f2  0.0000000         NA       0
+## v   0.0330319 0.05364379      NA
+## m   0.3842362         NA       1
+## f   0.2569912         NA      NA
+## fv  0.2900231 0.47099736      NA
+## fvm 0.6742593         NA      NA
 ## 
 ## $`R2 differences, Model B - Model A`
-##              total          within    between
-## f1   0.00013535276  0.000012118334         NA
-## f2  -0.06766958689              NA -0.2071345
-## v    0.00001196727 -0.000002520278         NA
-## m    0.06738069164              NA  0.2071345
-## f   -0.06753423412              NA         NA
-## fv  -0.06752226685  0.000009598056         NA
-## fvm -0.00014157521              NA         NA</code></pre>
+##             total        within    between
+## f1   1.513418e-04 -2.412125e-06         NA
+## f2  -8.559698e-02            NA -0.2225596
+## v    2.054085e-05  1.458584e-06         NA
+## m    8.523080e-02            NA  0.2225596
+## f   -8.544564e-02            NA         NA
+## fv  -8.542509e-02 -9.535413e-07         NA
+## fvm -1.942966e-04            NA         NA</code></pre>
 <p>This output contains three groups of R2s:</p>
 <ol style="list-style-type: decimal">
 <li>The R2s for Model A</li>
