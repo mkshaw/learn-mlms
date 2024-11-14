@@ -100,7 +100,7 @@ This isn't an explicit test of functional form, but it looks like there is varia
 
 ### An Aside: Extracting Residuals
 
-In linear regression, we have the assumption of homoscedasticity. That is, the variance of residuals is roughly the same at any value of of your predictor(s). In multilevel models, we have two classes of residuals: level-1 residuals and level-2 residuals. The remaining assumptions all deal with these residuals: that they are normally distributed, that they don't relate to each other, that they don't relate to predictors at the same level or at the other level. We're going to look at a model with math achievement predicted by SES centered within cluster (school) and mean SES predicting the intercept and slope of SES centered within cluster. We'll estimate a random effect for the slope of SES centered within cluster. We're not estimating the random effect covariance.
+In linear regression, we have the assumption of homoscedasticity. That is, the variance of residuals is roughly the same at any value of of your predictor(s). In multilevel models, we have two classes of residuals: level-1 residuals and level-2 residuals. The remaining assumptions all deal with these residuals: that they are normally distributed, that they don't relate to each other, that they don't relate to predictors at the same level or at the other level. We're going to look at a model with math achievement predicted by SES centered within cluster (school) and mean SES predicting the intercept and slope of SES centered within cluster. We'll estimate a random effect variance for the slope of SES centered within cluster. We're not estimating the random effect covariance.
 
 | Level  | Equation |
 |:-------|:---------|

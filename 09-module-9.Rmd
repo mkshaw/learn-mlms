@@ -116,8 +116,8 @@ With this model, we're estimating 5 parameters:
 1. $\gamma_{00}$: the fixed effect for the intercept, controlling for `c_mean` and `c_sal`;
 2. $\gamma_{10}$: the fixed effect for the slope of `c_mean`, controlling for `c_sal`. This represents how meaning affects a person's reaction time — do people respond more quickly or slowly to photos with changes that are related to driving a car (perhaps because they're often driving and are attuned to changes in the environment when operating a car)?
 3. $\gamma_{20}$: the fixed effect for the slope of `c_sal`, controlling for `c_mean`. This represents how salience affects a person's reaction time — do people respond more quickly or slowly to photos with more obvious changes?
-4. $\tau_0^2$: a random effect for the intercept capturing the variance of people around the intercept, controlling for `c_mean` and `c_sal`;
-3. $\sigma^2$: a random effect capturing the variance of people around their own mean log reaction time, controlling for `c_mean` and `c_sal`.
+4. $\tau_0^2$: a random effect variance for the intercept capturing the variance of people around the intercept, controlling for `c_mean` and `c_sal`;
+3. $\sigma^2$: a random effect variance capturing the variance of people around their own mean log reaction time, controlling for `c_mean` and `c_sal`.
 
 Let's run the model with FIML as our estimator:
 
@@ -153,10 +153,10 @@ Let's not estimate random effect covariances, so with this model, we're estimati
 1. $\gamma_{00}$: the fixed effect for the intercept, controlling for `c_mean` and `c_sal`;
 2. $\gamma_{10}$: the fixed effect for the slope of `c_mean`, controlling for `c_sal`;
 3. $\gamma_{20}$: the fixed effect for the slope of `c_sal`, controlling for `c_mean`;
-4. $\tau_0^2$: a random effect for the intercept capturing the variance of people around the intercept, controlling for `c_mean` and `c_sal`;
-5. $\tau_1^2$: a random effect capturing how people's slopes for `c_mean` vary around the grand mean slope, controlling for `c_sal`;
-6. $\tau_2^2$: a random effect capturing how people's slopes for `c_sal` vary around the grand mean slope, controlling for `c_mean`;
-7. $\sigma^2$: a random effect capturing the variance of people around their own mean log reaction time, controlling for `c_mean` and `c_sal`.
+4. $\tau_0^2$: a random effect variance for the intercept capturing the variance of people around the intercept, controlling for `c_mean` and `c_sal`;
+5. $\tau_1^2$: a random effect variance capturing how people's slopes for `c_mean` vary around the grand mean slope, controlling for `c_sal`;
+6. $\tau_2^2$: a random effect variance capturing how people's slopes for `c_sal` vary around the grand mean slope, controlling for `c_mean`;
+7. $\sigma^2$: a random effect variance capturing the variance of people around their own mean log reaction time, controlling for `c_mean` and `c_sal`.
 
 Let's run our model with random slope effects (but no covariances) in R:
 
@@ -172,7 +172,7 @@ l1_random_without_cmean <- lmer(lg_rt ~ 1 + c_mean + c_sal + (1|id) + (0 + c_sal
 summary(l1_random_without_cmean)
 ```
 
-That took care of our singularity issue. However, the random effect for salience still looks very small. Let's conduct a deviance test to see if including the random effect reduces deviance at all (that is, whether it is worth it to estimate).
+That took care of our singularity issue. However, the random effect variance for salience still looks very small. Let's conduct a deviance test to see if including the random effect reduces deviance at all (that is, whether it is worth it to estimate).
 
 ```{r}
 anova(l1_random, l1_random_without_cmean)
@@ -199,8 +199,8 @@ We're estimating 7 effects:
 3. $\gamma_{20}$: the fixed effect for the slope of `c_sal`, controlling for `c_mean`;
 4. $\gamma_{01}$: the fixed effect for the slope of `oldage`, controlling for `sex`, `c_mean`, and `c_sal`;
 5. $\gamma_{02}$: the fixed effect for the slope of `sex`, controlling for `oldage`, `c_mean` and `c_sal`;
-6. $\tau_0^2$: a random effect capturing how people's mean log reaction times vary around the grand mean log reaction time, controlling for `c_mean`, `c_sal`, `oldage`, and `sex`;
-7. $\sigma^2$: a random effect capturing the variance of people around their own mean log reaction time, controlling for `c_mean`, `c_sal`, `oldage`, and `sex`.
+6. $\tau_0^2$: a random effect variance capturing how people's mean log reaction times vary around the grand mean log reaction time, controlling for `c_mean`, `c_sal`, `oldage`, and `sex`;
+7. $\sigma^2$: a random effect variance capturing the variance of people around their own mean log reaction time, controlling for `c_mean`, `c_sal`, `oldage`, and `sex`.
 
 
 ```{r}
@@ -241,8 +241,8 @@ We're estimating 7 effects:
 3. $\gamma_{20}$: the fixed effect for the slope of `c_sal`, controlling for `c_mean` and `oldage`;
 4. $\gamma_{01}$: the fixed effect for the slope of `oldage`, controlling for `c_mean` and `c_sal`;
 5. $\gamma_{11}$: the fixed effect for the cross-level interaction of `oldage` with `c_mean`, controlling for `c_sal`;
-6. $\tau_0^2$: a random effect capturing how people's mean log reaction times vary around the grand mean log reaction time, controlling for `c_mean`, `c_sal`, and `oldage`;
-7. $\sigma^2$: a random effect capturing the variance of people around their own mean log reaction time, controlling for `c_mean`, `c_sal`, and `oldage``.
+6. $\tau_0^2$: a random effect variance capturing how people's mean log reaction times vary around the grand mean log reaction time, controlling for `c_mean`, `c_sal`, and `oldage`;
+7. $\sigma^2$: a random effect variance capturing the variance of people around their own mean log reaction time, controlling for `c_mean`, `c_sal`, and `oldage``.
 
 ```{r}
 crosslevel_model <- lmer(lg_rt ~ 1 + c_mean + c_sal + oldage + oldage:c_mean + (1|id), data = data, REML = FALSE)

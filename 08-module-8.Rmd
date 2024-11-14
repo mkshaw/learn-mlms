@@ -149,8 +149,8 @@ With this model, we are estimating 5 parameters:
 1. $\gamma_{00}$: the fixed effect for the intercept, controlling for `ses_cwc` and `ses_mean` (i.e., a student with school-average SES at the average school);
 2. $\gamma_{01}$: the fixed effect for `ses_mean` controlling for `ses_cwc`. This is our between effect, indicating the effect of a school's average SES on a student's math achievement;
 3. $\gamma_{10}$: the fixed effect for the slope of `ses_cwc` controlling for `ses_mean`. This is our within effect, indicating the effect of a student's SES compared to the school average (at the average school, `ses_mean` = 0);
-4. $\tau_0^2$: a random effect for the intercept capturing the variance of schools around the intercept, controlling for `ses_cwc` and `ses_mean`;
-5. $\sigma^2$: a random effect capturing the variance of students around their school mean math achievement, controlling for `ses_cwc` and `ses_mean`.
+4. $\tau_0^2$: a random effect variance for the intercept capturing the variance of schools around the intercept, controlling for `ses_cwc` and `ses_mean`;
+5. $\sigma^2$: a random effect variance capturing the variance of students around their school mean math achievement, controlling for `ses_cwc` and `ses_mean`.
 
 Let's estimate it:
 
@@ -215,8 +215,8 @@ With this model, we are estimating 5 parameters:
 1. $\gamma_{00}$: the fixed effect for the intercept, controlling for `ses_cgm` and `ses_mean` (i.e., a student with school-average SES at the average school);
 2. $\gamma_{01}$: the fixed effect for `ses_mean` controlling for `ses_cgm`. This is our contextual effect, indicating the effect of school average SES on student math achievement at the same level of student SES;
 3. $\gamma_{10}$: the fixed effect for the slope of `ses_cgm` controlling for `ses_mean`. This is our within effect, indicating the effect of a student's SES compared to the school average (at the average school, `ses_mean` = 0);
-4. $\tau_0^2$: a random effect for the intercept capturing the variance of schools around the intercept, controlling for `ses_cgm` and `ses_mean`;
-5. $\sigma^2$: a random effect capturing the variance of students around their school mean math achievement, controlling for `ses_cgm` and `ses_mean`.
+4. $\tau_0^2$: a random effect variance for the intercept capturing the variance of schools around the intercept, controlling for `ses_cgm` and `ses_mean`;
+5. $\sigma^2$: a random effect variance capturing the variance of students around their school mean math achievement, controlling for `ses_cgm` and `ses_mean`.
 
 Let's estimate it in R:
 

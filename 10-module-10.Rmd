@@ -129,8 +129,8 @@ Let's estimate our null model with FIML as our estimator and calculate the ICC. 
 Here, we're estimating three parameters:
 
 1. $\gamma_{00}$: the fixed effect for the intercept, mean testosterone levels across all people;
-4. $\tau_0^2$: a random effect for the intercept capturing the variance of people's average testosterone levels around the intercept;
-3. $\sigma^2$: a random effect capturing the variance of people around their own average testosterone level.
+4. $\tau_0^2$: a random effect variance for the intercept capturing the variance of people's average testosterone levels around the intercept;
+3. $\sigma^2$: a random effect variance capturing the variance of people around their own average testosterone level.
 
 ```{r}
 null_model <- lmer(Testosterone ~ 1 + (1|Code), data = data, REML = FALSE)
@@ -155,9 +155,9 @@ With this model, we're estimating 6 parameters:
 
 1. $\gamma_{00}$: the fixed effect for the intercept, mean testosterone levels at time 0 across all people;
 2. $\gamma_{10}$: the fixed effect for time0, effect of time on testosterone levels;
-3. $\tau_0^2$: a random effect for the intercept capturing the variance of people's average testosterone levels around the intercept;
-4. $\tau_1^2$: a random effect for the slope of time0 capturing the variance of people's slopes around the grand mean slope;
-3. $\sigma^2$: a random effect capturing the variance of people around their own average testosterone level.
+3. $\tau_0^2$: a random effect variance for the intercept capturing the variance of people's average testosterone levels around the intercept;
+4. $\tau_1^2$: a random effect variance for the slope of time0 capturing the variance of people's slopes around the grand mean slope;
+3. $\sigma^2$: a random effect variance capturing the variance of people around their own average testosterone level.
 6. $\tau_{01}$: the covariance between the random intercept and random slope. Do people who have higher values of testosterone at time0 have particularly lower or higher slopes?
 
 Let's run the model with FIML as our estimator:
@@ -236,9 +236,9 @@ With this model, we're estimating 7 parameters:
 2. $\gamma_{10}$: the fixed effect for time0, effect of time on testosterone levels controlling for playing;
 3. $\gamma_{01}$: the fixed effect for playing, effect of playing on testosterone at time0;
 4. $\gamma_{11}$: interaction term between playing and time, the effect of playing on the effect of time on testosterone levels;
-5. $\tau_0^2$: a random effect for the intercept capturing the variance of people's average testosterone levels around the intercept controlling for time and playing;
-6. $\tau_1^2$: a random effect for the slope of time0 capturing the variance of people's slopes around the grand mean slope controlling for playing;
-7. $\sigma^2$: a random effect capturing the variance of people around their own average testosterone level, controlling for time and playing;
+5. $\tau_0^2$: a random effect variance for the intercept capturing the variance of people's average testosterone levels around the intercept controlling for time and playing;
+6. $\tau_1^2$: a random effect variance for the slope of time0 capturing the variance of people's slopes around the grand mean slope controlling for playing;
+7. $\sigma^2$: a random effect variance capturing the variance of people around their own average testosterone level, controlling for time and playing;
 
 We are not estimating a covariance term.
 

@@ -139,15 +139,15 @@ Let's begin with a null model with teacher job satisfaction (`satisfaction`) as 
 We're estimating 3 parameters here:
 
 1. $\gamma_{00}$: the fixed effect for the intercept, mean teacher job satisfaction across all schools;
-2. $\tau_0^2$: a random effect for the intercept capturing the variance of school's average job satisfaction levels around the intercept;
-3. $\sigma^2$: a random effect capturing the variance of teachers around their school average job satisfaction.
+2. $\tau_0^2$: a random effect variance for the intercept capturing the variance of school's average job satisfaction levels around the intercept;
+3. $\sigma^2$: a random effect variance capturing the variance of teachers around their school average job satisfaction.
 
 ```{r}
 null_model <- lmer(satisfaction ~ 1 + (1|schoolID), data = teachsat, REML = TRUE)
 summary(null_model)
 ```
 
-The fixed effect for our intercept is 6.00, indicating the average teacher job satisfaction across all schools. The random effect describing how schools vary around that average is 0.70, and the random effect describing how teachers vary around their school averages is 1.52.
+The fixed effect for our intercept is 6.00, indicating the average teacher job satisfaction across all schools. The random effect variance describing how schools vary around that average is 0.70, and the random effect variance describing how teachers vary around their school averages is 1.52.
 
 Let's use the automatic `r2mlm()` function for the first time to calculate how much variance in teacher job satisfaction is explained by the null model.
 
@@ -179,9 +179,9 @@ We will be estimating 8 parameters:
 2. $\gamma_{01}$: the fixed effect for student-teacher ratio, effect of school-wide class size on job satisfaction controlling for salary and curriculum;
 3. $\gamma_{10}$: the fixed effect for salary_c, effect of salary on job satisfaction within a school, controlling for curriculum and student-teacher ratio;
 4. $\gamma_{20}$: the fixed effect for control_c, effect of control over curriculum on job satisfaction within a school, controlling for salary and student-teacher ratio;
-5. $\tau_0^2$: a random effect for the intercept capturing the variance of schools' average job satisfaction around the intercept controlling for salary, curriculum, and student-teacher ratio;
-6. $\tau_2^2$: a random effect for the slope of curriculum control capturing the variance of schools' curriculum slopes around the grand mean slope controlling for salary and student-teacher ratio;
-7. $\sigma^2$: a random effect capturing the variance of teachers around their school average job satisfaction, controlling for salary, curriculum, and student-teacher ratio;
+5. $\tau_0^2$: a random effect variance for the intercept capturing the variance of schools' average job satisfaction around the intercept controlling for salary, curriculum, and student-teacher ratio;
+6. $\tau_2^2$: a random effect variance for the slope of curriculum control capturing the variance of schools' curriculum slopes around the grand mean slope controlling for salary and student-teacher ratio;
+7. $\sigma^2$: a random effect variance capturing the variance of teachers around their school average job satisfaction, controlling for salary, curriculum, and student-teacher ratio;
 8. $\tau_{02}$: the covariance between the random intercept and random slope. Do schools with higher job satisfaction intercepts have higher/lower effects of curriculum?
 
 ```{r}
@@ -194,7 +194,7 @@ Matrix::bdiag(VarCorr(full_model))
 
 The average teaching satisfaction across all schools at average levels of curriculum control and salary and a student-teacher ratio of 0 is 7.19. (Note: this is an example of an uninterpretable zero point because there is no meaning behind a student-teacher ratio of zero. However, for demonstration purposes we're going to keep going and ignore that issue.) A one-unit increase in control over the curriculum within a school is associated with a 0.31-unit increase in teacher job satisfaction (on the 1-10 scale), controlling for salary and student-teacher ratio. A one-unit increase in salary within school is associated with a 0.07-unit increase in job satisfaction, controlling for curriculum control and student-teacher ratio. A one-unit increase in student-teacher ratio (i.e., one more student per class; all classes in one school have the same number of students) is associated with a 0.03-unit decrease in job satisfaction, at school average salary and control over curriculum.
 
-Looking at random effects, the term describing how the intercepts vary across schools is 0.57. The term describing how schools' curriculum-control slopes vary around the grand mean is 0.03. The term describing how teachers' intercepts vary around the grand mean intercept is 0.77. The covariance between the random intercept and random slope of curriculum is 0.01, so there is a negligible relationship between intercept and slope values.
+Looking at random effect variances, the term describing how the intercepts vary across schools is 0.57. The term describing how schools' curriculum-control slopes vary around the grand mean is 0.03. The term describing how teachers' intercepts vary around the grand mean intercept is 0.77. The covariance between the random intercept and random slope of curriculum is 0.01, so there is a negligible relationship between intercept and slope values.
 
 Recall that interpreting these coefficients in this way — a one-unit change is associated with an X-unit change in the outcome — is also an embodiment of effect sizes. Now let's also calculate and interpret R-squared for this model.
 

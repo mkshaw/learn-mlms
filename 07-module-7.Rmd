@@ -108,13 +108,13 @@ Things look okay here, no elements appear to be close to or zero. Our second met
 summary(ses_l1_random)
 ```
 
-Here, in our random effects section, we can see that the correlation between our random effects is -1.00, a sign of perfect multicollinearity. We can dig into the confidence intervals of our estimates up close to confirm this:
+Here, in our random effects section, we can see that the correlation between our random effect variances is -1.00, a sign of perfect multicollinearity. We can dig into the confidence intervals of our estimates up close to confirm this:
 
 ```{r}
 confint(ses_l1_random, oldNames = FALSE)
 ```
 
-Note that `oldNames = FALSE` just makes the output easier to read. This will take a moment to run, but when it does we can see that the 95% confidence interval for the correlation between our random effects spans -1 to 1 (i.e. the entire possible range). Our singularity issue started when we added the random slope effect, which added both a random slope variance $\tau_1^2$ and the random intercept-slope covariance $\tau_{01}$. Let's see if we can fix the issue by removing that problematic covariance.
+Note that `oldNames = FALSE` just makes the output easier to read. This will take a moment to run, but when it does we can see that the 95% confidence interval for the correlation between our random effect variances spans -1 to 1 (i.e. the entire possible range). Our singularity issue started when we added the random slope effect, which added both a random slope variance $\tau_1^2$ and the random intercept-slope covariance $\tau_{01}$. Let's see if we can fix the issue by removing that problematic covariance.
 
 ```{r}
 ses_l1_random_cov0 <- lmer(math ~ 1 + ses + (1|schcode) + (0 + ses|schcode), data = data, REML = TRUE)
@@ -127,7 +127,7 @@ Here, we specify our random intercept `(1|schcode)` and random slope with no cov
 Matrix::bdiag(VarCorr(ses_l1_random_cov0))
 ```
 
-In general, it is best practice to build a maximal multilevel model, one that includes all possible fixed and random effects that are not zero (Barr et al., 2013). This maximal model will produce parameter estimates with the least amount of bias and provide the best shot at your model fitting the data. However, the maximal model that tries to estimate extreme random effects (those near zero or with high multicollinearity) will have trouble converging and produce estimation errors. When this happens, often an inspection of the random effects will reveal which parameters need to be removed from the model. It can be helpful, ahead of running your MLMs, to consider the key variables of interest, their random effects, and plan, if the maximal model has errors, which parameters should be removed and in what order. Overall, building MLMs is about balancing complexity with utility. Sometimes we do not have enough information in our data to estimate the complex model we planned, so having a plan for how to decrease complexity ahead of time can prevent getting lost in the [garden of forking paths](http://www.stat.columbia.edu/~gelman/research/unpublished/p_hacking.pdf).
+In general, it is best practice to build a maximal multilevel model, one that includes all possible fixed and random effects that are not zero (Barr et al., 2013). This maximal model will produce parameter estimates with the least amount of bias and provide the best shot at your model fitting the data. However, the maximal model that tries to estimate extreme random effect variances (those near zero or with high multicollinearity) will have trouble converging and produce estimation errors. When this happens, often an inspection of the random effect variances will reveal which parameters need to be removed from the model. It can be helpful, ahead of running your MLMs, to consider the key variables of interest, their random effects, and plan, if the maximal model has errors, which parameters should be removed and in what order. Overall, building MLMs is about balancing complexity with utility. Sometimes we do not have enough information in our data to estimate the complex model we planned, so having a plan for how to decrease complexity ahead of time can prevent getting lost in the [garden of forking paths](http://www.stat.columbia.edu/~gelman/research/unpublished/p_hacking.pdf).
 
 ### Deviance Testing for Model Comparison
 

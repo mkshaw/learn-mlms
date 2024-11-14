@@ -75,11 +75,11 @@ The intercepts and slopes vary widely! For example, school 4 has an intercept ar
 
 ### Fixed vs Random Effects
 
-Multilevel models have two main ingredients: fixed and random effects. For our purposes of executing and interpreting MLMs, a fixed effect is an average effect across all clusters and a random effect is a variance that describes how much an effect differs across clusters. Generally, fixed effects in MLMs capture the mean of an effect and the random effect captures the variance of an effect. For example, we might have a fixed effect for the intercept that describes average math achievement across all schools. Then we have a random effect that describes how intercepts for math achievement vary across schools. Together, the fixed and random effect describe math achievement scores across schools.
+Multilevel models have two main ingredients: fixed and random effects. For our purposes of executing and interpreting MLMs, a fixed effect is an average effect across all clusters and a random effect describes how an effect for a given cluster differs from the average. We are usually interested less in individual random effects, and more in the random effects variances that describe how effects vary across all clusters. For example, we might have a fixed effect for the intercept that describes average math achievement across all schools. Then we have a random effect variance that describes how intercepts for math achievement vary across schools. Together, the fixed effect and random effect variance describe math achievement scores across schools.
 
 ### The Null Model
 
-In the simplest MLM we can run, we let intercepts vary between clusters by estimating random effects for the intercepts in addition to a fixed effect. The random effect allows the intercepts to randomly vary about the fixed effect, the grand mean of the intercepts. As a result, this model is called the "random intercept only model," also known as the "null model." For our example, math achievement is our outcome variable, and the equations for the null model look like this:
+In the simplest MLM we can run, we let intercepts vary between clusters by estimating random effects for the intercepts in addition to a fixed effect. The random effect allows the intercepts to deviate from the fixed effect, the grand mean of the intercepts. As a result, this model is called the "random intercept only model," also known as the "null model." For our example, math achievement is our outcome variable, and the equations for the null model look like this:
 
 | Level  | Equation |
 |:-------|:---------|
@@ -100,13 +100,13 @@ The key output to interpret is:
 
 * Number of parameters
 * Estimates of fixed effects
-* Estimates of variances, which are the random effects
+* Estimates of random effects variances
 
 As indicated in our combined equation, we are estimating three parameters:
 
 1. $\gamma_{00}$: the fixed effect for the intercept;
-2. $\tau_0^2$: a random effect for the intercept capturing the variance of schools around the intercept. Each $U_{0j}$ is the residual of a school around the intercept; that is, it describes how the school's mean math achievement at the intercept deviates from the intercept for the entire sample. Every school has a $U_{0j}$, and the variance of all of the $U_{0j}$s is $\tau_0^2$;
-3. $\sigma^2$: a random effect capturing the variance of students around their school mean math achievement. Each student has a residual, $R_{ij}$, and the variance of all the $R_{ij}$s is $\sigma^2$.
+2. $\tau_0^2$: a variance for the random effects of the intercept, capturing the variance of schools around the intercept. Each $U_{0j}$ is the residual of a school around the intercept; that is, it describes how the school's mean math achievement at the intercept deviates from the intercept for the entire sample. Every school has a $U_{0j}$, and the variance of all of the $U_{0j}$s is $\tau_0^2$;
+3. $\sigma^2$: a random effect variance capturing the variance of students around their school mean math achievement. Each student has a residual, $R_{ij}$, and the variance of all the $R_{ij}$s is $\sigma^2$.
 
 We can double-check we've counted parameters correctly using the `logLik` function from the `stats` package.
 

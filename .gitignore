@@ -5,3 +5,4 @@ _bookdown_files/
 .RData
 .Ruserdata
 .DS_Store 
+data/mathmot*
